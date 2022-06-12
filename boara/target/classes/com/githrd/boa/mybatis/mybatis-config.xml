@@ -10,10 +10,8 @@
 	</settings>
 	
 	<typeAliases>
-		<typeAlias alias="mVO" type="com.githrd.boa.vo.p.MainVO" />
 	</typeAliases>
 	
 	<mappers>
-		<mapper resource="com/githrd/boa/sql/p/MainSQL.xml" />
 	</mappers>
 </configuration>
