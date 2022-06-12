@@ -5,10 +5,18 @@
 <head>
 <title>메인페이지</title>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
+    />
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
+/>
 <link rel="stylesheet" type="text/css" href="/boa/css/w3.css">
 <link rel="stylesheet" type="text/css" href="/boa/css/user.css">
 <link rel="stylesheet" type="text/css" href="/boa/css/k/soyeon.css">
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 <script type="text/javascript" src="/boa/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/boa//js/k/main.js"></script>
 <style>
@@ -49,16 +57,46 @@ img {
 
    </header>
 
-
 	<!-- middle Grid -->
 
-
-
-
-
-
-
-
+		 <!-- Swiper -->
+	    <div class="swiper mySwiper">
+	      <div class="swiper-wrapper">
+	        <div class="swiper-slide">
+	        	<div class="swiperbox">
+		        	<img src="/boa/resources/img/noimage.jpg">
+						Slide 1
+				</div>
+	       	</div>
+	        <div class="swiper-slide">
+	        	<div class="swiperbox">
+		        	<img src="/boa/resources/img/noimage.jpg">
+						Slide 2
+				</div>
+	       	</div>
+	       <div class="swiper-slide">
+	        	<div class="swiperbox">
+		        	<img src="/boa/resources/img/noimage.jpg">
+						Slide 3
+				</div>
+	       	</div>
+	        <div class="swiper-slide">
+	        	<div class="swiperbox">
+		        	<img src="/boa/resources/img/noimage.jpg">
+						Slide 4
+				</div>
+	       	</div>
+	        <div class="swiper-slide">
+	        	<div class="swiperbox">
+		        	<img src="/boa/resources/img/noimage.jpg">
+						Slide 5
+				</div>
+	       	</div>
+	      </div>
+	      <div class="swiper-button-next"></div>
+	      <div class="swiper-button-prev"></div>
+	      <div class="swiper-pagination"></div>
+	    </div>
 
 
    <!-- Bottom Grid -->
@@ -139,5 +177,22 @@ img {
    <footer class="w3-container w3-padding-64 w3-center w3-opacity">
    		<p>(주)보아라</p>
    </footer>
+   
+    <!-- Initialize Swiper -->
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
+        }
+      });
+    </script>
 </body>
 </html>
