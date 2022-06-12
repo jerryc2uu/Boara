@@ -1,0 +1,10 @@
+.pic {
+	width: 160px;
+	height: 190px;
+	border: 1px solid gray;
+	overflow: hidden;
+}
+
+.mgl30 {
+	margin-left: 30px;
+}
