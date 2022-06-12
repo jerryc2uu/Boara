@@ -30,7 +30,7 @@ img {
 <c:if test="${not empty SID}">      
        <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="mwrite">글작성</a>
        <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="mcoll">새 컬렉션</a>
-</c:if>  
+</c:if>   
 	<div style="float: right; padding-right:30px;">      
 <c:if test="${empty SID}">
      <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white " id="mlogin">Login</a>
