@@ -24,14 +24,14 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
 .fa-anchor,.fa-coffee {font-size:200px}
 img {
-   width: 160px; 
-   height: 190px;
+   width: 200px; 
+   height: 235px;
 }
 </style>
 </head>
 <body>
    <!-- Navbar -->
-   <div class="w3-top">
+   <div class="w3-top fix">
      <div class="w3-bar w3-indigo w3-card w3-left-align w3-xlarge " >
        <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white " id="main">Main</a>
        <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="collection">Collection</a>
@@ -53,11 +53,11 @@ img {
    
    <!-- Header -->
    <header class="w3-container w3-indigo w3-center" style="padding:40px 16px; height: 150px;">
-     <h1 class="pdt10 w3-xxxlarge dfn">Boara</h1>
+     <h1 class="pdt10 w3-xxxlarge dfn"><b>Boara</b></h1>
 
    </header>
 
-	<!-- middle Grid -->
+	<!-- middle  -->
 
 		 <!-- Swiper -->
 	    <div class="swiper mySwiper">
@@ -65,31 +65,26 @@ img {
 	        <div class="swiper-slide">
 	        	<div class="swiperbox">
 		        	<img src="/boa/resources/img/noimage.jpg">
-						Slide 1
 				</div>
 	       	</div>
 	        <div class="swiper-slide">
 	        	<div class="swiperbox">
 		        	<img src="/boa/resources/img/noimage.jpg">
-						Slide 2
 				</div>
 	       	</div>
 	       <div class="swiper-slide">
 	        	<div class="swiperbox">
 		        	<img src="/boa/resources/img/noimage.jpg">
-						Slide 3
 				</div>
 	       	</div>
 	        <div class="swiper-slide">
 	        	<div class="swiperbox">
 		        	<img src="/boa/resources/img/noimage.jpg">
-						Slide 4
 				</div>
 	       	</div>
 	        <div class="swiper-slide">
 	        	<div class="swiperbox">
 		        	<img src="/boa/resources/img/noimage.jpg">
-						Slide 5
 				</div>
 	       	</div>
 	      </div>
@@ -99,55 +94,55 @@ img {
 	    </div>
 
 
-   <!-- Bottom Grid -->
-   <div class="w3-row-padding w3-padding-64 w3-container" style="margin: 0 auto;">		
+   <!-- Bottom  -->
+   <div class="w3-row-padding w3-padding-64 w3-container" style="margin: 50px auto;">		
       <div class="w3-col w3-display-container" style="margin: 0 auto;">
         	
          <!-- 컬렉션 리스트 보이는 곳 -->
-         <div style = "margin-left: 165px; margin-bottom: 60px;">
-            <h3 class="w3-padding" style="float: left;">Today <a class='w3-text-red'>HOT!<a> 컬렉션</h3>
+         <div style = "margin-left: 550px; margin-bottom: 60px;">
+            <h3 class="w3-padding" style="float: left;">Today <a class='w3-text-red'>HOT!<a> 게시글</h3>
          </div>
          <div class="w3-center w3-col">
-<div class="inblock w3-center mgl30" style="width: 160px; height: 200px;">
-	<div class="pic">
-		<img src="/boa/resources/img/noimage.jpg">
-	</div>
-	<div class="w3-center">
-	첫번째 컬렉션
-	</div>
-</div>
-<div class="inblock w3-center mgl30" style="width: 160px; height: 200px;">
-	<div class="pic">
-		<img src="/boa/resources/img/noimage.jpg">
-	</div>
-	<div class="w3-center">
-	두번째 컬렉션
-	</div>
-</div>
-<div class="inblock w3-center mgl30" style="width: 160px; height: 200px;">
-	<div class="pic">
-		<img src="/boa/resources/img/noimage.jpg">
-	</div>
-	<div class="w3-center">
-	세번째 컬렉션
-	</div>
-</div>
-<div class="inblock w3-center mgl30" style="width: 160px; height: 200px;">
-	<div class="pic">
-		<img src="/boa/resources/img/noimage.jpg">
-	</div>
-	<div class="w3-center">
-	네번째 컬렉션
-	</div>
-</div>
-<div class="inblock w3-center mgl30" style="width: 160px; height: 200px;">
-	<div class="pic">
-		<img src="/boa/resources/img/noimage.jpg">
-	</div>
-	<div class="w3-center">
-	다섯번째 컬렉션
-	</div>
-</div>
+			<div class="inblock w3-center mgl30" style="width: 200px; height: 250px;">
+				<div class="pic">
+					<img src="/boa/resources/img/noimage.jpg">
+				</div>
+				<div class="w3-center w3-xlarge">
+				(1st 게시글제목)
+				</div>
+			</div>
+			<div class="inblock w3-center mgl30" style="width: 200px; height: 250px;">
+				<div class="pic">
+					<img src="/boa/resources/img/noimage.jpg">
+				</div>
+				<div class="w3-center w3-xlarge">
+				(2nd 게시글제목)
+				</div>
+			</div>
+			<div class="inblock w3-center mgl30" style="width: 200px; height: 250px;">
+				<div class="pic">
+					<img src="/boa/resources/img/noimage.jpg">
+				</div>
+				<div class="w3-center w3-xlarge">
+				(3rd 게시글제목)
+				</div>
+			</div>
+			<div class="inblock w3-center mgl30" style="width: 200px; height: 250px;">
+				<div class="pic">
+					<img src="/boa/resources/img/noimage.jpg">
+				</div>
+				<div class="w3-center w3-xlarge">
+				(4th 게시글제목)
+				</div>
+			</div>
+			<div class="inblock w3-center mgl30" style="width: 200px; height: 250px;">
+				<div class="pic">
+					<img src="/boa/resources/img/noimage.jpg">
+				</div>
+				<div class="w3-center w3-xlarge">
+				(5th 게시글제목)
+				</div>
+			</div>
 <%--
 <c:forEach var="data" items="${LIST}">
 			<div class="inblock w3-center w3-border " id="${data.cno}" style="width: 150px; height: 160px; margin-left: 20px; padding-left: 20px;">
@@ -175,20 +170,20 @@ img {
    
    <!-- Footer -->
    <footer class="w3-container w3-padding-64 w3-center w3-opacity">
-   		<p>(주)보아라</p>
+   		<p class="w3-large">(주)보아라</p>
    </footer>
    
-    <!-- Initialize Swiper -->
+    <!-- Swiper 초기화 -->
     <script>
       var swiper = new Swiper(".mySwiper", {
-        slidesPerView: 1,
-        spaceBetween: 30,
-        loop: true,
-        pagination: {
+        slidesPerView: 1, 	// 보여줄 갯수
+        spaceBetween: 30, 	// 슬라이드 간격
+        loop: true,			// 슬라이드 반복
+        pagination: {		// 쪽수 매기기
           el: ".swiper-pagination",
-          clickable: true
+          clickable: true 	// 버튼 클릭 여부
         },
-        navigation: {
+        navigation: { 		// 버튼 css
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev"
         }

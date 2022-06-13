@@ -1,24 +1,21 @@
 .pic { 
-	width: 160px;
-	height: 190px;
+	width: 200px;
+	height: 235px;
 	border: 1px solid gray;
 	overflow: hidden;
+}
+.fix {
+	
+	position:fixed!important;
 }
 
 .mgl30 {
 	margin-left: 30px;
 }
 
-      body {
-        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-        font-size: 14px;
-        color: #000;
-        margin: 0;
-        padding: 0;
-      }
 
       .swiper {
-        width: 100%;
+        width: 70%;
         height: 100%;
       }
 
