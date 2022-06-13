@@ -18,7 +18,7 @@
 <link rel="stylesheet" type="text/css" href="/boa/css/k/soyeon.css">
 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 <script type="text/javascript" src="/boa/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="/boa//js/k/main.js"></script>
+<script type="text/javascript" src="/boa/js/k/main.js"></script>
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
@@ -164,7 +164,7 @@ img {
    
    <!-- 데이터 전송용 form 태그 -->
 	<form method="POST" action="" id="frm" name="frm">
-		<input type="hidden" id="cno" name="cno">
+		<input type="hidden" id="id" name="id" value="${SID}">
 	</form>
    
    

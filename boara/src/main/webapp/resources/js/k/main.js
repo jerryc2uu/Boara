@@ -23,12 +23,12 @@ $(document).ready(function(){
    
    //로그인 버튼 클릭 이벤트
    $('#mlogin').click(function(){
-		$(location).attr('href', '/boara/member/login.boa');
+		$(location).attr('href', '/boa/member/login.boa');
 	});
 
    //로그아웃 버튼 클릭 이벤트
    $('#mlogout').click(function(){
-   		$(location).attr('href', '/boara/member/logout.boa');
+   		$(location).attr('href', '/boa/member/logout.boa');
    }); 
 
    //아이디 버튼 클릭 이벤트

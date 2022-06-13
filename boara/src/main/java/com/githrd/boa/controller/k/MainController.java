@@ -1,4 +1,4 @@
-package com.githrd.boa.controller;
+package com.githrd.boa.controller.k;
  
 import javax.servlet.http.HttpSession;
 
