@@ -6,11 +6,11 @@
 <title>댓글 목록 페이지</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="/boara/css/w3.css">
-<link rel="stylesheet" type="text/css" href="/boara/css/user.css">
-<script type="text/javascript" src="/boara/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="/boara/js/p/reboard.js"></script>
-<script type="text/javascript" src="/boara/js/main.js"></script>
+<link rel="stylesheet" type="text/css" href="/boa/css/w3.css">
+<link rel="stylesheet" type="text/css" href="/boa/css/user.css">
+<script type="text/javascript" src="/boa/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="/boa/js/p/reboard.js"></script>
+<script type="text/javascript" src="/boa/js/main.js"></script>
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
