@@ -18,7 +18,7 @@ public class PageUtil {
 	private int nowPage = 1; 	//현재 보고 있는 페이지
 	private int totalCount; 	//총 게시물 수
 	
-	private int pageRow = 5;	//한 페이지에 보여줄 게시물 수
+	private int pageRow = 3;	//한 페이지에 보여줄 게시물 수
 	private int pageGroup = 3;	//한 화면 당 이동가능한 페이지 수
 	
 	private int startPage;		//현재 페이지에서 보여줄 시작 페이지
@@ -32,7 +32,7 @@ public class PageUtil {
 	public PageUtil() {}
 
 	public PageUtil(int nowPage, int totalCount) {
-		this(nowPage, totalCount, 5, 3); // this() : 현재 실행중인 객체의 생성자 호출할 수 있는 유일한 방법
+		this(nowPage, totalCount, 3, 3); // this() : 현재 실행중인 객체의 생성자 호출할 수 있는 유일한 방법
 	}
 	
 	public PageUtil(int nowPage, int totalCount, int pageRow, int pageGroup) {

@@ -10,8 +10,16 @@
 	</settings>
 	
 	<typeAliases>
+		<!-- p -->
+		<typeAlias alias="rVO" type="com.githrd.boa.vo.p.ReboardVO" />
+		<!-- k -->
+		<typeAlias type="com.githrd.boa.vo.k.MemberVO" alias="mVO"/>
 	</typeAliases>
 	
 	<mappers>
+		<!-- p -->
+		<mapper resource="com/githrd/boa/sql/p/ReboardSQL.xml" />
+		<!-- k -->
+		<mapper resource="com/githrd/boa/sql/k/MemberSQL.xml"/>
 	</mappers>
 </configuration>

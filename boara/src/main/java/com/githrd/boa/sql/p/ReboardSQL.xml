@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rSQL">
+	<!-- 총 댓글 수 조회 -->
+	<select id="getTotal" resultType="int" parameterType="rVO">
+		SELECT
+		    COUNT(*) cnt
+		FROM
+		    reply
+		WHERE
+		    isshow IN('Y', 'S')
+		    AND bno = #{bno}
+	</select>
+	<!-- 댓글 리스트 조회 -->
+	<select id="getList" resultType="rVO" parameterType="rVO">
+		SELECT
+		    rowno, rno, bno, uprno, mno, id, body, rdate, savename, isshow, step
+		FROM
+		    (
+		    SELECT
+		        ROWNUM rowno, rno, bno, uprno, mno, id, body, rdate, savename, isshow, step
+		    FROM
+		        (
+		        SELECT
+		            r.rno, r.bno, uprno, r.mno, id, body, rdate, savename, r.isshow, (level - 1) step         
+		        FROM
+		            reply r, member m, imgfile f
+		        WHERE
+		            r.isshow IN('Y', 'S')
+		            AND r.mno = m.mno
+		            AND m.mno = f.mno(+)
+		            AND r.bno = #{bno}
+		            AND f.isshow(+) = 'C'
+		            AND f.whereis(+) = 'M'
+		        START WITH
+		            uprno IS NULL
+		        CONNECT BY
+		            PRIOR r.rno = uprno
+		        ORDER SIBLINGS BY
+		            rdate DESC
+		        )
+		    )
+		WHERE
+		    rowno BETWEEN #{startCont} AND #{endCont}
+	</select>
+</mapper>
