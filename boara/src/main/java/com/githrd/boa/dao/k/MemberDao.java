@@ -14,4 +14,19 @@ public class MemberDao {
 	public int getLogin(MemberVO mVO) {
 		return sqlSession.selectOne("mSQL.login", mVO);
 	}
+	// id 중복 체크
+	public int getIdCnt(String id) {
+		return sqlSession.selectOne("mSQL.idCnt", id);
+	}
+	// id 중복 체크
+	public int getmailCnt(String mail) {
+		return sqlSession.selectOne("mSQL.mailCnt", mail);
+	}
+	// id 중복 체크
+	public int gettelCnt(String tel) {
+		return sqlSession.selectOne("mSQL.telCnt", tel);
+	}
+	
+	
+	
 }

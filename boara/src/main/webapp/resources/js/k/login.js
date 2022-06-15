@@ -22,7 +22,10 @@ $(document).ready(function(){
 		$(location).attr('href', '/boa/main.boa');
 	});
 	
-
-
+	// 조인 버튼 클릭 이벤트
+   $('#join').click(function(){
+   		$(location).attr('href', '/boa/member/join.boa');
+   });
+	
 });
 		

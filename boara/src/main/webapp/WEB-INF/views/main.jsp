@@ -23,48 +23,50 @@
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
 .fa-anchor,.fa-coffee {font-size:200px}
-img {
-   width: 200px; 
-   height: 235px;
+img{
+	width: 300px;
+	height: 350px;
 }
 </style>
 </head>
 <body>
    <!-- Navbar -->
-   <div class="w3-top fix">
-     <div class="w3-bar w3-indigo w3-card w3-left-align w3-xlarge " >
-       <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white " id="main">Main</a>
-       <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="collection">Collection</a>
+   <div class="fix" >
+     <div class="w3-bar w3-indigo w3-card w3-left-align  w3-xlarge h70 " >
+       <a class="w3-bar-item w3-button w3-hide-small ft25 w3-padding w3-hover-white " id="main">Main</a>
+       <a class="w3-bar-item w3-button w3-hide-small ft25 w3-padding w3-hover-white" id="collection">Collection</a>
 <c:if test="${not empty SID}">      
-       <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="mwrite">글작성</a>
-       <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="mcoll">새 컬렉션</a>
+       <a class="w3-bar-item w3-button w3-hide-small ft25 w3-padding w3-hover-white" id="mwrite">Write</a>
+       <a class="w3-bar-item w3-button w3-hide-small ft25 w3-padding w3-hover-white" id="mcoll">New Collection</a>
 </c:if>   
 	<div style="float: right; padding-right:30px;">      
 <c:if test="${empty SID}">
-     <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white " id="mlogin">Login</a>
+     <a class="w3-bar-item w3-button w3-hide-small ft25 w3-padding w3-hover-white " id="mlogin">Login</a>
+     <a class="w3-bar-item w3-button w3-hide-small ft25 w3-padding w3-hover-white " id="mjoin">Join</a>
 </c:if>
 <c:if test="${not empty SID}">
-     <a class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" id="msid">${SID}</a>   
-     <a class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"id="mlogout">Logout</a>   
+     <a class="w3-bar-item w3-button w3-hide-small ft25 w3-padding-large w3-hover-white" id="msid">${SID}</a>   
+     <a class="w3-bar-item w3-button w3-hide-small ft25 w3-padding-large w3-hover-white"id="mlogout">Logout</a>   
 </c:if>           
       </div>  
      </div>
    </div>
+   <!-- header -->
    
-   <!-- Header -->
-   <header class="w3-container w3-indigo w3-center" style="padding:40px 16px; height: 150px;">
-     <h1 class="pdt10 w3-xxxlarge dfn"><b>Boara</b></h1>
+   
+   <div class=" w3-indigo w3-center header" >
+     <h1 class=" w3-jumbo w3-container"><b>Boara</b></h1>
+   </div>
 
-   </header>
 
 	<!-- middle  -->
 
 		 <!-- Swiper -->
-	    <div class="swiper mySwiper">
+	    <div class="swiper mySwiper mt80">
 	      <div class="swiper-wrapper">
 	        <div class="swiper-slide">
 	        	<div class="swiperbox">
-		        	<img src="/boa/resources/img/noimage.jpg">
+		        	<img src="/boa/resources/img/jennie.jpg">
 				</div>
 	       	</div>
 	        <div class="swiper-slide">
@@ -99,27 +101,27 @@ img {
       <div class="w3-col w3-display-container" style="margin: 0 auto;">
         	
          <!-- 컬렉션 리스트 보이는 곳 -->
-         <div style = "margin-left: 550px; margin-bottom: 60px;">
+         <div class="w3-col" style = "margin-left: 550px; margin-bottom: 60px;">
             <h3 class="w3-padding" style="float: left;">Today <a class='w3-text-red'>HOT!<a> 게시글</h3>
          </div>
-         <div class="w3-center w3-col">
-			<div class="inblock w3-center mgl30" style="width: 200px; height: 250px;">
+         <div class=" w3-center w3-col">
+			<div class="inblock w3-center mgl10" >
 				<div class="pic">
-					<img src="/boa/resources/img/noimage.jpg">
+					<img src="/boa/resources/img/jennie.jpg">
 				</div>
 				<div class="w3-center w3-xlarge">
 				(1st 게시글제목)
 				</div>
 			</div>
-			<div class="inblock w3-center mgl30" style="width: 200px; height: 250px;">
+			<div class="inblock w3-center mgl10 " >
 				<div class="pic">
-					<img src="/boa/resources/img/noimage.jpg">
+					<img  src="/boa/resources/img/noimage.jpg">
 				</div>
 				<div class="w3-center w3-xlarge">
 				(2nd 게시글제목)
 				</div>
 			</div>
-			<div class="inblock w3-center mgl30" style="width: 200px; height: 250px;">
+			<div class="inblock w3-center mgl10" >
 				<div class="pic">
 					<img src="/boa/resources/img/noimage.jpg">
 				</div>
@@ -127,7 +129,7 @@ img {
 				(3rd 게시글제목)
 				</div>
 			</div>
-			<div class="inblock w3-center mgl30" style="width: 200px; height: 250px;">
+			<div class="inblock w3-center mgl10" style="width: 300px; height: 350px;">
 				<div class="pic">
 					<img src="/boa/resources/img/noimage.jpg">
 				</div>
@@ -135,7 +137,7 @@ img {
 				(4th 게시글제목)
 				</div>
 			</div>
-			<div class="inblock w3-center mgl30" style="width: 200px; height: 250px;">
+			<div class="inblock w3-center mgl10" style="width: 300px; height: 350px;">
 				<div class="pic">
 					<img src="/boa/resources/img/noimage.jpg">
 				</div>

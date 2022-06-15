@@ -14,9 +14,32 @@
 			AND isshow = 'Y'
 			AND pw = #{pw}
 	</select>
-
-
-
-
+	<!-- 회원가입 중복체크 -->
+	<select id="idCnt" resultType="int" parameterType="String">
+		SELECT
+			COUNT(*)
+		FROM
+			member
+		WHERE
+			id = #{id}
+	</select>
+	
+	<select id="mailCnt" resultType="int" parameterType="String">
+		SELECT
+			COUNT(*)
+		FROM
+			member
+		WHERE
+			mail = #{mail}
+	</select>
+	
+	<select id="telCnt" resultType="int" parameterType="String">
+		SELECT
+			COUNT(*)
+		FROM
+			member
+		WHERE
+			tel = #{tel}
+	</select>
 
 </mapper>

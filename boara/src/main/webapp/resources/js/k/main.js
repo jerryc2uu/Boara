@@ -1,14 +1,12 @@
 $(document).ready(function(){
-	
-    //##########맨 위 버튼###########
    //메인 버튼 클릭 이벤트
    $('#main').click(function(){
-      $(location).attr('href', '/boara/main.boa');//메인 페이지로 이동
+      $(location).attr('href', '/boa/main.boa');
    });
    
    //컬렉션 버튼 클릭 이벤트
    $('#collection').click(function(){
-      $(location).attr('href', '/boara/collection/collecList.boa');//컬렉션 리스트 보기 페이지로 이동
+      $(location).attr('href', '/boa/collection/collecList.boa');
    });
    
    //글작성 버튼 클릭 이벤트
@@ -18,7 +16,7 @@ $(document).ready(function(){
    
    //새 컬렉션 작성버튼 클릭 이벤트
    $('#mcoll').click(function(){
-		$(location).attr('href', '/boara/collection/collecWrite.boa');
+		$(location).attr('href', '/boa/collection/collecWrite.boa');
    });
    
    //로그인 버튼 클릭 이벤트
@@ -30,10 +28,15 @@ $(document).ready(function(){
    $('#mlogout').click(function(){
    		$(location).attr('href', '/boa/member/logout.boa');
    }); 
+   
+   // 조인 버튼 클릭 이벤트
+   $('#mjoin').click(function(){
+   		$(location).attr('href', '/boa/member/join.boa');
+   });
 
    //아이디 버튼 클릭 이벤트
    $('#msid').click(function(){
-      $(location).attr('href', '/boara/member/myinfo.boa')//마이페이지 이동
+      $(location).attr('href', '/boa/member/myinfo.boa')//마이페이지 이동
    });
 	
 	//################### 페이지마다 바뀌는 부분 #############
