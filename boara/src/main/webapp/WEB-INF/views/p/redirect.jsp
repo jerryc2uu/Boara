@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/boara/resources/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="/boa/resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#frm').submit();
@@ -17,10 +17,10 @@
 	<form method="POST" action="${VIEW}" id="frm" name="frm">
 <c:if test="${not empty param.nowPage}">
 		<input type="hidden" name="nowPage" value="${param.nowPage}">
-</c:if>		
+</c:if>	
 <c:if test="${not empty MSG}">
 		<input type="hidden" name="msg" value="${MSG}">
-</c:if>		
+</c:if>
 <c:if test="${not empty param.bno}">
 		<input type="hidden" name="bno" value="${param.bno}">
 </c:if>		

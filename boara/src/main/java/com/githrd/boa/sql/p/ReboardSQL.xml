@@ -45,4 +45,114 @@
 		WHERE
 		    rowno BETWEEN #{startCont} AND #{endCont}
 	</select>
+	
+	<!-- 댓글 작성자 정보 조회 -->
+	<select id="getWriterInfo" resultType="rVO" parameterType="string">
+		SELECT
+		    m.mno mno, savename
+		FROM
+		    member m, imgfile f
+		WHERE
+		    m.isshow IN('Y', 'A')
+		    AND m.mno = f.mno(+)
+		    AND f.isshow(+) = 'C'
+		    AND f.whereis(+) = 'M'
+		    AND m.id = #{id}
+	</select>
+	
+	<!-- 새 댓글 및 대댓글 작성 처리 -->
+	<insert id="addReboard" parameterType="rVO">
+		<selectKey keyProperty="rno" resultType="int" order="BEFORE">
+			SELECT 
+				NVL(MAX(rno) + 1, 100001) 
+			FROM 
+				reply
+		</selectKey>
+		INSERT INTO
+		    reply(rno, bno 
+		    <if test="uprno neq 0">
+		    ,uprno
+		    </if>		    
+		    , mno, body
+		    <if test="isshow neq null">
+		    , isshow
+		    </if>
+		    )
+		VALUES(
+		   	#{rno}, #{bno}
+		   	<if test="uprno neq 0">
+		   	, #{uprno}
+		   	</if>		   	
+		   	, #{mno}, #{body}
+		   	<if test="isshow neq null">
+		   	, #{isshow}
+		   	</if>
+		)
+	</insert>
+	
+	<!-- 댓글 수정 폼보기 -->
+	<select id="reboardEdit" resultType="rVO" parameterType="rVO">
+		SELECT
+		    r.rno rno, uprno, r.mno mno, body, rdate, savename, r.isshow isshow, f.savename savename
+		FROM
+		    reply r, member m, imgfile f
+		WHERE
+		    r.isshow IN('Y', 'S')
+		    AND r.rno = #{rno}
+		    AND m.mno = f.mno(+)
+		    AND r.mno = m.mno
+		    AND m.id = #{id}
+		    AND f.isshow(+) = 'C'
+		    AND f.whereis(+) = 'M'
+	</select>
+	
+	<!-- 댓글 수정 처리 -->
+	<update id="reboardEditProc" parameterType="rVO">
+		UPDATE
+		    reply
+		SET
+		    body = #{body}
+		    <if test="isshow eq null">
+		    , isshow = 'Y'
+		    </if>
+		    <if test="isshow neq null">
+		    , isshow = 'S'
+		    </if>
+		WHERE
+		    rno = #{rno}   
+	</update>
+	<!-- 댓글 삭제 처리 -->
+	<update id="delReboard" parameterType="rVO">
+		UPDATE
+			reply
+		SET
+			isshow = 'N'
+		WHERE
+			rno = #{rno}	
+	</update>
+	
+	<!-- 댓글, 대댓글 작성 시 포인트 적립 -->
+	<insert id="addPoint" parameterType="rVO">
+		INSERT INTO
+		    point(pno, mno, gnp, pcode, sumpoint)
+		VALUES(
+		    (SELECT
+		        NVL(MAX(pno) + 1, 1000000001) 
+		     FROM
+		        point), #{mno}, #{gnp}, #{pcode}, 
+		        (SELECT
+		            sumpoint
+		        FROM
+		            point
+		        WHERE
+		            (
+		            SELECT
+		                MAX(pno)
+		            FROM
+		                point
+		            WHERE
+		                mno = #{mno}
+		            ) = pno) + #{gnp}
+		)
+	</insert>
 </mapper>

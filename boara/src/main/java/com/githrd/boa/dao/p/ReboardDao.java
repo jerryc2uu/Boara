@@ -32,4 +32,32 @@ public class ReboardDao {
 	public List<ReboardVO> getList(ReboardVO rVO) {
 		return sqlSession.selectList("rSQL.getList", rVO);
 	}
+	
+	//댓글 작성자 정보 조회 함수
+	public ReboardVO getWriterInfo(String id) {
+		return sqlSession.selectOne("rSQL.getWriterInfo", id);
+	}
+	
+	//새 댓글 및 대댓글 등록 처리 함수
+	public int addReboard(ReboardVO rVO) {
+		return sqlSession.insert("rSQL.addReboard", rVO);
+	}
+
+	//댓글 수정 폼보기
+	public ReboardVO reboardEdit(ReboardVO rVO) {
+		return sqlSession.selectOne("rSQL.reboardEdit", rVO);
+	}
+	//댓글 수정 처리 요청
+	public int reboardEditProc(ReboardVO rVO) {
+		return sqlSession.update("rSQL.reboardEditProc", rVO);
+	}
+	//댓글 삭제 처리 함수
+	public int delReboard(int rno) {
+		return sqlSession.update("rSQL.delReboard", rno);
+	}
+	
+	//포인트 적립 함수
+	public int addPoint(ReboardVO rVO) {
+		return sqlSession.update("rSQL.addPoint", rVO);
+	}
 }

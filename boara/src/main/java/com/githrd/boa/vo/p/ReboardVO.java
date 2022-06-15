@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class ReboardVO {
 	private int rno, bno, uprno, mno, cnt, ano, clicks, rowno, step,//reply 테이블 컬럼
-				pno, gnp, dcode, sumpoint,//point 테이블 컬럼
+				pno, gnp, pcode, sumpoint,//point 테이블 컬럼
 				startCont, endCont, nowPage; // 페이징 처리
 	private String body, isshow, sdate, savename, id;
 	private Date rdate;
@@ -78,11 +78,12 @@ public class ReboardVO {
 	public void setGnp(int gnp) {
 		this.gnp = gnp;
 	}
-	public int getDcode() {
-		return dcode;
+	
+	public int getPcode() {
+		return pcode;
 	}
-	public void setDcode(int dcode) {
-		this.dcode = dcode;
+	public void setPcode(int pcode) {
+		this.pcode = pcode;
 	}
 	public int getSumpoint() {
 		return sumpoint;
@@ -153,7 +154,7 @@ public class ReboardVO {
 	public String toString() {
 		return "ReboardVO [rno=" + rno + ", bno=" + bno + ", uprno=" + uprno + ", mno=" + mno + ", cnt=" + cnt
 				+ ", ano=" + ano + ", clicks=" + clicks + ", rowno=" + rowno + ", step=" + step + ", pno=" + pno
-				+ ", gnp=" + gnp + ", dcode=" + dcode + ", sumpoint=" + sumpoint + ", startCont=" + startCont
+				+ ", gnp=" + gnp + ", pcode=" + pcode + ", sumpoint=" + sumpoint + ", startCont=" + startCont
 				+ ", endCont=" + endCont + ", nowPage=" + nowPage + ", body=" + body + ", isshow=" + isshow + ", sdate="
 				+ sdate + ", savename=" + savename + ", id=" + id + ", rdate=" + rdate + "]";
 	}

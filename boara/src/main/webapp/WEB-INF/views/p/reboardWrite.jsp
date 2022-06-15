@@ -6,11 +6,11 @@
 <title>댓글 작성 페이지</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="/boara/resources/css/w3.css">
-<link rel="stylesheet" type="text/css" href="/boara/resources/css/user.css">
-<script type="text/javascript" src="/boara/resources/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="/boara/resources/js/p/reboard.js"></script>
-<script type="text/javascript" src="/boara/resources/js/main.js"></script>
+<link rel="stylesheet" type="text/css" href="/boa/css/w3.css">
+<link rel="stylesheet" type="text/css" href="/boa/css/user.css">
+<script type="text/javascript" src="/boa/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="/boa/js/p/reboard.js"></script>
+<script type="text/javascript" src="/boa/js/k/main.js"></script>
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
@@ -24,29 +24,30 @@ img {
 <body>
 <!-- #############################여기서부터 아래 표시한 곳까지 모든 페이지에서 동일. -->
 <!-- <script type="text/javascript" src="/boara/resources/js/main.js"></script> 모든 페이지에 복붙해주세요. -->
-   <!-- Navbar -->
-   <div class="w3-top">
-     <div class="w3-bar w3-indigo w3-card w3-left-align w3-large">
-       <a class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" id="main">메인</a>
-       <a class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" id="collection">컬렉션</a>
+   <div class="w3-top fix">
+     <div class="w3-bar w3-indigo w3-card w3-left-align w3-xlarge " >
+       <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white " id="main">Main</a>
+       <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="collection">Collection</a>
 <c:if test="${not empty SID}">      
-       <a class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" id="mwrite">글작성</a>
-       <a class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" id="mcoll">새 컬렉션</a>
-</c:if>        
-        <h4 style="float: right; padding-right:40px;">Boara</h4>
+       <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="mwrite">글작성</a>
+       <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="mcoll">새 컬렉션</a>
+</c:if>   
+	<div style="float: right; padding-right:30px;">      
+<c:if test="${empty SID}">
+     <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white " id="mlogin">Login</a>
+</c:if>
+<c:if test="${not empty SID}">
+     <a class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" id="msid">${SID}</a>   
+     <a class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"id="mlogout">Logout</a>   
+</c:if>           
+      </div>  
      </div>
    </div>
    
    <!-- Header -->
-   <header class="w3-container w3-indigo w3-center" style="padding:128px 16px">
-     <h1 class="w3-margin w3-jumbo">Boara</h1>
-<c:if test="${empty SID}">
-     <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top" id="mlogin">Login</button>
-</c:if>
-<c:if test="${not empty SID}">
-     <button class="w3-button w3-indigo w3-padding-large w3-large w3-margin-top" id="msid">${SID}</button>     
-     <button class="w3-button w3-indigo w3-padding-large w3-large w3-margin-top" id="mlogout">Logout</button>     
-</c:if>   
+   <header class="w3-container w3-indigo w3-center" style="padding:40px 16px; height: 150px;">
+     <h1 class="pdt10 w3-xxxlarge dfn"><b>Boara</b></h1>
+
    </header>
 <!-- #################여기까진 모든 페이지에서 동일. 복붙해주세요 -->  
    
@@ -56,7 +57,7 @@ img {
 			<div class="w3-col w3-center" style="width: 700px; height: 100%;">
 				<div class="w3-col w3-round-large w3-card-4 w3-margin-bottom w3-padding"  style="height: 200px;">
 					<div class="w3-col box120 pdAll10 w3-border-right" style="height: 100%;">
-						<div>댓글 작성</div>
+						<div>새 댓글 작성</div>
 <c:if test="${not empty DATA.savename}">
 						<img src="/boara/resources/upload/${DATA.savename}" class="inblock avtBox100 w3-border w3-border-grey" style="margin-top: 20px;">
 </c:if>
@@ -68,14 +69,14 @@ img {
 						<div class="w3-col w3-border-bottom">
 							<span style="float: left;">${SID}</span>
 						</div>
-						<form method="POST" action="/boara/reboard/reboardWriteProc.boa" 
+						<form method="POST" action="/boa/reboard/reboardWriteProc.boa" 
 											id="frm" name="frm" class="w3-col w3-margin-top">
-							<input type="hidden" id="bno" name="bno" value="${DATA.bno}">
+							<input type="hidden" id="bno" name="bno" value="${param.bno}">
 							<input type="hidden" id="mno" name="mno" value="${DATA.mno}">
 							<textarea class="w3-col w3-padding ft12" id="body" name="body"
 										style="resize: none; height:120px;"></textarea>
 						<div class="w3-col w3-right" id="" style="height: 15px;">
-							 <label style="float:left;"><input type="checkbox" name="spo" id="spo" value="S"> 스포일러 포함 시 체크</label>
+							 <label style="float:left;"><input type="checkbox" name="isshow" id="spo" value="S"> 스포일러 포함 시 체크</label>
 							<div class="w3-col w3-button w70 w3-indigo w3-right" style="padding-top:2px; width: 55px; height:20px; font-size:5pt;" id="cmtbtn">등록</div>
 						</div>
 						</form>	

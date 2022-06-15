@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="/boa/css/user.css">
 <script type="text/javascript" src="/boa/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/boa/js/p/reboard.js"></script>
-<script type="text/javascript" src="/boa/js/main.js"></script>
+<script type="text/javascript" src="/boa/js/k/main.js"></script>
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
@@ -57,7 +57,7 @@ img {
    <!-- 페이지 본문 -->
    <div class="w3-row-padding w3-padding-64 w3-container" style="height: 700px; margin: 0;">
    		<h1 class="w3-indigo w3-center w3-padding mg0" style="width: 800px; margin-left: 485px; margin-bottom: 20px;">댓글 리스트</h1>
-   		<button class="w3-center w3-indigo w3-hover-grey listbutton" id="newcomwrite" style="border: none; margin-left: 1200px; margin-bottom: 20px;">새댓글작성</button>
+   		<button class="w3-center w3-indigo w3-hover-grey listbutton" id="newwrite" style="border: none; margin-left: 1200px; margin-bottom: 20px;">새댓글작성</button>
    		<div style="width: 800px; margin: 0 auto;">
    			
 			<!-- 댓글 리스트 보이는 곳 -->
@@ -66,10 +66,10 @@ img {
 				<div class="w3-col w3-round-large w3-card-4 w3-margin-bottom w3-padding">
 					<div class="w3-col box120 pdAll10 w3-border-right">
 <c:if test="${not empty data.savename}">
-						<img src="/boara/resources/upload/${data.savename}" class="inblock avtBox100 w3-border w3-border-grey">
+						<img src="/boa/resources/upload/${data.savename}" class="inblock avtBox100 w3-border w3-border-grey">
 </c:if>
 <c:if test="${empty data.savename}">
-						<img src="/boara/resources/img/noimage.jpg" class="inblock avtBox100 w3-border w3-border-grey">
+						<img src="/boa/resources/img/noimage.jpg" class="inblock avtBox100 w3-border w3-border-grey">
 </c:if>
 					</div>
 					<div class="w3-rest w3-padding">
@@ -127,14 +127,31 @@ img {
 			
    		</div>
    </div>
+   
+   <!-- 메세지 출력 모달창 -->
+<c:if test="${not empty MSG}">
+	<div id="modal" class="w3-modal" style="display:block;">
+	    <div class="w3-modal-content mxw650 w3-animate-top w3-card-4">
+	      <header class="w3-container w3-indigo"> 
+	        <span onclick="document.getElementById('modal').style.display='none'" 
+	        class="w3-button w3-display-topright">&times;</span>
+	        <h2>Boara Message</h2>
+	      </header>
+	      <div class="w3-container w3-center">
+	        <h4>${MSG}</h4>
+	      </div>
+	    </div>
+ 	</div>
+</c:if>
   
    <!-- 데이터 전송용 form 태그 -->
-	<form method="POST" action="/boara/reboard/reboardList.boa" id="frm" name="frm">
+	<form method="POST" action="/boa/p/reboardList.boa" id="frm" name="frm">
 		<input type="hidden" id="nowPage" name="nowPage" value="${PAGE.nowPage}">
+		<input type="hidden" id="id" name="id" value="${SID}">
 		<input type="hidden" id="rno" name="rno">
 		<input type="hidden" id="uprno" name="uprno">
-		<input type="hidden" id="bno" name="bno" value="100008"><!-- ${BNO}로 수정 -->
-		<input type="hidden" id="lid" name="lid">
+		<input type="hidden" id="bno" name="bno" value="${BNO}"><!-- ${BNO}로 수정 -->
+		<input type="hidden" id="view" name="vw" value="/boa/reboard/reboardList.boa">
 	</form>
    
    <!-- Footer -->
