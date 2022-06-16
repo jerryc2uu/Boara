@@ -101,8 +101,8 @@ img{
       <div class="w3-col w3-display-container" style="margin: 0 auto;">
         	
          <!-- 컬렉션 리스트 보이는 곳 -->
-         <div class="w3-col" style = "margin-left: 550px; margin-bottom: 60px;">
-            <h3 class="w3-padding" style="float: left;">Today <a class='w3-text-red'>HOT!<a> 게시글</h3>
+         <div class="w3-col" style = "margin-left: 700px; margin-bottom: 20px;">
+            <h3 class="w3-padding ft25" style="float: left;">Today <a class='w3-text-red'>HOT!</a> 게시글</h3>
          </div>
          <div class=" w3-center w3-col">
 			<div class="inblock w3-center mgl10" >

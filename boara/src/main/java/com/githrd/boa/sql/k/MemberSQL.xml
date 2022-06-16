@@ -41,5 +41,46 @@
 		WHERE
 			tel = #{tel}
 	</select>
+	
+		
+	<select id="idSeacch" resultType="String" parameterType="mVO">
+	SELECT
+		id
+	FROM
+		member
+	WHERE
+		name= #{name}
+		AND tel = #{tel}
+	</select>
+	
+	<select id="pwSeacch" resultType="String" parameterType="mVO">
+	SELECT
+		pw
+	FROM
+		member
+	WHERE
+		id= #{id}
+		AND mail = #{mail}
+	</select>
+	
+	
+<!-- 	
+	today 조회수 top5
+	<select id="topBoard" resultTUpe="bVO" >
+	SELECT
+   		*
+	FROM
+	    (
+	        SELECT
+	            bno, title, body
+	        FROM
+	            board
+	        ORDER BY 
+	            click DESC
+	    )
+	WHERE 
+	    ROWNUM <= 5
+	</select>
 
+ -->
 </mapper>

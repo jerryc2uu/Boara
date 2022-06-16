@@ -28,5 +28,14 @@ public class MemberDao {
 	}
 	
 	
+	// id 찾기
+	public String getSearchId(MemberVO mVO) {
+		return sqlSession.selectOne("mSQL.idSeacch", mVO);
+	}
+	// pw 찾기
+	public String getSearchPw(MemberVO mVO) {
+		return sqlSession.selectOne("mSQL.pwSeacch", mVO);
+	}
+	
 	
 }

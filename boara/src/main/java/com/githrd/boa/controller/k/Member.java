@@ -26,6 +26,7 @@ import com.githrd.boa.vo.k.MemberVO;
  * 									클래스 제작, 
  * 									로그인 화면보기 , 로그인 요청 처리, 로그아웃
  * 				2022.06.15 	-		회원가입 화면보기, id, mail, pw 체크 
+ * 				2022.06.16			id/pw 찾기 
  *  *
  */
 
@@ -55,6 +56,7 @@ public class Member {
 			return mv;
 	
 	}
+	
 	@RequestMapping("/logout.boa")
 	public ModelAndView logout(ModelAndView mv, HttpSession session, RedirectView rv) {
 		session.removeAttribute("SID");
@@ -69,6 +71,7 @@ public class Member {
 		mv.setViewName("k/join");
 		return mv;
 	}
+	
 	// 회원가입정보 중복 체크
 	@RequestMapping(path="/idCheck.boa", 
 			method=RequestMethod.POST, params="id")
@@ -86,6 +89,7 @@ public class Member {
 		map.put("result", result);
 		return map;
 		}
+	
 	@RequestMapping(path="/mailCheck.boa", 
 			method=RequestMethod.POST, params="mail")
 	
@@ -120,4 +124,53 @@ public class Member {
 		map.put("result", result);
 		return map;
 		}
+	
+	// idPw 찾기 
+	@RequestMapping("/idpwSearch.boa")
+	public ModelAndView idpwSearch(ModelAndView mv) {
+		mv.setViewName("k/idpwSearch");
+
+		return mv;
+	}
+	
+	// id 찾기 
+	@RequestMapping(path="/idSearchProc.boa", 
+			method=RequestMethod.POST, params= {"name", "tel"})
+	@ResponseBody
+	public Map<String, String> idCheck(MemberVO mVO) {
+	HashMap<String, String> map = new HashMap<String, String>();
+	String result = "NO";
+	
+	String sid = mDao.getSearchId(mVO);
+		if(sid != null) {
+			result= "OK";
+		}
+		map.put("result", result);
+		map.put("id", sid);
+	
+		return map;
+	}
+	
+	// pw 찾기 
+	@RequestMapping(path="/pwSearchProc.boa", 
+			method=RequestMethod.POST, params= {"id", "mail"})
+	@ResponseBody
+	public Map<String, String> pwCheck(MemberVO mVO) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		String result = "NO";
+		
+		String spw = mDao.getSearchPw(mVO);
+		if(spw != null) {
+			result= "OK";
+		}
+		map.put("result", result);
+		map.put("pw", spw);
+		
+		return map;
+	}
+	
+	
+	
+	
+	
 }

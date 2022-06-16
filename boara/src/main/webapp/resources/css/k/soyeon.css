@@ -86,6 +86,13 @@ display: -webkit-box;
 	margin-top: 30px;
 }
 
+.idpwbutton{
+	margin-left: 20px;
+	margin-right: 20px;
+	font-size : 24pt;
+	color : indigo;
+}
+
 .pdt20 {
 	margin-top: 20px;	
 }

@@ -98,9 +98,9 @@
 			</div>
 		</form>
 		<div class="w3-col w3-margin-top w3-card-4">
-			<div class="w3-third w3-text-white w3-indigo w3-padding ft22 w3-hover-grey" id="rbtn">Reset</div> 
-			<div class="w3-third w3-text-white w3-indigo w3-padding ft22 w3-hover-grey" id="hbtn">Main</div> 
-			<div class="w3-third w3-text-white w3-indigo w3-padding ft22 w3-hover-grey" id="jbtn">Join</div> 
+			<div class="w3-third w3-text-white w3-indigo w3-padding w3-xxlarge w3-hover-grey" id="rbtn">Reset</div> 
+			<div class="w3-third w3-text-white w3-indigo w3-padding w3-xxlarge w3-hover-grey" id="hbtn">Main</div> 
+			<div class="w3-third w3-text-white w3-indigo w3-padding w3-xxlarge w3-hover-grey" id="jbtn">Join</div> 
 		</div>
 	</div>
 </body>
