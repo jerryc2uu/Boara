@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="iSQL">
+	<!-- 마이페이지 메인 폼보기 (가입일, 게시글, 댓글, 총 포인트) -->
+	<select id="getMyInfo" resultType="iVO" parameterType="string">
+		SELECT
+		    m.jdate jdate, i.savename savename, p.sumpoint,
+		    (
+		        SELECT
+		            COUNT(*)
+		        FROM
+		            reply
+		        WHERE
+		            mno = (SELECT
+		                        mno
+		                    FROM
+		                        member
+		                    WHERE
+		                        id = #{id}) 
+		    ) rcnt,
+		    (
+		        SELECT
+		            COUNT(*)
+		        FROM
+		            board        
+		        WHERE
+		            mno = (SELECT
+		                        mno
+		                    FROM
+		                        member
+		                    WHERE
+		                        id = #{id})
+		    ) bcnt
+		    
+		FROM
+		    member m, imgfile i, point p
+		WHERE
+		    id = #{id}
+		    AND m.mno = i.mno
+		    AND i.isshow = 'C'
+		    AND i.whereis = 'M'
+		    AND m.mno = p.mno
+		    AND pdate = (
+		                    SELECT
+		                        MAX(pdate)
+		                    FROM
+		                        point
+		                    WHERE
+		                        mno = (SELECT
+		                                    mno
+		                                FROM
+		                                    member
+		                                WHERE
+		                                    id = #{id})
+		                )
+	</select>	
+	
+	<!-- 구매글 수 조회 -->
+	<select id="myBuyCount" resultType="int" parameterType="string">
+		SELECT
+		    COUNT(pno)
+		FROM
+		    point p
+		WHERE
+		    pcode = 201
+		    AND p.mno = (SELECT mno FROM member WHERE id = #{id})
+	</select>
+	<!-- 나의 구매글 리스트 조회 -->
+	<select id="myBuyList" resultType="iVO" parameterType="iVO">
+		SELECT
+		    bno, cname, id, title, sdate, price 
+		FROM
+		    (
+		    SELECT
+		        ROWNUM rno, bno, cname, id, title, sdate, price
+		    FROM
+		        (
+		        SELECT
+		            bno, cname, id, title, TO_CHAR(wdate, 'yyyy/MM/dd') sdate, price
+		        FROM
+		            member m, board b, collection c
+		        WHERE
+		            m.mno = b.mno
+		            AND b.cno = c.cno
+		            AND bno IN (
+		                    SELECT
+		                        bno
+		                    FROM
+		                        point p
+		                    WHERE
+		                        pcode = 201
+		                        AND p.mno = (SELECT mno FROM member WHERE id = #{id})
+		                    )
+		        )
+		    )
+		WHERE
+		    rno BETWEEN #{startCont} AND #{endCont}
+	</select>
+	<!-- 포인트 내역 갯수 -->
+	<select id="myPointCnt" resultType="int" parameterType="string">
+		SELECT
+		    COUNT(pno)
+		FROM
+		    point
+		WHERE
+		    mno = (
+		            SELECT
+		                mno
+		            FROM
+		                member
+		            WHERE
+		                id = #{id}
+		            )
+	</select>
+	<!-- 포인트 내역 조회-->
+	<select id="myPoint" resultType="iVO" parameterType="iVO">
+		SELECT
+		    pno, gnp, sdate, pcode, detail
+		FROM
+		    (
+		    SELECT
+		        ROWNUM rno, pno, gnp, sdate, pcode, detail
+		    FROM
+		        (
+		        SELECT
+		            pno, p.gnp gnp, TO_CHAR(p.pdate, 'yyyy/MM/dd') sdate, p.pcode pcode, detail
+		        FROM
+		            point p, detailcode d
+		        WHERE   
+		            p.pcode = d.pcode
+		            AND mno = (
+		                    SELECT
+		                        mno
+		                    FROM
+		                        member
+		                    WHERE
+		                        id = #{id}
+		                    )
+		        ORDER BY
+		            pno DESC
+		        )
+		    )
+		WHERE
+		    rno BETWEEN #{startCont} AND #{endCont}
+	</select>
+	<!-- 좋아요 갯수 -->
+	<select id="myLikeCnt" resultType="int" parameterType="string">
+		SELECT
+		    COUNT(MKNO)
+		FROM
+		    mark
+		WHERE
+		     mno = (
+		            SELECT
+		                mno
+		            FROM
+		                member
+		            WHERE
+		                id = #{id}
+		            )
+	</select>
+	<!-- 좋아요 리스트 조회 -->
+	<select id="myLike" resultType="iVO" parameterType="iVO">
+		SELECT
+		    bno, cname, id, title, sdate, click 
+		FROM
+		    (
+		    SELECT
+		        ROWNUM rno, bno, cname, id, title, sdate, click 
+		    FROM
+		        (
+		        SELECT
+		            bno, cname, id, title, TO_CHAR(wdate, 'yyyy/MM/dd') sdate, click 
+		        FROM
+		            member m, board b, collection c
+		        WHERE
+		            m.mno = b.mno
+		            AND b.cno = c.cno
+		            AND bno IN (
+		                        SELECT
+		                            bno
+		                        FROM
+		                            mark
+		                        WHERE
+		                            mno = (
+		                                    SELECT
+		                                        mno
+		                                    FROM
+		                                        member
+		                                    WHERE
+		                                        id = #{id}
+		                                    )
+		                            AND isshow = 'L'
+		                        )
+		        )
+		    )
+		WHERE
+		    rno BETWEEN #{startCont} AND #{endCont}
+	</select>
+</mapper>

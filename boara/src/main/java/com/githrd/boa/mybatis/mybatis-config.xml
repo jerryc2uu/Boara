@@ -12,6 +12,7 @@
 	<typeAliases>
 		<!-- p -->
 		<typeAlias alias="rVO" type="com.githrd.boa.vo.p.ReboardVO" />
+		<typeAlias alias="iVO" type="com.githrd.boa.vo.p.MyInfoVO" />
 		<!-- k -->
 		<typeAlias type="com.githrd.boa.vo.k.MemberVO" alias="mVO"/>
 	</typeAliases>
@@ -19,6 +20,7 @@
 	<mappers>
 		<!-- p -->
 		<mapper resource="com/githrd/boa/sql/p/ReboardSQL.xml" />
+		<mapper resource="com/githrd/boa/sql/p/MyInfoSQL.xml" />
 		<!-- k -->
 		<mapper resource="com/githrd/boa/sql/k/MemberSQL.xml"/>
 	</mappers>

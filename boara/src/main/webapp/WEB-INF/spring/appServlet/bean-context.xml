@@ -12,6 +12,7 @@
 	<context:annotation-config />
 	<!-- p -->
 	<bean id="rDao" class="com.githrd.boa.dao.p.ReboardDao" />
+	<bean id="iDao" class="com.githrd.boa.dao.p.MyInfoDao" />
 	<!-- k -->
 	<bean class="com.githrd.boa.dao.k.MemberDao" id="mDao"/>
 </beans>

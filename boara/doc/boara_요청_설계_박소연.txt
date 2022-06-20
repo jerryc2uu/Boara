@@ -1,0 +1,92 @@
+### boara 요청 설계 ###
+
+===========================================
+########### 댓글 관련 요청 설계 ##############
+===========================================
+# 댓글 리스트 폼 보기 요청
+요청내용	:	/boa/reboard/reboardList.boa
+파라미터	:	bno, [nowPage]
+컨트롤러	:	com.githrd.boa.controller.Reboard
+처리함수	:	reboardList()
+뷰			:	/WEB-INF/views/p/reboardList.jsp
+--------------------------------------------
+# 새 댓글 작성 폼 보기 요청
+요청내용	:	/boa/reboard/reboardWrite.boa
+파라미터	:	nowPage, id, bno
+컨트롤러	:	com.githrd.boa.controller.Reboard
+처리함수	:	reboardWrite()
+뷰			:	/WEB-INF/views/p/reboardWrite.jsp
+--------------------------------------------
+# 새 댓글 작성 처리 요청
+요청내용	:	/boa/reboard/reboardWriteProc.boa
+파라미터	:	nowPage, body, id, bno
+컨트롤러	:	com.githrd.boa.controller.Reboard
+처리함수	:	reboardWrite()
+뷰			:	/WEB-INF/views/p/reboardWrite.jsp
+--------------------------------------------
+# 댓글 수정 폼 보기 요청
+요청내용	:	/boa/reboard/reboardEdit.boa
+파라미터	:	nowPage, id, bno
+컨트롤러	:	com.githrd.boa.controller.Reboard
+처리함수	:	reboardWrite()
+뷰			:	/WEB-INF/views/p/reboardWrite.jsp
+--------------------------------------------
+# 새 댓글 작성 처리 요청
+요청내용	:	/boa/reboard/reboardWriteProc.boa
+파라미터	:	nowPage, body, id, bno
+컨트롤러	:	com.githrd.www.controller.Reboard
+처리함수	:	reboardWrite()
+뷰			:	/WEB-INF/views/p/reboardWrite.jsp
+--------------------------------------------
+# 대댓글 작성 폼 보기 요청
+요청내용	:	/boa/reboard/reboardComment.boa
+파라미터	:	nowPage, id, bno, uprno, vw
+컨트롤러	:	com.githrd.boa.controller.Reboard
+처리함수	:	reboardComment()
+뷰			:	/WEB-INF/views/p/reboardComment.jsp
+--------------------------------------------
+# 대댓글 작성 처리 요청
+요청내용	:	/boa/reboard/reboardCommentProc.boa
+파라미터	:	nowPage, body, id, bno, uprno, vw
+컨트롤러	:	com.githrd.boa.controller.Reboard
+처리함수	:	reboardCommentProc()
+뷰			:	/WEB-INF/views/p/redirect.jsp
+--------------------------------------------
+# 댓글 삭제 처리 요청
+요청내용	:	/boa/reboard/reboardDel.boa
+파라미터	:	nowPage, rno, vw
+컨트롤러	:	com.githrd.boa.controller.Reboard
+처리함수	:	reboardDel()
+뷰			:	/WEB-INF/views/p/redirect.jsp
+--------------------------------------------
+===========================================
+########### 마이페이지 관련 요청 설계 ##############
+===========================================
+# 마이페이지 메인 폼 보기 요청
+요청내용	:	/boa/member/myinfo.boa
+파라미터	:	id
+컨트롤러	:	com.githrd.boa.controller.Member
+처리함수	:	myInfo()
+뷰			:	/WEB-INF/views/p/myInfo.jsp
+--------------------------------------------
+# 구매글 리스트 폼 보기 요청
+요청내용	:	/boa/member/mybuy.boa
+파라미터	:	id, [nowPage]
+컨트롤러	:	com.githrd.boa.controller.Member
+처리함수	:	myBuyList()
+뷰			:	/WEB-INF/views/p/mybuy.jsp
+--------------------------------------------
+# 좋아요 리스트 폼 보기 요청
+요청내용	:	/boa/member/mylike.boa
+파라미터	:	id, [nowPage]
+컨트롤러	:	com.githrd.boa.controller.Member
+처리함수	:	myLike()
+뷰			:	/WEB-INF/views/p/myLike.jsp
+--------------------------------------------
+# 포인트 이용 내역 폼 보기 요청
+요청내용	:	/boa/member/mypoint.boa
+파라미터	:	id, [nowPage]
+컨트롤러	:	com.githrd.boa.controller.Member
+처리함수	:	myPoint()
+뷰			:	/WEB-INF/views/p/myPoint.jsp
+--------------------------------------------
