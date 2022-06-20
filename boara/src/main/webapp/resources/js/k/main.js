@@ -36,7 +36,8 @@ $(document).ready(function(){
 
    //아이디 버튼 클릭 이벤트
    $('#msid').click(function(){
-      $(location).attr('href', '/boa/member/myinfo.boa')//마이페이지 이동
+      $('#frm').attr('action', '/boa/member/myinfo.boa');
+      $('#frm').submit();
    });
 	
 	//################### 페이지마다 바뀌는 부분 #############
