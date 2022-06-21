@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>좋아요 게시글 리스트</title>
+<title>찜 리스트</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="/boa/css/w3.css">
@@ -27,7 +27,7 @@
 </script>
 <body class="w3-ligth-grey">
 	<!-- 데이터 전송용 폼태그 -->
-	<form method="POST" action="/boa/member/mylike.boa" id="frm" name="frm">
+	<form method="POST" action="/boa/member/myjjim.boa" id="frm" name="frm">
 		<input type="hidden" name="nowPage" id="nowPage" value="${PAGE.nowPage}">
 		<input type="hidden" name="id" id="id" value="${SID}">
 	</form>
@@ -35,20 +35,31 @@
 	<div class="w3-content mxw700" style="margin-right: 380px;">
 		<!-- 페이지 헤더 -->
 		<header class="w3-col mgb20">
-			<h1 class="w3-center mg0" style="width: 900px; margin-top: 30px; margin-bottom: 30px;">나의 좋아요 리스트</h1>
+			<h1 class="w3-center mg0" style="width: 900px; margin-top: 30px; margin-bottom: 30px;">나의 찜 목록</h1>
 		</header>
-		
-		<div class="w3-col w3-white w3-card-4 w3-round-large pd15" style="width: 900px;">
-			<div class="w3-col w3-light-grey w3-center w3-border">
-				<div class="w3-col m2">
-					<div class="w3-col m5 w3-border-right">글번호</div>
-					<div class="w3-col m7 w3-border-right">작성자</div>
-				</div>
-				<div class="w3-col m3 w3-border-right">컬렉션</div>
-				<div class="w3-col m4 w3-border-right">글제목</div>
-				<div class="w3-col m2 w3-border-right">작성일</div>
-				<div class="w3-col m1 w3-border-right">조회수</div>
-			</div>
+		<!-- 작품 보이는 곳 -->
+		<div class="w3-row-padding w3-padding-16 w3-center" style="margin-left: 50px;">
+		    <div class="w3-quarter">
+		      <img src="/boa/resources/upload/cat.jpg" alt="Sandwich" style="width:100%; margin-right: 40px;">
+		      <h3>글제목</h3>
+		      <p>작성자</p>
+		    </div>
+		    <div class="w3-quarter">
+		      <img src="/boa/resources/upload/cat.jpg" alt="Sandwich" style="width:100%; margin-right: 40px;">
+		      <h3>글제목</h3>
+		      <p>작성자</p>
+		    </div>
+		    <div class="w3-quarter">
+		      <img src="/boa/resources/upload/cat.jpg" alt="Sandwich" style="width:100%; margin-right: 40px;">
+		      <h3>글제목</h3>
+		      <p>작성자</p>
+		    </div>
+		    <div class="w3-quarter">
+		      <img src="/boa/resources/upload/cat.jpg" alt="Sandwich" style="width:100%; margin-right: 40px;">
+		      <h3>글제목</h3>
+		      <p>작성자</p>
+		    </div>
+	  	</div>
 <c:forEach var="data" items="${LIST}">
 			<div class="w3-col w3-white w3-center w3-border">
 				<div class="w3-col m2">

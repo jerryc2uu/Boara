@@ -86,7 +86,7 @@ font-weight: lighter ;
 					<h4><span class="w3-col m2">가입일 :</span><span class="w3-rest" id="sdate">${DATA.sdate}</span></h4>
 					</div>
 					<div class="w3-col "> 
-					<h4><span class="w3-col m2">작성글 </span><span class="w3-col m3">게시글  :  <strong> ${DATA.bcnt}개</strong><a id="bcnt"></a></span><span class="w3-col m3">댓글  :  <a id="rcnt"> <strong>${DATA.rcnt} 개</strong></a></span>
+					<h4><span class="w3-col m2">작성글 </span><span class="w3-col m3" id="bcnt">게시글  :  <strong> ${DATA.bcnt}개</strong><a></a></span><span class="w3-col m3" id="rcnt">댓글  :  <a> <strong>${DATA.rcnt} 개</strong></a></span>
 						</h4>
 					</div>
 					<div class="w3-col"> 
@@ -122,6 +122,8 @@ font-weight: lighter ;
 	            <iframe id="myJJim" src="/boa/member/myjjim.boa" style="display: none; position: absolute; width: 100%; height: 100%;" frameBorder="0"></iframe>
 	            <iframe id="myBuy" src="/boa/member/mybuy.boa" style="display: none; position: absolute; width: 100%; height: 100%;" frameBorder="0"></iframe>
 	            <iframe id="myPoint" src="/boa/member/mypoint.boa" style="display: none; position: absolute; width: 100%; height: 100%;" frameBorder="0"></iframe>
+	            <iframe id="myBoard" src="/boa/member/myboard.boa" style="display: none; position: absolute; width: 100%; height: 100%;" frameBorder="0"></iframe>
+	            <iframe id="myReboard" src="/boa/member/myreboard.boa" style="display: none; position: absolute; width: 100%; height: 100%;" frameBorder="0"></iframe>
 	         </div>
 			</div>
 	   </div>

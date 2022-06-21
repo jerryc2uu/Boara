@@ -53,4 +53,29 @@ public class MyInfoDao {
 	public List<MyInfoVO> myLikeList(MyInfoVO iVO) {
 		return sqlSession.selectList("iSQL.myLike", iVO);
 	}
+	//찜 갯수 조회
+	public int myJJimCnt(String id) {
+		return sqlSession.selectOne("iSQL.myJJimCnt", id);
+	}
+	//찜 리스트 조회 함수
+	public List<MyInfoVO> myJJimList(MyInfoVO iVO) {
+		return sqlSession.selectList("iSQL.myJJim", iVO);
+	}
+
+	//내가 쓴 게시글 갯수 조회
+	public int myBoardCnt(String id) {
+		return sqlSession.selectOne("iSQL.myBoardCnt", id);
+	}
+	//내가 쓴 게시글 리스트 조회 함수
+	public List<MyInfoVO> myBoardList(MyInfoVO iVO) {
+		return sqlSession.selectList("iSQL.myBoard", iVO);
+	}
+	//내가 쓴 댓글 갯수 조회
+	public int myReboardCnt(String id) {
+		return sqlSession.selectOne("iSQL.myReboardCnt", id);
+	}
+	//내가 쓴 댓글 리스트 조회 함수
+	public List<MyInfoVO> myReboardList(MyInfoVO iVO) {
+		return sqlSession.selectList("iSQL.myReboard", iVO);
+	}
 }

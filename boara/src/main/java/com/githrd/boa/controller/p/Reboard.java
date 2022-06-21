@@ -33,18 +33,18 @@ public class Reboard {
 	
 	//댓글 리스트 보기 요청
 	@RequestMapping("/reboardList.boa")
-	public ModelAndView reboardList(ModelAndView mv, ReboardVO rVO) {
+	public ModelAndView reboardList(ModelAndView mv, ReboardVO rVO, PageUtil page) {
 		
 		//페이징 처리
 		int total = rDao.getTotal(rVO);
-		int nowPage = rVO.getNowPage();
+		//int nowPage = rVO.getNowPage();
 		int bno = rVO.getBno();
+		/*
 		if (nowPage == 0) {
 			nowPage = 1;
 		}
-		
-		PageUtil page = new PageUtil(nowPage, total);
-		
+		*/
+		page.setPage(total);
 		/*
 		System.out.println(page.getStartCont());
 		System.out.println(page.getEndCont());

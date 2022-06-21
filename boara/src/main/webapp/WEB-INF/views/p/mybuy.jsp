@@ -34,8 +34,8 @@
 	
 	<div class="w3-content mxw700" style="margin-right: 380px;">
 		<!-- 페이지 헤더 -->
-		<header class="w3-col w3-card-4 mgb20">
-			<h1 class="w3-indigo w3-center w3-padding w3-card-4 mg0" style="width: 900px;">나의 구매글 리스트</h1>
+		<header class="w3-col mgb20">
+			<h1 class="w3-center mg0" style="width: 900px; margin-top: 30px; margin-bottom: 30px;">나의 구매글 리스트</h1>
 		</header>
 		
 		<div class="w3-col w3-white w3-card-4 w3-round-large pd15" style="width: 900px;">

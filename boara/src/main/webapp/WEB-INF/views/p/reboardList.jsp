@@ -145,7 +145,7 @@ img {
 </c:if>
   
    <!-- 데이터 전송용 form 태그 -->
-	<form method="POST" action="/boa/p/reboardList.boa" id="frm" name="frm">
+	<form method="POST" action="/boa/reboard/reboardList.boa" id="frm" name="frm">
 		<input type="hidden" id="nowPage" name="nowPage" value="${PAGE.nowPage}">
 		<input type="hidden" id="id" name="id" value="${SID}">
 		<input type="hidden" id="rno" name="rno">

@@ -160,6 +160,7 @@
 		            WHERE
 		                id = #{id}
 		            )
+		     AND isshow = 'L'
 	</select>
 	<!-- 좋아요 리스트 조회 -->
 	<select id="myLike" resultType="iVO" parameterType="iVO">
@@ -198,5 +199,155 @@
 		    )
 		WHERE
 		    rno BETWEEN #{startCont} AND #{endCont}
+	</select>
+	<!-- 찜 갯수 조회 -->
+	<select id="myJJimCnt" resultType="int" parameterType="string">
+		SELECT
+		    COUNT(MKNO)
+		FROM
+		    mark
+		WHERE
+		     mno = (
+		            SELECT
+		                mno
+		            FROM
+		                member
+		            WHERE
+		                id = #{id}
+		            )
+		    AND isshow = 'J'
+	</select>
+	<!-- 찜 목록 조회 -->
+	<select id="myJJim" resultType="iVO" parameterType="iVO">
+		SELECT
+		    bno, cname, id, title, sdate, click 
+		FROM
+		    (
+		    SELECT
+		        ROWNUM rno, bno, cname, id, title, sdate, click 
+		    FROM
+		        (
+		        SELECT
+		            bno, cname, id, title, TO_CHAR(wdate, 'yyyy/MM/dd') sdate, click 
+		        FROM
+		            member m, board b, collection c
+		        WHERE
+		            m.mno = b.mno
+		            AND b.cno = c.cno
+		            AND bno IN (
+		                        SELECT
+		                            bno
+		                        FROM
+		                            mark
+		                        WHERE
+		                            mno = (
+		                                    SELECT
+		                                        mno
+		                                    FROM
+		                                        member
+		                                    WHERE
+		                                        id = #{id}
+		                                    )
+		                            AND isshow = 'J'
+		                        )
+		        )
+		    )
+		WHERE
+		    rno BETWEEN #{startCont} AND #{endCont}
+	</select>
+	
+	<!-- 내가 작성한 게시글 갯수 -->
+	<select id="myBoardCnt" resultType="int" parameterType="string">
+		SELECT
+		    COUNT(bno)
+		FROM
+		    board
+		WHERE
+		    mno = (
+		            SELECT
+		                mno
+		            FROM
+		                member
+		            WHERE
+		                id = #{id}
+		            )
+	</select>
+	<!-- 내가 작성한 게시글 목록 -->
+	<select id="myBoard" resultType="iVO" parameterType="iVO">
+		SELECT
+		    bno, cname, title, sdate, click           
+		FROM
+		    (
+		    SELECT
+		        ROWNUM rno, bno, cname, title, sdate, click
+		    FROM
+		        (
+		        SELECT
+		            bno, cname, b.title title, TO_CHAR(wdate, 'yyyy/MM/dd') sdate, click   
+		        FROM
+		            board b, collection c
+		        WHERE
+		            b.cno = c.cno
+		            AND b.mno = (
+		                    SELECT
+		                        mno
+		                    FROM
+		                        member
+		                    WHERE
+		                        id = #{id}
+		                    )
+		        ORDER BY
+		            wdate DESC
+		        )
+		    )
+		WHERE
+		    rno BETWEEN #{startCont} AND #{endCont}
+	</select>
+	<!-- 내가 작성한 댓글 갯수 -->
+	<select id="myReboardCnt" resultType="int" parameterType="string">
+		SELECT
+		    COUNT(rno)
+		FROM
+		    reply
+		WHERE
+		    mno = (
+		            SELECT
+		                mno
+		            FROM
+		                member
+		            WHERE
+		                id = 'psoy'
+		            )
+		    AND isshow IN ('Y', 'S')
+	</select>
+	<!-- 내가 작성한 댓글 목록 -->
+	<select id="myReboard" resultType="iVO" parameterType="iVO">
+		SELECT
+		    rno, body, sdate, title
+		FROM
+		    (
+		    SELECT
+		        ROWNUM rowno, rno, body, sdate, title
+		    FROM
+		        (
+		            SELECT
+		                rno, r.body body, TO_CHAR(rdate, 'yyyy/MM/dd') sdate, b.title title
+		            FROM
+		                reply r, board b
+		            WHERE
+		                r.bno = b.bno
+		                AND r.mno = (
+		                            SELECT
+		                                mno
+		                            FROM
+		                                member
+		                            WHERE
+		                                id = #{id}
+		                            )
+		                AND r.isshow IN ('Y', 'S')
+		            )
+		        )
+		WHERE   
+		    rowno BETWEEN #{startCont} AND #{endCont}
 	</select>
 </mapper>
