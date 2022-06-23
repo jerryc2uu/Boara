@@ -80,7 +80,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <c:if test="${not empty PLIST}">
 	<c:forEach var="data" items="${PLIST}">
 		<%-- 게시글 하나 박스 --%>
-			<div class="w3-pale-blue collbox w3-center w3-margin-bottom w3-round">
+			<div class="w3-border-bottom collbox w3-center w3-margin-bottom w3-round">
 				<div class="thumbbox w3-border-right w3-col m2 pbox" id="${data.bno}">
 				
 				<%-- 이미지 작업 --%>

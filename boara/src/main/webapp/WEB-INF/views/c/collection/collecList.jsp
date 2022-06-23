@@ -66,7 +66,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 	<c:forEach var="data" items="${LIST}">
 
 		<div class="w3-col w3-display-container w3-center">
-			<div class="w3-pale-blue collbox w3-center w3-margin-bottom">
+			<div class="w3-border-bottom collbox w3-center w3-margin-bottom">
 				<div class="thumbbox w3-border-right w3-col m2 cbox" id="${data.cno}">
 				<%-- 이미지 작업 --%>
 					<div class="thbox">
