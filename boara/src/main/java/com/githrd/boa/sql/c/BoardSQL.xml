@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bSQL">
+
+	<!-- 장르 꺼내오기 -->
+	<select id="getGnr" resultType="gVO">
+		SELECT
+		    gname, gno
+		FROM
+		    genre
+	</select>
+	
+<!-- 게시글 리스트 관련 ###################################################################-->
+
+	<!-- 컬렉션 정보 꺼내오기 -->
+	<select id="getCInfo" resultType="cVO" parameterType="cVO">
+		SELECT
+		    cno, cname, NVL(descr, 'empty') descr, NVL(gnr, 'empty') sgenre, id
+		FROM
+		    collection c, member m
+		WHERE
+		    c.mno = m.mno
+		    AND cno = #{cno}
+	</select>
+	
+	<!-- 컬렉션 소속 게시글 수 꺼내오기 -->
+	<select id="getTotal" resultType="int" parameterType="cVO">
+		SELECT
+		    COUNT(*)
+		FROM
+		    board
+		WHERE
+		    cno = #{cno}
+	</select>
+	
+	<!-- 게시글 리스트 로딩 -->
+	<select id="getBList" resultType="bVO" parameterType="cVO">
+		SELECT
+		    bno, price, savename, title, body, isshow, sgenre, forwho, click
+		FROM
+		    (
+		        SELECT
+		            bno, price, savename, title, body, isshow, sgenre, forwho, click, ROWNUM rno
+		        FROM
+		        (
+		            SELECT
+		                b.bno bno, price, savename, title, body, b.isshow isshow, NVL(b.gnr, 'empty') sgenre, forwho, click
+		            FROM
+		                board b, collection c, imgfile f
+		            WHERE
+		                b.isshow != 'N'
+		                AND b.cno = #{cno}
+		                AND b.cno = c.cno
+		                AND b.bno = f.bno(+)
+		                AND f.isshow(+) = 'C'
+		                AND f.whereis(+) = 'B'
+		            ORDER BY
+		                wdate DESC, bno DESC
+		        )
+		    )
+		WHERE
+		    rno BETWEEN #{startCont} AND #{endCont}
+	</select>
+	
+	<update id="delBoard" parameterType="bVO">
+		UPDATE
+		    board
+		SET
+		    isshow = 'N'
+		WHERE
+		    bno = #{bno}
+	</update>
+</mapper>

@@ -1,0 +1,37 @@
+==========================================================
+컬렉션 관련 요청 설계
+==========================================================
+# 컬렉션 리스트 폼 보기
+
+요청내용 : /boa/collection/collecList.boa
+파라미터 : [cid, nowPage, msg]
+컨트롤러 : www.githrd.boa.controller.c.Collection
+담당함수 : collecList()
+	  뷰 : /WEB-INF/views/c/collection/collecList.jsp
+----------------------------------------------------------
+# 컬렉션 삭제 요청
+
+요청내용 : /boa/collection/collecDel.boa
+파라미터 : cno, nowPage[, cid]
+컨트롤러 : www.githrd.boa.controller.c.Collection
+담당함수 : collecDel()
+	  뷰 : /WEB-INF/views/c/collection/collecList.jsp
+==========================================================
+게시글 관련 요청 설계
+==========================================================
+# 게시글 리스트 폼 보기
+
+요청내용 : /boa/board/boardList.boa
+파라미터 : cno[, nowPage, msg]
+컨트롤러 : www.githrd.boa.controller.c.Board
+담당함수 : boardList()
+	  뷰 : /WEB-INF/views/c/board/boardList.jsp
+----------------------------------------------------------
+# 게시글 삭제 요청
+
+요청내용 : /boa/board/boardDel.boa
+파라미터 : bno, nowPage, cno
+컨트롤러 : www.githrd.boa.controller.c.Board
+담당함수 : boardDel()
+	  뷰 : /WEB-INF/views/c/board/boardList.jsp
+----------------------------------------------------------
