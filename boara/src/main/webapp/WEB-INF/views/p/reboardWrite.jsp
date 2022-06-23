@@ -59,10 +59,10 @@ img {
 					<div class="w3-col box120 pdAll10 w3-border-right" style="height: 100%;">
 						<div>새 댓글 작성</div>
 <c:if test="${not empty DATA.savename}">
-						<img src="/boara/resources/upload/${DATA.savename}" class="inblock avtBox100 w3-border w3-border-grey" style="margin-top: 20px;">
+						<img src="/boa/resources/upload/${DATA.savename}" class="inblock avtBox100 w3-border w3-border-grey" style="margin-top: 20px;">
 </c:if>
 <c:if test="${empty DATA.savename}">
-						<img src="/boara/resources/img/noimage.jpg" class="inblock avtBox100 w3-border w3-border-grey" style="margin-top: 20px;">
+						<img src="/boa/resources/img/noimage.jpg" class="inblock avtBox100 w3-border w3-border-grey" style="margin-top: 20px;">
 </c:if>
 					</div>
 					<div class="w3-rest w3-padding">

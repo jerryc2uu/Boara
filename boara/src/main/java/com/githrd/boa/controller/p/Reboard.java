@@ -70,7 +70,9 @@ public class Reboard {
 	//새 댓글 작성 폼보기 요청
 	@RequestMapping("/reboardWrite.boa")
 	public ModelAndView reboardWrite(ModelAndView mv, String id, int nowPage, int bno) {
+		System.out.println(id);
 		ReboardVO rVO = rDao.getWriterInfo(id);
+		System.out.println(rVO);
 		mv.addObject("DATA", rVO);
 		mv.setViewName("p/reboardWrite");
 		return mv;

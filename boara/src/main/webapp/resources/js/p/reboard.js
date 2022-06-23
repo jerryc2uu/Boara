@@ -21,6 +21,7 @@ $(document).ready(function(){
 		$('#frm').attr('action', '/boa/reboard/reboardWrite.boa');	
 		$('#rno').prop('disabled', true);
 		$('#uprno').prop('disabled', true);
+		$('#sid').prop('disabled', true);
 		$('#frm').submit();
 	});
 	
@@ -32,15 +33,25 @@ $(document).ready(function(){
 		var srno = $(this).parent().attr('id');
 		$('#rno').val(srno);
 		
+		
+		
 		if(btxt == '삭제') {
+			$('#sid').prop('disabled', true);
+			$('#id').prop('disabled', true);
 			$('#uprno').prop('disabled', true);
 			$('#frm').attr('action', '/boa/reboard/reboardDel.boa');
 		
 		} else if(btxt == '수정') {
+			//댓글 작성자 아이디
+			$('#id').prop('disabled', true);
+			var sid = $(this).attr('id');
+			$('#sid').val(sid);
+			
 			$('#uprno').prop('disabled', true);
 			$('#frm').attr('action', '/boa/reboard/reboardEdit.boa');
 		
 		} else if(btxt == '댓글') {
+			$('#sid').prop('disabled', true);
 			//클릭한 댓글의 글번호가 대댓글의 상위댓글번호가 된다.
 			var suprno = $(this).parent().attr('id');
 			$('#uprno').val(srno);		

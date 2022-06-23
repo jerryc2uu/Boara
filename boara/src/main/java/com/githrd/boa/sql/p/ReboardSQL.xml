@@ -16,15 +16,31 @@
 	<!-- 댓글 리스트 조회 -->
 	<select id="getList" resultType="rVO" parameterType="rVO">
 		SELECT
-		    rowno, rno, bno, uprno, mno, id, body, rdate, savename, isshow, step
+		    rowno, rno, bno, uprno, mno, id, oid, body, rdate, savename, isshow, step
 		FROM
 		    (
 		    SELECT
-		        ROWNUM rowno, rno, bno, uprno, mno, id, body, rdate, savename, isshow, step
+		        ROWNUM rowno, rno, bno, uprno, mno, id, oid, body, rdate, savename, isshow, step
 		    FROM
 		        (
 		        SELECT
-		            r.rno, r.bno, uprno, r.mno, id, body, rdate, savename, r.isshow, (level - 1) step         
+		            r.rno, r.bno, uprno, r.mno, id, 
+		            (
+		            SELECT
+		                id oid
+		            FROM
+		                member
+		            WHERE
+		                mno = (
+		                        SELECT
+		                            DISTINCT b.mno
+		                        FROM
+		                            reply r, board b
+		                        WHERE
+		                            b.bno = #{bno}
+		                            )
+		            ) oid,
+		                body, rdate, savename, r.isshow, (level - 1) step         
 		        FROM
 		            reply r, member m, imgfile f
 		        WHERE
@@ -93,7 +109,7 @@
 	<!-- 댓글 수정 폼보기 -->
 	<select id="reboardEdit" resultType="rVO" parameterType="rVO">
 		SELECT
-		    r.rno rno, uprno, r.mno mno, body, rdate, savename, r.isshow isshow, f.savename savename
+		    r.rno rno, uprno, r.mno mno, m.id id, body, rdate, savename, r.isshow isshow, f.savename savename
 		FROM
 		    reply r, member m, imgfile f
 		WHERE

@@ -58,11 +58,11 @@ img {
 				<div class="w3-col w3-round-large w3-card-4 w3-margin-bottom w3-padding" style="height: 200px;">
 					<div class="w3-col box120 pdAll10 w3-border-right" style="height: 100%;">
 						<div>댓글 수정</div>
-						<img src="/boa/resources/img/${DATA.savename}" class="inblock avtBox100 w3-border w3-border-grey" style="margin-top: 20px;">
+						<img src="/boa/resources/upload/${DATA.savename}" class="inblock avtBox100 w3-border w3-border-grey" style="margin-top: 20px;">
 					</div>
 					<div class="w3-rest w3-padding">
 						<div class="w3-col w3-border-bottom">
-							<span style="float: left;">${SID}</span>
+							<span style="float: left;">${DATA.id}</span>
 							<span style="float: right;">${DATA.sdate}</span>
 						</div>
 						<input type="hidden" id="obody" value="${DATA.body}">
@@ -72,9 +72,14 @@ img {
 							<input type="hidden" id="bno" name="bno" value="${param.bno}">
 							<input type="hidden" id="mno" name="mno" value="${DATA.mno}">
 							<input type="hidden" id="rno" name="rno" value="${DATA.rno}">
+						<c:if test="${SID eq DATA.id}">
 							<textarea class="w3-col w3-padding ft12" id="body" name="body"
 										style="resize: none; height:120px;">${DATA.body}</textarea>
-						
+						</c:if>
+						<c:if test="${SID ne DATA.id}">
+							<textarea readonly class="w3-col w3-padding ft12" id="body" name="body"
+										style="resize: none; height:120px;">${DATA.body}</textarea>
+						</c:if>
 						<!-- <div class="w3-col w3-margin-top" style="height: 50px;">
 							<input class="w3-col w3-padding ft12"></input>
 						</div> -->

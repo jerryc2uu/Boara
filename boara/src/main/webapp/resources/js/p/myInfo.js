@@ -8,6 +8,12 @@ $(document).ready(function(){
 		$('#frm').submit();
 	});
 	
+	//충전 버튼
+	$('#plusPoint').click(function(){
+		$('iframe').css('display', 'none');
+		$('#addPoint').css('display', 'block');
+	});
+	
 	// 회원 정보 수정
 	
 	// 회원 탈퇴
@@ -59,4 +65,42 @@ $(document).ready(function(){
 		$('#myReboard').css('display', 'block');
 	});
 	
+	
+	//결제하기
+	$('#pay').click(function(){
+		
+		//가맹점 식별코드
+		IMP.init('imp45012205');
+		//금액
+		
+		//var money = $('input'[name="money"]:checked').val();
+		console.log(money);
+		
+		IMP.request_pay({
+	    pg : 'kakaopay.TC0ONETIME',
+	    pay_method : 'card',
+	    merchant_uid : 'merchant_' + new Date().getTime(),
+	    name : '상품1' , //결제창에서 보여질 이름
+	    amount : money,
+	    buyer_email : 'iamport@siot.do',
+	    buyer_name : '구매자이름',
+	    buyer_tel : '010-1234-5678',
+	    buyer_addr : '서울 강남구 도곡동',
+	    buyer_postcode : '123-456'
+	}, function(rsp) {
+		console.log(rsp);
+	    if ( rsp.success ) {
+	    	var msg = '결제가 완료되었습니다.';
+	        msg += '고유ID : ' + rsp.imp_uid;
+	        msg += '상점 거래ID : ' + rsp.merchant_uid;
+	        msg += '결제 금액 : ' + rsp.paid_amount;
+	        msg += '카드 승인번호 : ' + rsp.apply_num;
+	    } else {
+	    	 var msg = '결제에 실패하였습니다.';
+	         msg += '에러내용 : ' + rsp.error_msg;
+	    }
+	    alert(msg);
+	});
+		
+	});
 });

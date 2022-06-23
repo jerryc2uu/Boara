@@ -32,7 +32,7 @@
 		<input type="hidden" name="id" id="id" value="${SID}">
 	</form>
 	
-	<div class="w3-content mxw700" style="margin-right: 380px;">
+	<div class="w3-content mxw700" style="margin-right: 550px;">
 		<!-- 페이지 헤더 -->
 		<header class="w3-col mgb20">
 			<h1 class="w3-center mg0" style="width: 900px; margin-top: 30px; margin-bottom: 30px;">나의 구매글 리스트</h1>

@@ -188,4 +188,10 @@ public class MyInfo {
 		mv.setViewName("p/myreboard");
 		return mv;
 	}
+	
+	@RequestMapping("/addpoint.boa")
+	public ModelAndView myReboard(ModelAndView mv) {
+		mv.setViewName("p/addPoint");
+		return mv;
+	}
 }
