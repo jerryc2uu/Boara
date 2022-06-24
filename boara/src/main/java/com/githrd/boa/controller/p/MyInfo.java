@@ -190,9 +190,25 @@ public class MyInfo {
 	}
 	
 	//포인트 충전 폼보기
-	@RequestMapping("/addpoint.boa")
-	public ModelAndView myReboard(ModelAndView mv) {
+	@RequestMapping("/addPoint.boa")
+	public ModelAndView addPoint(ModelAndView mv) {
 		mv.setViewName("p/addPoint");
+		return mv;
+	}
+	
+	//포인트 충전 처리
+	@RequestMapping("/addPointProc.boa")
+	public ModelAndView addPointProc(ModelAndView mv, MyInfoVO iVO) {
+		int cnt = iDao.addPointProc(iVO);
+		
+		String view =  "/boa/member/myinfo.boa";
+		
+		if(cnt != 1) {
+			view = "/boa/member/addpoint.boa";
+		}
+		
+		mv.addObject("VIEW", view);
+		mv.setViewName("p/redirect");
 		return mv;
 	}
 }

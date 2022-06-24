@@ -8,7 +8,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="/boa/css/w3.css">
 <link rel="stylesheet" type="text/css" href="/boa/css/user.css">
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript" src="/boa/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/boa/js/p/myInfo.js"></script>
 <script type="text/javascript" src="/boa/js/k/main.js"></script>
@@ -34,6 +33,7 @@ font-weight: lighter ;
 <body>
 	<form method="POST" action="" id="frm" name="frm">
 		<input type="hidden" name="id" id="id" value="${SID}">
+		<input type="hidden" name="sumpoint" id="sumpoint" disabled>
 	</form>
 
 <!-- #############################여기서부터 아래 표시한 곳까지 모든 페이지에서 동일. -->
@@ -91,7 +91,7 @@ font-weight: lighter ;
 						</h4>
 					</div>
 					<div class="w3-col"> 
-					<h4><span class="w3-col m2">포인트 : </span><span class="w3-col m3 w3-margin-right" style="text-align:right;" id="point"><strong>${DATA.sumpoint}</strong></span></h4><div class="w3-rest w3-button w3-indigo w3-hover-blue" id="plusPoint">충전</div>
+					<h4><span class="w3-col m2">포인트 : </span><span class="w3-col m3 w3-margin-right" style="text-align:right;" id="point"><strong id="spoint">${DATA.sumpoint}</strong></span></h4><div class="w3-rest w3-button w3-indigo w3-hover-blue" id="plusPoint">충전</div>
 					</div>
 				</div>  
 			</div> 
@@ -119,7 +119,7 @@ font-weight: lighter ;
 			
 			<!-- 버튼마다 다른 기능들-->
 	         <div id="area" style="position: relative; width: 100%; padding-bottom: 56.25%;">
-	            <iframe id="addPoint" src="/boa/member/addpoint.boa" style="display: none; position: absolute; width: 100%; height: 100%;" frameBorder="0"></iframe>
+	            <iframe id="addPoint" src="/boa/member/addPoint.boa" style="display: none; position: absolute; width: 100%; height: 100%;" frameBorder="0"></iframe>
 	            <iframe id="myLike" src="/boa/member/mylike.boa" style="display: none; position: absolute; width: 100%; height: 100%;" frameBorder="0"></iframe>
 	            <iframe id="myJJim" src="/boa/member/myjjim.boa" style="display: none; position: absolute; width: 100%; height: 100%;" frameBorder="0"></iframe>
 	            <iframe id="myBuy" src="/boa/member/mybuy.boa" style="display: none; position: absolute; width: 100%; height: 100%;" frameBorder="0"></iframe>

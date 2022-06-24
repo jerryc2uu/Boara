@@ -78,4 +78,8 @@ public class MyInfoDao {
 	public List<MyInfoVO> myReboardList(MyInfoVO iVO) {
 		return sqlSession.selectList("iSQL.myReboard", iVO);
 	}
+	//포인트 충전 처리 함수 {
+	public int addPointProc(MyInfoVO iVO) {
+		return sqlSession.insert("iSQL.addPointProc", iVO);
+	}
 }

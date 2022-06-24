@@ -350,4 +350,44 @@
 		WHERE   
 		    rowno BETWEEN #{startCont} AND #{endCont}
 	</select>
+	
+	<!-- 포인트 충전 -->
+	<insert id="addPointProc" parameterType="iVO">
+		INSERT INTO
+		    point(pno, mno, gnp, pcode, sumpoint)
+		VALUES(
+		    (SELECT
+		        NVL(MAX(pno) + 1, 1000000001) 
+		     FROM
+		        point),
+		    (
+		    SELECT
+		        mno
+		    FROM
+		        member
+		    WHERE
+		        id = #{id}
+		    ), #{gnp}, 101, 
+		        (SELECT
+		            sumpoint
+		        FROM
+		            point
+		        WHERE
+		            (
+		            SELECT
+		                MAX(pno)
+		            FROM
+		                point
+		            WHERE
+		                mno = (
+		                    SELECT
+		                        mno
+		                    FROM
+		                        member
+		                    WHERE
+		                        id = #{id}
+		                    )
+		            ) = pno) + #{gnp}
+		)
+	</insert>
 </mapper>

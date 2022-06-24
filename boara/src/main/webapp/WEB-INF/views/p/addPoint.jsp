@@ -8,6 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="/boa/css/w3.css">
 <link rel="stylesheet" type="text/css" href="/boa/css/user.css">
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript" src="/boa/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/boa/js/p/myInfo.js"></script>
 <script type="text/javascript" src="/boa/js/k/main.js"></script>
@@ -32,11 +33,23 @@ font-weight: lighter ;
 </head>
 <body>
 <!-- 포인트 충전 -->
-    <div class="w3-content mxw700" style="margin-right: 550px;">
+	<form method="POST" action="/boa/member/addPointProc.boa" id="pfrm" name="pfrm">
+		<input type="hidden" name="id" id="id" value="${SID}">
+		<input type="hidden" name="gnp" id="gnp">
+	</form>
+    <div id="${SID}"class="w3-content mxw700" style="margin-right: 550px;">
 	    <header class="w3-col mgb20">
 			<h1 class="w3-center mg0" style="width: 900px; margin-top: 30px; margin-bottom: 30px;">충전할 포인트</h1>
 		</header>
 		<div>
+			<div class="w3-col">
+				<input type="radio" name="money" value="100">
+				<label>100P</label>
+			</div>
+			<div class="w3-col">
+				<input type="radio" name="money" value="1000">
+				<label>1000P</label>
+			</div>
 			<div class="w3-col">
 				<input type="radio" name="money" value="5000">
 				<label>5000P</label>

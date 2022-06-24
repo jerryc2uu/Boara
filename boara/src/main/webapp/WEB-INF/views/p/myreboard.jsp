@@ -35,7 +35,7 @@
 	<div class="w3-content mxw700" style="margin-right: 550px;">
 		<!-- 페이지 헤더 -->
 		<header class="w3-col mgb20">
-			<h1 class="w3-center mg0" style="width: 900px; margin-top: 30px; margin-bottom: 30px;">내가 작성한 게시글</h1>
+			<h1 class="w3-center mg0" style="width: 900px; margin-top: 30px; margin-bottom: 30px;">내가 작성한 댓글</h1>
 		</header>
 		
 		<div class="w3-col w3-white w3-card-4 w3-round-large pd15" style="width: 900px;">
