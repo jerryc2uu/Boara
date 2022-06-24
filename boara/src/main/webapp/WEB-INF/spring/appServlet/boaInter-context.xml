@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
+						https://www.springframework.org/schema/mvc/spring-mvc.xsd
+						http://www.springframework.org/schema/beans 
+						https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<beans:bean id="loginRedirect" class="com.githrd.boa.interceptor.LoginRedirectInterceptor" />
+	
+	<interceptors>
+		<interceptor>
+			<mapping path = "/reboard/reboardWrite.boa" />
+			<mapping path = "/reboard/reboardWriteProc.boa" />
+			<mapping path = "/reboard/reboardComment.boa" />
+			<mapping path = "/reboard/reboardCommentProc.boa" />
+			<mapping path = "/reboard/reboardEdit.boa" />
+			<mapping path = "/reboard/reboardEditProc.boa" />
+			<mapping path = "/reboard/reboardDel.boa" />
+			<mapping path = "/member/myinfo.boa" />
+			<mapping path = "/member/mybuy.boa" />
+			<mapping path = "/member/mypoint.boa" />
+			<mapping path = "/member/mylike.boa" />
+			<mapping path = "/member/myjjim.boa" />
+			<mapping path = "/member/myboard.boa" />
+			<mapping path = "/member/myreboard.boa" />
+			<mapping path = "/member/addpoint.boa" />
+			<beans:ref bean="loginRedirect" />
+		</interceptor>
+	</interceptors>
+</beans:beans>
