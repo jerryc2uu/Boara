@@ -12,6 +12,7 @@
 	
 	<interceptors>
 		<interceptor>
+			<!-- 박소연 -->
 			<mapping path = "/reboard/reboardWrite.boa" />
 			<mapping path = "/reboard/reboardWriteProc.boa" />
 			<mapping path = "/reboard/reboardComment.boa" />
@@ -27,6 +28,8 @@
 			<mapping path = "/member/myboard.boa" />
 			<mapping path = "/member/myreboard.boa" />
 			<mapping path = "/member/addpoint.boa" />
+			<!-- 김소연 -->
+			<!-- 최이지 -->
 			<beans:ref bean="loginRedirect" />
 		</interceptor>
 	</interceptors>
