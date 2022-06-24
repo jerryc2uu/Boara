@@ -1,19 +1,20 @@
 package com.githrd.boa.vo.k;
 
-import java.util.*;
+
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
-//import com.githrd.boa.vo.FileVO;
-
-import java.sql.*;
-import java.text.*;
+import org.springframework.web.multipart.MultipartFile;
 
 public class MemberVO {
 	private int mno, cnt;
 	private String id, name, pw, mail, tel, sdate;
 	private Date jdate;
 	private Time jtime;
-//	ArrayList<FileVO> list;
+	private List<FileVO> list;	// 파일 관련 정보 기억
+	private MultipartFile file;	// 업로드된 파일 기억
 	
 	public int getMno() {
 		return mno;
@@ -81,10 +82,18 @@ public class MemberVO {
 		this.jtime = jtime;
 	}
 
-	/*
-	 * public ArrayList<FileVO> getList() { return list; } public void
-	 * setList(ArrayList<FileVO> list) { this.list = list; }
-	 */
+	public List<FileVO> getList() {
+		return list;
+	}
+	public void setList(List<FileVO> list) {
+		this.list = list;
+	}
+	public MultipartFile getFile() {
+		return file;
+	}
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
 	@Override
 	public String toString() {
 		return "MemberVO [mno=" + mno + ",  cnt=" + cnt + ", id=" + id + ", name=" + name + ", pw=" + pw

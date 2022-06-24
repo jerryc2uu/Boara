@@ -1,0 +1,151 @@
+==================================================================
+main
+==================================================================
+# Main page 보기 요청
+요청내용	: 	/boa/main.boa
+파라미터	: 	X
+컨트롤러	: 	com.githrd.boa.controller.k.Main
+처리함수	: 	getMain()
+      뷰	: 	/WEB-INF/views/main.jsp
+==================================================================
+회원 관련 요청 설계
+==================================================================
+# login 폼보기 요청
+요청내용	: 	/boa/member/login.boa
+파라미터	:	X [vw, nowPage ]
+컨트롤러	: 	com.githrd.boa.controller.k.Member
+처리함수	:	loginForm()
+뷰			:	/WEB-INF/views/k/login.jsp
+------------------------------------------------------------------
+# login 처리 요청
+요청내용	: 	/boa/member/loginProc.boa
+파라미터	:	id, pw 
+컨트롤러	: 	com.githrd.boa.controller.k.Member
+처리함수	:	loginProc()
+뷰			:	
+				성공 /WEB-INF/views/main.jsp
+				실패 /WEB-INF/views/k/login.jsp
+------------------------------------------------------------------ 
+# join 폼보기 요청
+요청내용	: 	/boa/member/join.boa
+파라미터	:	X
+컨트롤러	: 	com.githrd.boa.controller.k.Member
+처리함수	:	join()
+뷰			:	/WEB-INF/views/k/join.jsp
+------------------------------------------------------------------
+# id pw 찾기 폼보기 요청
+요청내용	: 	/boa/member/idpwSearch.boa
+파라미터	:	X
+컨트롤러	: 	com.githrd.boa.controller.k.Member
+처리함수	:	idpwSearch()
+뷰			:	/WEB-INF/views/k/idpwSearch.jsp
+------------------------------------------------------------------  
+# id찾기 처리 요청 - 비동기통신
+요청내용	: 	/boa/member/idSearchProc.boa
+파라미터	:	name, tel
+처리함수	:	idSearch()
+컨트롤러	: 	com.githrd.boa.controller.k.Member
+뷰			:	
+------------------------------------------------------------------   
+# pw 찾기 처리 요청 - 비동기통신
+요청내용	: 	/boa/member/pwSearchProc.boa
+파라미터	:	id, mail
+처리함수	:	pwSearch()
+컨트롤러	: 	com.githrd.boa.controller.k.Member
+뷰			:	
+------------------------------------------------------------------ 
+# 아이디 중복 체크 처리 요청 - 비동기통신 
+요청내용	: 	/boa/member/idCheck.blp
+파라미터	:	id
+처리함수	:	idCheck()
+컨트롤러	: 	com.githrd.boa.controller.k.Member
+뷰			:	
+------------------------------------------------------------------
+
+# 메일 중복 처리 요청 - 비동기통신 
+요청내용	: 	/boa/member/mailCheck.blp
+파라미터	:	mail
+처리함수	:	mailCheck()
+컨트롤러	: 	com.githrd.boa.controller.k.Member
+뷰			:	
+------------------------------------------------------------------
+# 전화번호 중복 처리 요청 - 비동기통신 
+요청내용	: 	/boa/member/telCheck.blp
+파라미터	:	tel
+처리함수	:	telCheck()
+컨트롤러	: 	com.githrd.boa.controller.k.Member
+뷰			:	
+------------------------------------------------------------------
+
+# join 처리 요청
+요청내용	: 	/boa/member/joinProc.boa
+파라미터	:	name, id, pw, mail, tel, file
+컨트롤러	: 	com.githrd.boa.controller.k.Member
+처리함수	:	joinProc()
+뷰			:	성공 /WEB-INF/views/main.jsp
+				실패 /WEB-INF/views/k/join.jsp
+------------------------------------------------------------------
+# logout 처리 요청
+요청내용	: 	/boa/member/logout.boa
+파라미터	:	X
+처리함수	:	logout()
+컨트롤러	: 	com.githrd.boa.controller.k.Member
+뷰			:	/WEB-INF/views/main.jsp
+------------------------------------------------------------------
+# 회원정보 수정 폼보기 
+요청내용	: 	/boa/member/editInfo.boa
+파라미터	:	id
+처리함수	:	editinfo()
+컨트롤러	: 	com.githrd.boa.controller.k.Member
+뷰			:	/WEB-INF/views/k/editInfo.jsp
+------------------------------------------------------------------
+# 회원정보 수정 처리 요청
+요청내용	: 	/boa/member/editInfoProc.boa
+파라미터	:	id, pw, mail, tel, file
+처리함수	:	editProc()
+컨트롤러	: 	com.githrd.boa.controller.k.Member
+뷰			:	
+				성공 /WEB-INF/views/main.jsp
+				실패 /WEB-INF/views/k/editInfoProc.jsp
+------------------------------------------------------------------    
+ # 이미지 삭제 처리 요청
+요청내용	: 	/boa/member/editImgProc.boa
+파라미터	:	fno
+처리함수	:	editProc()
+컨트롤러	: 	com.githrd.boa.controller.k.Member
+뷰			:	/WEB-INF/views/k/editInfo.jsp
+------------------------------------------------------------------
+ # 회원 탈퇴 폼보기 
+요청내용	: 	/boa/member/delMember.boa
+파라미터	:	id
+처리함수	:	delMember()
+컨트롤러	: 	com.githrd.boa.controller.k.Member
+뷰			:	/WEB-INF/views/k/delMember.jsp
+------------------------------------------------------------------
+
+# 회원 탈퇴 처리 요청
+요청내용	: 	/boa/member/delMemberProc.boa
+파라미터	:	id, pw
+처리함수	:	delProc()
+컨트롤러	: 	com.githrd.boa.controller.k.Member
+뷰			:	
+				성공 /WEB-INF/views/main.jsp
+				실패 /WEB-INF/views/k/delMemberProc.jsp
+------------------------------------------------------------------  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

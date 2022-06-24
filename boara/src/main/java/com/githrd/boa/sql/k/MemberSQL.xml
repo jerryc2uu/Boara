@@ -2,47 +2,91 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+			
+<!-- 
+
+ 이 클래스는 회원관련 질의명령을 기억하고 
+ 필요한 순간에 반환해주는 클래스
+ 
+  @author	김소연
+  @since	2022.06.
+  @version	v.1.0
+  
+  			작업이력 ]
+  				2022.06.13	-	담당자 ] 김소연
+ 								클래스제작, 로그인
+ 				2022.06.16  - 	id, pw 찾기, 조회수 TOP
+ 				2022.06.18  -	회원정보보기
+ 				2022.06.21	-	탈퇴 
+ 				2022.06.23 	-	회원가입
+  									
+ 
+  -->
 <mapper namespace="mSQL">
-	<!-- 로그인 처리  -->
-	<select id="login" resultType="int" parameterType="mVO">
+
+	<!-- 멤버 테이블에서 COUNT 조회 재사용 -->
+	<sql id="selCnt">
 		SELECT
 			COUNT(*)
 		FROM
 			member
 		WHERE
+	</sql>
+	
+	<!-- 로그인 처리  -->
+	<select id="login" resultType="int" parameterType="mVO">
+		<include refid="selCnt" />
 			id = #{id}
 			AND isshow = 'Y'
 			AND pw = #{pw}
 	</select>
-	<!-- 회원가입 중복체크 -->
+	<!-- 회원가입시 중복체크항목 -->
 	<select id="idCnt" resultType="int" parameterType="String">
-		SELECT
-			COUNT(*)
-		FROM
-			member
-		WHERE
+		<include refid="selCnt" />
 			id = #{id}
 	</select>
 	
 	<select id="mailCnt" resultType="int" parameterType="String">
-		SELECT
-			COUNT(*)
-		FROM
-			member
-		WHERE
+		<include refid="selCnt" />
 			mail = #{mail}
 	</select>
 	
 	<select id="telCnt" resultType="int" parameterType="String">
-		SELECT
-			COUNT(*)
-		FROM
-			member
-		WHERE
+		<include refid="selCnt" />
 			tel = #{tel}
 	</select>
 	
+	<insert id="join" parameterType="mVO">
+		<selectKey keyProperty="mno" resultType="int" order="BEFORE">
+			SELECT
+				NVL(MAX(mno)+1, 1001)
+			FROM
+				member
+		</selectKey>
 		
+		INSERT INTO
+			member(mno ,id, pw, name, mail, tel)
+		VALUES(
+			#{mno}, #{id}, #{pw}, #{name}, #{mail}, #{tel}
+		)
+		
+	</insert>
+	
+	<insert id="joinimg" parameterType="fVO">
+		<selectKey keyProperty="fno" resultType="int" order="BEFORE">
+			SELECT
+				NVL(MAX(fno) + 1, 100001)
+			FROM
+				imgfile
+		</selectKey>
+		
+		INSERT INTO
+			imgfile(fno, mno, oriname, savename, len, isshow, whereis )
+		VALUES(
+			#{fno}, #{mno}, #{oriname}, #{savename}, #{len}, 'C', 'M'
+		)
+	</insert>
+				
 	<select id="idSeacch" resultType="String" parameterType="mVO">
 	SELECT
 		id
@@ -68,11 +112,11 @@
 	today 조회수 top5
 	<select id="topBoard" resultTUpe="bVO" >
 	SELECT
-   		*
+    *
 	FROM
 	    (
 	        SELECT
-	            bno, title, body
+	            bno, title, body, wdate
 	        FROM
 	            board
 	        ORDER BY 
@@ -80,7 +124,38 @@
 	    )
 	WHERE 
 	    ROWNUM <= 5
+	    AND wdate >= (sysdate-7)
 	</select>
 
  -->
+ 
+ 
+ 	<!-- 회원정보 수정시 불러올 데이터(사진 아직 X) -->
+ 	
+ 	<select id="getIdInfo" resultType="mVO" parameterType="String">
+ 		SELECT
+		    m.mno, name, id, pw, mail, tel, fno, savename
+		FROM
+		    member m, imgfile f
+		WHERE
+		    m.isshow = 'Y'
+		    AND f.isshow = 'C'
+		    AND f.mno = m.mno
+		    AND f.whereis = 'M'
+		    AND id = #{id}
+ 	</select>
+ 	
+ 	
+ 	
+ 	<!-- 탈퇴 처리 -->
+ 	<select id="delMember" parameterType="mVO">
+ 		UPDATE
+ 			member
+ 		SET
+ 			isshow = 'N'
+ 		WHERE
+ 			isshow IN('Y','N')
+ 			AND id = #{id}
+ 			AND pw = #{pw}
+ 	</select>
 </mapper>

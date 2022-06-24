@@ -93,9 +93,14 @@ display: -webkit-box;
 	color : indigo;
 }
 
-.pdt20 {
+.pdt40 {
+	padding-top: 40px;
+}
+
+.mgt20 {
 	margin-top: 20px;	
 }
 
-
-
+.mgb30 {
+	margin-bottom: 30px;	
+}

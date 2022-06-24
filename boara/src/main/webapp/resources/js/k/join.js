@@ -122,8 +122,8 @@ $(document).ready(function(){
 			$('#repwmsg').html('비밀번호가 일치합니다.');
 			$('#repwmsg').removeClass('w3-text-green w3-text-red').addClass('w3-text-green');
 			$('#repwmsg').css('display', 'block');
-			$('#repw').parent().parent().stop().slideDown(300).stop().slideUp(300);
 			$('#pw').css('background-color', 'lightgray').prop('readonly', true);
+			$('#repw').css('background-color', 'lightgray').prop('readonly', true);
 		}
 	});
 	

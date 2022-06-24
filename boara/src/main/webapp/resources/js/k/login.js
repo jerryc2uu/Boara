@@ -27,6 +27,14 @@ $(document).ready(function(){
    		$(location).attr('href', '/boa/member/join.boa');
    });
 	
+	// login 버튼
+	$('#login').click(function(){
+		$(location)	.attr('href', '/boa/member/login.boa');
+	});
+	$('#login2').click(function(){
+		$(location)	.attr('href', '/boa/member/login.boa');
+	});
+	
 	// id/pw 찾기 버튼 이벤트
 	$('#check').click(function(){
 		$(location).attr('href','/boa/member/idpwSearch.boa');
@@ -91,8 +99,7 @@ $(document).ready(function(){
 		},
 		success: function(data){
 				if(data.result == 'OK'){
-					var pw = data.pw;
-					
+					var pw = data.pw;	
 					$('#serpw').html(pw);
 					$('#srchPwResult').css('display', 'block');		
 				}

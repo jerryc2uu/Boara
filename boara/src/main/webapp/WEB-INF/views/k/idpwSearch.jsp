@@ -43,7 +43,7 @@ $(document).ready(function(){
 });
 </script>
 <body>
-	<div class="w3-center w3-content w3-margin-top">
+	<div class="w3-center w3-content w3-margin-top main">
 		<div class="s8" id="select ">
 			<div>
 				<input type="radio" name="select" id="idsel" class=" w3-radio" value="idsear"> <label for="idsel" class="idpwbutton "> ID 찾기</label>
@@ -53,24 +53,24 @@ $(document).ready(function(){
 		<!-- 아이디 찾기 -->
 		<div id="ids" style="display: none;">
 			<div class="w3-show-inline-block w3-margin-top w3-margin-bottom main" >
-				<h1 class="w3-text-indigo w3-jumbo w3-padding w3-border-bottom"><b>ID 찾기</b></h1>
+				<h1 class="w3-text-indigo w3-xxxlarge w3-padding w3-border-bottom"><b>ID 찾기</b></h1>
 				<form method="POST" action="" class="mgt60 w3-col w3-padding  w3-border" id="frm" name="frm">
 					<div class="w3-col w3-margin-top ">
-						<label for="name" class="w3-col s2 w3-right-align w3-text-grey ft22">이    름 : </label>
+						<label for="name" class="w3-col s2 w3-right-align w3-text-grey ft20">이    름 : </label>
 						<div class="w3-col m9 pdl10" >
-							<input type="text" name="name" id="name" placeholder="이름을 입력하세요" class="w3-margin-left w3-col w3-input txt14 w3-border-bottom">			
+							<input type="text" name="name" id="name" placeholder="이름을 입력하세요" class="w3-margin-left w3-col w3-input ft18 w3-border-bottom">			
 						</div>
 					</div>
 					<div class="w3-col w3-margin-top w3-margin-bottom">
-						<label for="tel" class="w3-col m2 w3-right-align w3-text-grey ft22">전화번호 : </label>
+						<label for="tel" class="w3-col m2 w3-right-align w3-text-grey ft20">전화번호 : </label>
 						<div class="w3-col m9 pdl10" >
-								<input type="text" name="tel" id="tel" placeholder="전화번호를 입력하세요 (-제외)" class="w3-margin-left w3-col w3-input txt14 w3-border-bottom">			
+								<input type="text" name="tel" id="tel" placeholder="전화번호를 입력하세요 (-제외)" class="w3-margin-left w3-col w3-input ft18 w3-border-bottom">			
 						</div>
 					</div>
 				</form>
 				<div class="w3-col w3-margin-top">
-					<div class="w3-button w3-indigo w3-text-white w3-xxlarge w3-hover-grey " id="login">Login</div>
-					<div class="w3-button w3-indigo w3-xxlarge w3-text-white w3-hover-grey" id="idck">Search</div>
+					<div class="w3-button w3-indigo w3-text-white w3-xlarge w3-hover-grey " id="login">Login</div>
+					<div class="w3-button w3-indigo w3-xlarge w3-text-white w3-hover-grey" id="idck">Search</div>
 				</div>
 			</div>
 		</div>
@@ -90,24 +90,24 @@ $(document).ready(function(){
 		<!-- 비번 찾기 -->
 		<div id="pws" style="display: none;">
 			<div class="w3-show-inline-block w3-margin-top w3-margin-bottom main " >
-				<h1 class="w3-text-indigo w3-padding w3-jumbo w3-border-bottom"><b>PW 찾기</b></h1>
-				<form method="POST" action="" class="mgt60 w3-col w3-padding  w3-margin-bottom w3-border " id="frm" name="frm">
+				<h1 class="w3-text-indigo w3-padding w3-xxxlarge w3-border-bottom"><b>PW 찾기</b></h1>
+				<form method="POST" action="" class="mgt60 w3-col w3-padding  w3-border " id="frm" name="frm">
 					<div class="w3-col w3-margin-top">
-						<label for="id" class="w3-col s2 w3-right-align w3-text-grey ft22">I D : </label>
+						<label for="id" class="w3-col s2 w3-right-align w3-text-grey ft20">I D : </label>
 						<div class="w3-col m9 pdl10" >
-							<input type="text" name="id" id="id" placeholder="아이디를 입력하세요" class="w3-margin-left w3-col w3-input txt14 w3-border-bottom">			
+							<input type="text" name="id" id="id" placeholder="아이디를 입력하세요" class="w3-margin-left w3-col w3-input ft18 w3-border-bottom">			
 						</div>
 					</div>
 					<div class="w3-col w3-margin-top w3-margin-bottom">
-						<label for="mail" class="w3-col m2 w3-right-align w3-text-grey ft22 ">이 메 일 : </label>
+						<label for="mail" class="w3-col m2 w3-right-align w3-text-grey ft20 ">이 메 일 : </label>
 						<div class="w3-col m9 pdl10" >
-								<input type="text" name="mail" id="mail" placeholder="이메일을 입력하세요" class="w3-margin-left w3-col w3-input txt14 w3-border-bottom">			
+								<input type="text" name="mail" id="mail" placeholder="이메일을 입력하세요" class="w3-margin-left w3-col w3-input ft18 w3-border-bottom">			
 						</div>
 					</div>
 				</form>
 				<div class="w3-col w3-margin-top">
-					<div class="w3-button w3-indigo w3-text-white w3-xxlarge w3-hover-grey" id="login">Login</div>
-					<div class="w3-button w3-indigo w3-text-white w3-xxlarge w3-hover-grey" id="pwck">Search</div>
+					<div class="w3-button w3-indigo w3-text-white w3-xlarge w3-hover-grey" id="login2">Login</div>
+					<div class="w3-button w3-indigo w3-text-white w3-xlarge w3-hover-grey" id="pwck">Search</div>
 				</div>
 			</div>
 		</div>

@@ -34,8 +34,9 @@ $(document).ready(function(){
    		$(location).attr('href', '/boa/member/join.boa');
    });
 
-   //아이디 버튼 클릭 이벤트
    $('#msid').click(function(){
+        $('input').prop('disabled', true);
+        $('#id').prop('disabled', false);
       $('#frm').attr('action', '/boa/member/myinfo.boa');
       $('#frm').submit();
    });
