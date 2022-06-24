@@ -189,6 +189,7 @@ public class MyInfo {
 		return mv;
 	}
 	
+	//포인트 충전 폼보기
 	@RequestMapping("/addpoint.boa")
 	public ModelAndView myReboard(ModelAndView mv) {
 		mv.setViewName("p/addPoint");

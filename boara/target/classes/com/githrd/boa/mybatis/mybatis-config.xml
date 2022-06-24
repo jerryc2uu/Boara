@@ -10,16 +10,25 @@
 	</settings>
 	
 	<typeAliases>
-		<!-- p -->
+		<!-- 박소연 -->
 		<typeAlias alias="rVO" type="com.githrd.boa.vo.p.ReboardVO" />
-		<!-- k -->
+		<typeAlias alias="iVO" type="com.githrd.boa.vo.p.MyInfoVO" />
+		<!-- 김소연 -->
 		<typeAlias type="com.githrd.boa.vo.k.MemberVO" alias="mVO"/>
+		<!-- 최이지 -->
+		<typeAlias alias="cVO" type="com.githrd.boa.vo.c.CollecVO" />
+		<typeAlias alias="gVO" type="com.githrd.boa.vo.c.GenreVO" />
+		<typeAlias alias="bVO" type="com.githrd.boa.vo.c.BoardVO" />
 	</typeAliases>
 	
 	<mappers>
-		<!-- p -->
+		<!-- 박소연 -->
 		<mapper resource="com/githrd/boa/sql/p/ReboardSQL.xml" />
-		<!-- k -->
+		<mapper resource="com/githrd/boa/sql/p/MyInfoSQL.xml" />
+		<!-- 김소연 -->
 		<mapper resource="com/githrd/boa/sql/k/MemberSQL.xml"/>
+		<!-- 최이지 -->
+		<mapper resource="com/githrd/boa/sql/c/CollectionSQL.xml" />
+      	<mapper resource="com/githrd/boa/sql/c/BoardSQL.xml"/>
 	</mappers>
 </configuration>
