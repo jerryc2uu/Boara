@@ -196,6 +196,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 		<input type="hidden" name="cno" id="cno" value="${param.cno}">
 		<input type="hidden" name="bno" id="bno">
 		<input type="hidden" name="vw" id="vw">
+		<input type="hidden" name="id" id="id" value="${SID}">
 	</form>
 <script>
 // Used to toggle the menu on small screens when clicking on the menu button

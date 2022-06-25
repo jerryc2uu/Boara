@@ -23,12 +23,7 @@ $(document).ready(function(){
 		$('#addPoint').css('display', 'block');
 	});
 	
-	// 회원 정보 수정
-	
-	// 회원 탈퇴
-	
 	$('dd').click(function(){
-	
 		
 		$('iframe').css('display', 'none');
 		
@@ -36,7 +31,9 @@ $(document).ready(function(){
 		
 		if(msg == '회원정보 수정') {
 			
+			
 		} else if(msg == '회원 탈퇴') {
+		
 		
 		} else if(msg == '좋아요 목록') {
 			$('#myLike').css('display', 'block');
