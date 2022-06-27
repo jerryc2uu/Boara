@@ -6,19 +6,18 @@
 <head>
 <title>${CINFO.cname}</title>
 <meta charset="UTF-8">
-<meta
-      name="viewport"
+<meta name="viewport"
       content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
 />
-<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 <link rel="stylesheet" type="text/css" href="/boa/css/w3.css">
 <link rel="stylesheet" type="text/css" href="/boa/css/user.css">
 <link rel="stylesheet" type="text/css" href="/boa/css/c/ez.css">
 <link rel="stylesheet" type="text/css" href="/boa/css/k/soyeon.css">
-<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+<script src="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js"></script>
 <script type="text/javascript" src="/boa/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="/boa/js/k/main.js"></script>
 <script type="text/javascript" src="/boa/js/c/board.js"></script>
+<script type="text/javascript" src="/boa/js/k/main.js"></script>
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
@@ -27,36 +26,36 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 </head>
 <body>
 	<%-- Navbar --%>
-	<div class="fix" >
-		<div class="w3-bar w3-indigo w3-card w3-left-align w3-xlarge h70" >
-			<a class="w3-bar-item w3-button w3-hide-small ft25 w3-padding w3-hover-white " id="main">Main</a>
-			<a class="w3-bar-item w3-button w3-hide-small ft25 w3-padding w3-hover-white" id="collection">Collection</a>
+	<div class="w3-top fix">
+		<div class="w3-bar w3-indigo w3-card w3-left-align w3-xlarge">
+			<a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white " id="main">Main</a>
+			<a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="collection">Collection</a>
 <c:if test="${not empty SID}">
-			<a class="w3-bar-item w3-button w3-hide-small ft25 w3-padding w3-hover-white" id="mwrite">Write</a>
-			<a class="w3-bar-item w3-button w3-hide-small ft25 w3-padding w3-hover-white" id="mcoll">New Collection</a>
+			<a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="mwrite">Write</a>
+			<a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="mcoll">New Collection</a>
 </c:if>
 			<div style="float: right; padding-right:30px;">
 <c:if test="${empty SID}">
-				<a class="w3-bar-item w3-button w3-hide-small ft25 w3-padding w3-hover-white " id="lbtn">Login</a>
-				<a class="w3-bar-item w3-button w3-hide-small ft25 w3-padding w3-hover-white " id="gbtn">Join</a>
+				<a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white " id="lbtn">Login</a>
+				<a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white " id="jbtn">Join</a>
 </c:if>
 <c:if test="${not empty SID}">
-				<a class="w3-bar-item w3-button w3-hide-small ft25 w3-padding-large w3-hover-white" id="msid">${SID}</a>
-				<a class="w3-bar-item w3-button w3-hide-small ft25 w3-padding-large w3-hover-white"id="obtn">Logout</a>
-</c:if>
+				<a class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" id="msid">${SID}</a>
+				<a class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"id="obtn">Logout</a>
+</c:if>           
 			</div>
 		</div>
 	</div>
    
-   <%-- Header --%>
-	<div class=" w3-indigo w3-center header">
+	<%-- Header --%>
+	<header class="w3-container w3-indigo w3-center" style="padding:40px 16px; height: 200px;">
 <c:if test="${empty CINFO}">
-		<h1 class="w3-jumbo w3-container"><b>컬렉션을 선택해 주세요.</b></h1>
+		<h1 class="pdt40 w3-xxxlarge dfn"><b>선택된 컬렉션이 없습니다.</b></h1>
 </c:if>
 <c:if test="${not empty CINFO}">
-		<h1 class="w3-jumbo w3-container"><b>${CINFO.cname}</b></h1>
+		<h1 class="pdt40 w3-xxxlarge dfn"><b>${CINFO.cname}</b></h1>
 </c:if>
-	</div>
+	</header>
    
 	<%-- First Grid --%>
 	<div class="w3-row-padding w3-padding-64 w3-container">
@@ -107,10 +106,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 	<c:if test="${data.forwho eq 'A'}">
 						<div class="adult w3-round w3-left">성인</div>
 	</c:if>
-	<c:if test="${fn:length(data.title) > 20}">
-			 			<h1 class="w3-left inline">${fn:substring(data.title, 0, 20)}...</h1>
+	<c:if test="${fn:length(data.title) > 15}">
+			 			<h1 class="w3-left inline">${fn:substring(data.title, 0, 15)}...</h1>
 	</c:if>
-	<c:if test="${fn:length(data.title) <= 20}">
+	<c:if test="${fn:length(data.title) <= 15}">
 			 			<h1 class="w3-left inline">${data.title}</h1>
 	</c:if>
 					</div>
@@ -130,8 +129,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 					<div class="w3-col m2" id="${data.bno}">
 						<h6 class="w3-col w3-right-align pdt20 w3-text-gray">조회수 : ${data.click}</h6>
 	<c:if test="${CINFO.id eq SID}">
-						<div class="noti w3-right ebtn w3-round dbtn">수정</div>
-						<div class="noti w3-right dbtn w3-round">삭제</div>
+						<div class="noti w3-right ebtn w3-round ebtn">수정</div>
+						<div class="noti w3-right dbtn w3-round dbtn">삭제</div>
 	</c:if>
 					</div>
 				

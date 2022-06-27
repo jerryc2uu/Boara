@@ -6,16 +6,15 @@
 <head>
 <title>컬렉션 리스트</title>
 <meta charset="UTF-8">
-<meta
-      name="viewport"
+<meta name="viewport"
       content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
 />
-<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 <link rel="stylesheet" type="text/css" href="/boa/css/w3.css">
 <link rel="stylesheet" type="text/css" href="/boa/css/user.css">
 <link rel="stylesheet" type="text/css" href="/boa/css/c/ez.css">
 <link rel="stylesheet" type="text/css" href="/boa/css/k/soyeon.css">
-<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+<script src="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js"></script>
 <script type="text/javascript" src="/boa/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/boa/js/c/collec.js"></script>
 <script type="text/javascript" src="/boa/js/k/main.js"></script>
@@ -27,36 +26,36 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 </head>
 <body>
 	<%-- Navbar --%>
-	<div class="fix" >
-		<div class="w3-bar w3-indigo w3-card w3-left-align w3-xlarge h70" >
-			<a class="w3-bar-item w3-button w3-hide-small ft25 w3-padding w3-hover-white " id="main">Main</a>
-			<a class="w3-bar-item w3-button w3-hide-small ft25 w3-padding w3-hover-white" id="collection">Collection</a>
+	<div class="w3-top fix">
+		<div class="w3-bar w3-indigo w3-card w3-left-align w3-xlarge">
+			<a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white " id="main">Main</a>
+			<a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="collection">Collection</a>
 <c:if test="${not empty SID}">
-			<a class="w3-bar-item w3-button w3-hide-small ft25 w3-padding w3-hover-white" id="mwrite">Write</a>
-			<a class="w3-bar-item w3-button w3-hide-small ft25 w3-padding w3-hover-white" id="mcoll">New Collection</a>
+			<a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="mwrite">Write</a>
+			<a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="mcoll">New Collection</a>
 </c:if>
 			<div style="float: right; padding-right:30px;">
 <c:if test="${empty SID}">
-				<a class="w3-bar-item w3-button w3-hide-small ft25 w3-padding w3-hover-white " id="lbtn">Login</a>
-				<a class="w3-bar-item w3-button w3-hide-small ft25 w3-padding w3-hover-white " id="jbtn">Join</a>
+				<a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white " id="lbtn">Login</a>
+				<a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white " id="jbtn">Join</a>
 </c:if>
 <c:if test="${not empty SID}">
-				<a class="w3-bar-item w3-button w3-hide-small ft25 w3-padding-large w3-hover-white" id="msid">${SID}</a>
-				<a class="w3-bar-item w3-button w3-hide-small ft25 w3-padding-large w3-hover-white"id="obtn">Logout</a>
-</c:if>
+				<a class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" id="msid">${SID}</a>
+				<a class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"id="obtn">Logout</a>
+</c:if>           
 			</div>
 		</div>
 	</div>
    
-   <%-- Header --%>
-   <div class=" w3-indigo w3-center header">
-<c:if test="${empty CID}">
-     <h1 class="w3-jumbo w3-container"><b>Boara</b></h1>
+	<%-- Header --%>
+	<header class="w3-container w3-indigo w3-center" style="padding:40px 16px; height: 200px;">
+<c:if test="${empty CINFO}">
+		<h1 class="pdt40 w3-xxxlarge dfn"><b>Boara</b></h1>
 </c:if>
-<c:if test="${not empty CID}">
-     <h1 class="w3-jumbo w3-container"><b>${CID}'s Collection</b></h1>
+<c:if test="${not empty CINFO}">
+		<h1 class="pdt40 w3-xxxlarge dfn"><b>${CID}'s Collection</b></h1>
 </c:if>
-   </div>
+	</header>
    
 	<%-- First Grid --%>
 	<div class="w3-row-padding w3-padding-64 w3-container">
@@ -74,7 +73,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 						<img class="thumb" src="/boa//img/noimage.jpg">
 		</c:if>
 		<c:if test="${not empty data.savename}">
-						<img class="thumb" src="/boa//upload/${data.savename}">
+						<img class="thumb" src="/boa/upload/${data.savename}">
 		</c:if>
 					</div>
 					
@@ -100,8 +99,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 				</div>
 				<div class="w3-col m2" id="${data.cno}">
 		<c:if test="${data.id eq SID}">
-						<div class="noti w3-right ebtn w3-round dbtn">수정</div>
-						<div class="noti w3-right dbtn w3-round">삭제</div>
+						<div class="noti w3-right ebtn w3-round ebtn">수정</div>
+						<div class="noti w3-right dbtn w3-round dbtn">삭제</div>
 		</c:if>
 				</div>
 			</div>
@@ -169,6 +168,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 		<input type="hidden" name="nowPage" id="nowPage" value="${PAGE.nowPage}">
 		<input type="hidden" name="cno" id="cno">
 		<input type="hidden" name="vw" id="vw">
+		<input type="hidden" name="id" id="id" value="${SID}">
 <c:if test="${not empty CID}">
 		<input type="hidden" name="cid" id="cid" value="${CID}">
 </c:if>

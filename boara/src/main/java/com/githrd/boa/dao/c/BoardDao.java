@@ -8,6 +8,9 @@ package com.githrd.boa.dao.c;
  * 		작업 이력
  * 			2022.06.22	-	클래스 제작
  * 								담당자 : 최이지
+ * 
+ * 			2022.06.26	-	함수 추가(getCList, addBoard, addThumb, getBInfo, editBoard, setOldThumb, setNewThumb)
+ * 								담당자 : 최이지
  */
 
 import java.util.List;
@@ -27,7 +30,12 @@ public class BoardDao {
 		return sqlSession.selectList("bSQL.getGnr");
 	}
 	
-// 게시글 리스트 관련 -------------------------------------------------------------------------
+	// 갖고 있는 컬렉션 꺼내오기
+	public List<CollecVO> getCList(String id){
+		return sqlSession.selectList("bSQL.getCList", id);
+	}
+	
+// 게시글 리스트 관련 ---------------------------------------------------------------------------
 
 	// 컬렉션 정보 꺼내오기
 	public CollecVO getCInfo(CollecVO cVO) {
@@ -47,5 +55,42 @@ public class BoardDao {
 	// 게시글 삭제
 	public int delBoard(BoardVO bVO) {
 		return sqlSession.update("bSQL.delBoard", bVO);
+	}
+
+// 게시글 작성/수정 -----------------------------------------------------------------------------
+	
+	// 새 썸네일 업로드
+	public int addThumb(FileVO cfVO) {
+		return sqlSession.insert("bSQL.addThumb", cfVO);
+	}
+	
+	// 게시글 작성 (파일X)
+	public int addBoard(BoardVO bVO) {
+		return sqlSession.insert("bSQL.addBoard", bVO);
+	}
+	
+	// 게시글 수정시 기본 정보 불러오기
+	public BoardVO getBInfo(int bno) {
+		return sqlSession.selectOne("bSQL.getBInfo", bno);
+	}
+	
+	// 게시글 썸네일 히스토리 불러오기
+	public List<FileVO> getBHis(BoardVO bVO){
+		return sqlSession.selectList("bSQL.getBHis", bVO);
+	}
+	
+	// 게시글 정보 수정
+	public int editBoard(BoardVO bVO) {
+		return sqlSession.update("bSQL.editBoard", bVO);
+	}
+	
+	// 게시글 썸네일 히스토리 isshow 변경
+	public int setOldThumb(int bno) {
+		return sqlSession.update("bSQL.setOldThumb", bno);
+	}
+	
+	// 썸네일 히스토리 중 선택시 isshow 변경
+	public int setNewThumb(int fno) {
+		return sqlSession.update("bSQL.setNewThumb", fno);
 	}
 }

@@ -20,6 +20,7 @@
 		<typeAlias alias="cVO" type="com.githrd.boa.vo.c.CollecVO" />
 		<typeAlias alias="gVO" type="com.githrd.boa.vo.c.GenreVO" />
 		<typeAlias alias="bVO" type="com.githrd.boa.vo.c.BoardVO" />
+		<typeAlias alias="cfVO" type="com.githrd.boa.vo.c.FileVO" />
 	</typeAliases>
 	
 	<mappers>

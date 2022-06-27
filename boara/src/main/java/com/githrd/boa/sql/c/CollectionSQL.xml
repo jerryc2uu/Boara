@@ -12,7 +12,18 @@
 		    genre
 	</select>
 	
-<!-- 컬렉션 리스트 관련 ##################################################################-->
+	<!-- 컬렉션 새 썸네일 입력 -->
+	<insert id="addThumb" parameterType="cfVO">
+		INSERT INTO
+			imgfile(fno, mno, cno, oriname, savename, len, isshow, whereis)
+		VALUES(
+			(SELECT NVL(MAX(fno)+1, 100001) FROM imgfile),
+			(SELECT mno FROM member WHERE id = #{id}),
+			#{cno}, #{oriname}, #{savename}, #{len}, 'C', 'C'
+		)
+	</insert>
+	
+<!-- 컬렉션 리스트 관련 ####################################################################-->
 	<!-- 컬렉션 리스트 조회 : id X -->
 	<select id="cListDefault" parameterType="cVO" resultType="cVO">
 		SELECT
@@ -105,5 +116,97 @@
 		    isshow = 'N'
 		WHERE
 		    cno = #{cno}
+	</update>
+	
+<!-- 컬렉션 작성 관련 ######################################################################-->
+
+	<!-- 컬렉션 작성정보 입력 -->
+	<insert id="addColl" parameterType="cVO">
+		<selectKey keyProperty="cno" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(cno)+1, 100001) FROM collection
+		</selectKey>
+		INSERT INTO
+			collection(cno, cname,
+			<if test="descr neq null">
+				descr,
+			</if>
+			mno
+		    <if test="sgenre neq null">
+				, gnr
+		    </if>
+			)
+		VALUES(
+			#{cno}, #{cname},
+			<if test="descr neq null">
+				#{descr},
+			</if>
+			(SELECT mno FROM member WHERE id = #{id})
+			<if test="sgenre neq null">
+			, #{sgenre}
+			</if>
+		)
+	</insert>
+<!-- 컬렉션 수정 관련 ######################################################################-->
+
+	<!-- 컬렉션 기본 정보 불러오기 -->
+	<select id="getCInfo" resultType="cVO" parameterType="int">
+		SELECT
+		    c.cno, cname, NVL(descr, 'empty') descr, NVL(gnr, 'empty') sgenre, fno
+		FROM
+		    collection c, imgfile i
+		WHERE
+		    c.cno = i.cno(+)
+		    AND c.cno = #{cno}
+		    AND i.isshow(+) = 'C'
+	</select>
+	
+	<!-- 컬렉션 파일 히스토리 불러오기 -->
+	<select id="getCHis" resultType="cfVO" parameterType="int">
+		SELECT
+			savename, fno
+		FROM
+			imgfile
+		WHERE
+			cno = #{cno}
+			AND isshow != 'N'
+	</select>
+	
+	<!-- 컬렉션 기본 정보 수정 -->
+	<update id="editColl" parameterType="cVO">
+		UPDATE
+			collection
+		<set>
+			<if test="cname neq null">
+				cname = #{cname},
+			</if>
+			<if test="descr neq null">
+				descr = #{descr},
+			</if>
+			<if test="sgenre neq null">
+				gnr = #{sgenre},
+			</if>
+		</set>
+		WHERE
+			cno = #{cno}
+	</update>
+	
+	<!-- 모든 썸네일 isshow 변경 -->
+	<update id="setOldThumb" parameterType="int">
+		UPDATE
+			imgfile
+		SET
+			isshow = 'Y'
+		WHERE
+			cno = #{cno}
+	</update>
+	
+	<!-- 기존 썸네일 중 새 썸네일 선택시 -->
+	<update id="setNewThumb" parameterType="int">
+		UPDATE
+			imgfile
+		SET
+			isshow = 'C'
+		WHERE
+			fno = #{fno}
 	</update>
 </mapper>

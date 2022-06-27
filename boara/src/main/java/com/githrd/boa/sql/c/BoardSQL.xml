@@ -12,7 +12,35 @@
 		    genre
 	</select>
 	
-<!-- 게시글 리스트 관련 ###################################################################-->
+	<!-- 갖고 있는 컬렉션 꺼내오기 -->
+	<select id="getCList" resultType="cVO" parameterType="string">
+		SELECT
+			cno, cname
+		FROM
+			collection
+		WHERE
+			mno = (
+				SELECT
+					mno
+				FROM
+					member
+				WHERE
+					id = #{id}
+			)
+	</select>
+	
+	<!-- 게시글 새 썸네일 설정 -->
+	<insert id="addThumb" parameterType="cfVO">
+		INSERT INTO
+			imgfile(fno, mno, bno, oriname, savename, len, isshow, whereis)
+		VALUES(
+			(SELECT NVL(MAX(fno+1), 100001) FROM imgfile),
+			(SELECT mno FROM member WHERE id = #{id}),
+			#{bno}, #{oriname}, #{savename}, #{len}, 'C', 'B'
+		)
+	</insert>
+	
+<!-- 게시글 리스트 관련 ####################################################################-->
 
 	<!-- 컬렉션 정보 꺼내오기 -->
 	<select id="getCInfo" resultType="cVO" parameterType="cVO">
@@ -72,4 +100,109 @@
 		WHERE
 		    bno = #{bno}
 	</update>
+<!-- 게시글 작성/수정 관련 #################################################################-->
+
+	<!-- 게시글 작성 (파일X) -->
+	<insert id="addBoard" parameterType="bVO">
+		<selectKey keyProperty="bno" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(bno)+1, 100001) FROM board
+		</selectKey>
+		INSERT INTO
+			board(bno, title, body, price, isshow, forwho, cno, mno
+		<if test="sgenre neq null">
+			, gnr
+		</if>
+			)
+		VALUES(
+			#{bno}, #{title}, #{body}, #{price}, #{isshow}, #{forwho}, #{cno},
+			(SELECT mno FROM member WHERE id = #{id})
+		<if test="sgenre neq null">
+			, #{sgenre}
+		</if>
+		)
+	</insert>
+	
+	<!-- 수정 전 기본 정보 로딩 -->
+	<select id="getBInfo" resultType="bVO" parameterType="int">
+		SELECT
+			b.bno, b.cno, title, b.isshow, forwho, price, NVL(gnr, 'empty') sgenre, body, fno
+		FROM
+			board b, imgfile i
+		WHERE
+			b.bno = i.bno(+)
+			AND b.bno = #{bno}
+			AND i.isshow(+) = 'C'
+	</select>
+	
+	<!-- 썸네일 히스토리 불러오기 -->
+	<select id="getBHis" resultType="cfVO" parameterType="bVO">
+		SELECT
+			savename, fno
+		FROM
+			imgfile
+		WHERE
+			bno = #{bno}
+			AND isshow != 'N'
+	</select>
+	
+	<!-- 게시글 정보 수정 -->
+	<update id="editBoard" parameterType="bVO">
+		UPDATE
+			board
+		<set>
+			<if test="title neq null">
+				title = #{title},
+			</if>
+			<if test="isshow neq null">
+				isshow = #{isshow},
+			</if>
+			<if test="forwho neq null">
+				forwho = #{forwho},
+			</if>
+			<if test="price neq null">
+				price = #{price},
+			</if>
+			<if test="body neq null">
+				body = #{body},
+			</if>
+			<if test="sgenre neq null">
+				gnr = #{sgenre},
+			</if>
+		</set>
+		WHERE
+			bno = #{bno}
+	</update>
+	
+	<!-- 게시글 썸네일 히스토리 isshow 변경 -->
+	<update id="setOldThumb" parameterType="int">
+		UPDATE
+			imgfile
+		SET
+			isshow = 'Y'
+		WHERE
+			bno = #{bno}
+	</update>
+	
+	<!-- 썸네일 히스토리 중 선택시 isshow 변경 -->
+	<update id="setNewThumb" parameterType="int">
+		UPDATE
+			imgfile
+		SET
+			isshow = 'C'
+		WHERE
+			fno = #{fno}
+	</update>
+	
+<!-- 게시글 상세 보기 ######################################################################-->
+	
+	<select id="getBDetail" resultType="bVO" parameterType="int">
+		SELECT
+			cname, bno, b.isshow, title, NVL(b.gnr, 'empty') sgenre, price, id, click, body, b.cno cno
+		FROM
+		    board b, collection c, member m
+		WHERE
+		    bno = #{bno}
+		    AND b.cno = c.cno
+		    AND b.mno = m.mno
+	</select>
 </mapper>

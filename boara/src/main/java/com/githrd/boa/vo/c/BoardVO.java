@@ -8,15 +8,22 @@ package com.githrd.boa.vo.c;
  *			2022.06.22	-	클래스 제작
  *								담당자 : 최이지
  *
+ *			2022.06.26	-	모든 변수 private 속성 추가
+ *							변수, getter setter 추가 (thumb, fno, id, cno, cname)
+ *								담당자 : 최이지
+ *
  */
 
 import java.util.ArrayList;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class BoardVO {
-	private int bno, price, click;
-	private String savename, title, body, isshow, sgenre, forwho;
-	ArrayList<Integer> gnos;
-	ArrayList<String> genre;
+	private int bno, price, click, fno, cno;
+	private String savename, title, body, isshow, sgenre, forwho, id, cname;
+	private ArrayList<Integer> gnos;
+	private ArrayList<String> genre;
+	private MultipartFile thumb;
 	
 	// GetterSetter
 	public String getSgenre() {
@@ -92,5 +99,35 @@ public class BoardVO {
 	}
 	public void setClick(int click) {
 		this.click = click;
+	}
+	public MultipartFile getThumb() {
+		return thumb;
+	}
+	public void setThumb(MultipartFile thumb) {
+		this.thumb = thumb;
+	}
+	public int getFno() {
+		return fno;
+	}
+	public void setFno(int fno) {
+		this.fno = fno;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public int getCno() {
+		return cno;
+	}
+	public void setCno(int cno) {
+		this.cno = cno;
+	}
+	public String getCname() {
+		return cname;
+	}
+	public void setCname(String cname) {
+		this.cname = cname;
 	}
 }

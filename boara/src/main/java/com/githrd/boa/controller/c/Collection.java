@@ -14,6 +14,9 @@ package com.githrd.boa.controller.c;
  *
  *			2022.06.22	-	함수 추가(collecDel)
  *								담당자 : 최이지
+ *
+ *			2022.06.26	-	함수 추가(collecWrite, collecWriteProc, collecEdit, collecEditProc)
+ *								담당자 : 최이지
  */
 import java.util.List;
 
@@ -25,7 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.githrd.boa.dao.c.CollectionDao;
 import com.githrd.boa.service.c.CollectionService;
 import com.githrd.boa.util.c.PageUtil;
-import com.githrd.boa.vo.c.CollecVO;
+import com.githrd.boa.vo.c.*;
 @Controller
 @RequestMapping("/collection")
 public class Collection {
@@ -36,7 +39,7 @@ public class Collection {
 	@Autowired
 	CollectionService cSrvc;
 	
-// 폼 보기 ----------------------------------------------------------
+// 폼 보기 -------------------------------------------------------------------------------------
 
 	@RequestMapping("/collecList.boa")
 	public ModelAndView collecList(ModelAndView mv, CollecVO cVO, PageUtil page, String msg) {
@@ -60,7 +63,34 @@ public class Collection {
 		return mv;
 	}
 	
-// 요청 처리 --------------------------------------------------------
+	@RequestMapping("/collecWrite.boa")
+	public ModelAndView collecWrite(ModelAndView mv) {
+		// 장르 목록 가져오기
+		List<GenreVO> glist = cDao.getGnr();
+		
+		// 데이터 심기
+		mv.addObject("GLIST", glist);
+		mv.setViewName("c/collection/collecWrite");
+		return mv;
+	}
+	
+	@RequestMapping("/collecEdit.boa")
+	public ModelAndView collecEdit(ModelAndView mv, CollecVO cVO) {
+		// 정보 가져오기
+		int cno = cVO.getCno();
+		cVO = cDao.getCInfo(cno);				// 컬렉션 정보
+		List<FileVO> his = cDao.getCHis(cno);	// 컬렉션 파일 히스토리
+		List<GenreVO> glist = cDao.getGnr();	// 장르 정보
+		
+		// 데이터 심기
+		mv.addObject("GLIST", glist);
+		mv.addObject("HISTORY", his);
+		mv.addObject("CINFO", cVO);
+		mv.setViewName("c/collection/collecEdit");
+		return mv;
+	}
+	
+// 요청 처리 -----------------------------------------------------------------------------------
 	
 	@RequestMapping("/collecDel.boa")
 	public ModelAndView collecDel(ModelAndView mv, CollecVO cVO, PageUtil page) {
@@ -81,6 +111,46 @@ public class Collection {
 		if(cVO.getCid() != null) mv.addObject("CID", cVO.getCid());
 		mv.setViewName("c/collection/redirect");
 		
+		return mv;
+	}
+	
+	@RequestMapping("/collecWriteProc.boa")
+	public ModelAndView collecWriteProc(ModelAndView mv, CollecVO cVO) {
+		int cnt = cSrvc.addColl(cVO);
+		
+		// 결과에 따른 처리
+		String msg;
+		if(cnt != 0) {
+			msg = "컬렉션 추가 성공";
+		}else {
+			msg = "컬렉션 추가 실패";
+		}
+		
+		// 데이터 세팅
+		mv.addObject("VIEW", "/boa/collection/collecList.boa");
+		mv.addObject("MSG", msg);
+		if(cVO.getCid() != null) mv.addObject("CID", cVO.getCid());
+		mv.setViewName("c/collection/redirect");
+		return mv;
+	}
+	
+	@RequestMapping("/collecEditProc.boa")
+	public ModelAndView collecEditProc(ModelAndView mv, CollecVO cVO) {
+		int cnt = cSrvc.editColl(cVO);
+		
+		// 결과에 따른 처리
+		String msg;
+		if(cnt != 0) {
+			msg = "컬렉션 수정 성공";
+		}else {
+			msg = "컬렉션 수정 실패";
+		}
+		
+		// 데이터 세팅
+		mv.addObject("VIEW", "/boa/collection/collecList.boa");
+		mv.addObject("MSG", msg);
+		if(cVO.getCid() != null) mv.addObject("CID", cVO.getCid());
+		mv.setViewName("c/collection/redirect");
 		return mv;
 	}
 }

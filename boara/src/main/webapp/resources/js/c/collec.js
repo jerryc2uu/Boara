@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-// 상단 바 처리 -------------------------------------------------------------------------------
+// 상단 바 처리 ---------------------------------------------------------------------------------
 
 	// 로그인
 	$('#lbtn').click(function(){
@@ -32,12 +32,13 @@ $(document).ready(function(){
 		$('#frm').submit();
 	});
 	
-// 페이지 처리 --------------------------------------------------------------------------------
+// 페이지 처리 ----------------------------------------------------------------------------------
 
 	$('.cpbtn').click(function(){
 		// cno, vw 파라미터 무효화
 		$('#cno').prop('disabled', true);
 		$('#vw').prop('disabled', true);
+		$('#id').prop('disabled', true);
 		
 		// 페이지 데이터 읽어오기
 		var page = $(this).attr('id');
@@ -47,7 +48,7 @@ $(document).ready(function(){
 		$('#frm').submit();
 	});
 	
-// 리스트 페이지 기능 -------------------------------------------------------------------------
+// 리스트 페이지 기능 ---------------------------------------------------------------------------
 
 	// 컬렉션 클릭시
 	$('.cbox').click(function(){
@@ -55,6 +56,7 @@ $(document).ready(function(){
 		$('#nowPage').prop('disabled', true);
 		$('#cid').prop('disabled', true);
 		$('#vw').prop('disabled', true);
+		$('#id').prop('disabled', true);
 		
 		// cno 세팅
 		var cno = $(this).attr('id');
@@ -75,13 +77,14 @@ $(document).ready(function(){
 		// 불필요한 파라미터 무효화
 		$('#cid').prop('disabled', true);
 		$('#vw').prop('disabled', true);
+		$('#id').prop('disabled', true);
 
 		// 전송
 		$('#frm').attr('action', '/boa/collection/collecDel.boa');
 		$('#frm').submit();
 	});
 	
-	/* 컬렉션 수정 버튼
+	// 컬렉션 수정 버튼
 	$('.ebtn').click(function(){
 		// 컬렉션 번호 읽어오기
 		var scno = $(this).parent().attr('id');
@@ -90,11 +93,11 @@ $(document).ready(function(){
 		$('#cno').val(scno);
 		
 		// 전송
-		$('#frm').attr('action', '/boara/collection/collecEdit.boa');
+		$('#frm').attr('action', '/boa/collection/collecEdit.boa');
 		$('#frm').submit();
-	});*/
+	});
 
-/* 컬렉션 작성 페이지 ---------------------------------------------------------------------
+// 컬렉션 작성/수정 페이지 ----------------------------------------------------------------------
 
 	// 파일 프리뷰
 	$('#thumb').change(function(e){
@@ -153,14 +156,13 @@ $(document).ready(function(){
 		// 체크박스 : 장르
 		if(genre == ""){
 			$('input:checkbox[id="genr"]').prop('disabled', true);
-			$('#genre').prop('disabled', true);
+			$('#sgenre').prop('disabled', true);
 		}else{
-			$('#genre').val(genre);
+			$('#sgenre').val(genre);
 		}
+		
 		$('#frm').submit();
 	});
-*/
-/* 컬렉션 수정 페이지 ---------------------------------------------------------------------
 
 	// 파일 프리뷰
 	$('#newthumb').change(function(e){
@@ -177,6 +179,7 @@ $(document).ready(function(){
 		var tcname = $('#tcname').val();
 		var tdescr = $('#tdescr').val();
 		var tgenre = $('#tgenre').val();
+		var tfno = $('#tfno').val();
 		 
 		// 변경 된 값 찾아오기
 		var cname = $('#cname').val().trim();
@@ -195,33 +198,68 @@ $(document).ready(function(){
 			}
 		}
 		
-		// 새 파일 : 유효성 검사
+		// 유효성 검사 변수
+		var nameChange = true;
+		var descrChange = true;
+		var genreChange = true;
+		var thumbChange = false;
+		
+		// 새 파일 유효성 검사
 		var el = $('#newthumb');
 		// 입력된 파일 없으면 name 값 제거
 		if(!$(el).val()){
 			el.prop('disabled', true);
-			
-		}else{// 파일 두개 올라온경우
+		}else{// 파일 업로드, 선택 동시에 함
 			if($('input:radio[id="sthumb"]:checked').val()){
-				alert('새 파일을 올리거나, 아래 이미지 중 선택해 주세요.');
+				alert('새 썸네일 업로드, 히스토리 썸네일 선택 중 하나만 가능합니다.');
 				return;
-			}	
+			}
 		}
+		
+		// 통과 한 경우 : 새 파일만 있음
+		if($(el).val()){
+			thumbChange = true;
+		}else if(!$('input:radio[id="sthumb"]:checked').val()){
+			alert('썸네일을 선택해주세요.');
+			return;
+		}
+		
+		// 통과 한 경우 : 선택 파일이 있는 경우
+		if($('input:radio[id="sthumb"]:checked').val() != tfno){
+			thumbChange = true;
+		}else{
+			$('#sthumb').prop('disabled', true);
+		}
+		
 		
 		// 변경 안됐으면 전송 안되게 막기
 		if(cname == tcname){
 			$('#cname').prop('disabled', true);
+			nameChange = false;
 		}
 		if(descr == tdescr){
 			$('#descr').prop('disabled', true);
+			descrChange = false;
 		}
 		if(genre == tgenre) {
-			$('#genre').prop('disabled', true);
+			$('#sgenre').prop('disabled', true);
+			genreChange = false;
 		}else{
-			$('#genre').val(genre);
+			$('#sgenre').val(genre);
+		}
+		
+		// 변경 사항이 아예 없을시 alert
+		if((nameChange | descrChange | genreChange | thumbChange) == false){
+			alert('변경 사항이 없습니다.');
+			$('#cname').prop('disabled', false);
+			$('#descr').prop('disabled', false);
+			$('#genr').prop('disabled', false);
+			$('#sthumb').prop('disabled', false);
+			$('#newthumb').prop('disabled', false);
+			return;
 		}
 		
 		$('#frm').submit();
 	});
-*/
+
 });

@@ -16,6 +16,48 @@
 컨트롤러 : www.githrd.boa.controller.c.Collection
 담당함수 : collecDel()
 	  뷰 : /WEB-INF/views/c/collection/collecList.jsp
+----------------------------------------------------------
+# 컬렉션 작성 페이지 폼 보기
+
+요청내용 : /boa/collection/collecWrite.boa
+파라미터 : -
+컨트롤러 : www.githrd.boa.controller.c.Collection
+담당함수 : collecWrite()
+	  뷰 : /WEB-INF/views/c/collection/collecWrite.jsp
+----------------------------------------------------------
+# 컬렉션 작성 페이지 폼 보기
+
+요청내용 : /boa/collection/collecWrite.boa
+파라미터 : -
+컨트롤러 : www.githrd.boa.controller.c.Collection
+담당함수 : collecWrite()
+	  뷰 : /WEB-INF/views/c/collection/collecWrite.jsp
+----------------------------------------------------------
+# 컬렉션 작성 요청
+
+요청내용 : /boa/collection/collecWriteProc.boa
+파라미터 : cid, cname[, sgenre, descr, thumb]
+컨트롤러 : www.githrd.boa.controller.c.Collection
+담당함수 : collecWriteProc()
+	  뷰 : forward : redirect.jsp
+	  		/boa/collection/collecList.boa
+----------------------------------------------------------
+# 컬렉션 수정 페이지 폼 보기
+
+요청내용 : /boa/collection/collecEdit.boa
+파라미터 : cno, nowPage[, cid]
+컨트롤러 : www.githrd.boa.controller.c.Collection
+담당함수 : collecEdit()
+	  뷰 : /WEB-INF/views/c/collection/collecEdit.jsp
+----------------------------------------------------------
+# 컬렉션 수정 요청
+
+요청내용 : /boa/collection/collecWriteProc.boa
+파라미터 : nowPage[, cid, cname, sgenre, descr, thumb, fno]
+컨트롤러 : www.githrd.boa.controller.c.Collection
+담당함수 : collecWriteProc()
+	  뷰 : forward : redirect.jsp
+	  		/boa/collection/collecList.boa
 ==========================================================
 게시글 관련 요청 설계
 ==========================================================
@@ -34,4 +76,38 @@
 컨트롤러 : www.githrd.boa.controller.c.Board
 담당함수 : boardDel()
 	  뷰 : /WEB-INF/views/c/board/boardList.jsp
+----------------------------------------------------------
+# 게시글 작성 페이지 폼 보기
+
+요청내용 : /boa/board/boardWrite.boa
+파라미터 : id
+컨트롤러 : www.githrd.boa.controller.c.Board
+담당함수 : boardWrite()
+	  뷰 : /WEB-INF/views/c/board/boardWrite.jsp
+----------------------------------------------------------
+# 게시글 작성 요청
+
+요청내용 : /boa/board/boardWriteProc.boa
+파라미터 : cno, title, isshow, forwho, price, body[, sgenre, thumb]
+컨트롤러 : www.githrd.boa.controller.c.Board
+담당함수 : boardWriteProc()
+	  뷰 : forward : redirect.jsp
+	  		/boa/board/boardList.boa
+----------------------------------------------------------
+# 게시글 수정 페이지 폼 보기
+
+요청내용 : /boa/board/boardEdit.boa
+파라미터 : bno, nowPage
+컨트롤러 : www.githrd.boa.controller.c.Board
+담당함수 : boardEdit()
+	  뷰 : /WEB-INF/views/c/board/boardEdit.jsp
+----------------------------------------------------------
+# 게시글 수정 요청
+
+요청내용 : /boa/board/boardEditProc.boa
+파라미터 : bno, cno, nowPage, title, isshow, forwho, price, body[, sgenre, thumb]
+컨트롤러 : www.githrd.boa.controller.c.Board
+담당함수 : boardEditProc()
+	  뷰 : forward : redirect.jsp
+	  		/boa/board/boardList.boa
 ----------------------------------------------------------

@@ -8,6 +8,9 @@ package com.githrd.boa.controller.c;
  * 		작업 이력
  * 			2022.06.22	-	클래스 제작
  * 								담당자 : 최이지
+ * 
+ * 			2022.06.26	-	함수 추가(boardWrite, boardWriteProc, boardEdit, boaradEditProc)
+ * 								담당자 : 최이지
  */
 
 import java.util.List;
@@ -60,6 +63,34 @@ public class Board {
 		return mv;
 	}
 	
+	@RequestMapping("/boardWrite.boa")
+	public ModelAndView boardWrite(ModelAndView mv, String id) {
+		// 기초 데이터 가져오기
+		List<CollecVO> clist = bDao.getCList(id);	// 컬렉션 리스트
+		List<GenreVO> glist = bDao.getGnr();		// 장르 리스트
+		
+		// 데이터 세팅
+		mv.addObject("CLIST", clist);
+		mv.addObject("GLIST", glist);
+		mv.setViewName("c/board/boardWrite");
+		return mv;
+	}
+	
+	@RequestMapping("/boardEdit.boa")
+	public ModelAndView boardEdit(ModelAndView mv, BoardVO bVO) {
+		// 기초 데이터 가져오기
+		bVO = bDao.getBInfo(bVO.getBno());
+		List<FileVO> his = bDao.getBHis(bVO);
+		List<GenreVO> glist = bDao.getGnr();	// 장르 리스트
+		
+		// 데이터 세팅
+		mv.addObject("GLIST", glist);
+		mv.addObject("BINFO", bVO);
+		mv.addObject("HISTORY", his);
+		mv.setViewName("c/board/boardEdit");
+		return mv;
+	}
+	
 	// 게시글 상세 보기
 	@RequestMapping("/boardDetail.boa")
 	public ModelAndView boardDetail(ModelAndView mv, BoardVO bVO, CollecVO cVO, PageUtil page) {
@@ -69,6 +100,7 @@ public class Board {
 		mv.setViewName("c/board/boardDetail");
 		return mv;
 	}
+	
 // 처리 요청 ----------------------------------------------------------------------------------
 	
 	@RequestMapping("/boardDel.boa")
@@ -88,6 +120,50 @@ public class Board {
 		mv.addObject("VIEW", "/boa/board/boardList.boa");
 		mv.addObject("MSG", msg);
 		mv.addObject("CNO", cVO.getCno());
+		mv.setViewName("c/board/redirect");
+		
+		return mv;
+	}
+	
+	@RequestMapping("/boardWriteProc.boa")
+	public ModelAndView boardWriteProc(ModelAndView mv, BoardVO bVO) {
+		// db 작업
+		int cnt = bSrvc.addBoard(bVO);
+		
+		// 결과에 따른 처리
+		String msg;
+		if(cnt != 0) {
+			msg = "게시글 작성 성공";
+		}else {
+			msg = "게시글 작성 실패";
+		}
+		
+		// 데이터 세팅
+		mv.addObject("VIEW", "/boa/board/boardList.boa");
+		mv.addObject("CNO", bVO.getCno());
+		mv.addObject("MSG", msg);
+		mv.setViewName("c/board/redirect");
+		return mv;
+	}
+	
+	@RequestMapping("/boardEditProc.boa")
+	public ModelAndView boardEditProc(ModelAndView mv, BoardVO bVO, String nowPage) {
+		// db 작업
+		int cnt = bSrvc.editBoard(bVO);
+		
+		// 결과에 따른 처리
+		String msg;
+		if(cnt != 0) {
+			msg = "게시글 수정 성공";
+		}else {
+			msg = "게시글 수정 실패";
+		}
+		
+		// 데이터 세팅
+		mv.addObject("VIEW", "/boa/board/boardList.boa");
+		mv.addObject("CNO", bVO.getCno());
+		mv.addObject("NOWPAGE", nowPage);
+		mv.addObject("MSG", msg);
 		mv.setViewName("c/board/redirect");
 		
 		return mv;

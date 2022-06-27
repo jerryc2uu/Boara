@@ -16,17 +16,24 @@ package com.githrd.boa.vo.c;
  *							gnos, genre 타입을 ArrayList로 수정
  *							dir 변수, getter setter 삭제
  *								담당자 : 최이지
+ *
+ *			2022.06.26	-	모든 변수 private 속성 추가
+ *							변수, getter setter 추가 (thumb, fno)
+ *								담당자 : 최이지
  */
 import java.util.ArrayList;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.githrd.boa.util.c.PageUtil;
 
 public class CollecVO {
-	int cno, mno, startCont, endCont;
-	String id, savename, cname, descr, sgenre, cid;
-	ArrayList<Integer> gnos;
-	ArrayList<String> genre;
-	PageUtil page;
+	private int cno, mno, startCont, endCont, fno;
+	private String id, savename, cname, descr, sgenre, cid;
+	private ArrayList<Integer> gnos;
+	private ArrayList<String> genre;
+	private PageUtil page;
+	private MultipartFile thumb;
 	
 	// GetterSetter
 	public void setSgenre(String sgenre) {
@@ -119,5 +126,17 @@ public class CollecVO {
 		this.page = page;
 		this.startCont = page.getStartCont();
 		this.endCont = page.getEndCont();
+	}
+	public MultipartFile getThumb() {
+		return thumb;
+	}
+	public void setThumb(MultipartFile thumb) {
+		this.thumb = thumb;
+	}
+	public int getFno() {
+		return fno;
+	}
+	public void setFno(int fno) {
+		this.fno = fno;
 	}
 }

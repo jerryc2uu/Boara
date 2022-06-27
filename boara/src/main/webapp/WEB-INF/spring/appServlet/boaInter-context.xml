@@ -9,6 +9,8 @@
 						https://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<beans:bean id="loginRedirect" class="com.githrd.boa.interceptor.LoginRedirectInterceptor" />
+	<beans:bean id="collRedirect" class="com.githrd.boa.interceptor.CollectionInterceptor" />
+	<beans:bean id="boardRedirect" class="com.githrd.boa.interceptor.BoardInterceptor" />
 	
 	<interceptors>
 		<interceptor>
@@ -30,7 +32,35 @@
 			<mapping path = "/member/addpoint.boa" />
 			<!-- 김소연 -->
 			<!-- 최이지 -->
+			<mapping path="/collection/*.boa" />
+			<mapping path="/board/*.boa" />
+			
+			<!-- 예외 처리 -->
+			<!-- 최이지 -->
+			<exclude-mapping path="/collection/collecList.boa" />
+			<exclude-mapping path="/board/boardList.boa" />
+			<exclude-mapping path="/board/boardDetail.boa*" />
+			
 			<beans:ref bean="loginRedirect" />
 		</interceptor>
+		
+		<!-- cno 파라미터 없을 때 컬렉션 리스트로 이동 -->
+		<interceptor>
+			<!-- 최이지 -->
+			<mapping path="/board/boardList.boa" />
+			<mapping path="/collection/collecEdit.boa" />
+			
+			<beans:ref bean="collRedirect" />
+		</interceptor>
+		
+		<!-- bno 파라미터 없을 때 컬렉션 리스트로 이동 -->
+		<interceptor>
+			<!-- 최이지 -->
+			<mapping path="/board/boardDetail.boa" />
+			<mapping path="/board/boardEdit.boa" />
+			
+			<beans:ref bean="boardRedirect" />
+		</interceptor>
+		
 	</interceptors>
 </beans:beans>
