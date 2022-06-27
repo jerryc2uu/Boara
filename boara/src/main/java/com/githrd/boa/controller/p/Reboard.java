@@ -2,6 +2,8 @@ package com.githrd.boa.controller.p;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -80,15 +82,19 @@ public class Reboard {
 	
 	//새 댓글 등록 처리 요청
 	@RequestMapping("/reboardWriteProc.boa")
-	public ModelAndView reboardWriteProc(ModelAndView mv, ReboardVO rVO, String nowPage) {
+	public ModelAndView reboardWriteProc(ModelAndView mv, ReboardVO rVO, String nowPage, HttpSession session) {
 
 		int cnt = rDao.addReboard(rVO);
 		String view = "/boa/reboard/reboardList.boa";
+		String id = (String) session.getAttribute("SID");
+		rVO.setId(id);
 		
 		if(cnt == 0) {
 			view = "/boa/reboard/reboardWrite.boa";
+			rVO.setResult("NO");
 			mv.addObject("MSG", "게시글 등록에 실패했습니다.");		
 		} else {
+			rVO.setResult("OK");
 			rVO.setGnp(5);
 			rVO.setPcode(102);
 			rDao.addPoint(rVO);

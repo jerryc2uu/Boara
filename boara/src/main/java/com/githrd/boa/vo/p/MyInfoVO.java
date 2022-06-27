@@ -7,7 +7,7 @@ public class MyInfoVO {
 	
 	private int mno, cno, bno, rno, rcnt, bcnt, sumpoint, click, 
 				startCont, endCont, nowPage, pno, gnp, pcode, price, rowno;
-	private String id, name, body, pw, mail, tel, sdate, savename, title, cname, detail;
+	private String id, name, body, pw, mail, tel, sdate, savename, title, cname, detail, result;
 	private Date jdate, wdate;
 	
 	public int getMno() {
@@ -189,6 +189,12 @@ public class MyInfoVO {
 	public void setRowno(int rowno) {
 		this.rowno = rowno;
 	}
+	public String getResult() {
+		return result;
+	}
+	public void setResult(String result) {
+		this.result = result;
+	}
 	@Override
 	public String toString() {
 		return "MyInfoVO [mno=" + mno + ", cno=" + cno + ", bno=" + bno + ", rno=" + rno + ", rcnt=" + rcnt + ", bcnt="
@@ -196,6 +202,8 @@ public class MyInfoVO {
 				+ endCont + ", nowPage=" + nowPage + ", pno=" + pno + ", gnp=" + gnp + ", pcode=" + pcode + ", price="
 				+ price + ", rowno=" + rowno + ", id=" + id + ", name=" + name + ", body=" + body + ", pw=" + pw
 				+ ", mail=" + mail + ", tel=" + tel + ", sdate=" + sdate + ", savename=" + savename + ", title=" + title
-				+ ", cname=" + cname + ", detail=" + detail + ", jdate=" + jdate + ", wdate=" + wdate + "]";
+				+ ", cname=" + cname + ", detail=" + detail + ", result=" + result + ", jdate=" + jdate + ", wdate="
+				+ wdate + "]";
 	}
+	
 }

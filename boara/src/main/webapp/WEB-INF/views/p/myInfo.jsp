@@ -38,16 +38,18 @@ font-weight: lighter ;
 
 <!-- #############################여기서부터 아래 표시한 곳까지 모든 페이지에서 동일. -->
 <!-- <script type="text/javascript" src="/boara/resources/js/main.js"></script> 모든 페이지에 복붙해주세요. -->
+   <!-- Navbar -->
    <div class="w3-top fix">
      <div class="w3-bar w3-indigo w3-card w3-left-align w3-xlarge " >
        <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white " id="main">Main</a>
        <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="collection">Collection</a>
 <c:if test="${not empty SID}">      
-       <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="mwrite">글작성</a>
-       <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="mcoll">새 컬렉션</a>
+       <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="mwrite">Write</a>
+       <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="mcoll">New Collection</a>
 </c:if>   
-	<div style="float: right; padding-right:30px;">      
+   <div style="float: right; padding-right:30px;">      
 <c:if test="${empty SID}">
+     <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white " id="mjoin">Join</a>
      <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white " id="mlogin">Login</a>
 </c:if>
 <c:if test="${not empty SID}">
@@ -57,11 +59,9 @@ font-weight: lighter ;
       </div>  
      </div>
    </div>
-   
    <!-- Header -->
-   <header class="w3-container w3-indigo w3-center" style="padding:40px 16px; height: 150px;">
-  	  <h1 class="pdt10 w3-xxxlarge dfn"><b>Boara</b></h1>
-
+    <header class="w3-container w3-indigo w3-center" style="padding:40px 16px; height: 200px;">
+       <h1 class="pdt40 w3-xxxlarge dfn"><b>Boara</b></h1>
    </header>
 <!-- #################여기까진 모든 페이지에서 동일. 복붙해주세요 -->  
 
