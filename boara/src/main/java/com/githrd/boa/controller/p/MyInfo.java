@@ -200,7 +200,7 @@ public class MyInfo {
 	@RequestMapping("/addPointProc.boa")
 	public ModelAndView addPointProc(ModelAndView mv, MyInfoVO iVO) {
 		int cnt = iDao.addPointProc(iVO);
-		
+		int gnp = iVO.getGnp();
 		String view =  "/boa/member/myinfo.boa";
 		
 		if(cnt != 1) {
@@ -208,6 +208,7 @@ public class MyInfo {
 		}
 		
 		mv.addObject("VIEW", view);
+		mv.addObject("MSG", gnp + " 포인트 충전에 성공했습니다.");
 		mv.setViewName("p/redirect");
 		return mv;
 	}

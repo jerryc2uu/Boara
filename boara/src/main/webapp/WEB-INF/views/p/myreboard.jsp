@@ -18,9 +18,8 @@
 	$(document).ready(function(){
 		//게시물 하나 클릭 시 해당 게시물 상세 페이지로 이동
 		$('.brdList').click(function(){
-			var sbno = $(this).attr('id');
-//			alert(sbno);	05.29 최이지 주석처리
-			window.top.location.href = '/boa/board/boardDetail.boa?bno=' + sbno;
+			var sbno = $(this).parent().attr('id');
+			window.top.location.href = '/boa/reboard/reboardList.boa?bno=' + sbno;
 			//$(top.document).attr('href',  '/boara/board/boardDetail.boa?bno=' + sbno)
 		});
 	});
@@ -46,13 +45,16 @@
 				<div class="w3-col m2 w3-border-right">작성일</div>
 			</div>
 <c:forEach var="data" items="${LIST}">
-			<div class="w3-col w3-white w3-center w3-border">
-				<div class="w3-col m2 w3-border-right">${data.rno}</div>
-				<div class="w3-col m3 w3-border-right">${data.title}</div>				
-				<div class="w3-col m4 w3-border-right">${data.body}</div>
-				<div class="w3-col m2 w3-border-right">${data.sdate}</div>
+			<div class="w3-col w3-white w3-center w3-border" id="${data.bno}">
+				<div class="w3-col m2 w3-border-right brdList">${data.rno}</div>
+				<div class="w3-col m3 w3-border-right brdList">${data.title}</div>				
+				<div class="w3-col m4 w3-border-right brdList">${data.body}</div>
+				<div class="w3-col m2 w3-border-right brdList">${data.sdate}</div>
 			</div>
 </c:forEach>
+<c:if test="${empty LIST}">
+			<div class="w3-col w3-white w3-center w3-border">작성한 댓글이 없습니다.</div>
+</c:if>
 
 		</div>
 		

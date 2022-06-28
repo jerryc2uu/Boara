@@ -92,13 +92,12 @@ public class Reboard {
 		if(cnt == 0) {
 			view = "/boa/reboard/reboardWrite.boa";
 			rVO.setResult("NO");
-			mv.addObject("MSG", "게시글 등록에 실패했습니다.");		
 		} else {
 			rVO.setResult("OK");
 			rVO.setGnp(5);
 			rVO.setPcode(102);
 			rDao.addPoint(rVO);
-			mv.addObject("MSG", "게시글 등록에 성공했습니다. 5포인트가 적립되었습니다.");	
+			mv.addObject("MSG", "댓글 등록에 성공했습니다. 5포인트가 적립되었습니다.");	
 			nowPage = "1";
 		}
 		mv.addObject("VIEW", view);
@@ -126,8 +125,8 @@ public class Reboard {
 			rVO.setGnp(3);
 			rVO.setPcode(103);
 			rDao.addPoint(rVO);
-			System.out.println("포인트 적립~~");
 			mv.addObject("VIEW", "/boa/reboard/reboardList.boa");
+			mv.addObject("MSG", "대댓글 등록에 성공했습니다. 3포인트가 적립됩니다.");		
 		} else {
 			//실패
 			mv.addObject("VIEW", "/boa/reboard/reboardComment.boa");			
@@ -155,8 +154,10 @@ public class Reboard {
 		
 		if(result == 1) {
 			mv.addObject("VIEW", "/boa/reboard/reboardList.boa");
+			mv.addObject("MSG", "댓글 수정에 성공했습니다.");
 		} else {
 			mv.addObject("VIEW", "/boa/reboard/reboardEdit.boa");
+			mv.addObject("MSG", "댓글 수정에 실패했습니다.");
 		}
 		
 		mv.addObject("NOWPAGE", nowPage);
@@ -167,9 +168,15 @@ public class Reboard {
 	//댓글 삭제 처리 요청
 	@RequestMapping("/reboardDel.boa")
 	public ModelAndView reboardDel(ModelAndView mv, ReboardVO rVO, String nowPage, String vw) {
-		rDao.delReboard(rVO.getRno());
+		int cnt = rDao.delReboard(rVO.getRno());
+		
+		if(cnt != 1) {
+			mv.addObject("MSG", "댓글 삭제에 실패했습니다.");
+		}
+		
 		mv.addObject("VIEW", vw);
 		mv.addObject("NOWPAGE", nowPage);
+		mv.addObject("MSG", "댓글 삭제에 성공했습니다.");
 		mv.setViewName("p/redirect");
 		return mv;
 	}

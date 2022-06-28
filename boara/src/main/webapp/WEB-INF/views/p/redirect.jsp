@@ -16,15 +16,15 @@
 <c:if test="${not empty VIEW}">
 	<form method="POST" action="${VIEW}" id="frm" name="frm">
 		<input type="hidden" name="id" value="${SID}">
-<c:if test="${not empty param.nowPage}">
+	<c:if test="${not empty param.nowPage}">
 		<input type="hidden" name="nowPage" value="${param.nowPage}">
-</c:if>	
-<c:if test="${not empty MSG}">
+	</c:if>	
+	<c:if test="${not empty MSG}">
 		<input type="hidden" name="msg" value="${MSG}">
-</c:if>
-<c:if test="${not empty param.bno}">
+	</c:if>
+	<c:if test="${not empty param.bno}">
 		<input type="hidden" name="bno" value="${param.bno}">
-</c:if>		
+	</c:if>		
 	</form> 
 </c:if>		
 </body>

@@ -54,6 +54,10 @@ img {
    
    <!-- First Grid -->
    <div class="w3-row-padding w3-padding-64 w3-container">
+   		<h1 class="w3-center w3-padding mg0">대댓글 작성</h1>
+   		<div style="margin-left: 650px; margin-bottom: 20px;">
+	   		<button class="w3-center w3-indigo w3-hover-grey listbutton" id="boardList" style="border: none;">댓글 리스트</button>
+   		</div>
    		<div style="width: 800px; height: 200px; margin: 0 auto;">
 			<div class="w3-col w3-center" style="width: 700px; height: 100%;">
 				<div class="w3-col w3-round-large w3-card-4 w3-padding" style="height: 200px;">

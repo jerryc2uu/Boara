@@ -18,7 +18,7 @@
 	$(document).ready(function(){
 		//게시물 하나 클릭 시 해당 게시물 상세 페이지로 이동
 		$('.brdList').click(function(){
-			var sbno = $(this).attr('id');
+			var sbno = $(this).parent().attr('id');
 //			alert(sbno);	05.29 최이지 주석처리
 			window.top.location.href = '/boa/board/boardDetail.boa?bno=' + sbno;
 			//$(top.document).attr('href',  '/boara/board/boardDetail.boa?bno=' + sbno)
@@ -50,18 +50,20 @@
 				<div class="w3-col m1 w3-border-right">가격</div>
 			</div>
 <c:forEach var="data" items="${LIST}">
-			<div class="w3-col w3-white w3-center w3-border">
+			<div class="w3-col w3-white w3-center w3-border" id="${data.bno}">
 				<div class="w3-col m2">
-					<div class="w3-col m5 w3-border-right">${data.bno}</div>
-					<div class="w3-col m7 w3-border-right">${data.id}</div>
+					<div class="w3-col m5 w3-border-right brdList">${data.bno}</div>
+					<div class="w3-col m7 w3-border-right brdList">${data.id}</div>
 				</div>
-				<div class="w3-col m3 w3-border-right">${data.cname}</div>
-				<div class="w3-col m4 w3-border-right">${data.title}</div>
-				<div class="w3-col m2 w3-border-right">${data.sdate}</div>
-				<div class="w3-col m1 w3-border-right">${data.price}</div>
+				<div class="w3-col m3 w3-border-right brdList">${data.cname}</div>
+				<div class="w3-col m4 w3-border-right brdList">${data.title}</div>
+				<div class="w3-col m2 w3-border-right brdList">${data.sdate}</div>
+				<div class="w3-col m1 w3-border-right brdList">${data.price}</div>
 			</div>
 </c:forEach>
-
+<c:if test="${empty LIST}">
+			<div class="w3-col w3-white w3-center w3-border">구매한 게시글이 없습니다.</div>
+</c:if>
 		</div>
 		
 		<!-- 페이지 처리 시작 -->

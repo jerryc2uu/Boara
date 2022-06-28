@@ -10,17 +10,12 @@ $(document).ready(function(){
 	
 	//충전 버튼
 	$('#plusPoint').click(function(){
-	/*
 		var sumpoint = $('#spoint').html();
 		$('#sumpoint').prop('disabled', false);
 		$('#sumpoint').val(sumpoint);
 		alert(sumpoint);
 		$('#frm').attr('action', '/boa/member/addPoint.boa');
 		$('#frm').submit();
-		*/
-		
-		$('iframe').css('display', 'none');
-		$('#addPoint').css('display', 'block');
 	});
 	
 	$('dd').click(function(){

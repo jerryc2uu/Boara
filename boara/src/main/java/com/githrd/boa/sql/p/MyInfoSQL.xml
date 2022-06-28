@@ -323,15 +323,15 @@
 	<!-- 내가 작성한 댓글 목록 -->
 	<select id="myReboard" resultType="iVO" parameterType="iVO">
 		SELECT
-		    rno, body, sdate, title
+		    rno, body, bno, sdate, title
 		FROM
 		    (
 		    SELECT
-		        ROWNUM rowno, rno, body, sdate, title
+		        ROWNUM rowno, rno, body, bno, sdate, title
 		    FROM
 		        (
 		            SELECT
-		                rno, r.body body, TO_CHAR(rdate, 'yyyy/MM/dd') sdate, b.title title
+		                rno, r.body body, r.bno bno, TO_CHAR(rdate, 'yyyy/MM/dd') sdate, b.title title
 		            FROM
 		                reply r, board b
 		            WHERE

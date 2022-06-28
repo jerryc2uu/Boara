@@ -119,7 +119,6 @@ font-weight: lighter ;
 			
 			<!-- 버튼마다 다른 기능들-->
 	         <div id="area" style="position: relative; width: 100%; padding-bottom: 56.25%;">
-	            <iframe id="addPoint" src="/boa/member/addPoint.boa" style="display: none; position: absolute; width: 100%; height: 100%;" frameBorder="0"></iframe>
 	            <iframe id="myLike" src="/boa/member/mylike.boa" style="display: none; position: absolute; width: 100%; height: 100%;" frameBorder="0"></iframe>
 	            <iframe id="myJJim" src="/boa/member/myjjim.boa" style="display: none; position: absolute; width: 100%; height: 100%;" frameBorder="0"></iframe>
 	            <iframe id="myBuy" src="/boa/member/mybuy.boa" style="display: none; position: absolute; width: 100%; height: 100%;" frameBorder="0"></iframe>
@@ -131,6 +130,22 @@ font-weight: lighter ;
 	   </div>
    </div>
    
+   	<!-- 메세지 출력 모달창 -->
+<c:if test="${not empty param.msg}">
+	<div id="modal" class="w3-modal" style="display:block;">
+	    <div class="w3-modal-content mxw650 w3-animate-top w3-card-4">
+	      <header class="w3-container w3-indigo"> 
+	        <span onclick="document.getElementById('modal').style.display='none'" 
+	        class="w3-button w3-display-topright">&times;</span>
+	        <h2>BOARA Message</h2>
+	      </header>
+	      <div class="w3-container w3-center">
+	        <h4>${param.msg}</h4>
+	      </div>
+	    </div>
+ 	</div>
+</c:if>
+
    <footer class="w3-container w3-margin-top w3-padding-64 w3-center w3-opacity w3-border-top">
 		<p>(주)보아라</p>
 	</footer>

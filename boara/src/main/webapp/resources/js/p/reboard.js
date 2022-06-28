@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	
 	//=========1. 댓글 리스트 페이지================
 	
 	//페이지 버튼 클릭 이벤 처리
@@ -13,6 +14,22 @@ $(document).ready(function(){
 		$('#lid').prop('disabled', true);
 		
 		//폼 태그 전송
+		$('#frm').submit();
+	});
+	
+	//댓글 리스트
+	$('#boardList').click(function(){
+		$('input').prop('disabled', true);
+		$('#bno').prop('disabled', false);
+		$('#frm').attr('action', '/boa/reboard/reboardList.boa');
+		$('#frm').submit();
+	});
+	
+	//게시글로
+	$('#goboard').click(function(){
+		$('input').prop('disabled', true);
+		$('#bno').prop('disabled', false);
+		$('#frm').attr('action', '/boa/board/boardDetail.boa');
 		$('#frm').submit();
 	});
 	
@@ -32,7 +49,6 @@ $(document).ready(function(){
 		
 		var srno = $(this).parent().attr('id');
 		$('#rno').val(srno);
-		
 		
 		
 		if(btxt == '삭제') {

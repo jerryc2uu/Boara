@@ -56,8 +56,11 @@ img {
    
    <!-- 페이지 본문 -->
    <div class="w3-row-padding w3-padding-64 w3-container" style="height: 700px; margin: 0;">
-   		<h1 class="w3-indigo w3-center w3-padding mg0" style="width: 800px; margin-left: 485px; margin-bottom: 20px;">댓글 리스트</h1>
-   		<button class="w3-center w3-indigo w3-hover-grey listbutton" id="newwrite" style="border: none; margin-left: 1200px; margin-bottom: 20px;">새댓글작성</button>
+   		<h1 class="w3-center w3-padding mg0">댓글 리스트</h1>
+   		<div style="margin-left: 650px; margin-bottom: 20px;">
+	   		<button class="w3-center w3-indigo w3-hover-grey listbutton" id="goboard" style="border: none;">게시글로</button>
+	   		<button class="w3-center w3-indigo w3-hover-grey listbutton" id="newwrite" style="border: none; margin-left: 530px;">새댓글작성</button>
+   		</div>
    		<div style="width: 800px; margin: 0 auto;">
    			
 			<!-- 댓글 리스트 보이는 곳 -->
@@ -131,7 +134,7 @@ img {
    </div>
    
    <!-- 메세지 출력 모달창 -->
-<c:if test="${not empty MSG}">
+<c:if test="${not empty param.msg}">
 	<div id="modal" class="w3-modal" style="display:block;">
 	    <div class="w3-modal-content mxw650 w3-animate-top w3-card-4">
 	      <header class="w3-container w3-indigo"> 
@@ -140,7 +143,7 @@ img {
 	        <h2>Boara Message</h2>
 	      </header>
 	      <div class="w3-container w3-center">
-	        <h4>${MSG}</h4>
+	        <h4>${param.msg}</h4>
 	      </div>
 	    </div>
  	</div>
