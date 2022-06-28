@@ -165,7 +165,10 @@ public class BoardService {
 	// 게시글 상세보기 상세 처리
 	public BoardVO setBDetail(BoardVO bVO) {
 		// 기본 정보 불러오기
+		String id = null;
+		if(bVO.getId()!= null) id = bVO.getId();
 		bVO = bDao.getBDetail(bVO);
+		String cid = bVO.getId();
 		
 		// 조회수 올리기
 		bDao.upClick(bVO.getBno());
@@ -178,7 +181,7 @@ public class BoardService {
 		if(bVO.getPrice() != 0) {
 			String body = bVO.getBody();
 			// 로그인 상태가 아닐 시에 미리보기 처리
-			if(bVO.getSid() == null) {
+			if(id == null) {
 				bought = "NO";
 				bVO.setBought(bought);
 				
@@ -189,6 +192,7 @@ public class BoardService {
 				return bVO;
 			}
 			
+			bVO.setId(id);
 			int bcnt = bDao.didBuy(bVO);
 			
 			// 미구매시 미리보기 처리
@@ -203,11 +207,11 @@ public class BoardService {
 			
 			bVO.setBought(bought);
 		}
-		if(bVO.getSid() == null) return bVO;
 		
 		// 좋아요/찜 여부 처리
 		String nowStat = bDao.getStat(bVO);
 		if(nowStat != null) bVO.setNowStat(nowStat);
+		bVO.setId(cid);
 		
 		return bVO;
 	}

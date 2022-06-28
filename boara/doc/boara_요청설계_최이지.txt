@@ -119,3 +119,27 @@
 담당함수 : boardEdit()
 	  뷰 : /WEB-INF/views/c/board/boardDetail.jsp
 ----------------------------------------------------------
+# 게시글 좋아요 처리
+
+요청내용 : /boa/board/likeProc.boa
+파라미터 : bno, id
+컨트롤러 : www.githrd.boa.controller.c.Board
+담당함수 : likeProc()
+	  뷰 : json
+----------------------------------------------------------
+# 게시글 찜 처리
+
+요청내용 : /boa/board/jjimProc.boa
+파라미터 : bno, id
+컨트롤러 : www.githrd.boa.controller.c.Board
+담당함수 : jjimProc()
+	  뷰 : json
+----------------------------------------------------------
+# 게시글 찜/좋아요 해제 처리
+
+요청내용 : /boa/board/discardMark.boa
+파라미터 : bno, id
+컨트롤러 : www.githrd.boa.controller.c.Board
+담당함수 : discardMark()
+	  뷰 : json
+----------------------------------------------------------

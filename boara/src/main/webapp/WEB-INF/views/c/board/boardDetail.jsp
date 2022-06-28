@@ -94,33 +94,47 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 			</div>
 </c:if>
 
-			<div class="left">
+			<div class="left mgt10">
 				<div class="inline">
 			<%-- 좋아요, 찜 기능 구현해야됨!!!! --%>
 <c:if test="${POST.price eq 0}">
-	<c:if test="${empty POST.nowStat}">
-					<img src="/boa/img/c/unlike.jpg" class="like" id="unlike">
+					<img src="/boa/img/c/
+	<c:if test="${POST.nowStat eq 'L'}">
+					unlike
 	</c:if>
-	<c:if test="${not empty POST.nowStat}">
-					<img src="/boa/img/c/liked.jpg" class="like" id="like">
+	<c:if test="${POST.nowStat ne 'L'}">
+					liked
 	</c:if>
+					.jpg" class="like" id="unlike">
 </c:if>
 <c:if test="${POST.price ne 0}">
 	<c:if test="${POST.bought eq 'YES'}">
-		<c:if test="${empty POST.nowStat}">
-					<img src="/boa/img/c/unlike.jpg" class="like" id="unlike">
+					<img src="/boa/img/c/
+		<c:if test="${POST.nowStat eq 'L'}">
+					liked
 		</c:if>
-		<c:if test="${not empty POST.nowStat}">
-					<img src="/boa/img/c/liked.jpg" class="like" id="like">
+		<c:if test="${POST.nowStat ne 'L'}">
+					unlike
 		</c:if>
+		.jpg" class="like" id="
+	<c:if test="${POST.nowStat ne 'L'}">
+		un
 	</c:if>
-	<c:if test="${POST.bought eq 'NO'}">
-		<c:if test="${empty POST.nowStat}">
-					<h5 class="inline">+ 찜</h5>
+		like">
+	</c:if>
+	<c:if test="${POST.bought ne 'YES'}">
+					<h5 class="inline
+		<c:if test="${POST.nowStat eq 'J'}">
+					w3-indigo
 		</c:if>
-		<c:if test="${not empty POST.nowStat}">
-					<h5 class="w3-indigo inline">+ 찜</h5>
+					" id="
+		<c:if test="${POST.nowStat eq 'J'}">
+			jjimed
 		</c:if>
+		<c:if test="${POST.nowStat ne 'J'}">
+			jjimyet
+		</c:if>
+					">+ 찜</h5>
 	</c:if>
 </c:if>
 					<div class="genre w3-round" id="reshow">댓글 보기</div>

@@ -15,7 +15,7 @@ package com.githrd.boa.dao.c;
  * 			2022.06.27	-	함수 추가(getBDetail, didBuy, getStat)
  * 								담당자 : 최이지
  * 
- * 			2022.06.28	-	함수 추가(upClick)
+ * 			2022.06.28	-	함수 추가(upClick, cntStat, newLike, reLike, newJjim, reJjim, discard)
  * 								담당자 : 최이지
  */
 
@@ -120,5 +120,37 @@ public class BoardDao {
 	// 조회수 올리기
 	public int upClick(int bno) {
 		return sqlSession.update("bSQL.upClick", bno);
+	}
+	
+// 좋아요/찜 처리 관련 -------------------------------------------------------------------------
+
+	// 해당 게시글 mark 여부 검사
+	public int cntStat (BoardVO bVO) {
+		return sqlSession.selectOne("bSQL.cntStat", bVO);
+	}
+	
+	// NEW : 좋아요 처리
+	public int newLike(BoardVO bVO) {
+		return sqlSession.insert("bSQL.newLike", bVO);
+	}
+	
+	// RE : 좋아요 처리
+	public int reLike(BoardVO bVO) {
+		return sqlSession.update("bSQL.reLike", bVO);
+	}
+	
+	// NEW : 찜 처리
+	public int newJjim(BoardVO bVO) {
+		return sqlSession.insert("bSQL.newJjim", bVO);
+	}
+	
+	// RE : 찜 처리
+	public int reJjim(BoardVO bVO) {
+		return sqlSession.update("bSQL.reJjim", bVO);
+	}
+	
+	// 좋아요, 찜 해제 처리
+	public int discard(BoardVO bVO) {
+		return sqlSession.update("bSQL.discard", bVO);
 	}
 }

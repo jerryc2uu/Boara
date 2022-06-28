@@ -42,7 +42,6 @@ $(document).ready(function(){
 	$('.pbox').click(function(){
 		var bno = $(this).attr('id');
 		$('#bno').val(bno);
-		$('#id').prop('disabled', true);
 		$('#vw').prop('disabled', true);
 		$('#cno').prop('disabled', true);
 		
@@ -80,7 +79,6 @@ $(document).ready(function(){
 		$('#cno').prop('disabled', true);
 		$('#vw').prop('disabled', true);
 		$('#cno').prop('disabled', true);
-		$('#cno').prop('disabled', true);
 		
 		// 전송
 		$('#frm').attr('action', '/boa/board/boardEdit.boa');
@@ -89,15 +87,22 @@ $(document).ready(function(){
 
 // 게시글 상세보기 페이지 ----------------------------------------------------------------------
 
-	/* 좋아요 기능
-	$('.like').click(function(){
-		
-	});*/
+	// 좋아요 기능
+	$('#unlike').click(function(){
+		// 암것도 없음 -> 좋아요
+	});
+	$('#liked').click(function(){
+		// 좋아요 -> 해제
+	});
 	
-	/* 찜 기능
-	$('.jjim').click(function(){
+	// 찜 기능
+	$('#jjimyet').click(function(){
+		// 암것도 없음 -> 좋아요
 		
-	});*/
+	});
+	$('#jjimed').click(function(){
+		// 찜 -> 해제
+	});
 	
 	// 컬렉션으로
 	$('#upcoll').click(function(){

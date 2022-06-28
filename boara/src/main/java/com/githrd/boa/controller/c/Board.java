@@ -95,9 +95,9 @@ public class Board {
 	
 	// 게시글 상세 보기
 	@RequestMapping("/boardDetail.boa")
-	public ModelAndView boardDetail(ModelAndView mv, BoardVO bVO, HttpSession session) {
+	public ModelAndView boardDetail(ModelAndView mv, BoardVO bVO) {
 		// 상세 정보 불러오기
-		if(session.getAttribute("SID") != null) bVO.setSid((String)session.getAttribute("SID"));
+System.out.println(bVO.getId());
 		bVO = bSrvc.setBDetail(bVO);
 
 		mv.addObject("POST", bVO);
@@ -171,5 +171,11 @@ public class Board {
 		mv.setViewName("c/board/redirect");
 		
 		return mv;
+	}
+
+	@RequestMapping("/likeProc.boa")
+	public String likeProc(ModelAndView mv) {
+		String result = "NO";
+		return result;
 	}
 }

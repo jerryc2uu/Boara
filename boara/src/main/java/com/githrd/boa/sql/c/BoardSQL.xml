@@ -215,7 +215,7 @@
 			point
 		WHERE
 			bno = #{bno}
-			AND id = #{sid}
+			AND mno = (SELECT mno FROM member WHERE id = #{id})
 	</select>
 	
 	<!-- 좋아요/찜 여부 불러오기 -->
@@ -225,7 +225,7 @@
 		FROM
 		    mark
 		WHERE
-		    mno = (SELECT mno FROM member WHERE id = #{sid})
+		    mno = (SELECT mno FROM member WHERE id = #{id})
     		AND bno = #{bno}
 	</select>
 	
@@ -237,5 +237,76 @@
 			click = (click + 1)
 		WHERE
 			bno = #{bno}
+	</update>
+	
+<!-- 좋아요/찜 처리 관련 ################################################################## -->
+	
+	<!-- 해당 게시글 mark 여부 검사 -->
+	<select id="cntStat" resultType="int" parameterType='bVO'>
+		SELECT
+			COUNT(*)
+		FROM
+			mark
+		WHERE
+			bno = #{bno}
+			AND mno = (SELECT mno FROM member WHERE id = #{id})
+	</select>
+	
+	<!-- NEW : 좋아요 처리 -->
+	<insert id="newLike" parameterType="bVO">
+		INSERT INTO
+			mark(mkno, bno, mno, isshow)
+		VALUES(
+			(SELECT NVL(MAX(mkno+1), 1000000001) FROM mark),
+			#{bno},
+			(SELECT mno FROM member WHERE id = #{id}),
+			'L'
+		)
+	</insert>
+	
+	<!-- RE : 좋아요 처리 -->
+	<update id="reLike" parameterType="bVO">
+		UPDATE
+			mark
+		SET
+			isshow = 'L'
+		WHERE
+			bno = #{bno}
+			AND mno = (SELECT mno FROM member WHERE id = #{id})
+	</update>
+	
+	<!-- NEW : 찜 처리 -->
+	<insert id="newJjim" parameterType="bVO">
+		INSERT INTO
+			mark(mkno, bno, mno, isshow)
+		VALUES(
+			(SELECT NVL(MAX(mkno+1), 1000000001) FROM mark),
+			#{bno},
+			(SELECT mno FROM member WHERE id = #{id}),
+			'J'
+		)
+	</insert>
+	
+	<!-- RE : 찜 처리 -->
+	<update id="reJjim" parameterType="bVO">
+		UPDATE
+			mark
+		SET
+			isshow = 'J'
+		WHERE
+			bno = #{bno}
+			AND mno = (SELECT mno FROM member WHERE id = #{id})
+	</update>
+	
+	
+	<!-- 좋아요, 찜 해제 처리 -->
+	<update id="discard" parameterType="bVO">
+		UPDATE
+			mark
+		SET
+			isshow = 'N'
+		WHERE
+			bno = #{bno}
+			AND mno = (SELECT mno FROM member WHERE id = #{id})
 	</update>
 </mapper>
