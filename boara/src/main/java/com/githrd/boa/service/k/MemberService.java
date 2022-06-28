@@ -63,8 +63,24 @@ public class MemberService {
 			FileVO file = uploadProc(mVO.getFile());
 			// Mno를 꺼내서 FileVO들에 채워주고
 			file.setMno(mVO.getMno());
-			
 			mDao.addFile(file);
 		} 
 	}	
+	
+	@Transactional
+	public void editMemberData(MemberVO mVO) {
+		if(mVO.getMail() != null || mVO.getTel() != null || mVO.getPw() != null) {
+			mDao.updateInfo(mVO);
+		}
+		// 수정된 파일 추가
+		if(mVO.getFile() != null) {
+			FileVO file = uploadProc(mVO.getFile());
+			file.setId(mVO.getId());
+			file.setMno(mVO.getMno());
+			mDao.addFile(file);
+		}
+		
+	}
+	
+	
 }

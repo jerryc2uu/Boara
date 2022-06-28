@@ -58,7 +58,7 @@
 				<label for="pw" class="w3-col s3 w3-right-align ft20">비밀번호 : </label>
 				<div class="w3-col m8">
 					<input type="password" name="pw" id="pw" class="ft18 w3-margin-bottom w3-margin-left w3-col w3-input w3-border w3-round-medium"
-							placeholder="비밀번호를 입력하세요">
+							placeholder="비밀번호를 입력하세요 [대,소문자,숫자,특수문자로 구성된 7~15 글자]">
 				</div>
 			</div>
 			<div class="mgt20 w3-content">
@@ -101,7 +101,7 @@
 				</div>
 			</div>
 		</form>
-		<div class="w3-col w3-margin-top w3-card-4 mb50 mgb30 ">
+		<div class="w3-col w3-margin-top w3-card-4 mgb30 ">
 			<div class="w3-third w3-text-white w3-indigo w3-padding w3-xlarge w3-hover-grey" id="rbtn">Reset</div> 
 			<div class="w3-third w3-text-white w3-indigo w3-padding w3-xlarge w3-hover-grey" id="hbtn">Main</div> 
 			<div class="w3-third w3-text-white w3-indigo w3-padding w3-xlarge w3-hover-grey" id="jbtn">Join</div> 

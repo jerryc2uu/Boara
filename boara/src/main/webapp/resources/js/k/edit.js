@@ -14,10 +14,74 @@ $(document).ready(function(){
 	
 	});
 	
-	// dell 버튼
-	$('#dbtn').click(function(){
-		$(location).attr('href', '/boa/member/delMember.boa');
+	// 프로필 사진 삭제
+	$('.delImg').click(function(){
+		var sno = $('.picbox').attr('id');
+		$('#tfno').val(sno);
+		var el = $('.evtPic');
+		if(confirm('프로필 사진을 삭제하시겠습니까?')){
+			
+			$.ajax({
+				url: '/boa/member/delImg.boa',
+				type : 'post',
+				dataType: 'json',
+				data: {
+					fno: sno		
+				},
+				success: function(data){
+					if(data.result == 'OK'){
+						$(el).remove();
+						$('#frm').attr('action', '/boa/member/editInfo.boa');
+						$('#frm').submit();
+						}
+					},
+					error: function(){
+						alert('### 통신 에러 ###');
+					}
+			});
+		}
 	});
+	
+	// 새로운 사진 추가사 보여주기
+	$('.upfile').change(function(e){
+		var path = URL.createObjectURL(e.target.files[0]);
+		$('#img1').attr('src', path);
+	
+	});
+	
+	
+	// 회원 정보 수정 버튼
+	$('#ebtn').click(function(){
+		// 기존데이터
+		var tmail = $('#tmail').val();
+		var ttel = $('#ttel').val();
+		
+	
+		// 수정데이터
+		var mail = $('#mail').val();
+		var tel = $('#tel').val();
+		var pw = $('#pw').val();
+		var fno = $('#file').val();
+		
+		if(!pw){
+			$('#pw').prop('disabled', true);
+		}
+		if(tmail == mail) {
+			$('#mail').prop('disabled', true);
+		}
+		if(ttel == tel) {
+			$('#tel').prop('disabled', true);
+		}
+		if(!fno){
+			$('#fno').prop('disabled', true);
+		}
+		if(!pw && (tmail == mail) && (ttel == tel)  && !fno){
+			// 수정을 X
+			alert('수정된 개인정보가 없습니다.');
+			return;
+		}
+		$('#frm').submit();
+	});	
 	
 	// 비밀번호 일치 확인
 	$('#repw').keyup(function(){
@@ -35,6 +99,5 @@ $(document).ready(function(){
 			$('#repw').css('background-color', 'lightgray').prop('readonly', true);
 		}
 	});
-	
-	
+
 });

@@ -55,6 +55,7 @@ $(document).ready(function(){
 			<div class="w3-show-inline-block w3-margin-top w3-margin-bottom main" >
 				<h1 class="w3-text-indigo w3-xxxlarge w3-padding w3-border-bottom"><b>ID 찾기</b></h1>
 				<form method="POST" action="" class="mgt60 w3-col w3-padding  w3-border" id="frm" name="frm">
+					<input type="hidden" id="id" name="id" value="${SID}">
 					<div class="w3-col w3-margin-top ">
 						<label for="name" class="w3-col s2 w3-right-align w3-text-grey ft20">이    름 : </label>
 						<div class="w3-col m9 pdl10" >

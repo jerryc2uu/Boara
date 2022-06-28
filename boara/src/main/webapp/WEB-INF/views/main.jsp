@@ -41,6 +41,7 @@ img{
 </c:if>   
 	<div style="float: right; padding-right:30px;">      
 <c:if test="${empty SID}">
+     <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white " id="mjoin">Join</a>
      <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white " id="mlogin">Login</a>
 </c:if>
 <c:if test="${not empty SID}">
@@ -54,7 +55,6 @@ img{
     <header class="w3-container w3-indigo w3-center" style="padding:40px 16px; height: 200px;">
   	  <h1 class="pdt40 w3-xxxlarge dfn"><b>Boara</b></h1>
 	</header>
-	<!-- Middle  -->
 
 	<!-- Swiper -->
 	    <div class="swiper mySwiper mt80">
@@ -87,7 +87,7 @@ img{
 	      </div>
 	      <div class="swiper-button-next"></div>
 	      <div class="swiper-button-prev"></div>
-	      <div class="swiper-pagination"></div>
+	      <div class="swiper-pagination" style="position: relative!important; font-size: 15pt;"></div>
 	    </div>
 
 

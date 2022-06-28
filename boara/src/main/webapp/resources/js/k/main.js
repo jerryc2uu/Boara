@@ -40,6 +40,12 @@ $(document).ready(function(){
       $('#frm').attr('action', '/boa/member/myinfo.boa');
       $('#frm').submit();
    });
+   
+   // 글쓰기 버튼 이동
+   $('#mwrite').click(function(){
+   $('#frm').attr('/boa/board/boardWrite.boa');
+   $('#frm').submit();
+});
 	
 	//################### 페이지마다 바뀌는 부분 #############
 	

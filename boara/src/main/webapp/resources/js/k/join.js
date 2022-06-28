@@ -107,6 +107,20 @@ $(document).ready(function(){
 				});
 				
 			});
+	// 비밀번호 정규 표현식
+	$('#pw').change(function(){
+		var spw = $('#pw').val();
+		var pwPat = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{7,15}$/;
+	
+		var pwResult = pwPat.test(spw);
+		if(!pwResult){
+		alert('비밀번호를 다시 입력하세요');
+		$('#pw').val('');
+		}
+	
+	});
+
+	
 	
 	// 비밀번호 일치 처리
 	$('#repw').keyup(function(){

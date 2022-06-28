@@ -1,6 +1,7 @@
 package com.githrd.boa.controller.k;
  
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -15,6 +16,9 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.githrd.boa.dao.k.MemberDao;
 import com.githrd.boa.service.k.MemberService;
+import com.githrd.boa.vo.c.BoardVO;
+import com.githrd.boa.vo.c.CollecVO;
+import com.githrd.boa.vo.k.FileVO;
 import com.githrd.boa.vo.k.MemberVO;
 /**
  * 이 클래스는 member 관련 요청을 처리할 클래스
@@ -31,6 +35,8 @@ import com.githrd.boa.vo.k.MemberVO;
  * 				2022.06.18  -		탈퇴 페이지	처리
  * 				2022.06.21 	-		탈퇴처리
  * 				2022.06.23 	-		회원가입
+ * 				2022.06.26 	- 		회원정보 수정
+ * 				2022.06.28	-		로그인, 조인, 로그아웃 매개변수 추가
  *  *
  */
 
@@ -85,23 +91,7 @@ public class Member {
 		mv.addObject("NOWPAGE", nowPage);
 		mv.setViewName("k/redirect");
 			return mv;
-	}
-	
-	@RequestMapping("/logout.boa")
-	public ModelAndView logout(ModelAndView mv, HttpSession session, RedirectView rv, String vw, String nowPage) {
-		session.removeAttribute("SID");
-		if(vw == null) {
-			vw = "/boa/";
-		}
-		if(nowPage != null) {
-			mv.addObject("NOWPAGE", nowPage);
-		}
-		mv.addObject("VIEW", vw);
-		mv.setViewName("k/redirect");
-		
-		return mv;
-	}
-	
+	}	
 	@RequestMapping("/join.boa")
 	public ModelAndView join(ModelAndView mv) {
 		mv.setViewName("k/join");
@@ -120,6 +110,7 @@ public class Member {
 				mv.addObject("NOWPAGE", nowPage);
 			}
 			session.setAttribute("SID", mVO.getId());
+			
 		} catch(Exception e) {
 			view = "/boa/member/join.boa";
 			e.printStackTrace();
@@ -230,22 +221,56 @@ public class Member {
 	
 	
 	
-	// 회원정보 수정 페이지(사진 불러오기 미구현)
+	// 회원정보 수정 페이지
 	@RequestMapping("/editInfo.boa")
-	public ModelAndView editinfo(ModelAndView mv, HttpSession session,RedirectView rv) {
+	public ModelAndView editinfo(ModelAndView mv, HttpSession session,RedirectView rv, MemberVO mVO) {
 		String sid = (String) session.getAttribute("SID");
 		if(sid == null) {
 			rv.setUrl("/boa/member/login.boa");
 			mv.setView(rv);
 			return mv;
 		}
-		
 
-		
-		MemberVO mVO = mDao.getIfInfo(sid);
+		mVO = mDao.getIdInfo(sid);
+		List<FileVO> list = mDao.getIdImg(sid);
 		mv.addObject("DATA", mVO);
-		
+		mv.addObject("LIST", list);
+
 		mv.setViewName("k/editInfo");
+		return mv;
+	}
+	
+	// 프로필 이미지 삭제
+	@RequestMapping(path="/delImg.boa", method=RequestMethod.POST, params="fno")
+	@ResponseBody
+	public HashMap<String, String> delImg(FileVO fVO){
+		HashMap<String, String> map = new HashMap<String, String>();
+		String result = "NO";
+		
+		int cnt = mDao.getDelImg(fVO.getFno());
+		if(cnt == 1) {
+			result = "OK";			
+		}
+		map.put("result", result);
+		return map;
+	}
+	
+
+	
+	// 회원정보 수정 페이지
+	@RequestMapping("/editProc.boa")
+	public ModelAndView editProc(ModelAndView mv, HttpSession session, MemberVO mVO) {
+		String view = "/boa/member/editInfo.boa";
+		try {
+			mSrvc.editMemberData(mVO);
+		
+		} catch(Exception e) {
+			
+			e.printStackTrace();
+		}
+	
+		mv.addObject("VIEW", view);
+		mv.setViewName("k/redirect");
 		return mv;
 	}
 	

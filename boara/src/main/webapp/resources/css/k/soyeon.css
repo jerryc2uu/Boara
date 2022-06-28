@@ -28,7 +28,7 @@
 display: -webkit-box;
         display: -ms-flexbox;
         display: -webkit-flex;
-        display: flex;
+        display: flex;	
         -webkit-box-pack: center;
         -ms-flex-pack: center;
         -webkit-justify-content: center;
@@ -39,8 +39,8 @@ display: -webkit-box;
         align-items: center;
       }
 .swiperbox{
-    width: 800px;
-    height: 1000px;
+    width: 600px;
+    height: 800px;
     overflow: hidden;
 	}
 .swiper-slide img {

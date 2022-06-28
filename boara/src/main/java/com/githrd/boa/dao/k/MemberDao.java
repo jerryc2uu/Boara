@@ -1,5 +1,7 @@
 package com.githrd.boa.dao.k;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,7 +21,12 @@ public class MemberDao {
 	public int addMember(MemberVO mVO) {
 		return sqlSession.insert("mSQL.join", mVO);
 	}
-	// 회원가입시 프로필 사진 정보 
+	/*
+	public int addPoint(MemberVO mVO) {
+		return sqlSession.insert("mSQL.addPoint", mVO);
+	}
+	*/
+	// 회원가입시 프로필 사진 추가
 	public int addFile(FileVO fVO) {
 		return sqlSession.insert("mSQL.joinimg", fVO);
 	}
@@ -46,11 +53,24 @@ public class MemberDao {
 		return sqlSession.selectOne("mSQL.pwSeacch", mVO);
 	}
 	
-	// 회원정보조회
-	public MemberVO getIfInfo(String id) {
+	// 아이디로 회원정보조회
+	public MemberVO getIdInfo(String id) {
 		return sqlSession.selectOne("mSQL.getIdInfo", id);
 	}
+	// 아이디로 회원프로필 사진조회(리스트로 담기)
+	public List<FileVO> getIdImg(String id) {
+		return sqlSession.selectList("mSQL.getIdImg", id);
+	}
 	
+	// fno 로 프로필 사진 삭제
+	public int getDelImg(int fno) {
+		return sqlSession.update("mSQL.delImg", fno);
+	}
+	
+	// 회원정보 수정
+	public int updateInfo(MemberVO mVO) {
+		return sqlSession.update("mSQL.editInfo", mVO);
+	}
 	// 탈퇴
 	public int getDelMember(MemberVO mVO) {
 		return sqlSession.update("mSQL.delMember", mVO);
