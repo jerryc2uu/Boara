@@ -88,45 +88,28 @@
 		)
 	</insert>
 	
-	<!-- 
-	회원가입 100포인트 
+	
+	<!-- 회원가입 100포인트  -->
     <insert id="addPoint" parameterType="mVO">  
-		<selectKey keyProperty="pno" resultType="int" order="BEFORE">
-			SELECT
-				NVL(MAX(pno)+1, 1000000001)
-			FROM
-				point
-		</selectKey>
-		
-		<selectKey keyProperty="mno" resultType="int" order="BEFORE">
-			SELECT
-				NVL(MAX(mno)+1, 1001)
-			FROM
-				mno
-		</selectKey>
-       
 		INSERT INTO
 		    point(pno, mno, gnp, pcode, sumpoint)
 		VALUES(
-		    #{pno}, #{mno} , 100, 110, 
-		    (
-		    SELECT
-		        sumpoint
-		    FROM
-		        point
-		    WHERE
-		       pno = (
+		        (
 		        SELECT
-		            MAX(pno)
+		              NVL(MAX(pno)+1, 1000000001) 
 		        FROM
-		            point
-		        WHERE 
-		            mno = #{mno}
-		         )
-		    ) + 100
-		)
+		             point
+		         ) 
+		        , 
+		        (
+		         SELECT
+		              NVL(MAX(mno), 1001) 
+		        FROM
+		             member
+		        ) 
+		        , 100, 110, 100)
 	</insert>	
-	-->
+
 		
 	<select id="idSeacch" resultType="String" parameterType="mVO">
 	SELECT
@@ -232,32 +215,7 @@
  			)
  	</update>
  	
- 	<!--
- 	<insert id="editimg" parameterType="fVO">
-		<selectKey keyProperty="fno" resultType="int" order="BEFORE">
-			SELECT
-				NVL(MAX(fno) + 1, 100001)
-			FROM
-				imgfile
-		</selectKey>
-		
-		INSERT INTO
-			imgfile(fno, mno, oriname, savename, len, isshow, whereis )
-		VALUES(
-			#{fno}, 
-			mno = {
-				SELECT 
-					mno
-				FROM
-					member
-				WHERE
-					id = #{id}
-			}
-			, 
-			#{oriname}, #{savename}, #{len}, 'C', 'M'
-		)
-	</insert>
- 	-->
+ 
  	<!-- 탈퇴 처리 -->
  	<select id="delMember" parameterType="mVO">
  		UPDATE

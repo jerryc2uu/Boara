@@ -21,11 +21,11 @@ public class MemberDao {
 	public int addMember(MemberVO mVO) {
 		return sqlSession.insert("mSQL.join", mVO);
 	}
-	/*
+	
 	public int addPoint(MemberVO mVO) {
 		return sqlSession.insert("mSQL.addPoint", mVO);
 	}
-	*/
+	
 	// 회원가입시 프로필 사진 추가
 	public int addFile(FileVO fVO) {
 		return sqlSession.insert("mSQL.joinimg", fVO);
@@ -35,11 +35,11 @@ public class MemberDao {
 	public int getIdCnt(String id) {
 		return sqlSession.selectOne("mSQL.idCnt", id);
 	}
-	// id 중복 체크
+	// mail 중복 체크
 	public int getmailCnt(String mail) {
 		return sqlSession.selectOne("mSQL.mailCnt", mail);
 	}
-	// id 중복 체크
+	// tel 중복 체크
 	public int gettelCnt(String tel) {
 		return sqlSession.selectOne("mSQL.telCnt", tel);
 	}

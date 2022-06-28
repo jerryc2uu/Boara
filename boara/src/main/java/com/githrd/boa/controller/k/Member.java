@@ -110,6 +110,7 @@ public class Member {
 				mv.addObject("NOWPAGE", nowPage);
 			}
 			session.setAttribute("SID", mVO.getId());
+			mDao.addPoint(mVO);
 			
 		} catch(Exception e) {
 			view = "/boa/member/join.boa";
@@ -120,7 +121,21 @@ public class Member {
 		return mv;	
 	}
 	
-	
+	@RequestMapping("/logout.boa")
+	public ModelAndView logout(ModelAndView mv, HttpSession session, MemberVO mVO, String vw, String nowPage) {
+		session.removeAttribute("SID");
+		String view = "/boa/main.boa";
+		if(vw != null) {
+			view = vw;
+		}
+		if(nowPage != null) {
+			mv.addObject("NOWPAGE", nowPage);
+		}
+		mv.addObject("VIEW", view);
+		mv.setViewName("k/redirect");
+		return mv;
+	}
+		
 	
 	// 회원가입정보 중복 체크
 	@RequestMapping(path="/idCheck.boa", 
@@ -148,7 +163,7 @@ public class Member {
 		HashMap<String, String> map = new HashMap<String, String>();
 		String result = "NO";
 		
-		int cnt = mDao.getIdCnt(mail);
+		int cnt = mDao.getmailCnt(mail);
 		
 		if(cnt == 0) {
 			result = "OK";
@@ -165,7 +180,7 @@ public class Member {
 		HashMap<String, String> map = new HashMap<String, String>();
 		String result = "NO";
 		
-		int cnt = mDao.getIdCnt(tel);
+		int cnt = mDao.gettelCnt(tel);
 		
 		if(cnt == 0) {
 			result = "OK";

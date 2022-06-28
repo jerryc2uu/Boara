@@ -49,7 +49,7 @@
 				<label for="id" class="w3-col s3 w3-right-align ft20">아 이 디 : </label>
 				<div class="w3-col m8">
 					<input type="text" name="id" id="id" class="ft18 w3-margin-bottom w3-margin-left w3-col m9 w3-input w3-border w3-round-medium" 
-								placeholder="아이디를 입력하세요">
+								placeholder="아이디를 입력하세요 [10글자 이하]">
 					<div class=" w3-col m2 w3-right w3-button w3-indigo w3-text-white w3-round-medium ft18" id="idck">check </div>
 					<span class="w3-col mgb10 w3-center w3-text-green" id="idmsg">아이디 체크 처리 메세지</span>
 				</div>

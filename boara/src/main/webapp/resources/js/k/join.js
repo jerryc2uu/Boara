@@ -119,7 +119,17 @@ $(document).ready(function(){
 		}
 	
 	});
-
+	
+	// 전화번호 정규 표현식
+	$('#tel').change(function(){
+		var stel = $('#tel').val();
+		var pwTel =  /^[0-9].{0,11}$/;
+	var telResult = pwTel.test(stel);
+		if(!telResult){
+		alert('전화번호를 다시 입력하세요');
+		$('#tel').val('');
+		}
+	});
 	
 	
 	// 비밀번호 일치 처리
