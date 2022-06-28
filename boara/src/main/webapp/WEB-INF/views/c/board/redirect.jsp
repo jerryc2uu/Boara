@@ -25,6 +25,9 @@
 	<c:if test="${not empty CNO}">
 		<input type="hidden" name="cno" value="${CNO}">
 	</c:if>
+	<c:if test="${not empty BNO}">
+		<input type="hidden" name="bno" value="${BNO}">
+	</c:if>
 	</form>
 </c:if>
 </body>

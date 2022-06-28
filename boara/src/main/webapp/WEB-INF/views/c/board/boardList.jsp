@@ -60,16 +60,14 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 	<%-- First Grid --%>
 	<div class="w3-row-padding w3-padding-64 w3-container">
 		<div class="w3-col w3-display-container w3-center">
-<c:if test="${not empty CINFO}">
-		<div class="w3-border-bottom inline w900 w3-margin-bottom">
-			<h3 class="mgl10">${CINFO.descr}</h3>
-	<c:if test="${not empty CINFO.genre}">
+			<div class="w3-border-bottom inline w900 w3-margin-bottom">
+				<h3 class="mgl10">${CINFO.descr}</h3>
+<c:if test="${not empty CINFO.genre}">
 		<c:forEach var="gnr" items="${CINFO.genre}">
 				<div class="genre w3-round w3-left w3-margin-bottom">${gnr}</div>
 		</c:forEach>
-	</c:if>
-		</div>
 </c:if>
+		</div>
 	
 <c:if test="${empty PLIST}">
 		<div class="w3-center w3-content">
@@ -194,7 +192,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 		<input type="hidden" name="nowPage" id="nowPage" value="${PAGE.nowPage}">
 		<input type="hidden" name="cno" id="cno" value="${param.cno}">
 		<input type="hidden" name="bno" id="bno">
-		<input type="hidden" name="vw" id="vw">
+		<input type="hidden" name="vw" id="vw" value="/boa/board/boardList.boa">
 		<input type="hidden" name="id" id="id" value="${SID}">
 	</form>
 <script>

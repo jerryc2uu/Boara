@@ -11,6 +11,9 @@ package com.githrd.boa.service.c;
  * 
  * 			2022.06.26	-	함수 추가(uploadProc, addBoard, editBoard)
  * 								담당자 : 최이지
+ * 
+ * 			2022.06.27	-	함수 추가(getBGnr, setBDetail)
+ * 								담당자 : 최이지
  *
  */
 
@@ -20,7 +23,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.githrd.boa.dao.c.BoardDao;
 import com.githrd.boa.util.c.FileUtil;
@@ -144,13 +146,72 @@ public class BoardService {
 		}
 		
 // 게시글 상세보기 관련 -------------------------------------------------------------------------
-	// 게시글 상세보기 상세 처리
-	public void setBDetail(ModelAndView mv, BoardVO bVO) {
-		// 유료 게시글 구매 여부
 		
-		// 미구매시 미리보기 처리
+	// 단일 게시글 장르 처리
+	public void getBGnr(BoardVO bVO) {
+		List<GenreVO> glist = bDao.getGnr();
+		
+		if(bVO.getSgenre().equals("empty")) return;
+		
+		for(GenreVO gVO : glist) {
+			for(int gno : bVO.getGnos()) {
+				if(gno == gVO.getGno()) {
+					bVO.getGenre().add(gVO.getGname());
+				}
+			}
+		}
+	}
+	
+	// 게시글 상세보기 상세 처리
+	public BoardVO setBDetail(BoardVO bVO) {
+		// 기본 정보 불러오기
+		bVO = bDao.getBDetail(bVO);
+		
+		// 조회수 올리기
+		bDao.upClick(bVO.getBno());
 		
 		// 장르 처리
+		getBGnr(bVO);
 		
+		// 구매 여부 도출
+		String bought = "YES";
+		if(bVO.getPrice() != 0) {
+			String body = bVO.getBody();
+			// 로그인 상태가 아닐 시에 미리보기 처리
+			if(bVO.getSid() == null) {
+				bought = "NO";
+				bVO.setBought(bought);
+				
+				if(body.length() > 300) {
+					body.substring(0, 300);
+				}
+				bVO.setBody(body);
+				return bVO;
+			}
+			
+			int bcnt = bDao.didBuy(bVO);
+			
+			// 미구매시 미리보기 처리
+			if(bcnt != 1) {
+				bought = "NO";
+				
+				if(body.length() > 300) {
+					body.substring(0, 300);
+				}
+				bVO.setBody(body);
+			}
+			
+			bVO.setBought(bought);
+		}
+		if(bVO.getSid() == null) return bVO;
+		
+		// 좋아요/찜 여부 처리
+		String nowStat = bDao.getStat(bVO);
+		if(nowStat != null) bVO.setNowStat(nowStat);
+		
+		return bVO;
 	}
+	
+	// 좋아요 상태 변경
+	// 찜 상태 변경
 }

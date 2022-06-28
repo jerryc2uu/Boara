@@ -15,6 +15,8 @@ package com.githrd.boa.controller.c;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -93,10 +95,12 @@ public class Board {
 	
 	// 게시글 상세 보기
 	@RequestMapping("/boardDetail.boa")
-	public ModelAndView boardDetail(ModelAndView mv, BoardVO bVO, CollecVO cVO, PageUtil page) {
+	public ModelAndView boardDetail(ModelAndView mv, BoardVO bVO, HttpSession session) {
 		// 상세 정보 불러오기
-		
-		
+		if(session.getAttribute("SID") != null) bVO.setSid((String)session.getAttribute("SID"));
+		bVO = bSrvc.setBDetail(bVO);
+
+		mv.addObject("POST", bVO);
 		mv.setViewName("c/board/boardDetail");
 		return mv;
 	}

@@ -4,30 +4,18 @@ $(document).ready(function(){
 
 	// 로그인
 	$('#lbtn').click(function(){
-		// 파라미터 세팅
-		$('#vw').val('/boa/board/boardList.boa');
-		$('#bno').prop('disabled', true);
-		
 		$('#frm').attr('action', '/boa/member/login.boa');
 		$('#frm').submit();
 	});
 
 	// 회원가입
 	$('#jbtn').click(function(){
-		// 파라미터 세팅
-		$('#vw').val('/boa/board/boardList.boa');
-		$('#bno').prop('disabled', true);
-		
 		$('#frm').attr('action', '/boa/member/join.boa');
 		$('#frm').submit();
 	});
 
 	// 로그아웃
 	$('#obtn').click(function(){
-		// 파라미터 세팅
-		$('#vw').val('/boa/board/boardList.boa');
-		$('#bno').prop('disabled', true);
-		
 		$('#frm').attr('action', '/boa/member/logout.boa');
 		$('#frm').submit();
 	});
@@ -50,13 +38,17 @@ $(document).ready(function(){
 	
 // 리스트 페이지 기능 -------------------------------------------------------------------------
 
-	/* 게시글 클릭시
+	// 게시글 클릭시
 	$('.pbox').click(function(){
 		var bno = $(this).attr('id');
-		$('#cno').val(bno);
+		$('#bno').val(bno);
+		$('#id').prop('disabled', true);
+		$('#vw').prop('disabled', true);
+		$('#cno').prop('disabled', true);
 		
-		$(location).attr('href', '/boara/board/boardDetail.boa?bno=' + bno);
-	});*/
+		$('#frm').attr('action', '/boa/board/boardDetail.boa');
+		$('#frm').submit();
+	});
 	
 	// 게시글 삭제
 	$('.dbtn').click(function(){
@@ -95,37 +87,52 @@ $(document).ready(function(){
 		$('#frm').submit();
 	});
 
-/* 게시글 상세보기 페이지 ---------------------------------------------------------------------
+// 게시글 상세보기 페이지 ----------------------------------------------------------------------
 
-	// 좋아요 기능
+	/* 좋아요 기능
 	$('.like').click(function(){
 		
-	});
+	});*/
+	
+	/* 찜 기능
+	$('.jjim').click(function(){
+		
+	});*/
 	
 	// 컬렉션으로
 	$('#upcoll').click(function(){
-		var cno = $('#cno').val();
-		$(location).attr('href', '/boara/board/boardList.boa?cno=' + cno);
+		$('#bno').prop('disabled', true);
+		$('#id').prop('disabled', true);
+		$('#vw').prop('disabled', true);
+		
+		$('#frm').attr('action', '/boa/board/boardList.boa');
+		$('#frm').submit();
 	});
 	
 	// 댓글 리스트
 	$('#reshow').click(function(){
-		var bno = $('#bno').val();
-		$(location).attr('href', '/boara/reboard/reboardList.boa?bno=' + bno);
+		$('#vw').prop('disabled', true);
+		
+		$('#frm').attr('action', '/boa/reboard/reboardList.boa');
+		$('#frm').submit();
 	});
 
 	// 게시글 상세보기 -> 게시글 삭제
 	$('#dbtn').click(function(){
-		$('#frm').attr('action', '/boara/board/boardDel.boa');
+		$('#vw').prop('disabled', true);
+		
+		$('#frm').attr('action', '/boa/board/boardDel.boa');
 		$('#frm').submit();
 	});
 	
 	// 게시글 상세보기 -> 게시글 수정
 	$('#ebtn').click(function(){
+		$('#vw').prop('disabled', true);
+		
 		$('#frm').attr('action', '/boara/board/boardEdit.boa');
 		$('#frm').submit();
 	});
-*/
+
 // 게시글 작성 페이지 -----------------------------------------------------------------
 
 	// 파일 프리뷰

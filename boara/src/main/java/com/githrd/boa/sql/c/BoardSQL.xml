@@ -195,14 +195,47 @@
 	
 <!-- 게시글 상세 보기 ######################################################################-->
 	
-	<select id="getBDetail" resultType="bVO" parameterType="int">
+	<!-- 기본 상세정보 불러오기 -->
+	<select id="getBDetail" resultType="bVO" parameterType="bVO">
 		SELECT
-			cname, bno, b.isshow, title, NVL(b.gnr, 'empty') sgenre, price, id, click, body, b.cno cno
+			bno, b.isshow, forwho, title, NVL(gnr, 'empty') sgenre,
+			price, click, body, cno, wdate, id
 		FROM
-		    board b, collection c, member m
+		    board b, member m
 		WHERE
-		    bno = #{bno}
-		    AND b.cno = c.cno
-		    AND b.mno = m.mno
+			b.mno = m.mno
+			AND bno = #{bno}
 	</select>
+	
+	<!-- 게시글 구매/좋아요/찜 여부 불러오기 -->
+	<select id="didBuy" resultType="int" parameterType="bVO">
+		SELECT
+			COUNT(*) bought
+		FROM
+			point
+		WHERE
+			bno = #{bno}
+			AND id = #{sid}
+	</select>
+	
+	<!-- 좋아요/찜 여부 불러오기 -->
+	<select id="getStat" resultType="string" parameterType="bVO">
+		SELECT
+		    isshow nowStat
+		FROM
+		    mark
+		WHERE
+		    mno = (SELECT mno FROM member WHERE id = #{sid})
+    		AND bno = #{bno}
+	</select>
+	
+	<!-- 조회수 올리기 -->
+	<update id="upClick" parameterType="int">
+		UPDATE
+			board
+		SET
+			click = (click + 1)
+		WHERE
+			bno = #{bno}
+	</update>
 </mapper>

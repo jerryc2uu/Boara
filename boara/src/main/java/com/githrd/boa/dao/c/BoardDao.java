@@ -11,6 +11,12 @@ package com.githrd.boa.dao.c;
  * 
  * 			2022.06.26	-	함수 추가(getCList, addBoard, addThumb, getBInfo, editBoard, setOldThumb, setNewThumb)
  * 								담당자 : 최이지
+ * 
+ * 			2022.06.27	-	함수 추가(getBDetail, didBuy, getStat)
+ * 								담당자 : 최이지
+ * 
+ * 			2022.06.28	-	함수 추가(upClick)
+ * 								담당자 : 최이지
  */
 
 import java.util.List;
@@ -57,7 +63,7 @@ public class BoardDao {
 		return sqlSession.update("bSQL.delBoard", bVO);
 	}
 
-// 게시글 작성/수정 -----------------------------------------------------------------------------
+// 게시글 작성/수정 관련 ------------------------------------------------------------------------
 	
 	// 새 썸네일 업로드
 	public int addThumb(FileVO cfVO) {
@@ -92,5 +98,27 @@ public class BoardDao {
 	// 썸네일 히스토리 중 선택시 isshow 변경
 	public int setNewThumb(int fno) {
 		return sqlSession.update("bSQL.setNewThumb", fno);
+	}
+	
+// 게시글 상세 페이지 관련 ----------------------------------------------------------------------
+
+	// 게시글 기본 상세정보 얻기
+	public BoardVO getBDetail(BoardVO bVO) {
+		return sqlSession.selectOne("bSQL.getBDetail", bVO);
+	}
+	
+	// 게시글 구매 여부 얻기
+	public int didBuy(BoardVO bVO) {
+		return sqlSession.selectOne("bSQL.didBuy", bVO);
+	}
+	
+	// 좋아요/찜 여부 불러오기
+	public String getStat(BoardVO bVO) {
+		return sqlSession.selectOne("bSQL.getStat", bVO);
+	}
+	
+	// 조회수 올리기
+	public int upClick(int bno) {
+		return sqlSession.update("bSQL.upClick", bno);
 	}
 }

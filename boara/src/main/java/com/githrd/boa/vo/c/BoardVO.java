@@ -12,18 +12,24 @@ package com.githrd.boa.vo.c;
  *							변수, getter setter 추가 (thumb, fno, id, cno, cname)
  *								담당자 : 최이지
  *
+ *			2022.06.27	-	변수, getter setter 추가(bought, nowStat, sdate, wdate, sid)
+ *								담당자 : 최이지
  */
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import org.springframework.web.multipart.MultipartFile;
 
 public class BoardVO {
 	private int bno, price, click, fno, cno;
-	private String savename, title, body, isshow, sgenre, forwho, id, cname;
+	private String savename, title, body, isshow, sgenre, forwho, id, cname,
+		nowStat, bought, sdate, sid;
 	private ArrayList<Integer> gnos;
 	private ArrayList<String> genre;
 	private MultipartFile thumb;
+	private Date wdate;
 	
 	// GetterSetter
 	public String getSgenre() {
@@ -129,5 +135,39 @@ public class BoardVO {
 	}
 	public void setCname(String cname) {
 		this.cname = cname;
+	}
+	public String getNowStat() {
+		return nowStat;
+	}
+	public void setNowStat(String nowStat) {
+		this.nowStat = nowStat;
+	}
+	public String getBought() {
+		return bought;
+	}
+	public void setBought(String bought) {
+		this.bought = bought;
+	}
+	public Date getWdate() {
+		return wdate;
+	}
+	public void setWdate(Date wdate) {
+		this.wdate = wdate;
+	}
+	public String getSdate() {
+		return sdate;
+	}
+	public void setSdate(String sdate) {
+		this.sdate = sdate;
+	}
+	public void setSdate() {
+		SimpleDateFormat form = new SimpleDateFormat("YYYY.MM.DD HH:mm:ss");
+		this.sdate = form.format(wdate);
+	}
+	public String getSid() {
+		return sid;
+	}
+	public void setSid(String sid) {
+		this.sid = sid;
 	}
 }
