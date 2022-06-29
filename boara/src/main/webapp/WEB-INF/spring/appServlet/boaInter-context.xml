@@ -11,6 +11,7 @@
 	<beans:bean id="loginRedirect" class="com.githrd.boa.interceptor.LoginRedirectInterceptor" />
 	<beans:bean id="collRedirect" class="com.githrd.boa.interceptor.CollectionInterceptor" />
 	<beans:bean id="boardRedirect" class="com.githrd.boa.interceptor.BoardInterceptor" />
+	<beans:bean id="adultContent" class="com.githrd.boa.interceptor.AdultInterceptor" />
 	
 	<interceptors>
 		<interceptor>
@@ -67,6 +68,15 @@
 			<mapping path="/board/boardEdit.boa" />
 			
 			<beans:ref bean="boardRedirect" />
+		</interceptor>
+		
+		
+		<!-- 성인인증 X -> 마이페이지 -->
+		<interceptor>
+			<!-- 최이지 -->
+			<mapping path="/board/boardDetail.boa" />
+			
+			<beans:ref bean="adultContent" />
 		</interceptor>
 		
 	</interceptors>

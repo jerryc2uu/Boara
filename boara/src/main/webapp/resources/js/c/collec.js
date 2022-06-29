@@ -77,7 +77,6 @@ $(document).ready(function(){
 		// 불필요한 파라미터 무효화
 		$('#cid').prop('disabled', true);
 		$('#vw').prop('disabled', true);
-		$('#id').prop('disabled', true);
 
 		// 전송
 		$('#frm').attr('action', '/boa/collection/collecDel.boa');
@@ -230,7 +229,6 @@ $(document).ready(function(){
 		}else{
 			$('#sthumb').prop('disabled', true);
 		}
-		
 		
 		// 변경 안됐으면 전송 안되게 막기
 		if(cname == tcname){

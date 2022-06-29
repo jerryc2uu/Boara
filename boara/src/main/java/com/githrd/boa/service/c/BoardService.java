@@ -14,6 +14,9 @@ package com.githrd.boa.service.c;
  * 
  * 			2022.06.27	-	함수 추가(getBGnr, setBDetail)
  * 								담당자 : 최이지
+ * 
+ * 			2022.06.29	-	함수 수정(setBDetail)
+ * 								담당자 : 최이지
  *
  */
 
@@ -209,13 +212,11 @@ public class BoardService {
 		}
 		
 		// 좋아요/찜 여부 처리
+		bVO.setId(id);
 		String nowStat = bDao.getStat(bVO);
 		if(nowStat != null) bVO.setNowStat(nowStat);
 		bVO.setId(cid);
 		
 		return bVO;
 	}
-	
-	// 좋아요 상태 변경
-	// 찜 상태 변경
 }

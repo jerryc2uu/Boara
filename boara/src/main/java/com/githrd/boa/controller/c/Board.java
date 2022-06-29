@@ -11,15 +11,19 @@ package com.githrd.boa.controller.c;
  * 
  * 			2022.06.26	-	함수 추가(boardWrite, boardWriteProc, boardEdit, boaradEditProc)
  * 								담당자 : 최이지
+ * 
+ * 			2022.06.29	-	함수 추가(likeProc, jjimProc, discardMark)
+ * 							로그 처리를 위한 함수 수정(boardWriteProc, boardEditProc, boardDel)
+ * 								담당자 : 최이지
  */
 
-import java.util.List;
+import java.util.*;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.githrd.boa.dao.c.BoardDao;
@@ -95,13 +99,13 @@ public class Board {
 	
 	// 게시글 상세 보기
 	@RequestMapping("/boardDetail.boa")
-	public ModelAndView boardDetail(ModelAndView mv, BoardVO bVO) {
+	public ModelAndView boardDetail(ModelAndView mv, BoardVO bVO, HttpServletRequest req) {
 		// 상세 정보 불러오기
-System.out.println(bVO.getId());
 		bVO = bSrvc.setBDetail(bVO);
 
 		mv.addObject("POST", bVO);
 		mv.setViewName("c/board/boardDetail");
+		req.setAttribute("POST", bVO);
 		return mv;
 	}
 	
@@ -116,8 +120,10 @@ System.out.println(bVO.getId());
 		String msg;
 		if(cnt == 1) {// 성공
 			msg = "게시글 삭제 성공";
+			bVO.setResult("YES");
 		}else {
 			msg = "게시글 삭제 실패";
+			bVO.setResult("NO");
 		}
 		
 		// 데이터 세팅
@@ -138,8 +144,10 @@ System.out.println(bVO.getId());
 		String msg;
 		if(cnt != 0) {
 			msg = "게시글 작성 성공";
+			bVO.setResult("YES");
 		}else {
 			msg = "게시글 작성 실패";
+			bVO.setResult("NO");
 		}
 		
 		// 데이터 세팅
@@ -159,8 +167,10 @@ System.out.println(bVO.getId());
 		String msg;
 		if(cnt != 0) {
 			msg = "게시글 수정 성공";
+			bVO.setResult("YES");
 		}else {
 			msg = "게시글 수정 실패";
+			bVO.setResult("NO");
 		}
 		
 		// 데이터 세팅
@@ -174,8 +184,62 @@ System.out.println(bVO.getId());
 	}
 
 	@RequestMapping("/likeProc.boa")
-	public String likeProc(ModelAndView mv) {
+	@ResponseBody
+	public HashMap<String, String> likeProc(ModelAndView mv, BoardVO bVO) {
+		// 반환값 변수 초기화
+		HashMap<String, String> map = new HashMap<String, String>();
 		String result = "NO";
-		return result;
+
+		// mark 여부 검사
+		int marked = bDao.cntStat(bVO);
+		int success;
+		
+		if(marked == 0) {
+			success = bDao.newLike(bVO);
+			if(success == 1) result = "YES";
+		}else {
+			success = bDao.reLike(bVO);
+			if(success == 1) result = "YES";
+		}
+		bVO.setResult(result);
+		
+		map.put("result", result);
+		return map;
+	}
+	
+	@RequestMapping("/jjimProc.boa")
+	@ResponseBody
+	public HashMap<String, String> jjimProc(ModelAndView mv, BoardVO bVO) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		String result = "NO";
+		
+		// mark 여부 검사
+		int marked = bDao.cntStat(bVO);
+		int success;
+		
+		if(marked == 0) {
+			success = bDao.newJjim(bVO);
+			if(success == 1) result = "YES";
+		}else {
+			success = bDao.reJjim(bVO);
+			if(success == 1) result = "YES";
+		}
+		bVO.setResult(result);
+		
+		map.put("result", result);
+		return map;
+	}
+	
+	@RequestMapping("/discardMark.boa")
+	@ResponseBody
+	public HashMap<String, String> discardMark(BoardVO bVO) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		String result = "NO";
+		int success = bDao.discard(bVO);
+		if(success == 1) result = "YES";
+		bVO.setResult(result);
+		
+		map.put("result", result);
+		return map;
 	}
 }

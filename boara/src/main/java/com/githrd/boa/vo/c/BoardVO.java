@@ -14,6 +14,9 @@ package com.githrd.boa.vo.c;
  *
  *			2022.06.27	-	변수, getter setter 추가(bought, nowStat, sdate, wdate, sid)
  *								담당자 : 최이지
+ *
+ *			2022.06.29	-	변수, getter setter 추가(result)
+ *								담당자 : 최이지
  */
 
 import java.sql.Date;
@@ -25,7 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class BoardVO {
 	private int bno, price, click, fno, cno;
 	private String savename, title, body, isshow, sgenre, forwho, id, cname,
-		nowStat, bought, sdate, sid;
+		nowStat, bought, sdate, sid, result;
 	private ArrayList<Integer> gnos;
 	private ArrayList<String> genre;
 	private MultipartFile thumb;
@@ -169,5 +172,11 @@ public class BoardVO {
 	}
 	public void setSid(String sid) {
 		this.sid = sid;
+	}
+	public String getResult() {
+		return result;
+	}
+	public void setResult(String result) {
+		this.result = result;
 	}
 }

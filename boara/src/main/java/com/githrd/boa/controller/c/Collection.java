@@ -17,6 +17,9 @@ package com.githrd.boa.controller.c;
  *
  *			2022.06.26	-	함수 추가(collecWrite, collecWriteProc, collecEdit, collecEditProc)
  *								담당자 : 최이지
+ *
+ *			2022.06.29	-	로그처리를 위한 함수 수정(collecWriteProc, collecEditProc, collecDel)
+ *								담당자 : 최이지
  */
 import java.util.List;
 
@@ -101,8 +104,10 @@ public class Collection {
 		String msg;
 		if(cnt == 1) {// 성공
 			msg = "컬렉션 삭제 성공";
+			cVO.setResult("YES");
 		}else {
 			msg = "컬렉션 삭제 실패";
+			cVO.setResult("NO");
 		}
 		
 		// 데이터 세팅
@@ -122,8 +127,10 @@ public class Collection {
 		String msg;
 		if(cnt != 0) {
 			msg = "컬렉션 추가 성공";
+			cVO.setResult("YES");
 		}else {
 			msg = "컬렉션 추가 실패";
+			cVO.setResult("NO");
 		}
 		
 		// 데이터 세팅
@@ -142,8 +149,10 @@ public class Collection {
 		String msg;
 		if(cnt != 0) {
 			msg = "컬렉션 수정 성공";
+			cVO.setResult("YES");
 		}else {
 			msg = "컬렉션 수정 실패";
+			cVO.setResult("NO");
 		}
 		
 		// 데이터 세팅

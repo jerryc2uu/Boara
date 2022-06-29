@@ -20,6 +20,10 @@ package com.githrd.boa.vo.c;
  *			2022.06.26	-	모든 변수 private 속성 추가
  *							변수, getter setter 추가 (thumb, fno)
  *								담당자 : 최이지
+ *
+ *			2022.06.29	-	변수, getter setter 추가(result)
+ *								담당자 : 최이지
+ *
  */
 import java.util.ArrayList;
 
@@ -29,7 +33,7 @@ import com.githrd.boa.util.c.PageUtil;
 
 public class CollecVO {
 	private int cno, mno, startCont, endCont, fno;
-	private String id, savename, cname, descr, sgenre, cid;
+	private String id, savename, cname, descr, sgenre, cid, result;
 	private ArrayList<Integer> gnos;
 	private ArrayList<String> genre;
 	private PageUtil page;
@@ -138,5 +142,11 @@ public class CollecVO {
 	}
 	public void setFno(int fno) {
 		this.fno = fno;
+	}
+	public String getResult() {
+		return result;
+	}
+	public void setResult(String result) {
+		this.result = result;
 	}
 }

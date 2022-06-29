@@ -58,7 +58,6 @@ $(document).ready(function(){
 		$('#bno').val(sbno);
 		
 		// 불필요한 태그 무효화
-		$('#cno').prop('disabled', true);
 		$('#vw').prop('disabled', true);
 		
 		// 전송
@@ -88,20 +87,72 @@ $(document).ready(function(){
 // 게시글 상세보기 페이지 ----------------------------------------------------------------------
 
 	// 좋아요 기능
-	$('#unlike').click(function(){
-		// 암것도 없음 -> 좋아요
-	});
-	$('#liked').click(function(){
-		// 좋아요 -> 해제
+	$('.like').click(function(){
+		var sbno = $('#bno').val();
+		var sid = $('#id').val();
+		var targ = '/boa/board/likeProc.boa';
+		var img = '/boa/img/c/liked.jpg';
+		var aid = 'like';
+		
+		// 이미 좋아요 되어있으면 해제 처리
+		if($(this).attr('id') == 'like') {
+			targ = '/boa/board/discardMark.boa';
+			img = '/boa/img/c/unlike.jpg';
+			aid = 'unlike';
+		}
+		
+		$.ajax({
+			url: targ,
+			type: 'post',
+			dataType: 'json',
+			data: {
+				bno: sbno,
+				id: sid
+			},
+			success: function(data){
+				if(data.result == 'YES'){
+					$('.like').attr('src', img);
+					$('.like').attr('id', aid);
+				}
+			},
+			error: function(){
+			}
+		});
 	});
 	
 	// 찜 기능
-	$('#jjimyet').click(function(){
-		// 암것도 없음 -> 좋아요
+	$('.jjim').click(function(){
+		var sbno = $('#bno').val();
+		var sid = $('#id').val();
+		var targ = '/boa/board/jjimProc.boa';
+		var clas = 'w3-round-large genre jjim w3-indigo'
+		var aid = 'jjimed';
 		
-	});
-	$('#jjimed').click(function(){
-		// 찜 -> 해제
+		// 이미 찜 되어있으면 해제 처리
+		if($(this).attr('id') == 'jjimed') {
+			targ = '/boa/board/discardMark.boa';
+			clas = 'w3-round-large genre jjim';
+			aid = 'jjimyet';
+		}
+		
+		$.ajax({
+			url: targ,
+			type: 'post',
+			dataType: 'json',
+			data: {
+				bno: sbno,
+				id: sid
+			},
+			success: function(data){
+				if(data.result == 'YES'){
+					$('.jjim').attr('class', clas);
+					$('.jjim').attr('id', aid);
+				}
+			},
+			error: function(){
+			}
+		});
+		
 	});
 	
 	// 컬렉션으로
@@ -361,9 +412,6 @@ $(document).ready(function(){
 			return;
 		}
 		
-		alert('fno : ' + $('input:radio[id="sthumb"]:checked').val());
-		alert('title : ' + titBool + ', show : ' + showBool + ', who : ' + whoBool + ', price : ' + priceBool
-			+ ', body : ' + bodyBool + ', thumb : ' + thumbBool);
 		$('#frm').submit();
 	});
 

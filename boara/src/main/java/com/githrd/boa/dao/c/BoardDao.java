@@ -15,7 +15,10 @@ package com.githrd.boa.dao.c;
  * 			2022.06.27	-	함수 추가(getBDetail, didBuy, getStat)
  * 								담당자 : 최이지
  * 
- * 			2022.06.28	-	함수 추가(upClick, cntStat, newLike, reLike, newJjim, reJjim, discard)
+ * 			2022.06.28	-	함수 추가(upClick)
+ * 								담당자 : 최이지
+ * 
+ * 			2022.06.29	-	함수 추가(cntStat, newLike, reLike, newJjim, reJjim, discard, adultCheck)
  * 								담당자 : 최이지
  */
 
@@ -120,6 +123,11 @@ public class BoardDao {
 	// 조회수 올리기
 	public int upClick(int bno) {
 		return sqlSession.update("bSQL.upClick", bno);
+	}
+	
+	// 성인 인증 여부
+	public String adultCheck(String id) {
+		return sqlSession.selectOne("bSQL.adultCheck", id);
 	}
 	
 // 좋아요/찜 처리 관련 -------------------------------------------------------------------------

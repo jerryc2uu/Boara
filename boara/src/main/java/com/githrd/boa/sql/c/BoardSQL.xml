@@ -239,6 +239,16 @@
 			bno = #{bno}
 	</update>
 	
+	<!-- 성인 인증 회원 체크 -->
+	<select id="adultCheck" resultType="string" parameterType="string">
+		SELECT
+			isadult
+		FROM
+			member
+		WHERE
+			id = #{id}
+	</select>
+	
 <!-- 좋아요/찜 처리 관련 ################################################################## -->
 	
 	<!-- 해당 게시글 mark 여부 검사 -->

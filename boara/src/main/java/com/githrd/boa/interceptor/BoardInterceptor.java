@@ -11,11 +11,9 @@ package com.githrd.boa.interceptor;
  * 								담당자 : 최이지
  */
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.*;
 
 public class BoardInterceptor implements HandlerInterceptor {
 
