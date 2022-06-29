@@ -9,11 +9,6 @@ $(document).ready(function(){
       $(location).attr('href', '/boa/collection/collecList.boa');
    });
    
-   //글작성 버튼 클릭 이벤트
-   $('#mwrite').click(function(){
-      $(location).attr('href', '/boara/board/boardWrite.boa');      
-   });
-   
    //새 컬렉션 작성버튼 클릭 이벤트
    $('#mcoll').click(function(){
 		$(location).attr('href', '/boa/collection/collecWrite.boa');
@@ -48,7 +43,7 @@ $(document).ready(function(){
 });
 	
 	//################### 페이지마다 바뀌는 부분 #############
-	
+	/*
    //hot 클릭 이벤트
    $('.mhot').click(function(){
 	//모든 컬렉션 리스트 페이지로 이동 => 추후 hot 게시물 리스트로 이동하도록 수정..
@@ -64,5 +59,5 @@ $(document).ready(function(){
 		$('#frm').attr('action', '/boara/board/boardList.boa');
 		$('#frm').submit();
 	});
-   
+   */
 });

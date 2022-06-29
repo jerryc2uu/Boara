@@ -15,10 +15,12 @@
 		<typeAlias alias="iVO" type="com.githrd.boa.vo.p.MyInfoVO" />
 		<!-- 김소연 -->
 		<typeAlias type="com.githrd.boa.vo.k.MemberVO" alias="mVO"/>
+		<typeAlias type="com.githrd.boa.vo.k.FileVO" alias="fVO"/>
 		<!-- 최이지 -->
 		<typeAlias alias="cVO" type="com.githrd.boa.vo.c.CollecVO" />
 		<typeAlias alias="gVO" type="com.githrd.boa.vo.c.GenreVO" />
 		<typeAlias alias="bVO" type="com.githrd.boa.vo.c.BoardVO" />
+		<typeAlias alias="cfVO" type="com.githrd.boa.vo.c.FileVO" />
 	</typeAliases>
 	
 	<mappers>

@@ -9,11 +9,32 @@
 			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
 		</layout>
 	</appender>
+
+	
+	<!-- 박소연 -->
+	<!-- reboard Appender -->
+	<appender name="reboardAppender" class="org.apache.log4j.FileAppender">
+		<param name="File" value="${catalina.base}/src/main/resources/log/reboard.log" />
+		<param name="Append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p - %d{yyyy/MM/dd HH:mm:ss} : %m%n" />
+		</layout>
+	</appender>
+	<!-- 김소연 -->
+	<!-- 최이지 -->
 	
 	<!-- Application Loggers -->
 	<logger name="com.githrd.boa">
 		<level value="info" />
+		<appender-ref ref="file" />
 	</logger>
+	<!-- 박소연 -->
+	<logger name="reboardLog">
+		<level value="info" />
+		<appender-ref ref="reboardAppender" />
+	</logger>
+	<!-- 김소연 -->
+	<!-- 최이지 -->
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
