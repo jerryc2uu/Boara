@@ -1,20 +1,17 @@
 package com.githrd.boa.vo.k;
 
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
 public class MemberVO {
 	private int mno, cnt,
 				bno, pno, gnp, pcode, sumpoint;	 // 포인트 처리
-	private String id, name, pw, mail, tel, sdate;
+	private String id, name, pw, mail, tel, sdate, result;
 	private Date jdate;
-	private Time jtime;
 	ArrayList<FileVO> list;	// 파일 관련 정보 기억
 	private MultipartFile file;	// 업로드된 파일 기억
 	
@@ -98,22 +95,24 @@ public class MemberVO {
 		this.sdate = sdate;
 	}
 	public void setSdate() {
-		SimpleDateFormat form1 = new SimpleDateFormat("yyyy년 MM월 dd일 ");
-		SimpleDateFormat form2 = new SimpleDateFormat("HH:mm:ss");
-		sdate = form1.format(jdate) + form2.format(jtime);
+		SimpleDateFormat form = new SimpleDateFormat("yyyy년 MM월 dd일 HH:mm:ss");
+		sdate = form.format(jdate);
+	}
+	
+	public String getResult() {
+		return result;
+	}
+	public void setResult(String result) {
+		this.result = result;
 	}
 	public Date getJdate() {
 		return jdate;
 	}
 	public void setJdate(Date jdate) {
 		this.jdate = jdate;
+		setSdate();
 	}
-	public Time getJtime() {
-		return jtime;
-	}
-	public void setJtime(Time jtime) {
-		this.jtime = jtime;
-	}
+
 
 	public ArrayList<FileVO> getList() {
 		return list;
@@ -131,9 +130,10 @@ public class MemberVO {
 	public String toString() {
 		return "MemberVO [mno=" + mno + ", cnt=" + cnt + ", bno=" + bno + ", pno=" + pno + ", gnp=" + gnp + ", pcode="
 				+ pcode + ", sumpoint=" + sumpoint + ", id=" + id + ", name=" + name + ", pw=" + pw + ", mail=" + mail
-				+ ", tel=" + tel + ", sdate=" + sdate + ", jdate=" + jdate + ", jtime=" + jtime + ", list=" + list
+				+ ", tel=" + tel + ", sdate=" + sdate + ", result=" + result + ", jdate=" + jdate + ", list=" + list
 				+ ", file=" + file + "]";
 	}
+
 
 		
 	}

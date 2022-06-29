@@ -24,9 +24,17 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
 .fa-anchor,.fa-coffee {font-size:200px}
 img{
-	width: 230px;
-	height: 270px;
+	width: 225px;
+	height: 265px;
+
 }
+ #img_container{
+    display: flex;
+    width: 230px;
+    height: 270px;
+	margin-left: 130px;
+ 
+ }
 </style>
 </head>
 <body>
@@ -96,64 +104,23 @@ img{
       <div class="w3-col w3-display-container" style="margin: 0 auto;">
         	
          <!-- 컬렉션 리스트 보이는 곳 -->
-         <div class="w3-col" style = "margin-left: 200px; margin-bottom: 20px;">
-            <h3 class="w3-padding ft25" style="float: left;"> <a class='w3-text-red'>HOT!</a> 게시글</h3>
+         <div class="w3-col" style = "margin-left: 130px; margin-bottom: 20px;">
+            <h3 class="w3-padding ft22" style="float: left;">Weekly <a class='w3-text-red'>HOT!</a> 게시글</h3>
          </div>
-         <div class=" w3-center w3-col">
+         
+         <div class=" w3-center w3-col" id="img_container">
+ <c:forEach var="data" items="${LIST}" >      
 			<div class="inblock w3-center mgl10" >
-				<div class="pic">
-					<img src="/boa/resources/img/jennie.jpg">
+				<div class="pic" >
+					<img class="hot" id="${data.bno}" src="/boa/resources/upload/${data.savename}">
 				</div>
-				<div class="w3-center w3-xlarge">
-				(1st 게시글제목)
-				</div>
-			</div>
-			<div class="inblock w3-center mgl10 " >
-				<div class="pic">
-					<img  src="/boa/resources/img/noimage.jpg">
-				</div>
-				<div class="w3-center w3-xlarge">
-				(2nd 게시글제목)
+				<div class="w3-center w3-text-grey w3-large">
+				${data.title}
 				</div>
 			</div>
-			<div class="inblock w3-center mgl10" >
-				<div class="pic">
-					<img src="/boa/resources/img/noimage.jpg">
-				</div>
-				<div class="w3-center w3-xlarge">
-				(3rd 게시글제목)
-				</div>
-			</div>
-			<div class="inblock w3-center mgl10" >
-				<div class="pic">
-					<img src="/boa/resources/img/noimage.jpg">
-				</div>
-				<div class="w3-center w3-xlarge">
-				(4th 게시글제목)
-				</div>
-			</div>
-			<div class="inblock w3-center mgl10" >
-				<div class="pic">
-					<img src="/boa/resources/img/noimage.jpg">
-				</div>
-				<div class="w3-center w3-xlarge">
-				(5th 게시글제목)
-				</div>
-			</div>
-<%--
-<c:forEach var="data" items="${LIST}">
-			<div class="inblock w3-center w3-border " id="${data.cno}" style="width: 150px; height: 160px; margin-left: 20px; padding-left: 20px;">
-	         	<div class="picbox">
-	               <img class="pic w3-card-4" src="/boara/resources/img/${data.savename}">
-	         	</div>
-               <div>${data.cname}</div>
-	        </div>
-</c:forEach> 
---%>
-
-
+</c:forEach>
 	  	 </div>
-	  	 <!-- 컬렉션 리스트 보이는 곳 끝남 -->
+	  	 <!-- 컬렉션 리스트 보이는 곳 끝 -->
 			
       </div>
    </div>
@@ -162,6 +129,7 @@ img{
    <!-- 데이터 전송용 form 태그 -->
 	<form method="POST" action="" id="frm" name="frm">
 		<input type="hidden" id="id" name="id" value="${SID}">
+		<input type="hidden" id="bno" name="bno" value="">
 	</form>
    
    

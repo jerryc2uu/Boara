@@ -4,10 +4,11 @@ import java.util.*;
 import java.text.*;
 
 public class FileVO {
-	private int bno, fno, mno, rno, cno, cnt;
+	private int bno, fno, mno, rno, cno, cnt, click;
 	private long len;
-	private String id, oriname, savename, sdate;	// 형식 정해서 문자열로 변환 
+	private String id, oriname, savename, sdate, title;	// 형식 정해서 문자열로 변환 
 	private Date fdate;	// 파일 저장 시간
+	
 	public int getBno() {
 		return bno;
 	}
@@ -51,6 +52,13 @@ public class FileVO {
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
 	}
+	
+	public int getClick() {
+		return click;
+	}
+	public void setClick(int click) {
+		this.click = click;
+	}
 	public long getLen() {
 		return len;
 	}
@@ -79,6 +87,13 @@ public class FileVO {
 	public void setSdate(String sdate) {
 		this.sdate = sdate;
 	}
+	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public Date getFdate() {
 		return fdate;
 	}
@@ -88,8 +103,10 @@ public class FileVO {
 	}
 	@Override
 	public String toString() {
-		return "FileVO [bno=" + bno + ", fno=" + fno + ", mno=" + mno + ", rno=" + rno + ", cnt=" + cnt + ", len=" + len
-				+ ", id=" + id + ", oriname=" + oriname + ", savename=" + savename + ",  sdate=" + sdate
-				+ ", wdate=" + fdate + "]";
+		return "FileVO [bno=" + bno + ", fno=" + fno + ", mno=" + mno + ", rno=" + rno + ", cno=" + cno + ", cnt=" + cnt
+				+ ", click=" + click + ", len=" + len + ", id=" + id + ", oriname=" + oriname + ", savename=" + savename
+				+ ", sdate=" + sdate + ", title=" + title + ", fdate=" + fdate + "]";
 	}
+	
 }
+

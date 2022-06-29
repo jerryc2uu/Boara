@@ -15,6 +15,7 @@
 	<bean id="iDao" class="com.githrd.boa.dao.p.MyInfoDao" />
 	<!-- 김소연 -->
 	<bean class="com.githrd.boa.dao.k.MemberDao" id="mDao"/>
+	<bean class="com.githrd.boa.dao.k.MainBoardDao" id="mbDao"/>
 	<bean class="com.githrd.boa.service.k.MemberService" id="mSrvc" />
 	<!-- 최이지 -->
 	<bean class="com.githrd.boa.dao.c.CollectionDao" id="cDao"/>

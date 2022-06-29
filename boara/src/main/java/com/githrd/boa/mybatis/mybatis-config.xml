@@ -29,6 +29,7 @@
 		<mapper resource="com/githrd/boa/sql/p/MyInfoSQL.xml" />
 		<!-- 김소연 -->
 		<mapper resource="com/githrd/boa/sql/k/MemberSQL.xml"/>
+		<mapper resource="com/githrd/boa/sql/k/MainSQL.xml"/>
 		<!-- 최이지 -->
 		<mapper resource="com/githrd/boa/sql/c/CollectionSQL.xml" />
       	<mapper resource="com/githrd/boa/sql/c/BoardSQL.xml"/>

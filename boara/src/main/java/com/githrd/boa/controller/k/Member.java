@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,13 +38,15 @@ import com.githrd.boa.vo.k.MemberVO;
  * 				2022.06.21 	-		탈퇴처리
  * 				2022.06.23 	-		회원가입
  * 				2022.06.26 	- 		회원정보 수정
- * 				2022.06.28	-		로그인, 조인, 로그아웃 매개변수 추가
+ * 				2022.06.28	-		로그인, 조인, 로그아웃 매개변수 추가(수정중)
  *  *
  */
 
 @Controller
 @RequestMapping("/member")
 public class Member {
+
+	 
 	@Autowired
 	MemberDao mDao;
 	@Autowired
@@ -65,8 +69,10 @@ public class Member {
 	public ModelAndView loginProc(MemberVO mVO, HttpSession session, ModelAndView mv, RedirectView rv) {
 		
 		int cnt = mDao.getLogin(mVO);
+		mVO.setCnt(cnt);
 		if(cnt == 1) {
 			session.setAttribute("SID", mVO.getId());
+			
 			rv.setUrl("/boa/main.boa");
 		} else {
 			rv.setUrl("/boa/member/login.boa");
@@ -81,6 +87,7 @@ public class Member {
 	public ModelAndView loginProc(MemberVO mVO, HttpSession session, ModelAndView mv, RedirectView rv, String vw, String nowPage) {
 		
 		int cnt = mDao.getLogin(mVO);
+		mVO.setCnt(cnt);
 		String view = vw;
 		if(cnt == 1) {
 			session.setAttribute("SID", mVO.getId());
@@ -111,6 +118,7 @@ public class Member {
 			}
 			session.setAttribute("SID", mVO.getId());
 			mDao.addPoint(mVO);
+			mVO.setResult("OK");
 			
 		} catch(Exception e) {
 			view = "/boa/member/join.boa";
@@ -124,6 +132,7 @@ public class Member {
 	@RequestMapping("/logout.boa")
 	public ModelAndView logout(ModelAndView mv, HttpSession session, MemberVO mVO, String vw, String nowPage) {
 		session.removeAttribute("SID");
+		mVO.setResult("OK");
 		String view = "/boa/main.boa";
 		if(vw != null) {
 			view = vw;
@@ -278,7 +287,7 @@ public class Member {
 		String view = "/boa/member/editInfo.boa";
 		try {
 			mSrvc.editMemberData(mVO);
-		
+			mVO.setResult("OK");
 		} catch(Exception e) {
 			
 			e.printStackTrace();
@@ -305,7 +314,7 @@ public class Member {
 		
 	}
 	
-	@RequestMapping(path="/delMemberProc.boa", params= {"pw", "id"})
+	@RequestMapping(path="/delMemberProc.boa")
 	public ModelAndView delProc(ModelAndView mv,  RedirectView rv, HttpSession session, MemberVO mVO) {
 		String sid = (String) session.getAttribute("SID");
 		if(sid == null) {
@@ -315,6 +324,7 @@ public class Member {
 		}
 		
 		int cnt = mDao.getDelMember(mVO);
+		mVO.setCnt(cnt);
 		if(cnt == 1) {
 			// 세션에 기억한 데이터 삭제
 			session.removeAttribute("SID");

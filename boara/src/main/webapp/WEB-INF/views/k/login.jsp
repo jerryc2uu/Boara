@@ -29,6 +29,9 @@
 <c:if test="${not empty param.vw}">
 			<input type="hidden" name="vw" value="${param.vw}">
 			<input type="hidden" name="nowPage" value="${param.nowPage}">
+			<input type="hidden" name="cno" id="cno">
+			<input type="hidden" name="bno" id="bno">
+			<input type="hidden" name="cid" id="cid">
 </c:if>
 			<div class="w3-col  mgt30">
 				<label for="id" class="w3-col s2 w3-right-align w3-text-grey ft22">I D : </label>
