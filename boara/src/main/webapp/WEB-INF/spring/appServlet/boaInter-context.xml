@@ -29,8 +29,15 @@
 			<mapping path = "/member/myjjim.boa" />
 			<mapping path = "/member/myboard.boa" />
 			<mapping path = "/member/myreboard.boa" />
-			<mapping path = "/member/addpoint.boa" />
+			<mapping path = "/member/addPoint.boa" />
+			<mapping path = "/member/addPointProc.boa" />
 			<!-- 김소연 -->
+			<mapping path = "/member/logout.boa" />
+			<mapping path = "/member/editInfo.boa" />
+			<mapping path = "/member/editInfoProc.boa" />
+			<mapping path = "/member/editImgProc.boa" />
+			<mapping path = "/member/delMember.boa" />
+			<mapping path = "/member/delMemberProc.boa" />
 			<!-- 최이지 -->
 			<mapping path="/collection/*.boa" />
 			<mapping path="/board/*.boa" />

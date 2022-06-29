@@ -25,12 +25,17 @@ $(document).ready(function(){
 		var msg = $(this).html();
 		
 		if(msg == '회원정보 수정') {
-			
-			
+		
+			$('#frm').attr('action', '/boa/member/editInfo.boa');
+        	$('#frm').submit();
+		
 		} else if(msg == '회원 탈퇴') {
 		
+		 	$('#frm').attr('action', '/boa/member/delMember.boa');
+         	$('#frm').submit();
 		
 		} else if(msg == '좋아요 목록') {
+		
 			$('#myLike').css('display', 'block');
 		
 		} else if(msg == '찜 목록') {
