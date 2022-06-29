@@ -48,9 +48,9 @@ public class AdultInterceptor implements HandlerInterceptor {
 				if(!bDao.adultCheck(id).contentEquals("Y")) {
 					request.setAttribute("SID", id);
 					request.setAttribute("VIEW", "/boa/member/myinfo.boa");
+					request.setAttribute("MSG", "성인인증이 필요합니다.");
 					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/p/redirect.jsp");
 					rd.forward(request, response);
-					request.setAttribute("MSG", "성인인증이 필요합니다.");
 					return;
 				}
 				
@@ -65,9 +65,9 @@ public class AdultInterceptor implements HandlerInterceptor {
 		if(!bDao.adultCheck(id).contentEquals("Y")) {
 			request.setAttribute("SID", id);
 			request.setAttribute("VIEW", "/boa/member/myinfo.boa");
+			request.setAttribute("MSG", "성인인증이 필요합니다.");
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/p/redirect.jsp");
 			rd.forward(request, response);
-			request.setAttribute("MSG", "성인인증이 필요합니다.");
 			return;
 		}
 	}
