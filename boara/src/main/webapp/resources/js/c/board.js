@@ -201,6 +201,12 @@ $(document).ready(function(){
 		$('#preview').attr('src', path);
 	});
 	
+	// cno 클릭시 비워줌
+	$('#cno').click(function(){
+		$(this).val('');
+		$(this).focus();
+	});
+	
 	// 작성버튼
 	$('#wpbtn').click(function(){
 		// 데이터 따오기
@@ -344,7 +350,8 @@ $(document).ready(function(){
 		if($(el).val()){
 			thumbBool = true;
 		}else if(!$('input:radio[id="sthumb"]:checked').val()){
-			alert('썸네일을 선택해주세요.');
+			alert('썸네일을 추가해주세요.');
+			$('#newthumb').prop('disabled', false);
 			return;
 		}
 		

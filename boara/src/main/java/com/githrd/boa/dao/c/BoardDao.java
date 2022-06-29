@@ -18,7 +18,7 @@ package com.githrd.boa.dao.c;
  * 			2022.06.28	-	함수 추가(upClick)
  * 								담당자 : 최이지
  * 
- * 			2022.06.29	-	함수 추가(cntStat, newLike, reLike, newJjim, reJjim, discard, adultCheck)
+ * 			2022.06.29	-	함수 추가(cntStat, newLike, reLike, newJjim, reJjim, discard, adultCheck, addPoint)
  * 								담당자 : 최이지
  */
 
@@ -76,6 +76,11 @@ public class BoardDao {
 	// 게시글 작성 (파일X)
 	public int addBoard(BoardVO bVO) {
 		return sqlSession.insert("bSQL.addBoard", bVO);
+	}
+	
+	// 게시글 작성시 포인트 적립
+	public int addPoint(String id) {
+		return sqlSession.insert("bSQL.addPoint", id);
 	}
 	
 	// 게시글 수정시 기본 정보 불러오기

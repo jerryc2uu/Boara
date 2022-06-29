@@ -193,6 +193,24 @@
 			fno = #{fno}
 	</update>
 	
+	<!-- 게시글 작성시 포인트 처리 -->
+	<insert id="addPoint" parameterType="string">
+		INSERT INTO
+		    point(pno, mno, gnp, pcode, sumpoint)
+		VALUES(
+		    (SELECT NVL(MAX(pno)+1, 1000000001) FROM point),
+		    (SELECT mno FROM member WHERE id = #{id}),
+		    10, 104, (
+		        SELECT
+		            sumpoint+10
+		        FROM
+		            point
+		        WHERE
+		            pno = (SELECT NVL(MAX(pno), 0) FROM point WHERE mno = (SELECT mno FROM member WHERE id = #{id}))
+		        )
+		)
+	</insert>
+	
 <!-- 게시글 상세 보기 ######################################################################-->
 	
 	<!-- 기본 상세정보 불러오기 -->

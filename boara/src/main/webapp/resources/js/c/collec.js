@@ -219,7 +219,8 @@ $(document).ready(function(){
 		if($(el).val()){
 			thumbChange = true;
 		}else if(!$('input:radio[id="sthumb"]:checked').val()){
-			alert('썸네일을 선택해주세요.');
+			alert('썸네일을 추가해주세요.');
+			$('#newthumb').prop('disabled', false);
 			return;
 		}
 		

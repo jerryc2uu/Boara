@@ -11,8 +11,6 @@ package com.githrd.boa.service.c;
  *
  */
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.*;
@@ -31,6 +29,7 @@ public class EzLogger {
 	// 컬렉션 작성
 	@After("execution(* com.githrd.boa.controller.c.Collection.collecWriteProc(..))")
 	public void collLogWrite(JoinPoint join) {
+System.out.println("Logger 작동");
 		CollecVO cVO = (CollecVO) join.getArgs()[1];
 		if(cVO.getResult().contentEquals("YES")) collecLog.info(cVO.getId() + " 회원 " + cVO.getCno() + "번 컬렉션 작성");
 	}
@@ -38,6 +37,7 @@ public class EzLogger {
 	// 컬렉션 수정
 	@After("execution(* com.githrd.boa.controller.c.Collection.collecEditProc(..))")
 	public void collLogEdit(JoinPoint join) {
+System.out.println("Logger 작동");
 		CollecVO cVO = (CollecVO) join.getArgs()[1];
 		if(cVO.getResult().contentEquals("YES")) collecLog.info(cVO.getId() + " 회원 " + cVO.getCno() + "번 컬렉션 수정");
 	}
@@ -55,7 +55,7 @@ public class EzLogger {
 	@After("execution(* com.githrd.boa.controller.c.Board.boardWriteProc(..))")
 	public void boardLogWrite(JoinPoint join) {
 		BoardVO bVO = (BoardVO) join.getArgs()[1];
-		if(bVO.getResult().contentEquals("YES")) boardLog.info(bVO.getId() + " 회원 " + bVO.getBno() + "번 게시글 작성");
+		if(bVO.getResult().contentEquals("YES")) boardLog.info(bVO.getId() + " 회원 " + bVO.getBno() + "번 게시글 작성, 10P 적립");
 	}
 	
 	// 게시글 수정

@@ -107,7 +107,9 @@ public class BoardService {
 		@Transactional
 		public int addBoard(BoardVO bVO) {
 			// 파일 제외 정보 입력
+			String id = bVO.getId();
 			bDao.addBoard(bVO);
+			bDao.addPoint(id);
 			
 			// 썸네일 존재시 파일 채워주기
 			if(bVO.getThumb() != null) {
