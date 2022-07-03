@@ -168,6 +168,22 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 			<div class="genre w3-round w3-margin-top" id="epbtn">수정</div>
 		</div>
 	</div>
+	
+	<%-- 모달창 --%>
+	<div id="modal" class="w3-center w3-modal" style="display: none;">
+		<div class="w3-modal-content mxw650 w3-animate-top w3-card-4">
+			<header class="boablue w3-container">
+				<span onclick="document.getElementById('modal').style.display='none'"
+					class="w3-button w3-display-topright">&times;</span>
+					<h2>주의</h2>
+			</header>
+			<div class="w3-container w3-center">
+				<h4 id="mdcontext"></h4>
+				<div class="genre w3-round w3-margin-bottom w3-right" id="skipThumb" style="display: none;">썸네일 유지</div>
+				<div class="genre w3-round w3-margin-bottom w3-right" id="continue" style="display: none;">썸네일 선택</div>
+			</div>
+		</div>
+	</div>
  
 </body>
 </html>

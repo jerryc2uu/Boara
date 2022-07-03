@@ -245,32 +245,38 @@ $(document).ready(function(){
 		
 		// 일반 텍스트
 		if(!title){
-			alert('글 제목은 필수입니다.');
+			$('#mdcontext').html('글 제목은 필수입니다.');
+			$('#modal').css('display', 'block');
 			$('#title').focus();
 			return;
 		}else if(title.length > 50){
-			alert('글 제목은 최대 50글자입니다.');
+			$('#mdcontext').html('글 제목은 최대 50글자입니다.');
+			$('#modal').css('display', 'block');
 			$('#title').focus();
 			return;
 		}
 		
 		if(!cno){
-			alert('게시글이 들어갈 컬렉션을 선택하세요.');
+			$('#mdcontext').html('게시글이 들어갈 컬렉션을 선택하세요.');
+			$('#modal').css('display', 'block');
 			return;
 		}
 		
 		if(!body){
-			alert('본문을 입력하세요.');
+			$('#mdcontext').html('본문을 입력하세요.');
+			$('#modal').css('display', 'block');
 			$('#body').focus();
 			return;			
 		}else if(body.length > 2000){
-			alert('본문은 최대 2000자입니다.');
+			$('#mdcontext').html('본문은 최대 2000자입니다.');
+			$('#modal').css('display', 'block');
 			$('#body').focus();
 			return;			
 		}
 		
 		if(price > 50000){
-			alert('가격은 최대 50000P입니다.');
+			$('#mdcontext').html('가격은 최대 50000P입니다.');
+			$('#modal').css('display', 'block');
 			$('#price').focus();
 			return;
 		}else if(!price){// 입력값 없으면 0으로 세팅
@@ -341,22 +347,30 @@ $(document).ready(function(){
 			el.prop('disabled', true);
 		}else{// 파일 업로드, 선택 동시에 함
 			if($('input:radio[id="sthumb"]:checked').val()){
-				alert('새 썸네일 업로드, 히스토리 썸네일 선택 중 하나만 가능합니다.');
+				$('#mdcontext').html('새 썸네일 업로드, 히스토리 썸네일 선택 중 하나만 가능합니다.');
+				$('#modal').css('display', 'block');
 				return;
 			}
 		}
 		
-		// 통과 한 경우 : 새 파일만 있음
+		// 통과한 경우 : 새 썸네일O
 		if($(el).val()){
 			thumbBool = true;
+		// 새 썸네일, 히스토리 체크 모두 안함
 		}else if(!$('input:radio[id="sthumb"]:checked').val()){
-			alert('썸네일을 추가해주세요.');
-			$('#newthumb').prop('disabled', false);
-			return;
-		}
-		
-		// 통과 한 경우 : 선택 파일이 있는 경우
-		if($('input:radio[id="sthumb"]:checked').val() != tfno){
+			// 이미 스킵버튼 눌렀으면 실행 X
+			if($('#skipThumb').css('display') != 'block'){
+					
+				$('#mdcontext').html('선택된 썸네일이 없습니다. 기존 썸네일을 사용하시겠습니까?');
+				$('#skipThumb').css('display', 'block');
+				$('#continue').css('display', 'block');
+				$('#modal').css('display', 'block');
+				
+				return;
+			}
+			
+		// 선택 파일 존재 : 선택 파일 유효성 검사
+		}else if($('input:radio[id="sthumb"]:checked').val() != tfno){
 			thumbBool = true;
 		}else{
 			$('#sthumb').prop('disabled', true);
@@ -367,7 +381,8 @@ $(document).ready(function(){
 			$('#title').prop('disabled', true);
 			titBool = false;
 		}else if(title.length > 50){
-			alert('글 제목은 최대 50글자입니다.');
+			$('#mdcontext').html('글 제목은 최대 50글자입니다.');
+			$('#modal').css('display', 'block');
 			$('#title').focus();
 			return;
 		}
@@ -382,7 +397,8 @@ $(document).ready(function(){
 		if(price == tprice){
 			priceBool = false;
 		}else if(price > 50000){
-			alert('가격은 최대 50000P입니다.');
+			$('#mdcontext').html('가격은 최대 50000P입니다.');
+			$('#modal').css('display', 'block');
 			$('#price').focus();
 			return;
 		}
@@ -393,11 +409,13 @@ $(document).ready(function(){
 			$('#genre').val(genre);
 		}
 		if(!body){
-			alert('본문을 입력하세요.');
+			$('#mdcontext').html('본문을 입력하세요.');
+			$('#modal').css('display', 'block');
 			$('#body').focus();
 			return;
 		}else if(body.length > 2000){
-			alert('본문은 최대 2000자입니다.');
+			$('#mdcontext').html('본문은 최대 2000자입니다.');
+			$('#modal').css('display', 'block');
 			$('#body').focus();
 			return;			
 		}else if(body == tbody){
@@ -407,7 +425,10 @@ $(document).ready(function(){
 		
 		// 아무 변경사항이 없다면
 		if((titBool | showBool | whoBool | priceBool | gnrBool | bodyBool | thumbBool) == false){
-			alert('변경사항이 없습니다.');
+			$('#mdcontext').html('변경사항이 없습니다.');
+			$('#skipThumb').css('display', 'none');
+			$('#continue').css('display', 'none');
+			$('#modal').css('display', 'block');
 			$('#title').prop('disabled', false);
 			$('#price').prop('disabled', false);
 			$('#genr').prop('disabled', false);
@@ -422,4 +443,15 @@ $(document).ready(function(){
 		$('#frm').submit();
 	});
 
+	// 모달 창 버튼 function
+	$('#skipThumb').click(function(){
+		$('#modal').css('display', 'none');
+		$('#sthumb').prop('disabled', true);
+		$('#newThumb').prop('disabled', true);
+		$('#epbtn').trigger('click');
+	});
+	$('#continue').click(function(){
+		$('#modal').css('display', 'none');
+		$('#newthumb').prop('disabled', false);
+	});
 });

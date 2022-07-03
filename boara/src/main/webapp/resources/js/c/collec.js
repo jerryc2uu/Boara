@@ -135,17 +135,20 @@ $(document).ready(function(){
 		
 		// 일반 텍스트
 		if(!cname){
-			alert('컬렉션 이름은 필수입니다.');
+			$('#mdcontext').html('컬렉션 이름은 필수입니다.');
+			$('#modal').css('display', 'block');
 			$('#cname').focus();
 			return;
 		}else if(cname.length > 30){
-			alert('컬렉션 이름은 최대 30글자입니다.');
+			$('#mdcontext').html('컬렉션 이름은 최대 30글자입니다.');
+			$('#modal').css('display', 'block');
 			$('#cname').focus();
 			return;
 		}
 		
 		if(descr.legnth > 30){
-			alert('컬렉션 설명은 최대 30글자입니다.');
+			$('#mdcontext').html('컬렉션 설명은 최대 30글자입니다.');
+			$('#modal').css('display', 'block');
 			$('#descr').focus();
 			return;
 		}else if(descr.length == 0){// 입력값 없으면 name 지워주기
@@ -203,30 +206,38 @@ $(document).ready(function(){
 		var genreChange = true;
 		var thumbChange = false;
 		
-		// 새 파일 유효성 검사
+		// 새 파일 : 유효성 검사
 		var el = $('#newthumb');
 		// 입력된 파일 없으면 name 값 제거
 		if(!$(el).val()){
 			el.prop('disabled', true);
 		}else{// 파일 업로드, 선택 동시에 함
 			if($('input:radio[id="sthumb"]:checked').val()){
-				alert('새 썸네일 업로드, 히스토리 썸네일 선택 중 하나만 가능합니다.');
+				$('#mdcontext').html('새 썸네일 업로드, 히스토리 썸네일 선택 중 하나만 가능합니다.');
+				$('#modal').css('display', 'block');
 				return;
 			}
 		}
 		
-		// 통과 한 경우 : 새 파일만 있음
+		// 통과한 경우 : 새 썸네일O
 		if($(el).val()){
-			thumbChange = true;
+			thumbBool = true;
+		// 새 썸네일, 히스토리 체크 모두 안함
 		}else if(!$('input:radio[id="sthumb"]:checked').val()){
-			alert('썸네일을 추가해주세요.');
-			$('#newthumb').prop('disabled', false);
-			return;
-		}
-		
-		// 통과 한 경우 : 선택 파일이 있는 경우
-		if($('input:radio[id="sthumb"]:checked').val() != tfno){
-			thumbChange = true;
+			// 이미 스킵버튼 눌렀으면 실행 X
+			if($('#skipThumb').css('display') != 'block'){
+					
+				$('#mdcontext').html('선택된 썸네일이 없습니다. 기존 썸네일을 사용하시겠습니까?');
+				$('#skipThumb').css('display', 'block');
+				$('#continue').css('display', 'block');
+				$('#modal').css('display', 'block');
+				
+				return;
+			}
+			
+		// 선택 파일 존재 : 선택 파일 유효성 검사
+		}else if($('input:radio[id="sthumb"]:checked').val() != tfno){
+			thumbBool = true;
 		}else{
 			$('#sthumb').prop('disabled', true);
 		}
@@ -249,7 +260,10 @@ $(document).ready(function(){
 		
 		// 변경 사항이 아예 없을시 alert
 		if((nameChange | descrChange | genreChange | thumbChange) == false){
-			alert('변경 사항이 없습니다.');
+			$('#mdcontext').html('변경사항이 없습니다.');
+			$('#skipThumb').css('display', 'none');
+			$('#continue').css('display', 'none');
+			$('#modal').css('display', 'block');
 			$('#cname').prop('disabled', false);
 			$('#descr').prop('disabled', false);
 			$('#genr').prop('disabled', false);
@@ -261,4 +275,16 @@ $(document).ready(function(){
 		$('#frm').submit();
 	});
 
+	// 모달 창 버튼 function
+	$('#skipThumb').click(function(){
+		$('#modal').css('display', 'none');
+		$('#sthumb').prop('disabled', true);
+		$('#newThumb').prop('disabled', true);
+		$('#epbtn').trigger('click');
+	});
+	$('#continue').click(function(){
+		$('#modal').css('display', 'none');
+		$('#newthumb').prop('disabled', false);
+	});
+	
 });

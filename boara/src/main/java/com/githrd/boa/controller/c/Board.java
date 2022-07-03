@@ -99,9 +99,10 @@ public class Board {
 	
 	// 게시글 상세 보기
 	@RequestMapping("/boardDetail.boa")
-	public ModelAndView boardDetail(ModelAndView mv, BoardVO bVO, HttpServletRequest req) {
+	public ModelAndView boardDetail(ModelAndView mv, BoardVO bVO, HttpServletRequest req, String nowPage) {
 		// 상세 정보 불러오기
 		bVO = bSrvc.setBDetail(bVO);
+		if(nowPage == null) nowPage = "1";
 
 		mv.addObject("POST", bVO);
 		mv.setViewName("c/board/boardDetail");

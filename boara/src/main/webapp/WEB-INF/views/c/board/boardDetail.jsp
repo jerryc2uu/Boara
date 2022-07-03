@@ -97,18 +97,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 			<div class="left mgt10">
 				<div class="inline mgt10">
 			<%-- 좋아요, 찜 기능 구현해야됨!!!! --%>
-<c:if test="${POST.price eq 0}">
-					<img src="/boa/img/c/
-	<c:if test="${POST.nowStat eq 'L'}">
-					liked
-	</c:if>
-	<c:if test="${POST.nowStat ne 'L'}">
-					unlike
-	</c:if>
-					.jpg" class="like" id="<c:if test="${POST.nowStat ne 'L'}">un</c:if>like">
-</c:if>
-<c:if test="${POST.price ne 0}">
-	<c:if test="${POST.bought eq 'YES'}">
+<c:if test="${not empty SID}">
+	<c:if test="${POST.price eq 0}">
 					<img src="/boa/img/c/
 		<c:if test="${POST.nowStat eq 'L'}">
 					liked
@@ -116,14 +106,26 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 		<c:if test="${POST.nowStat ne 'L'}">
 					unlike
 		</c:if>
-		.jpg" class="like" id="<c:if test="${POST.nowStat ne 'L'}">un</c:if>like">
+					.jpg" class="like" id="<c:if test="${POST.nowStat ne 'L'}">un</c:if>like">
 	</c:if>
-	<c:if test="${POST.bought ne 'YES'}">
-					<div class="w3-round-large genre jjim
-		<c:if test="${POST.nowStat eq 'J'}">
-					w3-indigo
+	<c:if test="${POST.price ne 0}">
+		<c:if test="${POST.bought eq 'YES'}">
+					<img src="/boa/img/c/
+			<c:if test="${POST.nowStat eq 'L'}">
+					liked
+			</c:if>
+			<c:if test="${POST.nowStat ne 'L'}">
+					unlike
+			</c:if>
+		.jpg" class="like" id="<c:if test="${POST.nowStat ne 'L'}">un</c:if>like">
 		</c:if>
+		<c:if test="${POST.bought ne 'YES'}">
+					<div class="w3-round-large genre jjim
+			<c:if test="${POST.nowStat eq 'J'}">
+					w3-indigo
+			</c:if>
 					" id="<c:if test="${POST.nowStat eq 'J'}">jjimed</c:if><c:if test="${POST.nowStat ne 'J'}">jjimyet</c:if>">+ 찜</div>
+		</c:if>
 	</c:if>
 </c:if>
 					<div class="genre w3-round" id="reshow">댓글 보기</div>

@@ -215,6 +215,7 @@ public class BoardService {
 		
 		// 좋아요/찜 여부 처리
 		bVO.setId(id);
+		if(id == null) return bVO;
 		String nowStat = bDao.getStat(bVO);
 		if(nowStat != null) bVO.setNowStat(nowStat);
 		bVO.setId(cid);

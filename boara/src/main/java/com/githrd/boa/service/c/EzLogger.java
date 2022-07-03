@@ -29,7 +29,6 @@ public class EzLogger {
 	// 컬렉션 작성
 	@After("execution(* com.githrd.boa.controller.c.Collection.collecWriteProc(..))")
 	public void collLogWrite(JoinPoint join) {
-System.out.println("Logger 작동");
 		CollecVO cVO = (CollecVO) join.getArgs()[1];
 		if(cVO.getResult().contentEquals("YES")) collecLog.info(cVO.getId() + " 회원 " + cVO.getCno() + "번 컬렉션 작성");
 	}
@@ -37,7 +36,6 @@ System.out.println("Logger 작동");
 	// 컬렉션 수정
 	@After("execution(* com.githrd.boa.controller.c.Collection.collecEditProc(..))")
 	public void collLogEdit(JoinPoint join) {
-System.out.println("Logger 작동");
 		CollecVO cVO = (CollecVO) join.getArgs()[1];
 		if(cVO.getResult().contentEquals("YES")) collecLog.info(cVO.getId() + " 회원 " + cVO.getCno() + "번 컬렉션 수정");
 	}
