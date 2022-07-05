@@ -27,6 +27,7 @@
 		<!-- 박소연 -->
 		<mapper resource="com/githrd/boa/sql/p/ReboardSQL.xml" />
 		<mapper resource="com/githrd/boa/sql/p/MyInfoSQL.xml" />
+		<mapper resource="com/githrd/boa/sql/p/BoardpSQL.xml" />
 		<!-- 김소연 -->
 		<mapper resource="com/githrd/boa/sql/k/MemberSQL.xml"/>
 		<mapper resource="com/githrd/boa/sql/k/MainSQL.xml"/>

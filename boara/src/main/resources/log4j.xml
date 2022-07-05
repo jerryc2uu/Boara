@@ -20,15 +20,14 @@
 			<param name="ConversionPattern" value="%-5p - %d{yyyy/MM/dd HH:mm:ss} : %m%n" />
 		</layout>
 	</appender>
-	<!-- 김소연 -->
-	<!-- member Appender -->
-	<appender name="memberAppender" class="org.apache.log4j.FileAppender">
-		<param name="File" value="${catalina.base}/src/main/resources/log/member.log" />
+	<appender name="myInfoAppender" class="org.apache.log4j.FileAppender">
+		<param name="File" value="${catalina.base}/src/main/resources/log/myInfo.log" />
 		<param name="Append" value="true" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%-5p - %d{yyyy/MM/dd HH:mm:ss} : %m%n" />
 		</layout>
 	</appender>
+	<!-- 김소연 -->
 	<!-- 최이지 -->
 	<!-- Collection Appender -->
 	<appender name="collectionAppender" class="org.apache.log4j.FileAppender">
@@ -57,11 +56,11 @@
 		<level value="info" />
 		<appender-ref ref="reboardAppender" />
 	</logger>
-	<!-- 김소연 -->
-	<logger name="memberLog">
+	<logger name="myInfoLog">
 		<level value="info" />
-		<appender-ref ref="memberAppender" /> 
+		<appender-ref ref="myInfoAppender" />
 	</logger>
+	<!-- 김소연 -->
 	<!-- 최이지 -->
 	<logger name="collectionLog">
 		<level value="info" />

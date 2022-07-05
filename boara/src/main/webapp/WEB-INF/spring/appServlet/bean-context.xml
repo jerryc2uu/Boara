@@ -13,6 +13,7 @@
 	<!-- 박소연 -->
 	<bean id="rDao" class="com.githrd.boa.dao.p.ReboardDao" />
 	<bean id="iDao" class="com.githrd.boa.dao.p.MyInfoDao" />
+	<bean id="pDao" class="com.githrd.boa.dao.p.BoardpDao" />
 	<!-- 김소연 -->
 	<bean class="com.githrd.boa.dao.k.MemberDao" id="mDao"/>
 	<bean class="com.githrd.boa.dao.k.MainBoardDao" id="mbDao"/>

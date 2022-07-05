@@ -29,6 +29,11 @@ $(document).ready(function(){
 	$('#goboard').click(function(){
 		$('input').prop('disabled', true);
 		$('#bno').prop('disabled', false);
+		$('#cno').prop('disabled', false);
+		$('#id').prop('disabled', false);
+		$('#bnowPage').prop('disabled', false);
+		$('#bnowPage').attr('name', 'nowPage');
+		
 		$('#frm').attr('action', '/boa/board/boardDetail.boa');
 		$('#frm').submit();
 	});
@@ -38,13 +43,17 @@ $(document).ready(function(){
 		$('#frm').attr('action', '/boa/reboard/reboardWrite.boa');	
 		$('#rno').prop('disabled', true);
 		$('#uprno').prop('disabled', true);
-		$('#sid').prop('disabled', true);
+		$('#cno').prop('disabled', false);
+		$('#bnowPage').prop('disabled', false);
 		$('#frm').submit();
 	});
 	
 	//댓글의 수정/삭제/대댓글 버튼 클릭 이벤트
 	$('.listbutton').click(function(){
-		
+	
+		$('#cno').prop('disabled', false);
+		$('#bnowPage').prop('disabled', false);
+	
 		var btxt = $(this).html();
 		
 		var srno = $(this).parent().attr('id');
@@ -60,6 +69,8 @@ $(document).ready(function(){
 		} else if(btxt == '수정') {
 			//댓글 작성자 아이디
 			$('#id').prop('disabled', true);
+			$('#sid').prop('disabled', false);
+			
 			var sid = $(this).attr('id');
 			$('#sid').val(sid);
 			

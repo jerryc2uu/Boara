@@ -77,6 +77,8 @@ img {
 											id="frm" name="frm" class="w3-col w3-margin-top">
 							<input type="hidden" id="bno" name="bno" value="${param.bno}">
 							<input type="hidden" id="mno" name="mno" value="${DATA.mno}">
+							<input type="hidden" id="cno" name="cno" value="${param.cno}">
+							<input type="hidden" id="bnowPage" name="bnowPage" value="${param.bnowPage}">
 							<textarea class="w3-col w3-padding ft12" id="body" name="body"
 										style="resize: none; height:120px;"></textarea>
 						<div class="w3-col w3-right" id="" style="height: 15px;">

@@ -351,6 +351,29 @@
 		    rowno BETWEEN #{startCont} AND #{endCont}
 	</select>
 	
+	<!-- 포인트 충전 폼보기 -->
+	<select id="addPoint" resultType="iVO" parameterType="iVO">
+		SELECT
+		    sumpoint
+		FROM
+		    point
+		WHERE
+		    (
+		    SELECT
+		        MAX(pno)
+		    FROM
+		        point
+		    WHERE
+		        mno = (
+		            SELECT
+		                mno
+		            FROM
+		                member
+		            WHERE
+		                id = #{id}
+		            )
+		    ) = pno
+	</select>
 	<!-- 포인트 충전 -->
 	<insert id="addPointProc" parameterType="iVO">
 		INSERT INTO

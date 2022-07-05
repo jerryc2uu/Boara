@@ -191,7 +191,9 @@ public class MyInfo {
 	
 	//포인트 충전 폼보기
 	@RequestMapping("/addPoint.boa")
-	public ModelAndView addPoint(ModelAndView mv) {
+	public ModelAndView addPoint(ModelAndView mv, MyInfoVO iVO) {
+		iVO = iDao.addPoint(iVO);
+		mv.addObject("DATA", iVO);
 		mv.setViewName("p/addPoint");
 		return mv;
 	}
@@ -207,6 +209,7 @@ public class MyInfo {
 			view = "/boa/member/addpoint.boa";
 		}
 		
+		iVO.setResult("OK");
 		mv.addObject("VIEW", view);
 		mv.addObject("MSG", gnp + " 포인트 충전에 성공했습니다.");
 		mv.setViewName("p/redirect");

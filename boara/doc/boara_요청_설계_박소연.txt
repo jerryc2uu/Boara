@@ -5,56 +5,56 @@
 ===========================================
 # 댓글 리스트 폼 보기 요청
 요청내용	:	/boa/reboard/reboardList.boa
-파라미터	:	bno, [nowPage]
+파라미터	:	bno, cno, bnowPage, [nowPage]
 컨트롤러	:	com.githrd.boa.controller.Reboard
 처리함수	:	reboardList()
 뷰			:	/WEB-INF/views/p/reboardList.jsp
 --------------------------------------------
 # 새 댓글 작성 폼 보기 요청
 요청내용	:	/boa/reboard/reboardWrite.boa
-파라미터	:	nowPage, id, bno
+파라미터	:	nowPage, id, bno, cno, bnowPage
 컨트롤러	:	com.githrd.boa.controller.Reboard
 처리함수	:	reboardWrite()
 뷰			:	/WEB-INF/views/p/reboardWrite.jsp
 --------------------------------------------
 # 새 댓글 작성 처리 요청
 요청내용	:	/boa/reboard/reboardWriteProc.boa
-파라미터	:	nowPage, body, id, bno
+파라미터	:	nowPage, body, id, bno, cno, bnowPage
 컨트롤러	:	com.githrd.boa.controller.Reboard
 처리함수	:	reboardWrite()
 뷰			:	/WEB-INF/views/p/reboardWrite.jsp
 --------------------------------------------
 # 댓글 수정 폼 보기 요청
 요청내용	:	/boa/reboard/reboardEdit.boa
-파라미터	:	nowPage, id, bno
+파라미터	:	nowPage, id, bno, cno, bnowPage
 컨트롤러	:	com.githrd.boa.controller.Reboard
 처리함수	:	reboardWrite()
 뷰			:	/WEB-INF/views/p/reboardWrite.jsp
 --------------------------------------------
 # 새 댓글 작성 처리 요청
 요청내용	:	/boa/reboard/reboardWriteProc.boa
-파라미터	:	nowPage, body, id, bno
+파라미터	:	nowPage, body, id, bno, cno, bnowPage
 컨트롤러	:	com.githrd.www.controller.Reboard
 처리함수	:	reboardWrite()
 뷰			:	/WEB-INF/views/p/reboardWrite.jsp
 --------------------------------------------
 # 대댓글 작성 폼 보기 요청
 요청내용	:	/boa/reboard/reboardComment.boa
-파라미터	:	nowPage, id, bno, uprno, vw
+파라미터	:	nowPage, id, bno, uprno, vw, cno, bnowPage
 컨트롤러	:	com.githrd.boa.controller.Reboard
 처리함수	:	reboardComment()
 뷰			:	/WEB-INF/views/p/reboardComment.jsp
 --------------------------------------------
 # 대댓글 작성 처리 요청
 요청내용	:	/boa/reboard/reboardCommentProc.boa
-파라미터	:	nowPage, body, id, bno, uprno, vw
+파라미터	:	nowPage, body, id, bno, uprno, vw, cno, bnowPage
 컨트롤러	:	com.githrd.boa.controller.Reboard
 처리함수	:	reboardCommentProc()
 뷰			:	/WEB-INF/views/p/redirect.jsp
 --------------------------------------------
 # 댓글 삭제 처리 요청
 요청내용	:	/boa/reboard/reboardDel.boa
-파라미터	:	nowPage, rno, vw
+파라미터	:	nowPage, rno, vw, cno, bnowPage
 컨트롤러	:	com.githrd.boa.controller.Reboard
 처리함수	:	reboardDel()
 뷰			:	/WEB-INF/views/p/redirect.jsp
@@ -92,7 +92,7 @@
 --------------------------------------------
 # 포인트 충전 폼 보기 요청
 요청내용	:	/boa/member/addPoint.boa
-파라미터	:	없음
+파라미터	:	id, sumpoint
 컨트롤러	:	com.githrd.boa.controller.Member
 처리함수	:	addPoint()
 뷰			:	/WEB-INF/views/p/addPoint.jsp

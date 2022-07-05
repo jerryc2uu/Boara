@@ -153,10 +153,12 @@ img {
 	<form method="POST" action="/boa/reboard/reboardList.boa" id="frm" name="frm">
 		<input type="hidden" id="nowPage" name="nowPage" value="${PAGE.nowPage}">
 		<input type="hidden" id="rno" name="rno">
-		<input type="hidden" id="sid" name="id">
+		<input type="hidden" id="sid" name="id" disabled>
 		<input type="hidden" id="id" name="id" value="${SID}">
 		<input type="hidden" id="uprno" name="uprno">
-		<input type="hidden" id="bno" name="bno" value="${BNO}"><!-- ${BNO}로 수정 -->
+		<input type="hidden" id="bno" name="bno" value="${BNO}">
+		<input type="hidden" id="cno" name="cno" value="${param.cno}">
+		<input type="hidden" id="bnowPage" name="bnowPage" value="${param.bnowPage}">
 		<input type="hidden" id="view" name="vw" value="/boa/reboard/reboardList.boa">
 	</form>
    
