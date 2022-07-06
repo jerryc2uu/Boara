@@ -108,9 +108,11 @@ font-weight: lighter ;
 							 <dd>회원 탈퇴</dd>
 							 <dd>좋아요 목록</dd>
 							 <dd>찜 목록</dd>
-							 <dd>구매글 리스트</dd>
+							 <dd>구매글 목록</dd>
 						<dt>포인트</dt>
 							<dd>포인트 이용 내역</dd>
+						<dt>게시물 관련</dt>
+							<dd>나의 HOT 포스팅</dd>
 					</dl>
 	   			</div>
 	  	 </nav>

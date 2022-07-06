@@ -161,6 +161,7 @@ public class MyInfo {
 		
 		//뷰
 		mv.setViewName("p/myboard");
+		System.out.println(list);
 		return mv;
 	}
 

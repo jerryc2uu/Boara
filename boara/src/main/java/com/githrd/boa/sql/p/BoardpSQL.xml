@@ -41,4 +41,53 @@
 		            ) = pno) - #{gnp}, #{bno}
 		)
 	</insert>
+	
+	<!-- 핫 포스팅 등록 -->
+	<insert id="hotBoardProc" parameterType="iVO">
+		INSERT INTO
+		    hot(hno, bno)
+		VALUES(
+		    (SELECT NVL(MAX(hno) + 1, 100001) FROM hot),
+		    #{bno}
+		)
+	</insert>
+	
+	<insert id="hotBoardPoint" parameterType="iVO">
+		INSERT INTO
+		        point(pno, mno, gnp, pcode, sumpoint)
+		VALUES(
+		    (SELECT
+		        NVL(MAX(pno) + 1, 1000000001) 
+		     FROM
+		        point),
+		    (
+		    SELECT
+		        mno
+		    FROM
+		        member
+		    WHERE
+		        id = 'psoy'
+		    ), -5000, 204, 
+		        (SELECT
+		            sumpoint
+		        FROM
+		            point
+		        WHERE
+		            (
+		            SELECT
+		                MAX(pno)
+		            FROM
+		                point
+		            WHERE
+		                mno = (
+		                    SELECT
+		                        mno
+		                    FROM
+		                        member
+		                    WHERE
+		                        id = 'psoy'
+		                    )
+		            ) = pno) - 5000
+		)
+	</insert>
 </mapper>

@@ -21,6 +21,33 @@
 			var sbno = $(this).parent().attr('id');
 			window.top.location.href = '/boa/board/boardDetail.boa?bno=' + sbno;
 		});
+		
+		$('.hotBoard').click(function(){
+			var sbno = $(this).parent().attr('id');
+	        var sid = $('#id').val();
+	        
+			if(confirm("HOT 게시글로 등록하시겠습니까? 5000 포인트가 차감됩니다.")){
+				
+	         $.ajax({
+	            url: '/boa/board/hotBoardProc.boa',
+	            type: 'post',
+	            dataType: 'json',
+	            data: {
+	               bno: sbno,
+	               id: sid
+	            },
+	            success: function(data) {
+	               if(data.result == 'OK') {
+	                  $('#frm').submit();
+	               }   
+	            },
+	            error: function(){
+	               alert('### 통신오류 ###');
+	            }
+	         });
+
+			}
+		});
 	});
 </script>
 <body class="w3-ligth-grey">
@@ -38,19 +65,26 @@
 		
 		<div class="w3-col w3-white w3-card-4 w3-round-large pd15" style="width: 900px;">
 			<div class="w3-col w3-light-grey w3-center w3-border">
-				<div class="w3-col m2 w3-border-right">글번호</div>
+				<div class="w3-col m1 w3-border-right">글번호</div>
 				<div class="w3-col m3 w3-border-right">컬렉션</div>				
 				<div class="w3-col m4 w3-border-right">글제목</div>
 				<div class="w3-col m2 w3-border-right">작성일</div>
 				<div class="w3-col m1 w3-border-right">조회수</div>
+				<div class="w3-col m1">HOT</div>
 			</div>
 <c:forEach var="data" items="${LIST}">
 			<div class="w3-col w3-white w3-center w3-border" id="${data.bno}">
-				<div class="w3-col m2 w3-border-right brdList">${data.bno}</div>
+				<div class="w3-col m1 w3-border-right brdList">${data.bno}</div>
 				<div class="w3-col m3 w3-border-right brdList">${data.cname}</div>				
 				<div class="w3-col m4 w3-border-right brdList">${data.title}</div>
 				<div class="w3-col m2 w3-border-right brdList">${data.sdate}</div>
 				<div class="w3-col m1 w3-border-right brdList">${data.click}</div>
+	<c:if test="${data.hno ne 0}">
+				<div class="w3-col m1 brdList"></div>
+	</c:if>
+	<c:if test="${data.hno eq 0}">
+				<div class="w3-col w3-button m1 w3-indigo w3-hover-orange hotBoard" style="padding: 0px;">등록</div>
+	</c:if>
 			</div>
 </c:forEach>
 

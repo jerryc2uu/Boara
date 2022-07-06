@@ -24,4 +24,14 @@ public class BoardpDao {
 	public int buyBoard(MyInfoVO iVO) {
 		return sqlSession.insert("pSQL.buyBoard", iVO);
 	}
+	
+	//핫 포스팅 등록 처리 함수
+	public int hotBoardProc(MyInfoVO iVO) {
+		return sqlSession.insert("pSQL.hotBoardProc", iVO);
+	}
+	
+	//핫 포스팅 등록 시 포인트 차감 함수
+	public int hotBoardPoint(MyInfoVO iVO) {
+		return sqlSession.insert("pSQL.hotBoardPoint", iVO);
+	}
 }

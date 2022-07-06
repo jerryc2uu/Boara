@@ -20,7 +20,6 @@ public class Boardp {
 	BoardpDao pDao;
 	
 	@RequestMapping("/buyBoard.boa")
-	@ResponseBody
 	public ModelAndView buyBoard(ModelAndView mv, MyInfoVO iVO, String nowPage) {
 		
 		int cnt = pDao.buyBoard(iVO);
@@ -36,4 +35,23 @@ public class Boardp {
 		mv.setViewName("p/redirect");
 		return mv;
 	}
+	
+	//핫 게시글 등록 처리
+	@RequestMapping("/hotBoardProc.boa")
+	@ResponseBody
+	public Map hotBoardProc(MyInfoVO iVO) {
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		String result = "NO";
+		int cnt = pDao.hotBoardProc(iVO);
+		int cnt2 = pDao.hotBoardPoint(iVO);
+		
+		if(cnt == 1 && cnt2 == 1) {
+			result = "OK";
+		}
+		
+		map.put("result", result);
+		return map;
+	}
+	
 }

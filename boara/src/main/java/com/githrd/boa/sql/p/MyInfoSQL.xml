@@ -275,19 +275,21 @@
 	<!-- 내가 작성한 게시글 목록 -->
 	<select id="myBoard" resultType="iVO" parameterType="iVO">
 		SELECT
-		    bno, cname, title, sdate, click           
+		    bno, cname, title, sdate, click, hno           
 		FROM
 		    (
 		    SELECT
-		        ROWNUM rno, bno, cname, title, sdate, click
+		        ROWNUM rno, bno, cname, title, sdate, click, hno
 		    FROM
 		        (
 		        SELECT
-		            bno, cname, b.title title, TO_CHAR(wdate, 'yyyy/MM/dd') sdate, click   
+		            b.bno, cname, b.title title, TO_CHAR(wdate, 'yyyy/MM/dd') sdate, click, h.hno hno   
 		        FROM
-		            board b, collection c
+		            board b, collection c, hot h
 		        WHERE
 		            b.cno = c.cno
+		            AND h.bno(+) = b.bno
+		            AND h.hend(+) > sysdate
 		            AND b.mno = (
 		                    SELECT
 		                        mno

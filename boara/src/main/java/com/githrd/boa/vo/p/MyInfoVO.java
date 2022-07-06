@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 public class MyInfoVO {
 	
 	private int mno, cno, bno, rno, rcnt, bcnt, sumpoint, click, 
-				startCont, endCont, nowPage, pno, gnp, pcode, price, rowno;
+				startCont, endCont, nowPage, pno, gnp, pcode, price, rowno, hno;
 	private String id, name, body, pw, mail, tel, sdate, savename, title, cname, detail, result;
 	private Date jdate, wdate;
 	
@@ -195,15 +195,22 @@ public class MyInfoVO {
 	public void setResult(String result) {
 		this.result = result;
 	}
+	public int getHno() {
+		return hno;
+	}
+	public void setHno(int hno) {
+		this.hno = hno;
+	}
 	@Override
 	public String toString() {
 		return "MyInfoVO [mno=" + mno + ", cno=" + cno + ", bno=" + bno + ", rno=" + rno + ", rcnt=" + rcnt + ", bcnt="
 				+ bcnt + ", sumpoint=" + sumpoint + ", click=" + click + ", startCont=" + startCont + ", endCont="
 				+ endCont + ", nowPage=" + nowPage + ", pno=" + pno + ", gnp=" + gnp + ", pcode=" + pcode + ", price="
-				+ price + ", rowno=" + rowno + ", id=" + id + ", name=" + name + ", body=" + body + ", pw=" + pw
-				+ ", mail=" + mail + ", tel=" + tel + ", sdate=" + sdate + ", savename=" + savename + ", title=" + title
-				+ ", cname=" + cname + ", detail=" + detail + ", result=" + result + ", jdate=" + jdate + ", wdate="
-				+ wdate + "]";
+				+ price + ", rowno=" + rowno + ", hno=" + hno + ", id=" + id + ", name=" + name + ", body=" + body
+				+ ", pw=" + pw + ", mail=" + mail + ", tel=" + tel + ", sdate=" + sdate + ", savename=" + savename
+				+ ", title=" + title + ", cname=" + cname + ", detail=" + detail + ", result=" + result + ", jdate="
+				+ jdate + ", wdate=" + wdate + "]";
 	}
+	
 	
 }
