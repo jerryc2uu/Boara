@@ -16,7 +16,7 @@
 	display: none;
 	}
 </style>
-</head>
+</head> 
 <body>
 	<div class="w3-content w3-center main">
 		<h1 class="w3-text-indigo w3-padding w3-border-bottom "><b>${SID} 회원탈퇴</b></h1>
@@ -52,5 +52,16 @@
 		</div>
 		
 	</div>
+	<div id="id01" class="w3-modal">
+	    <div class="w3-modal-content">
+	      <header class="w3-container w3-red"> 
+	        <span class="w3-button w3-display-topright" >&times;</span>
+	        <h4 class="w3-center">탈퇴 처리 되었습니다.</h4>
+	      </header>
+	      <div class="w3-container w3-center">
+	       	<p id="exit" class="w3-center w3-button w3-red w3-large">확  인</p>
+	      </div>
+	    </div>
+	  </div>
 </body>
 </html>

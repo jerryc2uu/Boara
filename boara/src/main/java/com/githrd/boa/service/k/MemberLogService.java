@@ -1,6 +1,6 @@
 package com.githrd.boa.service.k;
 
-import javax.servlet.http.HttpSession;
+
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.githrd.boa.vo.k.*;
 
 /**
- * 	이 클래스는 member 관련 로그 처리를 관리할 클래스
+ *  member 관련 로그 처리를 관리할 클래스
  * 	@author 김소연
  * 	@since 2022.06.29
  * 	@version v.1.0
@@ -32,6 +32,7 @@ import com.githrd.boa.vo.k.*;
   @After("execution(* com.githrd.boa.controller.k.Member.loginProc(..))")
   public void login(JoinPoint join) { 
 	  MemberVO mVO = (MemberVO) join.getArgs()[0];
+	 
 	  if(mVO.getCnt() == 1) { 
 		  memberLog.info(mVO.getId() + " 님이 로그인 했습니다."); 
 		  } 
@@ -68,14 +69,15 @@ import com.githrd.boa.vo.k.*;
 		  } 
 	  }
   
-  // 탈퇴
-//
-//  @After("execution(* com.githrd.boa.controller.k.Member.delMemberProc(..))")
-//  public void del(JoinPoint join) { 
-//	  MemberVO mVO = (MemberVO)join.getArgs()[3]; 
-//	  if(mVO.getCnt() == 1) {  
-//		  memberLog.info(mVO.getId() +" 님이 회원탈퇴 했습니다."); 
-//	  	} 
-//	  }
+   //탈퇴
+
+  @After("execution(* com.githrd.boa.controller.k.Member.delProc(..))")
+  public void del(JoinPoint join) { 
+	  MemberVO mVO = (MemberVO)join.getArgs()[3]; 
+	  if(mVO.getCnt() == 1) {  
+		  memberLog.info(mVO.getId() +" 님이 회원탈퇴 했습니다."); 
+
+	  } 
   }
+}
  

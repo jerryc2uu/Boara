@@ -22,18 +22,21 @@ $(document).ready(function(){
 	});
 
 
-	// 탈퇴처리
+	// 탈퇴 모달창
 	$('#dbtn').click(function(){
 		var spw = $('#pw').val();	
 		if(!spw){
 			$('#pw').focus();
 			return;
 		}
+		$('#id01').css('display', 'block');
 	
-		alert('탈퇴 처리 되었습니다.')
-		$('#frm').attr('action', '/boa/member/delMemberProc.boa');
-		$('#frm').submit();
-	
+		// 탈퇴 처리 
+		$('#exit').click(function(){
+		
+			$('#frm').attr('action', '/boa/member/delMemberProc.boa');
+			$('#frm').submit();
+		});
 	});
 	
 		

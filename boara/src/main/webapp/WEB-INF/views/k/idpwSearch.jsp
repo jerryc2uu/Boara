@@ -112,7 +112,7 @@ $(document).ready(function(){
 				</div>
 			</div>
 		</div>
-
+ 
 	<!-- 비밀번호 찾았을때 보이는 모달창 -->
 	<div class="w3-modal" id="srchPwResult">
 		<div class="w3-modal-content w3-animate-top w3-card-4">

@@ -21,7 +21,7 @@
  				2022.06.23 	-	회원가입
  				2022.06.23	-	회원정보수정(+프로필 이미지 변경)
   									
- 
+  
   -->
 <mapper namespace="mSQL">
 
@@ -66,9 +66,9 @@
 		</selectKey>
 		
 		INSERT INTO
-			member(mno ,id, pw, name, mail, tel)
+			member(mno ,id, pw, name, mail, tel, isshow)
 		VALUES(
-			#{mno}, #{id}, #{pw}, #{name}, #{mail}, #{tel}
+			#{mno}, #{id}, #{pw}, #{name}, #{mail}, #{tel}, 'Y'
 		)
 		
 	</insert>
@@ -132,6 +132,9 @@
 	</select>
 	
 
+
+ 
+ 
  	<!-- 회원정보 수정시 불러올 데이터 -->
  	
  	<select id="getIdInfo" resultType="mVO" parameterType="String">

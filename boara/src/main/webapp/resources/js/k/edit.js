@@ -36,7 +36,7 @@ $(document).ready(function(){
 						}
 					},
 					error: function(){
-						alert('### 통신 에러 ###');
+						$('#id01').css('display', 'block');
 					}
 			});
 		}

@@ -1,7 +1,15 @@
 package com.githrd.boa.service.k;
-
+/**
+ *  member 관련 부가기능 관리할 클래스
+ * 	@author 김소연
+ * 	@since 2022.06.23
+ * 	@version v.1.0
+ * 		작업 이력
+ * 			2022.06.23	-	클래스 제작
+ * 								담당자 : 김소연
+ *
+ */
 import java.io.File;
-import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;

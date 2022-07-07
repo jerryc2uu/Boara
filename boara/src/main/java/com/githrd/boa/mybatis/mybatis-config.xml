@@ -14,8 +14,9 @@
 		<typeAlias alias="rVO" type="com.githrd.boa.vo.p.ReboardVO" />
 		<typeAlias alias="iVO" type="com.githrd.boa.vo.p.MyInfoVO" />
 		<!-- 김소연 -->
-		<typeAlias type="com.githrd.boa.vo.k.MemberVO" alias="mVO"/>
-		<typeAlias type="com.githrd.boa.vo.k.FileVO" alias="fVO"/>
+		<typeAlias alias="mVO" type="com.githrd.boa.vo.k.MemberVO" />
+		<typeAlias alias="fVO" type="com.githrd.boa.vo.k.FileVO" />
+		<typeAlias alias="sVO" type="com.githrd.boa.vo.k.SearchVO" />
 		<!-- 최이지 -->
 		<typeAlias alias="cVO" type="com.githrd.boa.vo.c.CollecVO" />
 		<typeAlias alias="gVO" type="com.githrd.boa.vo.c.GenreVO" />

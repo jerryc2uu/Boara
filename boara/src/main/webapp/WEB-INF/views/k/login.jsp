@@ -29,10 +29,11 @@
 <c:if test="${not empty param.vw}">
 			<input type="hidden" name="vw" value="${param.vw}">
 			<input type="hidden" name="nowPage" value="${param.nowPage}">
+</c:if>
 			<input type="hidden" name="cno" id="cno">
 			<input type="hidden" name="bno" id="bno">
 			<input type="hidden" name="cid" id="cid">
-</c:if>
+
 			<div class="w3-col  mgt30">
 				<label for="id" class="w3-col s2 w3-right-align w3-text-grey ft22">I D : </label>
 				<div class="w3-col m9 ">
@@ -58,5 +59,19 @@
 		</div>
 		<div class="w3-col w3-padding w3-card-4 w3-hide"><span id="msg">${SID} 님은 이미 로그인했습니다.</span></div>
 	</div>
+	
+	<div id="id01" class="w3-modal">
+	    <div class="w3-modal-content">
+	      <header class="w3-container w3-red"> 
+	        <span onclick="document.getElementById('id01').style.display='none'" 
+	        class="w3-button w3-display-topright">&times;</span>
+	        <h4 class="w3-center">통신오류</h4>
+	      </header>
+	      <div class="w3-container">
+	        <h4> </h4>
+	      </div>
+	    </div>
+	  </div>
+
 </body>
 </html>

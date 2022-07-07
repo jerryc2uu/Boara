@@ -19,6 +19,7 @@
 <script src="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js"></script>
 <script type="text/javascript" src="/boa/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/boa/js/k/main.js"></script>
+<script type="text/javascript" src="/boa/js/k/search.js"></script>
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
@@ -67,52 +68,62 @@ img{
 	<!-- Swiper -->
 	    <div class="swiper mySwiper mt80">
 	      <div class="swiper-wrapper">
-	        <div class="swiper-slide">
+	<c:forEach var="list" items="${HLIST}" >
+	        <div class="swiper-slide" id="${list.bno}">
 	        	<div class="swiperbox">
-		        	<img src="/boa/resources/img/jennie.jpg">
+	      <c:if test="${list.savename == 'no'}">
+		        	<img class="hot" src="/boa/resources/img/noimage.jpg" id="${list.bno}">
+		  </c:if>
+		 <c:if test="${list.savename != 'no'}">
+		  			<img class="hot" src="/boa/resources/upload/${list.savename}" id="${list.bno}">
+		  </c:if>
+		    		<div class="w3-center w3-text-grey w3-xlarge mgt20">
+						${list.title}
+					</div>
 				</div>
 	       	</div>
-	        <div class="swiper-slide">
-	        	<div class="swiperbox">
-		        	<img src="/boa/resources/img/noimage.jpg">
-				</div>
-	       	</div>
-	       <div class="swiper-slide">
-	        	<div class="swiperbox">
-		        	<img src="/boa/resources/img/noimage.jpg">
-				</div>
-	       	</div>
-	        <div class="swiper-slide">
-	        	<div class="swiperbox">
-		        	<img src="/boa/resources/img/noimage.jpg">
-				</div>
-	       	</div>
-	        <div class="swiper-slide">
-	        	<div class="swiperbox">
-		        	<img src="/boa/resources/img/noimage.jpg">
-				</div>
-	       	</div>
+	 </c:forEach>
 	      </div>
 	      <div class="swiper-button-next"></div>
 	      <div class="swiper-button-prev"></div>
-	      <div class="swiper-pagination" style="position: relative!important; font-size: 15pt;"></div>
+	      <div class="swiper-pagination w3-padding" style="position: relative!important; "></div>
 	    </div>
-
-
+   
+	<!-- search bar -->
+   	<form method="POST" action="" id="frm" name="frm">
+		<input type="hidden" id="id" name="id" value="${SID}">	
+		<input type="hidden" id="bno" name="bno" >
+		<input type="hidden" id="cno" name="cno" >
+		
+		<div class="w3-auto w3-center pdt40"  ">
+			<select id="sel" name="sel" class="w3-col w3-quarter w3-select w3-center">
+				<option disabled selected>*** 제목 검색 ***</option>
+				<option value="col">컬렉션</option>
+				<option value="bo">게시글</option>
+				
+			</select>
+			<div class="w3-col w3-threequarter ">
+				<input type="text" id="search" name="search" class="w3-input w3-col" style="width: 93%">
+				<img id="sertitle" class="w3-rest w3-col" style="width: 40px; height: 40px; "src="/boa/resources/img/k/search.png">
+			</div>
+		</div>
+	</form>
+	
+	
    <!-- Bottom  -->
    <div class="w3-row-padding w3-padding-64 w3-container" style="margin: 50px auto;">		
       <div class="w3-col w3-display-container" style="margin: 0 auto;">
         	
          <!-- 컬렉션 리스트 보이는 곳 -->
          <div class="w3-col" style = "margin-left: 130px; margin-bottom: 20px;">
-            <h3 class="w3-padding ft22" style="float: left;">Weekly <a class='w3-text-red'>HOT!</a> 게시글</h3>
+            <h3 class="w3-padding ft22" style="float: left;">Weekly <a class='w3-text-red'>TOP!</a> 게시글</h3>
          </div>
          
          <div class=" w3-center w3-col" id="img_container">
  <c:forEach var="data" items="${LIST}" >      
 			<div class="inblock w3-center mgl10" >
 				<div class="pic" >
-					<img class="hot" id="${data.bno}" src="/boa/resources/upload/${data.savename}">
+					<img class="top" id="${data.bno}" src="/boa/resources/upload/${data.savename}">
 				</div>
 				<div class="w3-center w3-text-grey w3-large">
 				${data.title}
@@ -125,14 +136,7 @@ img{
       </div>
    </div>
    
-   
-   <!-- 데이터 전송용 form 태그 -->
-	<form method="POST" action="" id="frm" name="frm">
-		<input type="hidden" id="id" name="id" value="${SID}">
-		<input type="hidden" id="bno" name="bno" value="">
-	</form>
-   
-   
+	
    <!-- Footer -->
    <footer class="w3-container w3-padding-64 w3-center w3-opacity">
    		<p class="w3-large">(주)보아라</p>

@@ -3,8 +3,7 @@ package com.githrd.boa.util.k;
 import java.io.File;
 
 /**
- * 이 클래스는 파일업로드에 필요한 기능을 처리하기 위해서
- * 만든 유틸리티적인 클래스
+ * 파일업로드에 필요한 기능을 처리하기 위해서 만든 유틸리티적인 클래스
  * @author	김소연
  * @since	2022/06/24
  * @version	v.1.0

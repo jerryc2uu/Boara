@@ -11,7 +11,9 @@ $(document).ready(function(){
 			$('#pw').focus();
 			return;
 		}
-		
+		if(!$('#bno').val()){
+         $('#bno').prop('disabled', true);
+      }
 		$('#frm').attr('action', '/boa/member/loginProc.boa');
 		$('#frm').submit();
 	});
@@ -70,7 +72,7 @@ $(document).ready(function(){
 				}
 			},
 			error: function(){
-				alert('##### 통신 에러 #####');
+				$('#id01').css('display', 'block');
 			}
 		});
 	});
@@ -105,7 +107,7 @@ $(document).ready(function(){
 				}
 			},
 			error: function(){
-				alert('##### 통신 에러 #####');
+				$('#id01').css('display', 'block');
 			}
 		});
 	});

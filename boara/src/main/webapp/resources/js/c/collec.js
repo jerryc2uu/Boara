@@ -7,7 +7,7 @@ $(document).ready(function(){
 		// 파라미터 세팅
 		$('#vw').val('/boa/collection/collecList.boa');
 		$('#cno').prop('disabled', true);
-		
+	
 		$('#frm').attr('action', '/boa/member/login.boa');
 		$('#frm').submit();
 	});

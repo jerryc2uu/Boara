@@ -7,7 +7,7 @@ $(document).ready(function(){
 			alert("아이디를 입력하세요!")
 			return;
 		}
-		
+		 
 		$.ajax({
 			url: '/boa/member/idCheck.boa',
 			type: 'post',
@@ -31,7 +31,7 @@ $(document).ready(function(){
 					$('#idmsg').css('display', 'block');
 				},
 			error: function(){
-				alert('### 통신 에러 ###');
+				$('#id01').css('display', 'block');
 			}
 		});
 			
@@ -66,7 +66,7 @@ $(document).ready(function(){
 						$('#mailmsg').css('display', 'block');
 					},
 					error: function(){
-						alert('### 통신 에러 ###');
+						$('#id01').css('display', 'block');
 					}
 				});
 				
@@ -102,7 +102,7 @@ $(document).ready(function(){
 						$('#telmsg').css('display', 'block');
 					},
 					error: function(){
-						alert('### 통신 에러 ###');
+						$('#id01').css('display', 'block');
 					}
 				});
 				
@@ -185,6 +185,27 @@ $(document).ready(function(){
 		var path = URL.createObjectURL(e.target.files[0]);
 		$('#img1').attr('src', path);	
 		
+	});
+	
+	// 본인인증
+	$('#certi').click(function(){
+		IMP.init('imp95234810');
+		IMP.certification({
+ 
+	}, 
+	function(rsp) {
+	    if ( rsp.success ) {
+	
+			alert("인증성공");        
+	   
+	    } else {
+	    	 // 인증취소 또는 인증실패
+	        var msg = '인증에 실패하였습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	
+	        alert(msg);
+	    }
+		});
 	});
 });
 	

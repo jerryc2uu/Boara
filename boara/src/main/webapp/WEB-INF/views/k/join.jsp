@@ -10,14 +10,18 @@
 <link rel="stylesheet" type="text/css" href="/boa/css/k/soyeon.css">
 <script type="text/javascript" src="/boa/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/boa/js/k/join.js"></script>
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+ <!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.4.js"></script>
 <style type="text/css">
 	.main {
 	max-width :900px;
 	}
 	#idmsg, #telmsg, #repwmsg, #mailmsg {
 	display: none;
-	}
-	
+	}  
+	 
 	.picbox {
 	width: 300px;
 	height: 300px;
@@ -42,9 +46,13 @@
 </c:if>
 			<div class="mgt20  w3-content">
 				<label for="name" class="w3-col s3 w3-right-align ft20">회원이름 : </label>
-				<input type="text" name="name" id="name" class="ft18 w3-margin-bottom w3-margin-left m8 w3-col w3-input w3-border w3-round-medium"
+				<div class="w3-col m8">
+					<input type="text" name="name" id="name"class="ft18 w3-margin-bottom w3-margin-left w3-col m9 w3-input w3-border w3-round-medium" 
 								placeholder="이름을 입력하세요">
+					<div class=" w3-col m2 w3-right w3-button  w3-indigo w3-text-white w3-round-medium ft18" id="certi">회원인증</div>
+				</div>				
 			</div>
+			
 			<div class="mgt20 w3-content">
 				<label for="id" class="w3-col s3 w3-right-align ft20">아 이 디 : </label>
 				<div class="w3-col m8">
@@ -107,5 +115,18 @@
 			<div class="w3-third w3-text-white w3-indigo w3-padding w3-xlarge w3-hover-grey" id="jbtn">Join</div> 
 		</div>
 	</div>
+	
+	<div id="id01" class="w3-modal">
+	    <div class="w3-modal-content">
+	      <header class="w3-container w3-red"> 
+	        <span onclick="document.getElementById('id01').style.display='none'" 
+	        class="w3-button w3-display-topright">&times;</span>
+	        <h4 class="w3-center">통신오류</h4>
+	      </header>
+	      <div class="w3-container">
+	        <h4> </h4>
+	      </div>
+	    </div>
+	  </div>
 </body>
 </html>

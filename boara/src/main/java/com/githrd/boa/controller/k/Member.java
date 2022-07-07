@@ -6,8 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,12 +17,10 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.githrd.boa.dao.k.MemberDao;
 import com.githrd.boa.service.k.MemberService;
-import com.githrd.boa.vo.c.BoardVO;
-import com.githrd.boa.vo.c.CollecVO;
 import com.githrd.boa.vo.k.FileVO;
 import com.githrd.boa.vo.k.MemberVO;
 /**
- * 이 클래스는 member 관련 요청을 처리할 클래스
+ *  member 관련 요청을 처리할 controller 클래스
  * @author	김소연
  * @since	2022.06.13
  * @version	v.1.0
@@ -140,6 +137,7 @@ public class Member {
 		if(nowPage != null) {
 			mv.addObject("NOWPAGE", nowPage);
 		}
+		
 		mv.addObject("VIEW", view);
 		mv.setViewName("k/redirect");
 		return mv;
@@ -322,7 +320,7 @@ public class Member {
 			mv.setView(rv);
 			return mv;
 		}
-		
+		 
 		int cnt = mDao.getDelMember(mVO);
 		mVO.setCnt(cnt);
 		if(cnt == 1) {

@@ -1,32 +1,34 @@
 package com.githrd.boa.vo.k;
-
+/**
+ * 	파일 관련 데이터를 담을 VO클래스
+ * 
+ * 	@author 김소연
+ * 	@since 2022.06.26
+ * 	@version v.1.0
+ * 		작업 이력
+ * 			2022.06.26	-	담당자 : 김소연
+ * 								클래스 제작
+ *
+ */
 import java.util.*;
-import java.text.*;
 
 public class FileVO {
-	private int bno, fno, mno, rno, cno, cnt, click;
+	private int bno, fno, mno, rno, cno, cnt, click, pcode;
 	private long len;
-	private String id, oriname, savename, sdate, title;	// 형식 정해서 문자열로 변환 
-	private Date fdate;	// 파일 저장 시간
-	
+	private String id, oriname, savename, title;
+	private Date sysdate, hend, hstart, fdate, wdate;	// 파일 저장 시간
 	public int getBno() {
 		return bno;
 	}
 	public void setBno(int bno) {
 		this.bno = bno;
 	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
 	public int getFno() {
 		return fno;
 	}
 	public void setFno(int fno) {
 		this.fno = fno;
-	}
+	} 
 	public int getMno() {
 		return mno;
 	}
@@ -39,7 +41,6 @@ public class FileVO {
 	public void setRno(int rno) {
 		this.rno = rno;
 	}
-	
 	public int getCno() {
 		return cno;
 	}
@@ -52,18 +53,29 @@ public class FileVO {
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
 	}
-	
 	public int getClick() {
 		return click;
 	}
 	public void setClick(int click) {
 		this.click = click;
 	}
+	public int getPcode() {
+		return pcode;
+	}
+	public void setPcode(int pcode) {
+		this.pcode = pcode;
+	}
 	public long getLen() {
 		return len;
 	}
 	public void setLen(long len) {
 		this.len = len;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getOriname() {
 		return oriname;
@@ -77,36 +89,51 @@ public class FileVO {
 	public void setSavename(String savename) {
 		this.savename = savename;
 	}
-	public String getSdate() {
-		return sdate;
-	}
-	public void setSdate() {
-		SimpleDateFormat form = new SimpleDateFormat("yyyy년 MM월 dd일");
-		sdate = form.format(fdate);
-	}
-	public void setSdate(String sdate) {
-		this.sdate = sdate;
-	}
-	
 	public String getTitle() {
 		return title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	public Date getSysdate() {
+		return sysdate;
+	}
+	public void setSysdate(Date sysdate) {
+		this.sysdate = sysdate;
+	}
+	public Date getHend() {
+		return hend;
+	}
+	public void setHend(Date hend) {
+		this.hend = hend;
+	}
+	public Date getHstart() {
+		return hstart;
+	}
+	public void setHstart(Date hstart) {
+		this.hstart = hstart;
+	}
 	public Date getFdate() {
 		return fdate;
 	}
 	public void setFdate(Date fdate) {
 		this.fdate = fdate;
-		setSdate();
+	}
+	public Date getWdate() {
+		return wdate;
+	}
+	public void setWdate(Date wdate) {
+		this.wdate = wdate;
 	}
 	@Override
 	public String toString() {
 		return "FileVO [bno=" + bno + ", fno=" + fno + ", mno=" + mno + ", rno=" + rno + ", cno=" + cno + ", cnt=" + cnt
-				+ ", click=" + click + ", len=" + len + ", id=" + id + ", oriname=" + oriname + ", savename=" + savename
-				+ ", sdate=" + sdate + ", title=" + title + ", fdate=" + fdate + "]";
+				+ ", click=" + click + ", pcode=" + pcode + ", len=" + len + ", id=" + id + ", oriname=" + oriname
+				+ ", savename=" + savename + ", title=" + title + ", sysdate=" + sysdate + ", hend=" + hend
+				+ ", hstart=" + hstart + ", fdate=" + fdate + ", wdate=" + wdate + "]";
 	}
+	
+	
 	
 }
 

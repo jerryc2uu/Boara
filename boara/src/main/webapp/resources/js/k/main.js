@@ -38,20 +38,30 @@ $(document).ready(function(){
    
    // 글쓰기 버튼 이동
    $('#mwrite').click(function(){
-   $('#frm').attr('/boa/board/boardWrite.boa');
+    $('input').prop('disabled', true);
+    $('#id').prop('disabled', false);
+   $('#frm').attr('action','/boa/board/boardWrite.boa');
    $('#frm').submit();
 });
 		
-   //hot 클릭 이벤트
-   $('.hot').click(function(){
+   // 주간 조회수 top5 클릭 이벤트
+   $('.top').click(function(){
     	var sbno = $(this).attr('id');
     	$('#bno').val(sbno);
-//    	$('#frm').attr('/boa/board/boardDetail.boa');
-// 	 	$('#frm').submit();
-//			$(location).attr('href', '/boa/board/boardDetail.boa');
-  	 	alert(sbno);
+    	$('#cno').prop('disabled', true);
+    	$('#frm').attr('action','/boa/board/boardDetail.boa');
+ 	 	$('#frm').submit();
+
    });
-   
-	
-	
+    
+     // hot 게시글 클릭 이벤트
+      $('.hot').click(function(){
+    	var sbno = $(this).attr('id');
+    	$('#bno').val(sbno);
+    	$('#cno').prop('disabled', true);
+    	$('#frm').attr('action','/boa/board/boardDetail.boa');
+ 	 	$('#frm').submit();
+
+   });
+     
 });

@@ -20,8 +20,31 @@
 			<param name="ConversionPattern" value="%-5p - %d{yyyy/MM/dd HH:mm:ss} : %m%n" />
 		</layout>
 	</appender>
+	<appender name="myInfoAppender" class="org.apache.log4j.FileAppender">
+		<param name="File" value="${catalina.base}/src/main/resources/log/myInfo.log" />
+		<param name="Append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p - %d{yyyy/MM/dd HH:mm:ss} : %m%n" />
+		</layout>
+	</appender>
 	<!-- 김소연 -->
 	<!-- 최이지 -->
+	<!-- Collection Appender -->
+	<appender name="collectionAppender" class="org.apache.log4j.FileAppender">
+		<param name="File" value="${catalina.base}/src/main/resources/log/collection.log" />
+		<param name="Append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p - %d{yyyy/MM/dd HH:mm:ss} : %m%n" />
+		</layout>
+	</appender>
+	<!-- Board Appender -->
+	<appender name="boardAppender" class="org.apache.log4j.FileAppender">
+		<param name="File" value="${catalina.base}/src/main/resources/log/board.log" />
+		<param name="Append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p - %d{yyyy/MM/dd HH:mm:ss} : %m%n" />
+		</layout>
+	</appender>
 	
 	<!-- Application Loggers -->
 	<logger name="com.githrd.boa">
@@ -33,8 +56,20 @@
 		<level value="info" />
 		<appender-ref ref="reboardAppender" />
 	</logger>
+	<logger name="myInfoLog">
+		<level value="info" />
+		<appender-ref ref="myInfoAppender" />
+	</logger>
 	<!-- 김소연 -->
 	<!-- 최이지 -->
+	<logger name="collectionLog">
+		<level value="info" />
+		<appender-ref ref="collectionAppender" />
+	</logger>
+	<logger name="boardLog">
+		<level value="info" />
+		<appender-ref ref="boardAppender" />
+	</logger>
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">

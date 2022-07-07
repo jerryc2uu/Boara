@@ -44,7 +44,7 @@
 			<c:forEach var="data" items="${LIST}">
 				<input type="hidden" id="tfno" value="${data.fno}" > 
 			</c:forEach>
-		<!-- 
+		<!--  
 		-->
 			<div class="w3-margin-top  w3-content">
 				<label for="name" class="w3-col m3 w3-right-align ft20">회원이름 : </label>
@@ -56,8 +56,7 @@
 			</div>
 			<div class="w3-margin-top w3-content">
 				<label for="pw" class="w3-col m3 w3-right-align ft20">비밀번호 : </label>
-				<input type="password" name="pw" id="pw" class="w3-margin-bottom w3-margin-left m8 w3-col ft18 w3-input w3-border w3-round-medium"
-						placeholder="필수 입력">
+				<input type="password" name="pw" id="pw" class="w3-margin-bottom w3-margin-left m8 w3-col ft18 w3-input w3-border w3-round-medium">
 			</div>
 			<div class="w3-margin-top  w3-content">
 				<label for="repw" class="w3-col m3 w3-right-align ft20">비밀번호 확인 : </label>
@@ -116,7 +115,18 @@
 			<div class="w3-third w3-text-white w3-indigo w3-padding w3-xlarge w3-hover-grey" id="ebtn">Edit</div> 
 		</div>
 		
-	
+		<div id="id01" class="w3-modal">
+	    <div class="w3-modal-content">
+	      <header class="w3-container w3-red"> 
+	        <span onclick="document.getElementById('id01').style.display='none'" 
+	        class="w3-button w3-display-topright">&times;</span>
+	        <h4 class="w3-center">통신오류</h4>
+	      </header>
+	      <div class="w3-container">
+	        <h4> </h4>
+	      </div>
+	    </div>
+	  </div>
 	</div>
 </body>
 </html>

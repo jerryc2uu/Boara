@@ -1,5 +1,15 @@
 package com.githrd.boa.dao.k;
-
+/**
+ * member 게시판 관련 db 작업 할 Dao클래스
+ * @author	김소연
+ * @since	2022.06.13
+ * @version	v.1.0
+ * 
+ * 			작업이력 ]
+ * 				2022.06.13	-	담당자 : 김소연
+ * 									클래스 제작 
+ *
+ */
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;

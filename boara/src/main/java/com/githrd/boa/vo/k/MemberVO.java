@@ -1,7 +1,17 @@
 package com.githrd.boa.vo.k;
+/**
+ * 	회원 관련 데이터를 담을 VO클래스
+ * 
+ * 	@author 김소연
+ * 	@since 2022.06.13
+ * 	@version v.1.0
+ * 		작업 이력
+ * 			2022.06.13	-	담당자 : 김소연
+ * 								클래스 제작
+ * 			2022.06.28  -	포인트 추가
+ *
+ */
 
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -10,11 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class MemberVO {
 	private int mno, cnt,
 				bno, pno, gnp, pcode, sumpoint;	 // 포인트 처리
-	private String id, name, pw, mail, tel, sdate, result;
+	private String id, name, pw, mail, tel, sdate, result, isshow;
 	private Date jdate;
 	ArrayList<FileVO> list;	// 파일 관련 정보 기억
 	private MultipartFile file;	// 업로드된 파일 기억
-	
 	public int getMno() {
 		return mno;
 	}
@@ -23,11 +32,10 @@ public class MemberVO {
 	}
 	public int getCnt() {
 		return cnt;
-	}
+	} 
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
 	}
-	
 	public int getBno() {
 		return bno;
 	}
@@ -94,26 +102,24 @@ public class MemberVO {
 	public void setSdate(String sdate) {
 		this.sdate = sdate;
 	}
-	public void setSdate() {
-		SimpleDateFormat form = new SimpleDateFormat("yyyy년 MM월 dd일 HH:mm:ss");
-		sdate = form.format(jdate);
-	}
-	
 	public String getResult() {
 		return result;
 	}
 	public void setResult(String result) {
 		this.result = result;
 	}
+	public String getIsshow() {
+		return isshow;
+	}
+	public void setIsshow(String isshow) {
+		this.isshow = isshow;
+	}
 	public Date getJdate() {
 		return jdate;
 	}
 	public void setJdate(Date jdate) {
 		this.jdate = jdate;
-		setSdate();
 	}
-
-
 	public ArrayList<FileVO> getList() {
 		return list;
 	}
@@ -130,10 +136,9 @@ public class MemberVO {
 	public String toString() {
 		return "MemberVO [mno=" + mno + ", cnt=" + cnt + ", bno=" + bno + ", pno=" + pno + ", gnp=" + gnp + ", pcode="
 				+ pcode + ", sumpoint=" + sumpoint + ", id=" + id + ", name=" + name + ", pw=" + pw + ", mail=" + mail
-				+ ", tel=" + tel + ", sdate=" + sdate + ", result=" + result + ", jdate=" + jdate + ", list=" + list
-				+ ", file=" + file + "]";
+				+ ", tel=" + tel + ", sdate=" + sdate + ", result=" + result + ", isshow=" + isshow + ", jdate=" + jdate
+				+ ", list=" + list + ", file=" + file + "]";
 	}
-
-
-		
+	
+	
 	}
