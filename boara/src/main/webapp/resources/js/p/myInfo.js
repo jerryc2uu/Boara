@@ -1,5 +1,6 @@
 $(document).ready(function(){
-
+	
+	
 	//페이징처리
 	$('.pbtn').click(function(){
 		var sno = $(this).attr('id');
@@ -41,19 +42,30 @@ $(document).ready(function(){
 			
 			$('#myJJim').css('display', 'block');
 			
-		} else if(msg == '구매글 리스트') {
+		} else if(msg == '구매한 게시글') {
+		
 			$('#myBuy').css('display', 'block');
 		
 		} else if(msg == '포인트 이용 내역') {
 			
 			$('#myPoint').css('display', 'block');
+			
+		} else if(msg == '구독 목록') {
+			
+			$('#mySub').css('display', 'block');
 		}
-	
 	
 	});
 	
 	//전체 포인트 내역
 	$('#allList').click(function(){
+		$('#frm').submit();
+	});
+	
+	//충전 내역
+	$('#addList').click(function(){
+		alert('충전내역만');
+		$('#pcode').prop('disabled', 'false');
 		$('#frm').submit();
 	});
 	

@@ -74,7 +74,7 @@ public class MyInfo {
 		iVO.setId(id);
 		
 		//포인트 내역 수
-		int total = iDao.myPointCnt(id);
+		int total = iDao.myPointCnt(iVO);
 		
 		//페이징
 		page.setPage(total);
@@ -216,4 +216,12 @@ public class MyInfo {
 		mv.setViewName("p/redirect");
 		return mv;
 	}
+	
+	//나의 구독 리스트
+	@RequestMapping("/mySub.boa")
+	public ModelAndView mySub(ModelAndView mv) {
+		mv.setViewName("p/mySub");
+		return mv;
+	}
+	
 }

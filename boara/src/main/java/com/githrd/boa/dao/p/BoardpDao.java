@@ -20,6 +20,11 @@ public class BoardpDao {
 	@Autowired
 	SqlSessionTemplate sqlSession;
 	
+	//현재 총 포인트 조회
+	public int selPoint(MyInfoVO iVO) {
+		return sqlSession.selectOne("pSQL.selPoint", iVO);
+	}
+
 	//게시글 구매 함수
 	public int buyBoard(MyInfoVO iVO) {
 		return sqlSession.insert("pSQL.buyBoard", iVO);

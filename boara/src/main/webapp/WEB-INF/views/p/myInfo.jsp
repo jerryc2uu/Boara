@@ -106,13 +106,13 @@ font-weight: lighter ;
 						<dt>회원관련</dt>
 							 <dd>회원정보 수정</dd>
 							 <dd>회원 탈퇴</dd>
-							 <dd>좋아요 목록</dd>
-							 <dd>찜 목록</dd>
-							 <dd>구매글 목록</dd>
 						<dt>포인트</dt>
 							<dd>포인트 이용 내역</dd>
 						<dt>게시물 관련</dt>
-							<dd>나의 HOT 포스팅</dd>
+							<dd>좋아요 목록</dd>
+							<dd>구독 목록</dd>
+							<dd>찜 목록</dd>
+							<dd>구매한 게시글</dd>
 					</dl>
 	   			</div>
 	  	 </nav>
@@ -126,6 +126,7 @@ font-weight: lighter ;
 	            <iframe id="myBuy" src="/boa/member/mybuy.boa" style="display: none; position: absolute; width: 100%; height: 100%;" frameBorder="0"></iframe>
 	            <iframe id="myPoint" src="/boa/member/mypoint.boa" style="display: none; position: absolute; width: 100%; height: 100%;" frameBorder="0"></iframe>
 	            <iframe id="myBoard" src="/boa/member/myboard.boa" style="display: none; position: absolute; width: 100%; height: 100%;" frameBorder="0"></iframe>
+	            <iframe id="mySub" src="/boa/member/mySub.boa" style="display: none; position: absolute; width: 100%; height: 100%;" frameBorder="0"></iframe>
 	            <iframe id="myReboard" src="/boa/member/myreboard.boa" style="display: none; position: absolute; width: 100%; height: 100%;" frameBorder="0"></iframe>
 	         </div>
 			</div>

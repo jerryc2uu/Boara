@@ -38,8 +38,8 @@ public class MyInfoDao {
 	}
 	
 	//포인트 내역 갯수 조회
-	public int myPointCnt(String id) {
-		return sqlSession.selectOne("iSQL.myPointCnt", id);
+	public int myPointCnt(MyInfoVO iVO) {
+		return sqlSession.selectOne("iSQL.myPointCnt", iVO);
 	}
 	//포인트 내역 조회 함수
 	public List<MyInfoVO> myPoint(MyInfoVO iVO) {

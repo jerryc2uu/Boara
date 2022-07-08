@@ -38,8 +38,12 @@
 	            },
 	            success: function(data) {
 	               if(data.result == 'OK') {
-	                  $('#frm').submit();
-	               }   
+	            	   window.top.location.href = '/boa/member/myinfo.boa?id=' + sid + '&msg=HOT 게시물 등록에 성공했습니다.';
+	               } else if(data.result = 'NOPOINT'){
+	            	   window.top.location.href = '/boa/member/myinfo.boa?id=' + sid + '&msg=포인트가 부족합니다. 포인트를 충전해주세요.';
+	               } else if(data.result == 'NO') {
+	            	   window.top.location.href = '/boa/member/myinfo.boa?id=' + sid + '&msg=HOT 포스팅 등록에 실패했습니다. 다시 시도해주세요.';
+	               }
 	            },
 	            error: function(){
 	               alert('### 통신오류 ###');

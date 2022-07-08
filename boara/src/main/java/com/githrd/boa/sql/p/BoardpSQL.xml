@@ -3,6 +3,32 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="pSQL">
+	<!-- 현재 나의 총 포인트 조회 -->
+	<select id="selPoint" parameterType="iVO" resultType="int">
+		SELECT
+		    sumpoint
+		FROM
+		    point
+		WHERE
+		    pdate =
+		    (
+		    SELECT
+		        MAX(pdate)
+		    FROM
+		        point
+		    WHERE
+		        mno = (
+		                SELECT
+		                    mno
+		                FROM
+		                    member
+		                WHERE
+		                    id = #{id}
+		                )
+		    
+		    )
+	</select>
+	<!-- 게시글 구매 시 포인트 차감-->
 	<insert id="buyBoard" parameterType="iVO">
 		INSERT INTO
 		    point(pno, mno, gnp, pcode, sumpoint, bno)
@@ -52,6 +78,7 @@
 		)
 	</insert>
 	
+	<!-- 핫 포스팅 등록 시 포인트 차감 -->
 	<insert id="hotBoardPoint" parameterType="iVO">
 		INSERT INTO
 		        point(pno, mno, gnp, pcode, sumpoint)

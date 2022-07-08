@@ -47,7 +47,7 @@
 				<div class="w3-col m3 w3-border-right">컬렉션</div>
 				<div class="w3-col m4 w3-border-right">글제목</div>
 				<div class="w3-col m2 w3-border-right">작성일</div>
-				<div class="w3-col m1 w3-border-right">조회수</div>
+				<div class="w3-col m1">조회수</div>
 			</div>
 <c:forEach var="data" items="${LIST}">
 			<div class="w3-col w3-white w3-center w3-border" id="${data.bno}">
@@ -58,7 +58,7 @@
 				<div class="w3-col m3 w3-border-right brdList">${data.cname}</div>
 				<div class="w3-col m4 w3-border-right brdList">${data.title}</div>
 				<div class="w3-col m2 w3-border-right brdList">${data.sdate}</div>
-				<div class="w3-col m1 w3-border-right brdList">${data.click}</div>
+				<div class="w3-col m1 brdList">${data.click}</div>
 			</div>
 </c:forEach>
 <c:if test="${empty LIST}">

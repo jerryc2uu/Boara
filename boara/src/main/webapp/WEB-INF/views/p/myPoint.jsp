@@ -35,13 +35,14 @@ font-weight: lighter ;
 	<form method="POST" action="/boa/member/mypoint.boa" id="frm" name="frm">
 		<input type="hidden" name="nowPage" id="nowPage" value="${PAGE.nowPage}">
 		<input type="hidden" name="id" id="id" value="${SID}">
+		<input type="hidden" name="pcode" id="pcode" value="101" disabled>
 	</form>
   	
   	 <!-- 보여질 기능들 -->
 		<div class="w3-rest w3-text-grey w3-margin-left">
 			<div class="w3-content mxw650 w3-margin-top">
 			<div class="w3-button w3-hover-blue w3-indigo btnbox parent" id="allList">전체내역</div>
-			<div class="w3-button w3-hover-blue w3-indigo btnbox parent" id="plusList">충전내역</div>
+			<div class="w3-button w3-hover-blue w3-indigo btnbox parent" id="addList">충전내역</div>
 		<div class="w3-col w3-round-large w3-card-4 w3-margin-bottom w3-margin-top w3-padding w3-center">
 			<div class="w3-col m2 w3-left">분류</div>
 			<div class="w3-col m6 w3-center">내용</div>
@@ -50,7 +51,7 @@ font-weight: lighter ;
 		</div>
 		<!-- 페이지 본문 -->
 <c:forEach var="data" items="${LIST}">
-		<div class="w3-col w3-round-large w3-card-4 w3-margin-bottom w3-margin-top w3-padding w3-center">
+		<div class="w3-col w3-round-large w3-card-4 w3-margin-bottom w3-margin-top w3-padding w3-center" style="line-height:70px;">
 	<c:if test="${data.pcode lt 200 && data.pcode ne 101}">
 			<div class="w3-col m2 w3-left"><div class="btnbox w3-dark-grey parent">적립</div></div>
 	</c:if>

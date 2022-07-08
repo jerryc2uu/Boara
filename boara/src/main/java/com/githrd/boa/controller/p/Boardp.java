@@ -19,19 +19,33 @@ public class Boardp {
 	@Autowired
 	BoardpDao pDao;
 	
+	//게시글 구매 처리
 	@RequestMapping("/buyBoard.boa")
 	public ModelAndView buyBoard(ModelAndView mv, MyInfoVO iVO, String nowPage) {
 		
-		int cnt = pDao.buyBoard(iVO);
-		int bno = iVO.getBno();
-		System.out.println(bno + "bno");
-		if(cnt != 1) {
-			mv.addObject("MSG", "게시글 구매에 실패했습니다.");
+		mv.addObject("MSG", "게시글 구매에 성공했습니다.");
+
+		//현재 총 포인트
+		int sumpoint = pDao.selPoint(iVO);
+		
+		if (sumpoint - iVO.getGnp() < 0) {
+		
+			mv.addObject("MSG", "포인트가 부족합니다. 포인트를 충전해주세요.");
+			
+		} else {
+			
+			int cnt = pDao.buyBoard(iVO);
+			int bno = iVO.getBno();
+			
+			if(cnt != 1) {
+				mv.addObject("MSG", "게시글 구매에 실패했습니다.");
+			}
+
 		}
+		
 		
 		mv.addObject("NOWPAGE", nowPage);
 		mv.addObject("VIEW", "/boa/board/boardDetail.boa");
-		mv.addObject("MSG", "게시글 구매에 성공했습니다.");
 		mv.setViewName("p/redirect");
 		return mv;
 	}
@@ -43,11 +57,25 @@ public class Boardp {
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		String result = "NO";
-		int cnt = pDao.hotBoardProc(iVO);
-		int cnt2 = pDao.hotBoardPoint(iVO);
 		
-		if(cnt == 1 && cnt2 == 1) {
-			result = "OK";
+		//현재 총 포인트
+		int sumpoint = pDao.selPoint(iVO);
+		
+		if(sumpoint - 5000 > 0) {
+			
+			//핫 포스팅 등록 처리
+			int cnt = pDao.hotBoardProc(iVO);
+			
+			//핫 포스팅 등록 시 포인트 차감
+			int cnt2 = pDao.hotBoardPoint(iVO);
+			
+			if(cnt == 1 && cnt2 == 1) {
+				result = "OK";
+			} else {
+				result = "NO";
+			}
+		} else {
+			result = "NOPOINT";
 		}
 		
 		map.put("result", result);

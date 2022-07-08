@@ -106,3 +106,20 @@
 					성공 : /boa/member/myinfo.boa
 					실패 : /boa/member/addPoint.boa
 --------------------------------------------
+===========================================
+########### 게시글 관련 요청 설계 ##############
+===========================================
+# 유료 게시글 구매 요청
+요청내용	:	/boa/board/buyBoard.boa
+파라미터	:	id, gnp, nowPage, bno, cno
+컨트롤러	:	com.githrd.boa.controller.Member
+처리함수	:	buyBoard()
+뷰			:	/WEB-INF/views/p/redirect.jsp
+--------------------------------------------
+# HOT 게시글 등록 요청
+요청내용	:	/boa/board/hotBoardProc.boa
+파라미터	:	id, bno
+컨트롤러	:	com.githrd.boa.controller.Member
+처리함수	:	hotBoardProc()
+뷰			:	json
+--------------------------------------------

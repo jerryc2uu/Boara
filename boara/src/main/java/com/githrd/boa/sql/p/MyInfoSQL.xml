@@ -99,7 +99,7 @@
 		    rno BETWEEN #{startCont} AND #{endCont}
 	</select>
 	<!-- 포인트 내역 갯수 -->
-	<select id="myPointCnt" resultType="int" parameterType="string">
+	<select id="myPointCnt" resultType="int" parameterType="iVO">
 		SELECT
 		    COUNT(pno)
 		FROM
@@ -113,6 +113,9 @@
 		            WHERE
 		                id = #{id}
 		            )
+		<if test ="pcode eq 101">
+		    AND pcode = 101
+		</if>
 	</select>
 	<!-- 포인트 내역 조회-->
 	<select id="myPoint" resultType="iVO" parameterType="iVO">
@@ -138,6 +141,9 @@
 		                    WHERE
 		                        id = #{id}
 		                    )
+		    <if test ="pcode eq 101">
+		           AND p.pcode = 101
+		    </if>
 		        ORDER BY
 		            pno DESC
 		        )

@@ -57,12 +57,15 @@ img {
    <!-- 페이지 본문 -->
    <div class="w3-row-padding w3-padding-64 w3-container" style="height: 700px; margin: 0;">
    		<h1 class="w3-center w3-padding mg0">댓글 리스트</h1>
-   		<div style="margin-left: 650px; margin-bottom: 20px;">
-	   		<button class="w3-center w3-indigo w3-hover-grey listbutton" id="goboard" style="border: none;">게시글로</button>
-	   		<button class="w3-center w3-indigo w3-hover-grey listbutton" id="newwrite" style="border: none; margin-left: 530px;">새댓글작성</button>
-   		</div>
    		<div style="width: 800px; margin: 0 auto;">
-   			
+   		<div class="w3-cetner w3-padding mxw700 mg0 w3-margin-bottom">
+	   		<button class="w3-center w3-indigo w3-hover-grey listbutton" id="goboard" style="border: none;">게시글로</button>
+	   		<button class="w3-center w3-indigo w3-hover-grey listbutton" id="newwrite" style="border: none; float:right;">새댓글작성</button>
+   		</div>
+
+<c:if test="${empty LIST}">
+			<div class="w3-col w3-white w3-center">작성된 댓글이 없습니다.</div>
+</c:if>
 			<!-- 댓글 리스트 보이는 곳 -->
 <c:forEach var="data" items="${LIST}">
 			<div class="w3-col w3-center" style="width: 700px; height: 160px; padding-left: ${data.step * 70}px;">
