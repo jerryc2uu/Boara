@@ -72,15 +72,22 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 					<input type="text" class="w3-input w3-col m7" id="title" name="title" value="${BINFO.title}">
 				</div>
 				<div class="w3-col w3-margin-bottom w3-margin-top">
-					<label for="title" class="w3-col m3 w3-padding" style="text-align:right">공지글 여부 : </label>
+					<label for="isshow" class="w3-col m3 w3-padding" style="text-align:right">공개 범위 : </label>
+					<label class="w3-col m2 left mgt10"><input type="radio" id="noti" name="isshow" value="A"
 <c:if test="${BINFO.isshow eq 'A'}">
-					<label class="w3-col m3 left mgt10"><input type="radio" name="isshow" value="A" checked>공지</label>
-					<label class="w3-col m3 left mgt10"><input type="radio" name="isshow" value="Y">공지글 아님</label>
+						checked
 </c:if>
+					>공지</label>
+					<label class="w3-col m2 left mgt10"><input type="radio" id="noti" name="isshow" value="Y"
 <c:if test="${BINFO.isshow eq 'Y'}">
-					<label class="w3-col m3 left mgt10"><input type="radio" name="isshow" value="A">공지</label>
-					<label class="w3-col m3 left mgt10"><input type="radio" name="isshow" value="Y" checked>공지글 아님</label>
+						checked
 </c:if>
+					>일반</label>
+					<label class="w3-col m2 left mgt10"><input type="radio" id="noti" name="isshow" value="L"
+<c:if test="${BINFO.isshow eq 'L'}">
+						checked
+</c:if>
+					>비공개</label>
 				</div>
 				<div class="w3-col w3-margin-bottom w3-margin-top">
 					<label for="forwho" class="w3-col m3 w3-padding" style="text-align:right">이용가 설정 : </label>

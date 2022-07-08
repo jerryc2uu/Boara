@@ -5,9 +5,8 @@ $(document).ready(function(){
 	// 로그인
 	$('#lbtn').click(function(){
 		// 파라미터 세팅
-		$('#vw').val('/boa/collection/collecList.boa');
 		$('#cno').prop('disabled', true);
-	
+		
 		$('#frm').attr('action', '/boa/member/login.boa');
 		$('#frm').submit();
 	});
@@ -15,7 +14,6 @@ $(document).ready(function(){
 	// 회원가입
 	$('#jbtn').click(function(){
 		// 파라미터 세팅
-		$('#vw').val('/boa/collection/collecList.boa');
 		$('#cno').prop('disabled', true);
 		
 		$('#frm').attr('action', '/boa/member/join.boa');
@@ -25,7 +23,6 @@ $(document).ready(function(){
 	// 로그아웃
 	$('#obtn').click(function(){
 		// 파라미터 세팅
-		$('#vw').val('/boa/collection/collecList.boa');
 		$('#cno').prop('disabled', true);
 		
 		$('#frm').attr('action', '/boa/member/logout.boa');
@@ -53,10 +50,7 @@ $(document).ready(function(){
 	// 컬렉션 클릭시
 	$('.cbox').click(function(){
 		// cno 외의 파라미터 무효화
-		$('#nowPage').prop('disabled', true);
-		$('#cid').prop('disabled', true);
-		$('#vw').prop('disabled', true);
-		$('#id').prop('disabled', true);
+		$('#nowPage, #cid, #vw').prop('disabled', true);
 		
 		// cno 세팅
 		var cno = $(this).attr('id');
@@ -90,6 +84,7 @@ $(document).ready(function(){
 		
 		// 폼태그에 파라미터 세팅
 		$('#cno').val(scno);
+		$('#vw').prop('disabled', true);
 		
 		// 전송
 		$('#frm').attr('action', '/boa/collection/collecEdit.boa');
@@ -109,6 +104,8 @@ $(document).ready(function(){
 	});
 	
 	$('#wpbtn').click(function(){
+		$('#vw').prop('disabled', true);
+
 		// 유효성 검사 : 값 가져오기
 		var cname = $('#cname').val();
 		var descr = $('#descr').val();
@@ -177,6 +174,8 @@ $(document).ready(function(){
 	});
 	
 	$('#epbtn').click(function(){
+		$('#vw').prop('disabled', true);
+
 		// 유효성 검사 : 원래 값 꺼내기
 		var tcname = $('#tcname').val();
 		var tdescr = $('#tdescr').val();

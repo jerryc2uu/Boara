@@ -126,6 +126,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 				<input type="hidden" id="cno" name="cno" value="${CINFO.cno}">
 				<input type="hidden" id="id" name="id" value="${SID}">
 				<input type="hidden" name="nowPage" value="${param.nowPage}">
+				<input type="hidden" name="vw" id="vw" value="/boa/collection/collecEdit.boa">
 			</form>
 		</div>
 			

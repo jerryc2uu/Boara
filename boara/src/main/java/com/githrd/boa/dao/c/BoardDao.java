@@ -20,6 +20,9 @@ package com.githrd.boa.dao.c;
  * 
  * 			2022.06.29	-	함수 추가(cntStat, newLike, reLike, newJjim, reJjim, discard, adultCheck, addPoint)
  * 								담당자 : 최이지
+ * 
+ * 			2022.07.08	-	함수 추가(getSelfTotal, getSelfBList, viewCheck)
+ * 								담당자 : 최이지
  */
 
 import java.util.List;
@@ -55,10 +58,18 @@ public class BoardDao {
 	public int getTotal(CollecVO cVO) {
 		return sqlSession.selectOne("bSQL.getTotal", cVO);
 	}
+	// 본인 컬렉션일 때
+	public int getSelfTotal(CollecVO cVO) {
+		return sqlSession.selectOne("bSQL.getSelfTotal", cVO);
+	}
 	
 	// 컬렉션 소속 게시글 호출
 	public List<BoardVO> getBList(CollecVO cVO){
 		return sqlSession.selectList("bSQL.getBList", cVO);
+	}
+	// 본인컬렉션일때
+	public List<BoardVO> getSelfBList(CollecVO cVO){
+		return sqlSession.selectList("bSQL.getSelfBList", cVO);
 	}
 	
 	// 게시글 삭제
@@ -128,6 +139,11 @@ public class BoardDao {
 	// 조회수 올리기
 	public int upClick(int bno) {
 		return sqlSession.update("bSQL.upClick", bno);
+	}
+	
+	// 조회 기록 남기기
+	public int viewCheck(BoardVO bVO) {
+		return sqlSession.insert("bSQL.viewCheck", bVO);
 	}
 	
 	// 성인 인증 여부

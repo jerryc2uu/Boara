@@ -61,10 +61,51 @@
 		    board
 		WHERE
 		    cno = #{cno}
+		    AND isshow IN ('Y', 'A')
+	</select>
+	
+	<!-- 본인 컬렉션 소속 게시글 수 꺼내오기 -->
+	<select id="getSelfTotal" resultType="int" parameterType="cVO">
+		SELECT
+		    COUNT(*)
+		FROM
+		    board
+		WHERE
+		    cno = #{cno}
+		    AND isshow != 'N'
 	</select>
 	
 	<!-- 게시글 리스트 로딩 -->
 	<select id="getBList" resultType="bVO" parameterType="cVO">
+		SELECT
+		    bno, price, savename, title, body, isshow, sgenre, forwho, click
+		FROM
+		    (
+		        SELECT
+		            bno, price, savename, title, body, isshow, sgenre, forwho, click, ROWNUM rno
+		        FROM
+		        (
+		            SELECT
+		                b.bno bno, price, savename, title, body, b.isshow isshow, NVL(b.gnr, 'empty') sgenre, forwho, click
+		            FROM
+		                board b, collection c, imgfile f
+		            WHERE
+		                b.isshow IN ('Y', 'A')
+		                AND b.cno = #{cno}
+		                AND b.cno = c.cno
+		                AND b.bno = f.bno(+)
+		                AND f.isshow(+) = 'C'
+		                AND f.whereis(+) = 'B'
+		            ORDER BY
+		                wdate DESC, bno DESC
+		        )
+		    )
+		WHERE
+		    rno BETWEEN #{startCont} AND #{endCont}
+	</select>
+	
+	<!-- 본인 게시글 불러오기 -->
+	<select id="getSelfBList" resultType="bVO" parameterType="cVO">
 		SELECT
 		    bno, price, savename, title, body, isshow, sgenre, forwho, click
 		FROM
@@ -90,6 +131,7 @@
 		    )
 		WHERE
 		    rno BETWEEN #{startCont} AND #{endCont}
+	
 	</select>
 	
 	<update id="delBoard" parameterType="bVO">
@@ -256,6 +298,17 @@
 		WHERE
 			bno = #{bno}
 	</update>
+	
+	<!-- 조회 기록 남기기 -->
+	<insert id="viewCheck" parameterType="bVO">
+		INSERT INTO
+			viewlog(vno, vmno, vbno)
+		VALUES(
+			(SELECT NVL(MAX(vno)+1, 10000001) FROM viewlog),
+			(SELECT mno FROM member WHERE id = #{id}),
+			#{bno}
+		)
+	</insert>
 	
 	<!-- 성인 인증 회원 체크 -->
 	<select id="adultCheck" resultType="string" parameterType="string">

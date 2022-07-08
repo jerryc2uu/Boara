@@ -61,9 +61,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 					<input type="text" class="w3-input w3-col m7" id="title" name="title">
 				</div>
 				<div class="w3-col w3-margin-bottom w3-margin-top">
-					<label for="isshow" class="w3-col m3 w3-padding" style="text-align:right">공지글 여부 : </label>
-					<label class="w3-col m3 left mgt10"><input type="radio" id="noti" name="isshow" value="A">공지</label>
-					<label class="w3-col m3 left mgt10"><input type="radio" id="noti" name="isshow" value="Y" checked>공지글 아님</label>
+					<label for="isshow" class="w3-col m3 w3-padding" style="text-align:right">공개 범위 : </label>
+					<label class="w3-col m2 left mgt10"><input type="radio" id="noti" name="isshow" value="A">공지</label>
+					<label class="w3-col m2 left mgt10"><input type="radio" id="noti" name="isshow" value="Y" checked>일반</label>
+					<label class="w3-col m2 left mgt10"><input type="radio" id="noti" name="isshow" value="L">비공개</label>
 				</div>
 				<div class="w3-col w3-margin-bottom w3-margin-top">
 					<label for="forwho" class="w3-col m3 w3-padding" style="text-align:right">이용가 설정 : </label>

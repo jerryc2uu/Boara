@@ -46,18 +46,32 @@ public class Board {
 	@RequestMapping("/boardList.boa")
 	public ModelAndView boardList(ModelAndView mv, CollecVO cVO, PageUtil page, String msg) {
 		// 컬렉션 정보 세팅
+		String id = cVO.getId();
 		cVO = bDao.getCInfo(cVO);
 		bSrvc.getCGnr(cVO);
 		
+		// 본인 컬렉션인지 파악
+		int totalCount;
+		if(id == null || !id.equals(cVO.getId())) {
+			totalCount  = bDao.getTotal(cVO);
+		}else {
+			totalCount = bDao.getSelfTotal(cVO);
+		}
+		
 		// 페이지 처리
-		int totalCount = bDao.getTotal(cVO);
 		int nowPage = 1;
 		if(page.getNowPage() != 0) nowPage = page.getNowPage();
 		page.setPage(nowPage, totalCount);
 		
 		// db 작업, list 불러오기
 		cVO.setPage(page);
-		List<BoardVO> list = bDao.getBList(cVO);
+		List<BoardVO> list;
+		if(id == null || !id.equals(cVO.getId())) {
+			list = bDao.getBList(cVO);
+		}else {
+			list = bDao.getSelfBList(cVO);
+		}
+		
 		bSrvc.getBListGnr(list);
 		
 		// 데이터 세팅

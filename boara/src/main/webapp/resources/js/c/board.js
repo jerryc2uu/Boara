@@ -155,6 +155,20 @@ $(document).ready(function(){
 		
 	});
 	
+	// 게시글 구매
+	$('#buyPost').click(function(){
+		$('#mdcontext').html('게시글을 구매하시겠습니까?');
+		$('#modal, #buy, #cancel').css('display', 'block');
+	});
+	$('#buy').click(function(){
+		$('#vw').prop('disabled', true);
+		$('#frm').attr('action', '/boa/board/buyBoard.boa');
+		$('#frm').submit();
+	});
+	$('#cancel').click(function(){
+		$('#modal, #cancel, #buy').css('display', 'none');
+	});
+	
 	// 컬렉션으로
 	$('#upcoll').click(function(){
 		$('#bno').prop('disabled', true);
@@ -165,9 +179,10 @@ $(document).ready(function(){
 		$('#frm').submit();
 	});
 	
-	// 댓글 리스트
+	// 게시글 상세보기 -> 댓글 리스트
 	$('#reshow').click(function(){
 		$('#vw').prop('disabled', true);
+		$('#gnp').prop('disabled', true);
 		
 		$('#frm').attr('action', '/boa/reboard/reboardList.boa');
 		$('#frm').submit();
@@ -176,6 +191,7 @@ $(document).ready(function(){
 	// 게시글 상세보기 -> 게시글 삭제
 	$('#dbtn').click(function(){
 		$('#vw').prop('disabled', true);
+		$('#gnp').prop('disabled', true);
 		
 		$('#frm').attr('action', '/boa/board/boardDel.boa');
 		$('#frm').submit();
@@ -184,6 +200,7 @@ $(document).ready(function(){
 	// 게시글 상세보기 -> 게시글 수정
 	$('#ebtn').click(function(){
 		$('#vw').prop('disabled', true);
+		$('#gnp').prop('disabled', true);
 		
 		$('#frm').attr('action', '/boara/board/boardEdit.boa');
 		$('#frm').submit();

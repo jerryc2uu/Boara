@@ -85,13 +85,15 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 			</div>
 			<p class="left chgline pdb5" class="w3-border-bottom">${POST.body}</p>
 <c:if test="${POST.price ne 0}">
+	<c:if test="${POST.bought eq 'NO'}">
 			<div class="w3-col w3-border-bottom" style="padding-bottom: 10px;">
 				<div class="w3-col w3-light-gray w3-round w3-padding">
 					<h6 class="w3-left-align">미리보기 분량은 300자입니다.
 					<br>${POST.price}P로 해당 게시글을 전체 열람하실 수 있습니다.</h6>
-					<div class="genre w3-round w3-right align">${POST.price}P</div>
+					<div class="genre w3-round w3-right align" id="buyPost">${POST.price}P</div>
 				</div>
 			</div>
+	</c:if>
 </c:if>
 
 			<div class="left mgt10">
@@ -141,6 +143,40 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 		</div>
 	</div>
 	
+	<%-- 파라미터용 모달창 --%>
+<c:if test="${not empty param.msg}">
+	<div class="w3-center w3-modal">
+		<div class="w3-modal-content mxw650 w3-animate-top w3-card-4">
+			<header class="boablue w3-container">
+				<span onclick="document.getElementById('modal').style.display='none'"
+					class="w3-button w3-display-topright">&times;</span>
+					<h2>INFO</h2>
+			</header>
+			<div class="w3-container w3-center">
+				<h4>${param.msg}</h4>
+			</div>
+		</div>
+	</div>
+</c:if>
+
+	<%-- 일반 모달창 --%>
+	<div id="modal" class="w3-center w3-modal" style="display: none;">
+		<div class="w3-modal-content mxw650 w3-animate-top w3-card-4">
+			<header class="boablue w3-container">
+				<span onclick="document.getElementById('modal').style.display='none'"
+					class="w3-button w3-display-topright">&times;</span>
+					<h2>INFO</h2>
+			</header>
+			<div class="w3-container w3-center">
+				<h4 id="mdcontext"></h4>
+				<div class="genre w3-round w3-margin-bottom w3-right" id="buy" style="display: none;">구매</div>
+				<div class="genre w3-round w3-margin-bottom w3-right" id="cancel" style="display: none;">취소</div>
+			</div>
+		</div>
+	</div>
+		
+		
+	
 	<%-- Footer --%>
 	<footer class="w3-container w3-padding-64 w3-center w3-opacity w3-border-top">
 		<p>(주)보아라</p>
@@ -148,6 +184,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 	
 	<%-- 데이터 전송용 폼 --%>
 	<form method="POST" name="frm" id="frm">
+<c:if test="${POST.price ne 0}">
+		<input type="hidden" name="gnp" id="gnp" value="${POST.price * -1}">
+</c:if>
 		<input type="hidden" name="nowPage" value="${param.nowPage}">
 		<input type="hidden" name="bno" id="bno" value="${POST.bno}">
 		<input type="hidden" name="cno" id="cno" value="${POST.cno}">

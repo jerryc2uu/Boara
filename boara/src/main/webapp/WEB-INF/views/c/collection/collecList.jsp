@@ -167,8 +167,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 	<form method="POST" name="frm" id="frm">
 		<input type="hidden" name="nowPage" id="nowPage" value="${PAGE.nowPage}">
 		<input type="hidden" name="cno" id="cno">
-		<input type="hidden" name="vw" id="vw">
 		<input type="hidden" name="id" id="id" value="${SID}">
+		<input type="hidden" name="vw" id="vw" value="/boa/collection/collecList.boa">
 <c:if test="${not empty CID}">
 		<input type="hidden" name="cid" id="cid" value="${CID}">
 </c:if>

@@ -177,6 +177,11 @@ public class BoardService {
 		
 		// 조회수 올리기
 		bDao.upClick(bVO.getBno());
+		if(id != null && !id.equals(cid)) {
+			bVO.setId(id);
+			bDao.viewCheck(bVO);
+		}
+		bVO.setId(cid);
 		
 		// 장르 처리
 		getBGnr(bVO);
