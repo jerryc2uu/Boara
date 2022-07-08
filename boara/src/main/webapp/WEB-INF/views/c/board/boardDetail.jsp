@@ -185,7 +185,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 	<%-- 데이터 전송용 폼 --%>
 	<form method="POST" name="frm" id="frm">
 <c:if test="${POST.price ne 0}">
-		<input type="hidden" name="gnp" id="gnp" value="${POST.price * -1}">
+		<input type="hidden" name="gnp" id="gnp" value="${POST.price}">
 </c:if>
 		<input type="hidden" name="nowPage" value="${param.nowPage}">
 		<input type="hidden" name="bno" id="bno" value="${POST.bno}">
