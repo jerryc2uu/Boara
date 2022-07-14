@@ -3,11 +3,14 @@ package com.githrd.boa.service.k;
 
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.*;
-import org.slf4j.*;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Aspect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.githrd.boa.vo.k.*;
+import com.githrd.boa.vo.k.MemberVO;
+import com.githrd.boa.vo.k.MessageVO;
 
 /**
  *  member 관련 로그 처리를 관리할 클래스
@@ -77,6 +80,16 @@ import com.githrd.boa.vo.k.*;
 	  if(mVO.getCnt() == 1) {  
 		  memberLog.info(mVO.getId() +" 님이 회원탈퇴 했습니다."); 
 
+	  } 
+  }
+  
+  //쪽지 전송
+  @After("execution(* com.githrd.boa.controller.k.Main.sendMess(..))")
+  public void message(JoinPoint join) { 
+	  MessageVO msVO = (MessageVO)join.getArgs()[0]; 
+	  if(msVO.getCnt() == 1) {  
+		  memberLog.info(msVO.getId() + " 님이 " + msVO.getRecvid() + "님에게 쪽지를 발신했습니다."); 
+		  
 	  } 
   }
 }

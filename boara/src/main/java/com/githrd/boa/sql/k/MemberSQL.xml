@@ -66,9 +66,9 @@
 		</selectKey>
 		
 		INSERT INTO
-			member(mno ,id, pw, name, mail, tel, isshow)
+			member(mno ,id, pw, name, birth, mail, tel, isshow)
 		VALUES(
-			#{mno}, #{id}, #{pw}, #{name}, #{mail}, #{tel}, 'Y'
+			#{mno}, #{id}, #{pw}, #{name}, TO_DATE(#{birth}, 'yyyy/MM/dd'), #{mail}, #{tel}, 'Y'
 		)
 		
 	</insert>
@@ -139,7 +139,7 @@
  	
  	<select id="getIdInfo" resultType="mVO" parameterType="String">
  		SELECT
-		    mno, name, id, pw, mail, tel
+		    mno, name, id, pw, TO_CHAR(birth, 'yyyy/MM/dd') birth, mail, tel
         FROM
 		    member 
 		WHERE
@@ -182,6 +182,9 @@
  			</if>
  			<if test="pw neq null">
  				pw = #{pw},
+ 			</if>
+ 			<if test="birth neq null">
+ 				birth = #{birth},
  			</if>
  		</set>
  		WHERE

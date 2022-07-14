@@ -166,7 +166,7 @@ $(document).ready(function(){
 
 	
 		
-		var el = $('#name, #id, #pw, #tel, #mail, #file'); 
+		var el = $('#name, #id, #pw, #tel, #mail, #file');  //, #certi
 		
 		for(var i = 0 ; i < el.length ; i++ ){
 			var txt = $(el).eq(i).val();
@@ -187,25 +187,5 @@ $(document).ready(function(){
 		
 	});
 	
-	// 본인인증
-	$('#certi').click(function(){
-		IMP.init('imp95234810');
-		IMP.certification({
- 
-	}, 
-	function(rsp) {
-	    if ( rsp.success ) {
-	
-			alert("인증성공");        
-	   
-	    } else {
-	    	 // 인증취소 또는 인증실패
-	        var msg = '인증에 실패하였습니다.';
-	        msg += '에러내용 : ' + rsp.error_msg;
-	
-	        alert(msg);
-	    }
-		});
-	});
 });
 	

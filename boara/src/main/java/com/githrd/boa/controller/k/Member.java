@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +34,7 @@ import com.githrd.boa.vo.k.MemberVO;
  * 				2022.06.21 	-		탈퇴처리
  * 				2022.06.23 	-		회원가입
  * 				2022.06.26 	- 		회원정보 수정
- * 				2022.06.28	-		로그인, 조인, 로그아웃 매개변수 추가(수정중)
+ * 				
  *  *
  */
 
@@ -333,4 +332,27 @@ public class Member {
 		mv.setView(rv);
 		return mv;
 	}
+	/* 본인인증 
+	@RequestMapping(path="/certify.boa", method=RequestMethod.POST)
+	public ModelAndView certify (ModelAndView mv, String imp_uid) {
+		String imp = imp_uid;
+		// 성공
+		if(imp != null) {
+			
+			
+		}
+		
+		String view = "k/join";
+		
+		mv.setViewName(view);
+		
+		return mv;
+	}
+	*/
+	
+	
+	
+	
+	
+	
 }

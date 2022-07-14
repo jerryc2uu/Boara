@@ -1,18 +1,22 @@
 package com.githrd.boa.controller.k;
  
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.githrd.boa.dao.c.BoardDao;
 import com.githrd.boa.dao.k.MainBoardDao;
 import com.githrd.boa.util.k.PageUtil;
 import com.githrd.boa.vo.k.FileVO;
+import com.githrd.boa.vo.k.MessageVO;
 import com.githrd.boa.vo.k.SearchVO;
 
 /**
@@ -28,6 +32,8 @@ import com.githrd.boa.vo.k.SearchVO;
  * 				2022.06.29  - 		top 게시글 조회(일주일)
  * 				2022.07.03	-		컬렉션 검색(reference collectList.jsp)
  *				2022.07.06	-		게시글 검색(reference boardList.jsp)
+ *				2022.07.12	- 		발신, 수신 메세지 조회
+ *				2022.07.13 	-		수신자 조회, 쪽지보내기
  */
 
 @Controller
@@ -64,7 +70,6 @@ public class Main {
 			mv.addObject("LIST", list);
 		} else  {
 			List<SearchVO> blist = mbDao.getBoList(sVO);
-			bDao.upClick(sVO.getBno());
 			mv.addObject("BLIST", blist);
 		}
 			 mv.addObject("PAGE", page);
@@ -72,6 +77,43 @@ public class Main {
 		
 		return mv;
 	
+	}
+	
+	@RequestMapping("/receive.boa")
+	@ResponseBody
+	public List<MessageVO> receList (MessageVO msVO){
+		
+
+		List<MessageVO> list = mbDao.getReceList(msVO);
+		return list;
+	}
+	
+	@RequestMapping("/send.boa")
+	@ResponseBody
+	public List<MessageVO> sendList (MessageVO msVO){
+		List<MessageVO> list = mbDao.getSendList(msVO);
+		return list;
+	}
+	
+	@RequestMapping("/idList.boa")
+	@ResponseBody
+	public List<MessageVO> idList (MessageVO msVO){
+		List<MessageVO> list = mbDao.getIdList(msVO);
+		return list;
+	}
+	
+	@RequestMapping("/sendMess.boa")
+	@ResponseBody
+	public Map<String, String> sendMess (MessageVO msVO){
+		HashMap<String, String> map = new HashMap<String, String>();
+		String result = "NO";
+		int cnt = mbDao.addMess(msVO);
+		msVO.setCnt(cnt);
+		if(cnt == 1) {
+			result = "OK";
+		}
+		map.put("result", result);
+		return map;
 	}
 }
  

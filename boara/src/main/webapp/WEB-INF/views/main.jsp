@@ -54,6 +54,9 @@ img{
      <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white " id="mlogin">Login</a>
 </c:if>
 <c:if test="${not empty SID}">
+     <a class="w3-bar-item w3-button w3-hide-small w3-hover-white" id="message">
+     	<img  src="/boa/resources/img/k/message.png" style=" width:55px; height:35px;"  > 
+     </a>   
      <a class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" id="msid">${SID}</a>   
      <a class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"id="mlogout">Logout</a>   
 </c:if>           
@@ -65,6 +68,119 @@ img{
   	  <h1 class="pdt40 w3-xxxlarge dfn"><b>Boara</b></h1>
 	</header>
 
+	<div id="id01" class="w3-padding mgtb30 w3-modal" >
+		<div class="w3-modal-content  w3-card-4 w3-right" style="width: 700px; ">
+	      <header class="w3-container w3-indigo"> 
+	        <span id="exit" class="w3-button w3-display-topright">&times;</span>
+		    <div class="w3-col ft14 h50">
+		        <div id="rebtn" class="w3-hover-white w3-button jjbtn">받은쪽지함</div>
+		        <div id="sebtn" class="w3-hover-white w3-button jjbtn">보낸쪽지함</div>
+		        <div id="newbtn" class="w3-hover-white w3-button jjbtn">쪽지보내기</div>
+	        </div>
+	      </header>
+	      <!-- 받은 쪽지함 -->
+	      <div id="receme" class="w3-container mgtb30">
+	        <div class="w3-col mess rec">
+	        	<div class="s1 mgt16 w3-col">No.</div>
+	        	<div class="s2 mgt16 w3-col">발신인</div>
+		        <div class="s7 mgt16 w3-col">제목</div>
+		        <div class="s2 mgt16 w3-col">수신일</div>
+	        </div>
+	        <div id="ajaxre">
+	        </div>
+	      </div>
+	      
+	      <!-- 보낸 쪽지함 -->
+	      <div id="sendme" class="w3-container mgtb30">
+	        <div class="w3-col mess">
+	        	<div class="s1 mgt16 w3-col ">No.</div>
+	        	<div class="s2 mgt16 w3-col">수신인</div>
+		        <div class="s7 mgt16 w3-col">제목</div>
+		        <div class="s2 mgt16 w3-col">발송일</div>
+	        </div>
+	         <div id="ajaxse">
+	        </div>
+	      </div>
+	      
+	      <!-- 쪽지보내기-->
+	      <div id="newme" >
+		      <form method="POST" action="" name="frm1" id="frm1" class=" w3-col mgtb30">
+			      <div class="w3-col mgtb10 ">
+			      	<label for="sendid" class="w3-col s3 w3-center" >[ 보내는사람 ]</label>
+			      	<input class="w3-col w3-select w3-border s8 w3-center ck" readOnly="true" id="mid" name="mid" value="${SID}">
+			      </div>
+			      <div class="w3-col mgtb10 ">
+			      	<label for="recvid" class="w3-col s3 w3-center" >[ 받는사람 ]</label>
+			      	<select class="w3-col w3-select w3-border s8 w3-center ck" id="recvid" name="recvid">
+					</select>			     
+			      </div>
+			      <div class="w3-col mgtb10">
+			      	<label for="title" class="w3-col s3 w3-center">[ 제목 ]</label>
+			      	<input type="text" id="title" name="title" class="w3-col ft13 w3-input w3-border s8 ck ch" 
+			      	placeholder="20글자 미만">
+			      </div>
+			      <div class="w3-col mgtb10">
+				      	<label for="body" class="w3-col s3 w3-center">[ 내용 ]</label>
+				      	<div class="w3-col s8">
+					    	<textarea id="body" name="body" rows="10" class="w3-col ft13 ck" style="resize: none;"	></textarea>
+							<div class="w3-col w3-margin-top">
+								<div class="w3-half w3-text-white w3-indigo w3-xarge w3-button" id="rbtn">reset</div> 
+								<div class="w3-half w3-text-white w3-indigo w3-xarge w3-button" id="send">send</div> 
+							</div>
+			     		</div>
+	    		  </div>
+			   </form>
+		   </div>
+		   
+		   
+		   <!-- 쪽지 상세보기 
+		    <div id="detame" class=" w3-col mgtb30">
+			      <div class="w3-col mgtb10 ">
+			      	<label for="recv" class="w3-col s3 w3-center" >[ 받는사람 ]</label>
+			      	<h5 id="recv"  class="w3-col w3-border s8" >ksoy</h5>
+			      </div>
+			      <div class="w3-col mgtb10 ">
+			      	<label for="recv" class="w3-col s3 w3-center" >[ 보낸사람 ]</label>
+			      	<h5 id="recv"  class="w3-col w3-border s8" >ksoy</h5>
+			      </div>
+			      <div class="w3-col mgtb10">
+			      	<label for="ttitle" class="w3-col s3 w3-center">[ 제목 ]</label>
+			      	<h5 id="ttitle"  class="w3-col w3-border s8" >안녕하세요</h5>
+			      </div>
+			      <div class="w3-col mgtb10">
+				      	<label for="body" class="w3-col s3 w3-center">[ 내용 ]</label>
+				      	<div class="w3-col s8">
+					    	<h5 id="body"  class="w3-col w3-border" >!!@!!!!!!!!!!!!!!!!!!!!!!ㅁㄴㄹ너이라무내여ㅐ누ㅕㅑ유ㅕㅑㅁㄴ유ㅑㄴ며야ㅠ녀뉴ㅑㅣㅕ</h5>
+							<div class="w3-col w3-margin-top">
+								<div class="w3-half w3-text-white w3-indigo w3-xarge w3-button" id="list">list</div> 
+							</div>
+							<div class="w3-col w3-margin-top">
+								<div class="w3-half w3-text-white w3-indigo w3-xarge w3-button" id="list">list</div> 
+								<div class="w3-half w3-text-white w3-indigo w3-xarge w3-button" id="reply">reply</div> 
+							</div>
+			     		</div>
+	    		  </div>
+			   </div>
+			   
+			   -->
+			   
+			   
+		</div>
+	</div>	
+
+
+<!-- 메세지 성공 -->
+	<div id="succ" class="w3-padding mgtb30 w3-modal">
+		<div class="w3-modal-content  w3-card-4 " style="width: 400px; ">
+	      <header class="w3-container w3-indigo"> 
+	        <span id="exit1" class="w3-button w3-display-topright">&times;</span>
+		   		<div class="w3-col w3-center ft18 h50 mgt10"> message</div>
+		  </header>
+		   		<div class="w3-col w3-white w3-center ft14 h50 pdt10 sufa"> 메세지가 성공적으로 전송되었습니다.</div>
+		  </div>
+	</div> 
+	
+		
 	<!-- Swiper -->
 	    <div class="swiper mySwiper mt80">
 	      <div class="swiper-wrapper">
@@ -95,7 +211,7 @@ img{
 		<input type="hidden" id="bno" name="bno" >
 		<input type="hidden" id="cno" name="cno" >
 		
-		<div class="w3-auto w3-center pdt40"  ">
+		<div class="w3-auto w3-center pdt40" >
 			<select id="sel" name="sel" class="w3-col w3-quarter w3-select w3-center">
 				<option disabled selected>*** 제목 검색 ***</option>
 				<option value="col">컬렉션</option>

@@ -55,12 +55,14 @@ $(document).ready(function(){
 		// 기존데이터
 		var tmail = $('#tmail').val();
 		var ttel = $('#ttel').val();
+		var tbir = $('#tbir').val();
 		
 	
 		// 수정데이터
 		var mail = $('#mail').val();
 		var tel = $('#tel').val();
 		var pw = $('#pw').val();
+		var birth = $('#birth').val();
 		var fno = $('#file').val();
 		
 		if(!pw){
@@ -75,7 +77,7 @@ $(document).ready(function(){
 		if(!fno){
 			$('#fno').prop('disabled', true);
 		}
-		if(!pw && (tmail == mail) && (ttel == tel)  && !fno){
+		if(!pw && (tmail == mail) && (ttel == tel)   &&!fno){
 			// 수정을 X
 			alert('수정된 개인정보가 없습니다.');
 			return;
@@ -98,6 +100,31 @@ $(document).ready(function(){
 			$('#pw').css('background-color', 'lightgray').prop('readonly', true);
 			$('#repw').css('background-color', 'lightgray').prop('readonly', true);
 		}
+	});
+	
+	//-------------------------------------------------------------------------------
+	
+	// 체크시 탈퇴 버튼 노출
+	$('#delete').click(function(){
+		$('#delbox').css('display','block')
+	});
+
+
+	// 탈퇴 모달창
+	$('#dbtn').click(function(){
+		var spw = $('#pw').val();	
+		if(!spw){
+			$('#pw').focus();
+			return;
+		}
+		$('#id01').css('display', 'block');
+	
+		// 탈퇴 처리 
+		$('#exit').click(function(){
+		
+			$('#frm').attr('action', '/boa/member/delMemberProc.boa');
+			$('#frm').submit();
+		});
 	});
 
 });

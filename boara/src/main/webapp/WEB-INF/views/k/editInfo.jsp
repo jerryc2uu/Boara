@@ -40,6 +40,7 @@
 				<input type="hidden" id="tmail" value="${DATA.mail}">
 				<input type="hidden" id="ttel" value="${DATA.tel}">
 				<input type="hidden" id="tpw" value="${DATA.pw}">
+				<input type="hidden" id="tbir" value="${DATA.birth}">
 	
 			<c:forEach var="data" items="${LIST}">
 				<input type="hidden" id="tfno" value="${data.fno}" > 
@@ -48,11 +49,15 @@
 		-->
 			<div class="w3-margin-top  w3-content">
 				<label for="name" class="w3-col m3 w3-right-align ft20">회원이름 : </label>
-				<h4 class="w3-col s8 w3-center ft18 w3-margin-top w3-magrin-left w3-margin-bottom">${DATA.name}</h4>
+				<h4 class="w3-col s8 w3-center ft18  w3-magrin-left ">${DATA.name}</h4>
 			</div>
 			<div class="w3-margin-top  w3-content">
 				<label class="w3-col m3 w3-right-align ft20">아 이 디 : </label>
-				<h4 class="w3-col ft18 s8 w3-center w3-magrin-left w3-magrin-left w3-margin-bottom">${DATA.id}</h4>
+				<h4 class="w3-col ft18 s8 w3-center w3-magrin-left w3-magrin-left ">${DATA.id}</h4>
+			</div>
+			<div class="w3-margin-top  w3-content">
+				<label class="w3-col m3 w3-right-align ft20">생년월일 : </label>
+				<h4 class="w3-col s8 w3-center ft18  w3-magrin-left ">${DATA.birth}</h4>
 			</div>
 			<div class="w3-margin-top w3-content">
 				<label for="pw" class="w3-col m3 w3-right-align ft20">비밀번호 : </label>

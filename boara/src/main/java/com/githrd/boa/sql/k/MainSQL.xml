@@ -22,7 +22,7 @@
   -->
 <mapper namespace="maSQL">
 
-	<!-- weekly 조회수 top5  -->	    
+	<!-- weekly 조회수 top5 sysdate-7 ==> sysdate-20 -->	    
 	  <select id="topBoard" resultType="fVO">
 	   SELECT
 		    bno, savename, title, click
@@ -40,7 +40,7 @@
 		                f.whereis = 'B'
 		                AND f.isshow ='C'
 		                AND b.bno = f.bno
-		                AND wdate <![CDATA[>=]]> sysdate-7
+		                AND wdate <![CDATA[>=]]> sysdate-20
 		            ORDER BY 
 		                click DESC
 		        )
@@ -59,7 +59,7 @@
 		     f.bno(+) = b.bno
 		     AND h.bno = b.bno(+)
 		     AND f.isshow(+) = 'C'
-		     AND sysdate BETWEEN hstart AND hend
+		     AND sysdate BETWEEN hstart AND hend+20
 	</select>
 	 
 	<!-- 검색 컬렉션 개수 조회 -->
@@ -145,5 +145,59 @@
 		FROM
 		    genre
  	</select>
+
+	<!-- 쪽지관련 -->
+	<sql id="list">
+						 #{id}
+		    AND isshow = 'Y'
+		ORDER BY
+		    mdate DESC
+		    ,mgno DESC
+	</sql>
+	 
+	 
+	<select id="receList" resultType="msVO" parameterType="msVO">
+		SELECT
+		    mgno, sendid, title, body, TO_CHAR(mdate, 'YYYY/mm/dd') mdate, NVL(to_char(read), '읽지않음') ck, TO_CHAR(NVL(read, mdate), 'YYYY/mm/dd') read 
+		FROM
+		    message
+		WHERE
+		    recvid = 
+		<include refid="list" />
+	</select>
+	
+	<select id="sendList" resultType="msVO" parameterType="msVO">
+		SELECT
+		    mgno, recvid, title, body, TO_CHAR(mdate, 'YYYY/mm/dd') mdate
+		FROM
+		    message
+		WHERE
+		    sendid = 
+		<include refid="list" />
+	</select>
+	
+	<select id="IdList" resultType="msVO" parameterType="msVO">
+		SELECT
+		    id
+		FROM
+		    member
+		WHERE
+		    id != #{id}
+	</select>
+	
+	<insert id="sendMess" parameterType="msVO">
+		<selectKey keyProperty="mgno" resultType="int" order="BEFORE">
+			SELECT 
+				NVL(MAX(mgno) + 1, 100001)
+			FROM 
+				message
+		</selectKey>
+	
+		INSERT INTO
+		    message(mgno, sendid, recvid, title, body)
+		values(
+		   #{mgno}, #{id}, #{recvid}, #{title} ,#{body}
+		   )
+	</insert>
 
 </mapper>

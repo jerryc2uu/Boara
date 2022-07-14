@@ -8,6 +8,12 @@ package com.githrd.boa.dao.k;
  * 			작업이력 ]
  * 				2022.06.12	-	담당자 : 김소연
  * 									클래스 제작 
+ * 				2022.06.29  - 		top 게시글 
+ * 				2022.07.03	-		컬렉션 검색
+ *				2022.07.06	-		게시글 검색
+ *				2022.07.12	- 		발신, 수신 메세지 조회
+ *				2022.07.13 	-		수신자 조회, 쪽지보내기
+ * 
  *
  */
 
@@ -16,8 +22,8 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 import com.githrd.boa.vo.k.FileVO;
+import com.githrd.boa.vo.k.MessageVO;
 import com.githrd.boa.vo.k.SearchVO;
 
 public class MainBoardDao {
@@ -48,6 +54,23 @@ public class MainBoardDao {
 	// 장르 디테일 조회
 	public List<SearchVO> getGnr() {
 		return sqlSession.selectList("maSQL.gnrList");
+	}
+	// 받은메세지 조회
+	public List<MessageVO> getReceList(MessageVO msVO) {
+		return  sqlSession.selectList("maSQL.receList", msVO);
+	}
+	// 보낸메세지 조회
+	public List<MessageVO> getSendList(MessageVO msVO) {
+		return  sqlSession.selectList("maSQL.sendList", msVO);
+	}
+	// 보낸메세지 조회
+	public List<MessageVO> getIdList(MessageVO msVO) {
+		return  sqlSession.selectList("maSQL.IdList", msVO);
+	}
+	
+	// 쪽지보내기
+	public int addMess(MessageVO msVO) {
+		return sqlSession.insert("maSQL.sendMess", msVO);
 	}
 	
 }

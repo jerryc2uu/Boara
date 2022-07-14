@@ -12,8 +12,109 @@
 <script type="text/javascript" src="/boa/js/k/join.js"></script>
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
- <!-- iamport.payment.js -->
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.4.js"></script>
+  <!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script><script type="text/javascript">
+
+/*
+var IMP = window.IMP; 
+IMP.init('imp53161363'); 
+
+ IMP.certification({
+	 m_redirect_url : "k/join",
+	 popup : true 
+ }, function (rsp) { // callback
+	 if ( rsp.success ) {
+         // 인증성공
+        console.log(rsp.imp_uid);
+		alert("1. " + rsp.imp_uid);        
+        alert("1. 성공");
+       $.ajax({
+                type : 'POST',
+                url: '/boa/member/join.boa',
+                dataType: "json",
+            	data: {
+            		imp_uid : rsp.imp_uid
+            		}
+       		}).done(function(){
+            	 takeResponseAndHandle(rsp)
+            });
+	  } else {
+	         // 인증취소 또는 인증실패
+	        var msg = '인증에 실패하였습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	 
+	        alert(msg);
+	        $('#certi').prop('disabled', true);
+	        $('frm').attr('action', '/boa/member/join.boa');
+	        $('#frm').submit();
+	    }
+	});
+ 
+	 function takeResponseAndHandle(rsp) {
+		    if ( rsp.success ) {
+		        // 인증성공
+		        
+		        $('#certi').val('Y')
+		    } else {
+		         // 인증취소 또는 인증실패
+		        var msg = '인증에 실패하였습니다.';
+		        msg += '에러내용 : ' + rsp.error_msg;
+	
+		        alert(msg);
+		        $('#certi').prop('disabled', true);
+		        $('frm').attr('action', '/boa/member/join.boa');
+		        $('#frm').submit();
+		    }
+		}
+
+ 
+ 
+
+ ----------------------------------------------------------------------
+	 app.use(bodyParser.json());
+	 // "/certifications"에 대한 POST 요청을 처리하는 controller
+	 app.post("/certifications", async (request, response) => {
+	   const { imp_uid } = request.body; // request의 body에서 imp_uid 추출
+	 })
+	  app.use(bodyParser.json());
+  
+  // "/certifications"에 대한 POST 요청을 처리하는 controller
+  app.post("/certifications", async (request, response) => {
+    const { imp_uid } = request.body; // request의 body에서 imp_uid 추출
+    try {
+      const getToken = await axios({
+        url: "https://api.iamport.kr/users/getToken",
+        method: "post", // POST method
+        headers: { "Content-Type": "application/json" }, // "Content-Type": "application/json"
+        data: {
+          imp_key: "0760855733743360", // REST API키
+          imp_secret: "ah6OWUVBhM4CAtddyNp9xNU3ls6FkLUfDPnh67KzaAu3PcAsbWeTNEbBe0B7pXVEi3z4aQvxvkESfjct" // REST API Secret
+        }
+      });
+      const { access_token } = getToken.data.response; // 인증 토큰
+      // imp_uid로 인증 정보 조회
+      const getCertifications = await axios({
+        url: "https://api.iamport.kr/certifications/${imp_uid}", // imp_uid 전달
+        method: "get", // GET method
+        headers: { "Authorization": access_token } // 인증 토큰 Authorization header에 추가
+      });
+      const certificationsInfo = getCertifications.data.response; // 조회한 인증 정보
+      const { name, birth } = certificationsInfo;
+      
+      // 연령 제한 로직
+      if (new Date(birth).getFullYear() <= 2003) {
+        $('#birth').val(birth);
+        alert("성인인증이 완료되었습니다.")
+      } else {
+        alert("미성년자로 등록되었습니다.")
+      }   
+    } catch(e) {
+      console.error(e);
+    }
+  });
+	*/ 
+	 
+ </script>
 <style type="text/css">
 	.main {
 	max-width :900px;
@@ -32,14 +133,13 @@
 	margin-bottom : 20px;
 }
 </style>
-
-
 </head>
 <body>
 	<div class="w3-content w3-center main">
 		<h1 class="w3-text-indigo w3-padding w3-xxxlarge w3-border-bottom "><b>BOARA 회원가입</b></h1>
 		<form method="POST" action="" name="frm" id="frm" encType="multipart/form-data"
 									class="w3-col mgt60 w3-border w3-margin-bottom w3-text-grey w3-padding">
+			<input type="hidden" name="certi" id="certi">						
 <c:if test="${not empty param.vw}">
 			<input type="hidden" name="vw" value="${param.vw}">
 			<input type="hidden" name="nowPage" value="${param.nowPage}">
@@ -47,9 +147,8 @@
 			<div class="mgt20  w3-content">
 				<label for="name" class="w3-col s3 w3-right-align ft20">회원이름 : </label>
 				<div class="w3-col m8">
-					<input type="text" name="name" id="name"class="ft18 w3-margin-bottom w3-margin-left w3-col m9 w3-input w3-border w3-round-medium" 
+					<input type="text" name="name" id="name"class="ft18 w3-margin-bottom w3-margin-left w3-col w3-input w3-border w3-round-medium" 
 								placeholder="이름을 입력하세요">
-					<div class=" w3-col m2 w3-right w3-button  w3-indigo w3-text-white w3-round-medium ft18" id="certi">회원인증</div>
 				</div>				
 			</div>
 			
@@ -74,6 +173,12 @@
 				<div class="w3-col m8">
 					<input type="password" id="repw" class="w3-margin-bottom ft18 w3-margin-left w3-col w3-input w3-border w3-round-medium">
 					<span class="w3-col mgb10 w3-text-red w3-center" id="repwmsg">비밀번호 체크 처리 메세지</span>
+				</div>
+			</div>
+			<div class="mgt20 w3-content">
+				<label for="birth" class="w3-col s3 w3-right-align ft20">생년월일 : </label>
+				<div class="w3-col m8">
+					<input type="date" id="birth" name="birth" class="w3-margin-bottom ft18 w3-margin-left w3-col w3-input w3-border w3-round-medium">
 				</div>
 			</div>
 			<div class="mgt20  w3-content">
