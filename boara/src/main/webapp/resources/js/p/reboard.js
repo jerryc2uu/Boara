@@ -21,6 +21,7 @@ $(document).ready(function(){
 	$('#boardList').click(function(){
 		$('input').prop('disabled', true);
 		$('#bno').prop('disabled', false);
+		$('#cno').prop('disabled', false);
 		$('#frm').attr('action', '/boa/reboard/reboardList.boa');
 		$('#frm').submit();
 	});

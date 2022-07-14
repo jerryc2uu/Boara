@@ -16,15 +16,15 @@
 	<!-- 댓글 리스트 조회 -->
 	<select id="getList" resultType="rVO" parameterType="rVO">
 		SELECT
-		    rowno, rno, bno, uprno, mno, id, oid, body, rdate, savename, isshow, step
+		    rowno, rno, bno, uprno, cno, mno, id, oid, body, rdate, savename, isshow, step
 		FROM
 		    (
 		    SELECT
-		        ROWNUM rowno, rno, bno, uprno, mno, id, oid, body, rdate, savename, isshow, step
+		        ROWNUM rowno, rno, bno, uprno, cno, mno, id, oid, body, rdate, savename, isshow, step
 		    FROM
 		        (
 		        SELECT
-		            r.rno, r.bno, uprno, r.mno, id, 
+		            r.rno, r.bno, uprno, c.cno cno, r.mno, m.id, 
 		            (
 		            SELECT
 		                id oid
@@ -40,11 +40,13 @@
 		                            b.bno = #{bno}
 		                            )
 		            ) oid,
-		                body, rdate, savename, r.isshow, (level - 1) step         
+		                r.body, rdate, savename, r.isshow, (level - 1) step         
 		        FROM
-		            reply r, member m, imgfile f
+		            reply r, member m, imgfile f, board b, collection c
 		        WHERE
 		            r.isshow IN('Y', 'S')
+		            AND c.mno = b.mno
+		            AND b.bno = r.bno
 		            AND r.mno = m.mno
 		            AND m.mno = f.mno(+)
 		            AND r.bno = #{bno}

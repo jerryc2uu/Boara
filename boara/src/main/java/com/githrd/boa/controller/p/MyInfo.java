@@ -1,6 +1,9 @@
 package com.githrd.boa.controller.p;
 
+import java.io.IOException;
 import java.util.List;
+
+
 
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.githrd.boa.dao.p.MyInfoDao;
+import com.githrd.boa.service.p.IamPort;
 import com.githrd.boa.util.p.PageUtil;
 import com.githrd.boa.vo.p.MyInfoVO;
 
@@ -30,6 +34,10 @@ public class MyInfo {
 	
 	@Autowired
 	MyInfoDao iDao;
+	
+	@Autowired
+	IamPort pt;
+	
 	
 	//마이페이지 메인 보기 요청
 	@RequestMapping("/myinfo.boa")
@@ -67,7 +75,7 @@ public class MyInfo {
 		return mv;
 	}
 	
-	// 포인트 내역 폼보기
+	// 전체 포인트 내역 폼보기
 	@RequestMapping("/mypoint.boa")
 	public ModelAndView myPoint(ModelAndView mv, HttpSession session, MyInfoVO iVO, PageUtil page) {
 		String id = (String) session.getAttribute("SID");
@@ -83,9 +91,10 @@ public class MyInfo {
 
 		//포인트 내역 조회
 		List<MyInfoVO> list = iDao.myPoint(iVO);
-		
+		System.out.println(list);
 		mv.addObject("LIST", list);
 		mv.addObject("PAGE", page);
+		mv.addObject("PCODE", iVO.getPcode());
 		mv.setViewName("p/myPoint");
 		return mv;
 	}
@@ -161,7 +170,6 @@ public class MyInfo {
 		
 		//뷰
 		mv.setViewName("p/myboard");
-		System.out.println(list);
 		return mv;
 	}
 
@@ -212,15 +220,41 @@ public class MyInfo {
 		
 		iVO.setResult("OK");
 		mv.addObject("VIEW", view);
+		System.out.println("mer : " + iVO.getMerchant_uid());
+		System.out.println("imp : " + iVO.getImp_uid());
 		mv.addObject("MSG", gnp + " 포인트 충전에 성공했습니다.");
 		mv.setViewName("p/redirect");
 		return mv;
+		
+		
 	}
 	
 	//나의 구독 리스트
 	@RequestMapping("/mySub.boa")
 	public ModelAndView mySub(ModelAndView mv) {
 		mv.setViewName("p/mySub");
+		return mv;
+	}
+	
+	//포인트 환불하기
+	@RequestMapping("/canclePay.boa")
+	public ModelAndView canclePay(ModelAndView mv, MyInfoVO iVO) {
+		
+		String imp = iVO.getImp_uid();
+		int gnp = iVO.getGnp();
+		
+		try {
+			
+			pt.refundPoint(iVO);
+		    mv.addObject("MSG", "환불이 완료되었습니다.");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("MSG", "환불에 실패했습니다. 다시 시도해주세요.");
+		}
+		
+		mv.addObject("VIEW", "/boa/member/myinfo.boa");
+		mv.setViewName("p/redirect");
 		return mv;
 	}
 	

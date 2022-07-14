@@ -28,16 +28,17 @@
 	<!-- 데이터 전송용 폼태그 -->
 	<form method="POST" action="/boa/member/myreboard.boa" id="frm" name="frm">
 		<input type="hidden" name="nowPage" id="nowPage" value="${PAGE.nowPage}">
+		<input type="hidden" name="bnowPage" id="bnowPage" value="1">
 		<input type="hidden" name="id" id="id" value="${SID}">
 	</form>
 	
-	<div class="w3-content mxw700" style="margin-right: 550px;">
+	<div class="w3-content w3-center" style="width: 980px;">
 		<!-- 페이지 헤더 -->
 		<header class="w3-col mgb20">
-			<h1 class="w3-center mg0" style="width: 900px; margin-top: 30px; margin-bottom: 30px;">내가 작성한 댓글</h1>
+			<h1 class="w3-center mg0" style="margin-top: 30px; margin-bottom: 30px;">내가 작성한 댓글</h1>
 		</header>
 		
-		<div class="w3-col w3-white w3-card-4 w3-round-large pd15" style="width: 900px;">
+		<div class="w3-col w3-white w3-card-4 w3-round-large pd15" style="margin-bottom: 50px;">
 			<div class="w3-col w3-light-grey w3-center w3-border">
 				<div class="w3-col m2 w3-border-right">글번호</div>
 				<div class="w3-col m3 w3-border-right">상위글</div>				
@@ -59,7 +60,7 @@
 		</div>
 		
 		<!-- 페이지 처리 시작 -->
-		<div class="w3-center" style="margin-left: 170px;">
+		<div class="w3-center" style="width: 900px; margin: 0 auto;">
 			<div class="w3-bar w3-border w3-round-medium w3-card w3-margin-top w3-margin-bottom">
 	<c:if test="${PAGE.startPage eq 1}">
 				<div class="w3-bar-item w3-light-grey">&laquo;</div>

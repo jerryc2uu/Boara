@@ -86,4 +86,14 @@ public class MyInfoDao {
 	public int addPointProc(MyInfoVO iVO) {
 		return sqlSession.insert("iSQL.addPointProc", iVO);
 	}
+	
+	//환불 시 변경
+	public int refund(MyInfoVO iVO) {
+		return sqlSession.insert("iSQL.refund", iVO);
+	}
+
+	//환불 시 포인트 차감
+	public int minusPoint(MyInfoVO iVO) {
+		return sqlSession.insert("iSQL.minusPoint", iVO);
+	}
 }

@@ -7,7 +7,8 @@ public class MyInfoVO {
 	
 	private int mno, cno, bno, rno, rcnt, bcnt, sumpoint, click, 
 				startCont, endCont, nowPage, pno, gnp, pcode, price, rowno, hno;
-	private String id, name, body, pw, mail, tel, sdate, savename, title, cname, detail, result, message;
+	private String id, name, body, pw, mail, tel, sdate, savename, title, cname, detail, 
+				result, message, merchant_uid, imp_uid, isRefund;
 	private Date jdate, wdate;
 	
 	public int getMno() {
@@ -207,6 +208,24 @@ public class MyInfoVO {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+	public String getMerchant_uid() {
+		return merchant_uid;
+	}
+	public void setMerchant_uid(String merchant_uid) {
+		this.merchant_uid = merchant_uid;
+	}
+	public String getImp_uid() {
+		return imp_uid;
+	}
+	public void setImp_uid(String imp_uid) {
+		this.imp_uid = imp_uid;
+	}
+	public String getIsRefund() {
+		return isRefund;
+	}
+	public void setIsRefund(String isRefund) {
+		this.isRefund = isRefund;
+	}
 	@Override
 	public String toString() {
 		return "MyInfoVO [mno=" + mno + ", cno=" + cno + ", bno=" + bno + ", rno=" + rno + ", rcnt=" + rcnt + ", bcnt="
@@ -215,8 +234,8 @@ public class MyInfoVO {
 				+ price + ", rowno=" + rowno + ", hno=" + hno + ", id=" + id + ", name=" + name + ", body=" + body
 				+ ", pw=" + pw + ", mail=" + mail + ", tel=" + tel + ", sdate=" + sdate + ", savename=" + savename
 				+ ", title=" + title + ", cname=" + cname + ", detail=" + detail + ", result=" + result + ", message="
-				+ message + ", jdate=" + jdate + ", wdate=" + wdate + "]";
+				+ message + ", merchant_uid=" + merchant_uid + ", imp_uid=" + imp_uid + ", isRefund=" + isRefund
+				+ ", jdate=" + jdate + ", wdate=" + wdate + "]";
 	}
-	
 	
 }

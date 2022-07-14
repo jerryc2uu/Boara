@@ -8,19 +8,31 @@
 <script type="text/javascript" src="/boa/resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#frm').submit();
+		
+		var msg = $('#msg').val();
+		var sid = $('#id').val();
+		
+		if(msg == '환불이 완료되었습니다.' || msg == '환불에 실패했습니다. 다시 시도해주세요.') {
+		
+			window.top.location.href = '/boa/member/myinfo.boa?id=' + sid + '&msg=' + msg;
+
+		} else {
+	
+			$('#frm').submit();
+			
+		}
 	});
 </script>
 </head>
 <body>
 <c:if test="${not empty VIEW}">
 	<form method="POST" action="${VIEW}" id="frm" name="frm">
-		<input type="hidden" name="id" value="${SID}">
+		<input type="hidden" name="id" id="id" value="${SID}">
 	<c:if test="${not empty param.nowPage}">
 		<input type="hidden" name="nowPage" value="${param.nowPage}">
 	</c:if>	
 	<c:if test="${not empty MSG}">
-		<input type="hidden" name="msg" value="${MSG}">
+		<input type="hidden" name="msg" id="msg" value="${MSG}">
 	</c:if>
 	<c:if test="${not empty param.bno}">
 		<input type="hidden" name="bno" value="${param.bno}">

@@ -3,7 +3,12 @@ $(document).ready(function(){
 	
 	//페이징처리
 	$('.pbtn').click(function(){
-		var sno = $(this).attr('id');
+		var sno = $(this).attr('id');	
+		var pcode = $(this).parent().attr('id');
+		
+		if(pcode == 101) {
+			$('#pcode').prop('disabled', false);
+		}
 		
 		$('#nowPage').val(sno);
 		$('#frm').submit();
@@ -59,13 +64,15 @@ $(document).ready(function(){
 	
 	//전체 포인트 내역
 	$('#allList').click(function(){
+		$('#nowPage').val(1);
 		$('#frm').submit();
 	});
 	
-	//충전 내역
+	//충전 내역만 보기
 	$('#addList').click(function(){
-		alert('충전내역만');
-		$('#pcode').prop('disabled', 'false');
+		$('#nowPage').val(1);
+		$('#pcode').prop('disabled', false);
+		var pcode = $('#pcode').val();
 		$('#frm').submit();
 	});
 	
@@ -112,10 +119,16 @@ $(document).ready(function(){
 	      
 	       	var msg = '결제가 완료되었습니다.';
 	        msg += '고유ID : ' + rsp.imp_uid;
-	        msg += '상점 거래ID : ' + rsp.merchant_uid;
+	        msg += '상점 거래ID : ' + rsp.merchant_uid; //결제 번호
 	        msg += '결제 금액 : ' + rsp.paid_amount;
 	        msg += '카드 승인번호 : ' + rsp.apply_num;
 	        
+	        var marchan = rsp.merchant_uid;
+	        //var payno = marchan.split('_');
+	        //$('#payno').val(payno[1]);
+	        
+	        $('#mer').val(rsp.merchant_uid);
+	        $('#imp').val(rsp.imp_uid);
 	        $('#frm').submit();
 	        
 	      } else {
@@ -124,5 +137,24 @@ $(document).ready(function(){
 	      }
 	      alert(msg);
 	  });
+	});
+	
+	//포인트 환불 버튼
+	$('.canclePay').click(function(){
+		 
+      $('#imp').prop('disabled', false);
+      $('#gnp').prop('disabled', false);
+
+      //결제번호
+      var imp = $(this).attr('id');
+      $('#imp').val(imp);
+      
+      //환불 금액
+      var gnp = $(this).prev().text();
+      $('#gnp').val(gnp);
+      
+      alert('환불');
+      $('#frm').attr('action', '/boa/member/canclePay.boa');
+      $('#frm').submit();
 	});
 });

@@ -59,11 +59,12 @@ public class Reboard {
 		
 		//댓글 리스트 조회
 		List<ReboardVO> list = rDao.getList(rVO);
-		
+		System.out.println("CNO : " + list.get(0).getCno());
 		//System.out.println("list : " + list);
 		mv.addObject("LIST", list);
 		mv.addObject("PAGE", page);
 		mv.addObject("BNO", bno);
+		mv.addObject("CNO", list.get(0).getCno());
 		
 		mv.setViewName("p/reboardList");
 		return mv;

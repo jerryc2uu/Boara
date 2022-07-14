@@ -160,7 +160,7 @@ img {
 		<input type="hidden" id="id" name="id" value="${SID}">
 		<input type="hidden" id="uprno" name="uprno">
 		<input type="hidden" id="bno" name="bno" value="${BNO}">
-		<input type="hidden" id="cno" name="cno" value="${param.cno}">
+		<input type="hidden" id="cno" name="cno" value="${CNO}">
 		<input type="hidden" id="bnowPage" name="bnowPage" value="${param.bnowPage}">
 		<input type="hidden" id="view" name="vw" value="/boa/reboard/reboardList.boa">
 	</form>

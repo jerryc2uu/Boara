@@ -32,13 +32,13 @@
 		<input type="hidden" name="id" id="id" value="${SID}">
 	</form>
 	
-	<div class="w3-content mxw700" style="margin-right: 550px;">
+	<div class="w3-content w3-center" style="width: 980px;">
 		<!-- 페이지 헤더 -->
 		<header class="w3-col mgb20">
-			<h1 class="w3-center mg0" style="width: 900px; margin-top: 30px; margin-bottom: 30px;">나의 좋아요 리스트</h1>
+			<h1 class="w3-center mg0" style="margin-top: 30px; margin-bottom: 30px;">나의 좋아요 리스트</h1>
 		</header>
 		
-		<div class="w3-col w3-white w3-card-4 w3-round-large pd15" style="width: 900px;">
+		<div class="w3-col w3-white w3-card-4 w3-round-large pd15" style="margin-bottom: 50px;">
 			<div class="w3-col w3-light-grey w3-center w3-border">
 				<div class="w3-col m2">
 					<div class="w3-col m5 w3-border-right">글번호</div>
@@ -67,7 +67,7 @@
 		</div>
 		
 		<!-- 페이지 처리 시작 -->
-		<div class="w3-center" style="margin-left: 170px;">
+		<div class="w3-center" style="width: 900px; margin: 0 auto;">
 			<div class="w3-bar w3-border w3-round-medium w3-card w3-margin-top w3-margin-bottom">
 	<c:if test="${PAGE.startPage eq 1}">
 				<div class="w3-bar-item w3-light-grey">&laquo;</div>

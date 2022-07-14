@@ -35,6 +35,8 @@ font-weight: lighter ;
 	<form method="POST" action="/boa/member/mypoint.boa" id="frm" name="frm">
 		<input type="hidden" name="nowPage" id="nowPage" value="${PAGE.nowPage}">
 		<input type="hidden" name="id" id="id" value="${SID}">
+		<input type="hidden" name="gnp" id="gnp" disabled>
+		<input type="hidden" name="imp_uid" id="imp" disabled>
 		<input type="hidden" name="pcode" id="pcode" value="101" disabled>
 	</form>
   	
@@ -45,31 +47,43 @@ font-weight: lighter ;
 			<div class="w3-button w3-hover-blue w3-indigo btnbox parent" id="addList">충전내역</div>
 		<div class="w3-col w3-round-large w3-card-4 w3-margin-bottom w3-margin-top w3-padding w3-center">
 			<div class="w3-col m2 w3-left">분류</div>
-			<div class="w3-col m6 w3-center">내용</div>
-			<div class="w3-col m3 w3-right">일자</div>
-			<div class="w3-col m1 w3-right">금액</div>
+			<div class="w3-col m4 w3-center">내용</div>
+			<div class="w3-col m3">일자</div>
+			<div class="w3-col m1">금액</div>
+			<div class="w3-col m2">환불</div>
 		</div>
+
 		<!-- 페이지 본문 -->
-<c:forEach var="data" items="${LIST}">
-		<div class="w3-col w3-round-large w3-card-4 w3-margin-bottom w3-margin-top w3-padding w3-center" style="line-height:70px;">
-	<c:if test="${data.pcode lt 200 && data.pcode ne 101}">
-			<div class="w3-col m2 w3-left"><div class="btnbox w3-dark-grey parent">적립</div></div>
-	</c:if>
-	<c:if test="${data.pcode ge 200}">
-			<div class="w3-col m2 w3-left"><div class="btnbox w3-red parent">사용</div></div>
-	</c:if>
-	<c:if test="${data.pcode eq 101}">
-			<div class="w3-col m2 w3-left"><div class="btnbox w3-green parent">충전</div></div>
-	</c:if>
-			<div class="w3-col m6 w3-center">${data.detail}</div>  
-			<div class="w3-col m3 w3-right">${data.sdate}</div>
-			<div class="w3-col m1 w3-right">${data.gnp}</div>
-		</div>
-</c:forEach>
+		<!-- 전체 포인트 내역 -->
+	<c:forEach var="data" items="${LIST}">
+			<div class="w3-col w3-round-large w3-card-4 w3-margin-bottom w3-margin-top w3-padding w3-center" style="line-height:70px;">
+		<c:if test="${data.pcode lt 200 && data.pcode ne 101}">
+				<div class="w3-col m2 w3-left"><div class="btnbox w3-dark-grey parent">적립</div></div>
+		</c:if>
+		<c:if test="${data.pcode ge 200 && data.pcode ne 205}">
+				<div class="w3-col m2 w3-left"><div class="btnbox w3-red parent">사용</div></div>
+		</c:if>
+		<c:if test="${data.pcode eq 101}">
+				<div class="w3-col m2 w3-left"><div class="btnbox w3-green parent">충전</div></div>
+		</c:if>
+		<c:if test="${data.pcode eq 205}">
+				<div class="w3-col m2 w3-left"><div class="btnbox w3-orange parent">환불</div></div>
+		</c:if>
+				<div class="w3-col m4 w3-center">${data.detail}</div>  
+				<div class="w3-col m3">${data.sdate}</div>
+				<div class="w3-col m1">${data.gnp}</div>
+			<c:if test="${data.isRefund == 'N'}">
+				<div class="w3-col m2 w3-right w3-indigo w3-hover-orange canclePay" id="${data.imp_uid}">환불하기</div>
+			</c:if>
+			<c:if test="${data.isRefund == 'Y'}">
+				<div class="w3-col m2 w3-right">환불완료</div>
+			</c:if>
+			</div>
+	</c:forEach>
 		
-		<!-- 페이지 처리 시작 -->
+		<!-- 페이지 처리 시작 -->	
 		<div class="w3-center">
-			<div class="w3-bar w3-border w3-margin-top w3-margin-bottom">
+			<div class="w3-bar w3-border w3-margin-top w3-margin-bottom" id="${PCODE}">
 	<c:if test="${PAGE.startPage eq 1}">
 				<div class="w3-bar-item w3-light-grey">&laquo;</div>
 	</c:if>
@@ -92,7 +106,24 @@ font-weight: lighter ;
 			</c:if>
 			</div>
 		</div>
-		<!-- 페이지 처리 태그 끝 -->
+		<!-- 페이지 처리 끝 -->
+
+	<!-- 메세지 출력 모달창 -->
+<c:if test="${not empty param.msg}">
+	<div id="modal" class="w3-modal" style="display:block;">
+	    <div class="w3-modal-content mxw650 w3-animate-top w3-card-4">
+	      <header class="w3-container w3-indigo"> 
+	        <span onclick="document.getElementById('modal').style.display='none'" 
+	        class="w3-button w3-display-topright">&times;</span>
+	        <h2>BOARA Message</h2>
+	      </header>
+	      <div class="w3-container w3-center">
+	        <h4 id="payMsg">${param.msg}</h4>
+	      </div>
+	    </div>
+ 	</div>
+</c:if>
+
 	</div>
 		</div>
 </body>

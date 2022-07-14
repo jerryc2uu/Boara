@@ -114,21 +114,21 @@
 		                id = #{id}
 		            )
 		<if test ="pcode eq 101">
-		    AND pcode = 101
+		    AND pcode = #{pcode}
 		</if>
 	</select>
 	<!-- 포인트 내역 조회-->
 	<select id="myPoint" resultType="iVO" parameterType="iVO">
 		SELECT
-		    pno, gnp, sdate, pcode, detail
+		    pno, gnp, sdate, pcode, detail, NVL(merchant_uid, 0) merchant_uid, NVL(imp_uid, 0) imp_uid, NVL(isRefund, 0) isRefund
 		FROM
 		    (
 		    SELECT
-		        ROWNUM rno, pno, gnp, sdate, pcode, detail
+		        ROWNUM rno, pno, gnp, sdate, pcode, detail, merchant_uid, imp_uid, isRefund
 		    FROM
 		        (
 		        SELECT
-		            pno, p.gnp gnp, TO_CHAR(p.pdate, 'yyyy/MM/dd') sdate, p.pcode pcode, detail
+		            pno, p.gnp gnp, TO_CHAR(p.pdate, 'yyyy/MM/dd') sdate, p.pcode pcode, detail, p.merchant_uid, p.imp_uid, p.isRefund
 		        FROM
 		            point p, detailcode d
 		        WHERE   
@@ -142,7 +142,7 @@
 		                        id = #{id}
 		                    )
 		    <if test ="pcode eq 101">
-		           AND p.pcode = 101
+		           AND p.pcode = #{pcode}
 		    </if>
 		        ORDER BY
 		            pno DESC
@@ -281,15 +281,15 @@
 	<!-- 내가 작성한 게시글 목록 -->
 	<select id="myBoard" resultType="iVO" parameterType="iVO">
 		SELECT
-		    bno, cname, title, sdate, click, hno           
+		    bno, cname, cno, title, sdate, click, hno           
 		FROM
 		    (
 		    SELECT
-		        ROWNUM rno, bno, cname, title, sdate, click, hno
+		        ROWNUM rno, bno, cname, cno, title, sdate, click, hno
 		    FROM
 		        (
 		        SELECT
-		            b.bno, cname, b.title title, TO_CHAR(wdate, 'yyyy/MM/dd') sdate, click, h.hno hno   
+		            b.bno, cname, b.cno, b.title title, TO_CHAR(wdate, 'yyyy/MM/dd') sdate, click, h.hno hno   
 		        FROM
 		            board b, collection c, hot h
 		        WHERE
@@ -385,7 +385,7 @@
 	<!-- 포인트 충전 -->
 	<insert id="addPointProc" parameterType="iVO">
 		INSERT INTO
-		    point(pno, mno, gnp, pcode, sumpoint)
+		    point(pno, mno, gnp, pcode, sumpoint, merchant_uid, imp_uid, isRefund)
 		VALUES(
 		    (SELECT
 		        NVL(MAX(pno) + 1, 1000000001) 
@@ -418,7 +418,57 @@
 		                    WHERE
 		                        id = #{id}
 		                    )
-		            ) = pno) + #{gnp}
+		            ) = pno) + #{gnp}, #{merchant_uid}, #{imp_uid}, 'N'
+		)
+	</insert>
+	
+	<!-- 환불 처리 시 기존 포인트 충전 Y로 변경 -->
+	<update id="refund" parameterType="iVO">
+		UPDATE
+		    point
+		SET
+		    isRefund = 'Y'
+		WHERE
+		    imp_uid = #{imp_uid}
+	</update>
+
+	<!-- 환불 처리 시 포인트 차감 -->
+	<insert id="minusPoint" parameterType="iVO">
+		INSERT INTO
+		    point(pno, mno, gnp, pcode, sumpoint)
+		VALUES(
+		    (SELECT
+		        NVL(MAX(pno) + 1, 1000000001) 
+		     FROM
+		        point),
+		    (
+		    SELECT
+		        mno
+		    FROM
+		        member
+		    WHERE
+		        id = #{id}
+		    ), #{gnp}, 205, 
+		        (SELECT
+		            sumpoint
+		        FROM
+		            point
+		        WHERE
+		            (
+		            SELECT
+		                MAX(pno)
+		            FROM
+		                point
+		            WHERE
+		                mno = (
+		                    SELECT
+		                        mno
+		                    FROM
+		                        member
+		                    WHERE
+		                        id = #{id}
+		                    )
+		            ) = pno) - #{gnp}
 		)
 	</insert>
 </mapper>

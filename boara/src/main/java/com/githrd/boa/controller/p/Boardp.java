@@ -24,6 +24,7 @@ public class Boardp {
 	public ModelAndView buyBoard(ModelAndView mv, MyInfoVO iVO, String nowPage) {
 		
 		mv.addObject("MSG", "게시글 구매에 성공했습니다.");
+		iVO.setResult("NO");
 
 		//현재 총 포인트
 		int sumpoint = pDao.selPoint(iVO);
@@ -31,18 +32,20 @@ public class Boardp {
 		if (sumpoint - iVO.getGnp() < 0) {
 		
 			mv.addObject("MSG", "포인트가 부족합니다. 포인트를 충전해주세요.");
+			iVO.setResult("NO");
 			
 		} else {
 			
-			int cnt = pDao.buyBoard(iVO);
 			int bno = iVO.getBno();
+			int cnt = pDao.buyBoard(iVO);
+			iVO.setResult("OK");
 			
 			if(cnt != 1) {
 				mv.addObject("MSG", "게시글 구매에 실패했습니다.");
+				iVO.setResult("NO");
 			}
-
+			
 		}
-		
 		
 		mv.addObject("NOWPAGE", nowPage);
 		mv.addObject("VIEW", "/boa/board/boardDetail.boa");
@@ -61,7 +64,7 @@ public class Boardp {
 		//현재 총 포인트
 		int sumpoint = pDao.selPoint(iVO);
 		
-		if(sumpoint - 5000 > 0) {
+		if(sumpoint - 5000 >= 0) {
 			
 			//핫 포스팅 등록 처리
 			int cnt = pDao.hotBoardProc(iVO);
@@ -78,6 +81,7 @@ public class Boardp {
 			result = "NOPOINT";
 		}
 		
+		iVO.setResult(result);
 		map.put("result", result);
 		return map;
 	}

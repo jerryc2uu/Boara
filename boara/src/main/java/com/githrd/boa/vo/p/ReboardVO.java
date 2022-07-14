@@ -6,7 +6,7 @@ import java.util.Date;
 
 
 public class ReboardVO {
-	private int rno, bno, uprno, mno, cnt, ano, clicks, rowno, step,//reply 테이블 컬럼
+	private int rno, bno, cno, uprno, mno, cnt, ano, clicks, rowno, step,//reply 테이블 컬럼
 				pno, gnp, pcode, sumpoint,//point 테이블 컬럼
 				startCont, endCont, nowPage; // 페이징 처리
 	private String body, isshow, sdate, savename, id, oid, result;
@@ -162,16 +162,19 @@ public class ReboardVO {
 	public void setResult(String result) {
 		this.result = result;
 	}
+	public int getCno() {
+		return cno;
+	}
+	public void setCno(int cno) {
+		this.cno = cno;
+	}
 	@Override
 	public String toString() {
-		return "ReboardVO [rno=" + rno + ", bno=" + bno + ", uprno=" + uprno + ", mno=" + mno + ", cnt=" + cnt
-				+ ", ano=" + ano + ", clicks=" + clicks + ", rowno=" + rowno + ", step=" + step + ", pno=" + pno
-				+ ", gnp=" + gnp + ", pcode=" + pcode + ", sumpoint=" + sumpoint + ", startCont=" + startCont
-				+ ", endCont=" + endCont + ", nowPage=" + nowPage + ", body=" + body + ", isshow=" + isshow + ", sdate="
-				+ sdate + ", savename=" + savename + ", id=" + id + ", oid=" + oid + ", result=" + result + ", rdate="
-				+ rdate + "]";
+		return "ReboardVO [rno=" + rno + ", bno=" + bno + ", cno=" + cno + ", uprno=" + uprno + ", mno=" + mno
+				+ ", cnt=" + cnt + ", ano=" + ano + ", clicks=" + clicks + ", rowno=" + rowno + ", step=" + step
+				+ ", pno=" + pno + ", gnp=" + gnp + ", pcode=" + pcode + ", sumpoint=" + sumpoint + ", startCont="
+				+ startCont + ", endCont=" + endCont + ", nowPage=" + nowPage + ", body=" + body + ", isshow=" + isshow
+				+ ", sdate=" + sdate + ", savename=" + savename + ", id=" + id + ", oid=" + oid + ", result=" + result
+				+ ", rdate=" + rdate + "]";
 	}
-	
-	
-	
 }

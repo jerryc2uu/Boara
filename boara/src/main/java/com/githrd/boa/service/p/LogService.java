@@ -15,6 +15,7 @@ public class LogService {
 	
 	private static Logger reboardLog = LoggerFactory.getLogger("reboardLog"); 
 	private static Logger myInfoLog = LoggerFactory.getLogger("myInfoLog"); 
+	private static Logger boardpLog = LoggerFactory.getLogger("boardpLog"); 
 	
 	//댓글 등록 로그
 	@After("execution(* com.githrd.boa.controller.p.Reboard.reboardWriteProc(..))")
@@ -86,4 +87,30 @@ public class LogService {
 		}
 	}
 	
+	//게시글 구매 로그
+	@After("execution(* com.githrd.boa.controller.p.Boardp.buyBoard(..))")
+	public void buyBoard(JoinPoint join) {
+		System.out.println("로그~~~");
+		MyInfoVO iVO = (MyInfoVO) join.getArgs()[1];
+		String id = iVO.getId();
+		String result = iVO.getResult();
+		int bno = iVO.getBno();
+		if(result.equals("OK") ) {
+			//정상 구매
+			boardpLog .info(id + " 회원님이 [ " + bno + " ] 번 게시글을 구매했습니다.");
+		}
+	}
+	
+	//핫 게시글 등록 로그
+	@After("execution(* com.githrd.boa.controller.p.Boardp.hotBoardProc(..))")
+	public void hotBoardProc(JoinPoint join) {
+		MyInfoVO iVO = (MyInfoVO) join.getArgs()[0];
+		String id = iVO.getId();
+		String result = iVO.getResult();
+		int bno = iVO.getBno();
+		if(result.equals("OK") ) {
+			//정상 등록
+			boardpLog .info(id + " 회원님이 [ " + bno + " ] 번 게시글을 핫 포스팅으로 등록하셨습니다.");
+		}
+	}
 }

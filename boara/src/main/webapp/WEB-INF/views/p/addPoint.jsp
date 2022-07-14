@@ -36,6 +36,8 @@ font-weight: lighter ;
 	<form method="POST" action="/boa/member/addPointProc.boa" id="frm" name="frm">
 		<input type="hidden" name="id" id="id" value="${SID}">
 		<input type="hidden" name="gnp" id="gnp">
+		<input type="hidden" name="merchant_uid" id="mer">
+		<input type="hidden" name="imp_uid" id="imp">
 	</form>
 	
 	<!-- Navbar -->
@@ -64,81 +66,94 @@ font-weight: lighter ;
   	  <h1 class="pdt40 w3-xxxlarge dfn"><b>Boara</b></h1>
 	</header>
     
-    
-    <div class="w3-content w3-border mxwh1000 w3-card-4" id="spoint" style="margin-top: 50px;" id="${SID}">
-    	<div class="w3-col w3-center w3-padding w3-border-bottom" style="margin-bottom: 30px;">
-			<h1>충전할 포인트</h1>
+    <div class="w3-content w3-center" style="width: 1000px; hegith: 550px;">
+	    <div class="w3-content w3-border mxwh1000 w3-card-4" id="spoint" style="margin-top: 50px;" id="${SID}">
+	    	<div class="w3-col w3-center w3-padding w3-border-bottom" style="margin-bottom: 30px;">
+				<h1>충전할 포인트</h1>
+			</div>
+			<div class="w3-content w3-col w3-center" style="margin-left: 105px; margin-bottom: 20px;">
+<!-- test -->
+	            <label>
+	            	<div class="w3-col m3">
+		            	<div class="w3-col w3-center w3-border">
+		            		<h1>100P</h1>
+		            	</div>
+		            	<div class="w3-col">
+							<input type="radio" name="money" value="100">
+						</div>
+	            	</div>
+	            </label>
+<!-- test -->
+	            <label>
+	            	<div class="w3-col m3">
+		            	<div class="w3-col w3-center w3-border">
+		            		<h1>1000P</h1>
+		            	</div>
+		            	<div class="w3-col">
+							<input type="radio" name="money" value="1000">
+						</div>
+	            	</div>
+	            </label>
+				<label>
+					<div class="w3-col m3 w3-margin-left">
+						<div class="w3-col w3-center w3-border">
+							<h1>5000P</h1>
+						</div>
+						<div class="w3-col">
+							<input type="radio" name="money" value="5000">
+						</div>
+					</div>
+				</label>
+				<label>
+					<div class="w3-col m3 w3-margin-left">
+						<div class="w3-col w3-center w3-border">
+							<h1>10000P</h1>
+						</div>
+						<div class="w3-col">
+							<input type="radio" name="money" value="10000">
+						</div>
+					</div>
+				</label>
+	        </div>
+			<div class="w3-content w3-col w3-center" style="margin-left: 105px; margin-bottom: 20px;">
+	            <label>
+	            	<div class="w3-col m3">
+		            	<div class="w3-col w3-center w3-border">
+		            		<h1>30000P</h1>
+		            	</div>
+		            	<div class="w3-col">
+							<input type="radio" name="money" value="30000">
+						</div>
+	            	</div>
+	            </label>
+				<label>
+					<div class="w3-col m3 w3-margin-left">
+						<div class="w3-col w3-center w3-border">
+							<h1>50000P</h1>
+						</div>
+						<div class="w3-col">
+							<input type="radio" name="money" value="50000">
+						</div>
+					</div>
+				</label>
+				<label>
+					<div class="w3-col m3 w3-margin-left">
+						<div class="w3-col w3-center w3-border">
+							<h1>100000P</h1>
+						</div>
+						<div class="w3-col">
+							<input type="radio" name="money" value="100000">
+						</div>
+					</div>
+				</label>
+	        </div>
+	        <div class="w3-content w3-col w3-center">
+	        	<h3>현재 보유 포인트 : ${DATA.sumpoint} P</h3>
+	        </div>
 		</div>
-		<div class="w3-content w3-col w3-center" style="margin-left: 105px; margin-bottom: 20px;">
-            <label>
-            	<div class="w3-col m3">
-	            	<div class="w3-col w3-center w3-border">
-	            		<h1>1000P</h1>
-	            	</div>
-	            	<div class="w3-col">
-						<input type="radio" name="money" value="1000">
-					</div>
-            	</div>
-            </label>
-			<label>
-				<div class="w3-col m3 w3-margin-left">
-					<div class="w3-col w3-center w3-border">
-						<h1>5000P</h1>
-					</div>
-					<div class="w3-col">
-						<input type="radio" name="money" value="5000">
-					</div>
-				</div>
-			</label>
-			<label>
-				<div class="w3-col m3 w3-margin-left">
-					<div class="w3-col w3-center w3-border">
-						<h1>10000P</h1>
-					</div>
-					<div class="w3-col">
-						<input type="radio" name="money" value="10000">
-					</div>
-				</div>
-			</label>
-        </div>
-		<div class="w3-content w3-col w3-center" style="margin-left: 105px; margin-bottom: 20px;">
-            <label>
-            	<div class="w3-col m3">
-	            	<div class="w3-col w3-center w3-border">
-	            		<h1>30000P</h1>
-	            	</div>
-	            	<div class="w3-col">
-						<input type="radio" name="money" value="30000">
-					</div>
-            	</div>
-            </label>
-			<label>
-				<div class="w3-col m3 w3-margin-left">
-					<div class="w3-col w3-center w3-border">
-						<h1>50000P</h1>
-					</div>
-					<div class="w3-col">
-						<input type="radio" name="money" value="50000">
-					</div>
-				</div>
-			</label>
-			<label>
-				<div class="w3-col m3 w3-margin-left">
-					<div class="w3-col w3-center w3-border">
-						<h1>100000P</h1>
-					</div>
-					<div class="w3-col">
-						<input type="radio" name="money" value="100000">
-					</div>
-				</div>
-			</label>
-        </div>
-        <div class="w3-content w3-col w3-center">
-        	<h3>현재 보유 포인트 : ${DATA.sumpoint} P</h3>
-        </div>
-	</div>
-    <div class="w3-content w3-col w3-center" style="margin-left: 1350px; margin-top: 30px;">
-    	<div class="w3-button w3-center w3-hover-blue w3-indigo btnbox parent" style="width: 200px;"id="pay">결제하기</div>
+	    <div class="w3-content w3-center" style="margin-top: 30px;">
+	    	<div class="w3-button w3-center w3-hover-blue w3-indigo btnbox parent" style="width: 200px; float: right; line-height: 45px;" id="pay">결제하기</div>
+	    </div>
     </div>
 </body>
 </html>
