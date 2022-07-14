@@ -17,6 +17,8 @@
 		<typeAlias alias="mVO" type="com.githrd.boa.vo.k.MemberVO" />
 		<typeAlias alias="fVO" type="com.githrd.boa.vo.k.FileVO" />
 		<typeAlias alias="sVO" type="com.githrd.boa.vo.k.SearchVO" />
+		<typeAlias alias="msVO" type="com.githrd.boa.vo.k.MessageVO" />
+		
 		<!-- 최이지 -->
 		<typeAlias alias="cVO" type="com.githrd.boa.vo.c.CollecVO" />
 		<typeAlias alias="gVO" type="com.githrd.boa.vo.c.GenreVO" />

@@ -42,18 +42,22 @@
 		    AND i.isshow = 'C'
 		    AND i.whereis = 'M'
 		    AND m.mno = p.mno
-		    AND pdate = (
+		    AND pno = (
 		                    SELECT
-		                        MAX(pdate)
+		                        MAX(pno)
 		                    FROM
 		                        point
 		                    WHERE
-		                        mno = (SELECT
-		                                    mno
-		                                FROM
-		                                    member
-		                                WHERE
-		                                    id = #{id})
+		                        pdate = (SELECT MAX(pdate)
+		                                FROM point
+		                                WHERE mno = (
+		                                    SELECT mno
+		                                    FROM member
+		                                    WHERE id =#{id})
+		                                )
+		                        AND mno = (SELECT mno FROM member WHERE id =#{id})
+		                    GROUP BY
+		                        pdate
 		                )
 	</select>	
 	

@@ -25,5 +25,7 @@
 	<bean class="com.githrd.boa.dao.c.BoardDao" id="bDao" />
 	<bean class="com.githrd.boa.service.c.CollectionService" id="cSrvc" />
 	<bean class="com.githrd.boa.service.c.BoardService" id="bSrvc" />
+	<bean class="com.githrd.boa.service.c.Recommend" id="reco" />
+	<bean class="com.githrd.boa.dao.c.RecommendDao" id="recoDao" />
 	
 </beans>
