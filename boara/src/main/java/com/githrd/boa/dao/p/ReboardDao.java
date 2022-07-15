@@ -34,8 +34,8 @@ public class ReboardDao {
 	}
 	
 	//댓글 작성자 정보 조회 함수
-	public ReboardVO getWriterInfo(String id) {
-		return sqlSession.selectOne("rSQL.getWriterInfo", id);
+	public ReboardVO getWriterInfo(ReboardVO rVO) {
+		return sqlSession.selectOne("rSQL.getWriterInfo", rVO);
 	}
 	
 	//새 댓글 및 대댓글 등록 처리 함수

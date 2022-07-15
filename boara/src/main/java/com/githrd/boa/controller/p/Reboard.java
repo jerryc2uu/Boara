@@ -39,10 +39,12 @@ public class Reboard {
 		
 		//페이징 처리
 		int total = rDao.getTotal(rVO);
-			
+		System.out.println(total);
+		int bno = rVO.getBno();
+		int cno = rVO.getCno();
+		
 		if(total != 0) {
 			
-			int bno = rVO.getBno();
 			page.setPage(total);
 			rVO.setStartCont(page.getStartCont());
 			rVO.setEndCont(page.getEndCont());
@@ -52,11 +54,17 @@ public class Reboard {
 			List<ReboardVO> list = rDao.getList(rVO);
 			
 			mv.addObject("LIST", list);
-			mv.addObject("PAGE", page);
-			mv.addObject("BNO", bno);
-			mv.addObject("CNO", list.get(0).getCno());
+			//mv.addObject("CNO", list.get(0).getCno());
+		
+			System.out.println(list);
+		
+		} else {
+			page.setPage(1);
 		}
 		
+		mv.addObject("PAGE", page);
+		mv.addObject("BNO", bno);
+		mv.addObject("CNO", cno);
 		mv.addObject("CNT", total);
 		mv.setViewName("p/reboardList");
 		return mv;
@@ -64,10 +72,9 @@ public class Reboard {
 	
 	//새 댓글 작성 폼보기 요청
 	@RequestMapping("/reboardWrite.boa")
-	public ModelAndView reboardWrite(ModelAndView mv, String id, int nowPage, int bno) {
-		System.out.println(id);
-		ReboardVO rVO = rDao.getWriterInfo(id);
-		System.out.println(rVO);
+	public ModelAndView reboardWrite(ModelAndView mv, ReboardVO rVO) {
+		System.out.println(rVO.getNowPage());
+		rVO = rDao.getWriterInfo(rVO);
 		mv.addObject("DATA", rVO);
 		mv.setViewName("p/reboardWrite");
 		return mv;
@@ -100,8 +107,8 @@ public class Reboard {
 	
 	//대댓글 작성 폼 보기 요청
 	@RequestMapping("/reboardComment.boa")
-	public ModelAndView reboardComment(ModelAndView mv, String nowPage, String id, int bno) {
-		ReboardVO rVO = rDao.getWriterInfo(id);
+	public ModelAndView reboardComment(ModelAndView mv, ReboardVO rVO) {
+		rVO = rDao.getWriterInfo(rVO);
 		mv.addObject("DATA", rVO);
 		mv.setViewName("p/reboardComment");
 		return mv;
@@ -109,7 +116,7 @@ public class Reboard {
 
 	//대댓글 작성 처리 요청
 	@RequestMapping("/reboardCommentProc.boa")
-	public ModelAndView reboardCommentProc(ModelAndView mv, String nowPage, ReboardVO rVO) {
+	public ModelAndView reboardCommentProc(ModelAndView mv, ReboardVO rVO, String nowPage) {
 		
 		int result = rDao.addReboard(rVO);
 		
@@ -132,7 +139,7 @@ public class Reboard {
 
 	//댓글 수정 폼 보기 요청
 	@RequestMapping("/reboardEdit.boa")
-	public ModelAndView reboardEdit(ModelAndView mv, String nowPage, ReboardVO rVO, String vw) {
+	public ModelAndView reboardEdit(ModelAndView mv, ReboardVO rVO, String nowPage, String vw) {
 		rVO = rDao.reboardEdit(rVO);
 		mv.addObject("DATA", rVO);
 		mv.setViewName("p/reboardEdit");
@@ -141,11 +148,12 @@ public class Reboard {
 	
 	//댓글 수정 처리 요청
 	@RequestMapping("/reboardEditProc.boa")
-	public ModelAndView reboardEditProc(ModelAndView mv, String nowPage, ReboardVO rVO, String vw) {
+	public ModelAndView reboardEditProc(ModelAndView mv, ReboardVO rVO, String nowPage, String vw) {
 		
 		int result = rDao.reboardEditProc(rVO);
 		
 		if(result == 1) {
+			rVO.setCnt(result);
 			mv.addObject("VIEW", "/boa/reboard/reboardList.boa");
 			mv.addObject("MSG", "댓글 수정에 성공했습니다.");
 		} else {
@@ -166,7 +174,7 @@ public class Reboard {
 		if(cnt != 1) {
 			mv.addObject("MSG", "댓글 삭제에 실패했습니다.");
 		}
-		
+		rVO.setCnt(cnt);
 		mv.addObject("VIEW", vw);
 		mv.addObject("NOWPAGE", nowPage);
 		mv.addObject("MSG", "댓글 삭제에 성공했습니다.");
