@@ -91,7 +91,6 @@ public class MyInfo {
 
 		//포인트 내역 조회
 		List<MyInfoVO> list = iDao.myPoint(iVO);
-		System.out.println(list);
 		mv.addObject("LIST", list);
 		mv.addObject("PAGE", page);
 		mv.addObject("PCODE", iVO.getPcode());
@@ -220,8 +219,6 @@ public class MyInfo {
 		
 		iVO.setResult("OK");
 		mv.addObject("VIEW", view);
-		System.out.println("mer : " + iVO.getMerchant_uid());
-		System.out.println("imp : " + iVO.getImp_uid());
 		mv.addObject("MSG", gnp + " 포인트 충전에 성공했습니다.");
 		mv.setViewName("p/redirect");
 		return mv;
@@ -246,6 +243,7 @@ public class MyInfo {
 		try {
 			
 			pt.refundPoint(iVO);
+			iVO.setResult("OK");
 		    mv.addObject("MSG", "환불이 완료되었습니다.");
 
 		} catch (Exception e) {

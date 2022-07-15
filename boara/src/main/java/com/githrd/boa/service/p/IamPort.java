@@ -29,9 +29,6 @@ public class IamPort {
 		String imp_uid = iVO.getImp_uid(); 
 		int gnp = iVO.getGnp();
 		
-		System.out.println("imp : " + imp_uid);
-		System.out.println("gnp : " + gnp);
-	
 		try {
 			String token = getToken();
 			payMentCancle(token, imp_uid, gnp);
@@ -72,8 +69,6 @@ public class IamPort {
 		Gson gson = new Gson();
 
 		String response = gson.fromJson(br.readLine(), Map.class).get("response").toString();
-		
-		System.out.println(response);
 
 		String token = gson.fromJson(response, Map.class).get("access_token").toString();
 
@@ -86,11 +81,6 @@ public class IamPort {
 	
 	//결제 취소	
 	public void payMentCancle(String access_token, String imp_uid, int gnp) throws IOException  {
-		System.out.println("결제 취소");
-		
-		System.out.println(access_token);
-		
-		System.out.println(imp_uid);
 		
 		HttpsURLConnection conn = null;
 		URL url = new URL("https://api.iamport.kr/payments/cancel");

@@ -63,8 +63,8 @@ img {
 	   		<button class="w3-center w3-indigo w3-hover-grey listbutton" id="newwrite" style="border: none; float:right;">새댓글작성</button>
    		</div>
 
-<c:if test="${empty LIST}">
-			<div class="w3-col w3-white w3-center">작성된 댓글이 없습니다.</div>
+<c:if test="${CNT eq 0}">
+			<div class="w3-col w3-white w3-center"><h3>작성된 댓글이 없습니다.</h3></div>
 </c:if>
 			<!-- 댓글 리스트 보이는 곳 -->
 <c:forEach var="data" items="${LIST}">

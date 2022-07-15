@@ -32,6 +32,7 @@
 			<mapping path = "/member/myreboard.boa" />
 			<mapping path = "/member/addPoint.boa" />
 			<mapping path = "/member/addPointProc.boa" />
+			<mapping path = "/member/canclePay.boa" />
 			<mapping path = "/board/buyBoard.boa" />
 			<mapping path = "/board/hotBoardProc.boa" />
 			<!-- 김소연 -->

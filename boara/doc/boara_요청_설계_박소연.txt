@@ -106,14 +106,14 @@
 					성공 : /boa/member/myinfo.boa
 					실패 : /boa/member/addPoint.boa
 --------------------------------------------
-# 포인트 충전 처리 요청
-요청내용	:	/boa/member/addPointProc.boa
-파라미터	:	id, gnp
+# 포인트 환불 요청
+요청내용	:	/boa/member/canclePay.boa
+파라미터	:	id, gnp, imp_uid
 컨트롤러	:	com.githrd.boa.controller.Member
 처리함수	:	addPointProc()
 뷰			:	/WEB-INF/views/p/redirect.jsp
 					성공 : /boa/member/myinfo.boa
-					실패 : /boa/member/addPoint.boa
+					실패 : /boa/member/myinfo.boa
 --------------------------------------------
 ===========================================
 ########### 게시글 관련 요청 설계 ##############

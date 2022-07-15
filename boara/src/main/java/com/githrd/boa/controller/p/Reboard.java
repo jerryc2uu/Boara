@@ -39,33 +39,25 @@ public class Reboard {
 		
 		//페이징 처리
 		int total = rDao.getTotal(rVO);
-		//int nowPage = rVO.getNowPage();
-		int bno = rVO.getBno();
-		/*
-		if (nowPage == 0) {
-			nowPage = 1;
+			
+		if(total != 0) {
+			
+			int bno = rVO.getBno();
+			page.setPage(total);
+			rVO.setStartCont(page.getStartCont());
+			rVO.setEndCont(page.getEndCont());
+			
+			
+			//댓글 리스트 조회
+			List<ReboardVO> list = rDao.getList(rVO);
+			
+			mv.addObject("LIST", list);
+			mv.addObject("PAGE", page);
+			mv.addObject("BNO", bno);
+			mv.addObject("CNO", list.get(0).getCno());
 		}
-		*/
-		page.setPage(total);
-		/*
-		System.out.println(page.getStartCont());
-		System.out.println(page.getEndCont());
-		System.out.println(page.getNowPage());
-		*/
 		
-		rVO.setStartCont(page.getStartCont());
-		rVO.setEndCont(page.getEndCont());
-		
-		
-		//댓글 리스트 조회
-		List<ReboardVO> list = rDao.getList(rVO);
-		System.out.println("CNO : " + list.get(0).getCno());
-		//System.out.println("list : " + list);
-		mv.addObject("LIST", list);
-		mv.addObject("PAGE", page);
-		mv.addObject("BNO", bno);
-		mv.addObject("CNO", list.get(0).getCno());
-		
+		mv.addObject("CNT", total);
 		mv.setViewName("p/reboardList");
 		return mv;
 	}

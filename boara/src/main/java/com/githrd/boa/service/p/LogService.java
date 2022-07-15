@@ -77,6 +77,7 @@ public class LogService {
 	//포인트 충전 로그
 	@After("execution(* com.githrd.boa.controller.p.MyInfo.addPointProc(..))")
 	public void addPoint(JoinPoint join) {
+		System.out.println("결제완료");
 		MyInfoVO iVO = (MyInfoVO) join.getArgs()[1];
 		String id = iVO.getId();
 		String result = iVO.getResult();
@@ -87,10 +88,23 @@ public class LogService {
 		}
 	}
 	
+	//결제 취소 로그
+	@After("execution(* com.githrd.boa.controller.p.MyInfo.canclePay(..))")
+	public void canclePay(JoinPoint join) {
+		System.out.println("결제취소");
+		MyInfoVO iVO = (MyInfoVO) join.getArgs()[1];
+		String id = iVO.getId();
+		String result = iVO.getResult();
+		int gnp = iVO.getGnp();
+		if(result.equals("OK") ) {
+			//정상 삭제
+			myInfoLog.info(id + " 회원님이 [ " + gnp + " ] 포인트를 환불했습니다.");
+		}
+	}
+	
 	//게시글 구매 로그
 	@After("execution(* com.githrd.boa.controller.p.Boardp.buyBoard(..))")
 	public void buyBoard(JoinPoint join) {
-		System.out.println("로그~~~");
 		MyInfoVO iVO = (MyInfoVO) join.getArgs()[1];
 		String id = iVO.getId();
 		String result = iVO.getResult();
