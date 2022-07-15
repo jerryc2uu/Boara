@@ -37,5 +37,6 @@
 		<!-- 최이지 -->
 		<mapper resource="com/githrd/boa/sql/c/CollectionSQL.xml" />
       	<mapper resource="com/githrd/boa/sql/c/BoardSQL.xml"/>
+      	<mapper resource="com/githrd/boa/sql/c/RecommendSQL.xml"/>
 	</mappers>
 </configuration>
