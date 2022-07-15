@@ -133,11 +133,15 @@ img{
 		   </div>
 		   
 		   
-		   <!-- 쪽지 상세보기 
 		    <div id="detame" class=" w3-col mgtb30">
+		    	<div class="w3-col mgtb10 ">
+			      	<label for="sendid" class="w3-col s3 w3-center" >[ 보내는사람 ]</label>
+			      	<h4 class="w3-col w3-border s8 w3-center " id="mid" name="mid" value="${SID}"> </h4>
+			      </div>
+		    
 			      <div class="w3-col mgtb10 ">
 			      	<label for="recv" class="w3-col s3 w3-center" >[ 받는사람 ]</label>
-			      	<h5 id="recv"  class="w3-col w3-border s8" >ksoy</h5>
+			      	<h5 id="recv"  class="w3-col w3-border s8" >ksoy</h54>
 			      </div>
 			      <div class="w3-col mgtb10 ">
 			      	<label for="recv" class="w3-col s3 w3-center" >[ 보낸사람 ]</label>
@@ -151,19 +155,14 @@ img{
 				      	<label for="body" class="w3-col s3 w3-center">[ 내용 ]</label>
 				      	<div class="w3-col s8">
 					    	<h5 id="body"  class="w3-col w3-border" >!!@!!!!!!!!!!!!!!!!!!!!!!ㅁㄴㄹ너이라무내여ㅐ누ㅕㅑ유ㅕㅑㅁㄴ유ㅑㄴ며야ㅠ녀뉴ㅑㅣㅕ</h5>
-							<div class="w3-col w3-margin-top">
-								<div class="w3-half w3-text-white w3-indigo w3-xarge w3-button" id="list">list</div> 
-							</div>
-							<div class="w3-col w3-margin-top">
-								<div class="w3-half w3-text-white w3-indigo w3-xarge w3-button" id="list">list</div> 
-								<div class="w3-half w3-text-white w3-indigo w3-xarge w3-button" id="reply">reply</div> 
+							<div class="w3-col w3-center w3-margin-top">
+								<div class="w3-text-white w3-indigo w3-xarge w3-button" id="reply">reply</div> 
 							</div>
 			     		</div>
 	    		  </div>
 			   </div>
 			   
-			   -->
-			   
+		
 			   
 		</div>
 	</div>	

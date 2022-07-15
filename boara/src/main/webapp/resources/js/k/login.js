@@ -14,6 +14,9 @@ $(document).ready(function(){
 		if(!$('#bno').val()){
          $('#bno').prop('disabled', true);
       }
+     	 if(!$('#cno').val()){
+         $('#cno').prop('disabled', true);
+      }
 		$('#frm').attr('action', '/boa/member/loginProc.boa');
 		$('#frm').submit();
 	});

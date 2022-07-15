@@ -53,14 +53,7 @@ public class Member {
 		mv.setViewName("k/login");
 		return mv;
 	}
-	
-	// 다른게시판에서 로그인 폼보기를 요청할때 처리함수
-	@RequestMapping(path="/login.boa", params={"vw", "nowPage"})
-	public ModelAndView loginForm(ModelAndView mv, HttpSession session, String vw, String nowPage) {
-		mv.setViewName("k/login");
-		return mv;
-	}
-	
+
 	@RequestMapping(path="/loginProc.boa", method=RequestMethod.POST, params= {"id", "pw"})
 	public ModelAndView loginProc(MemberVO mVO, HttpSession session, ModelAndView mv, RedirectView rv) {
 		
@@ -81,7 +74,7 @@ public class Member {
 	// 다른게시판에서 로그인 처리를 요청할때 처리함수
 	@RequestMapping(path="/loginProc.boa", method=RequestMethod.POST, params= {"id", "pw", "vw", "nowPage"})
 	public ModelAndView loginProc(MemberVO mVO, HttpSession session, ModelAndView mv, RedirectView rv, String vw, String nowPage) {
-		
+		System.out.println(vw);
 		int cnt = mDao.getLogin(mVO);
 		mVO.setCnt(cnt);
 		String view = vw;
@@ -125,6 +118,7 @@ public class Member {
 		return mv;	
 	}
 	
+
 	@RequestMapping("/logout.boa")
 	public ModelAndView logout(ModelAndView mv, HttpSession session, MemberVO mVO, String vw, String nowPage) {
 		session.removeAttribute("SID");
@@ -137,11 +131,13 @@ public class Member {
 			mv.addObject("NOWPAGE", nowPage);
 		}
 		
+		
 		mv.addObject("VIEW", view);
 		mv.setViewName("k/redirect");
 		return mv;
 	}
-		
+
+	
 	
 	// 회원가입정보 중복 체크
 	@RequestMapping(path="/idCheck.boa", 

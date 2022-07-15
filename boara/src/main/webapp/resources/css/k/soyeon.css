@@ -107,8 +107,14 @@ display: -webkit-box;
 .ft18 {
 	font-size: 18pt;
 }
+.ft15 {
+	font-size: 15pt;
+}
 .ft13 {
 	font-size: 13pt;
+}
+.ft12 {
+	font-size: 12pt;
 }
 .header {
 	padding-top:85px;	

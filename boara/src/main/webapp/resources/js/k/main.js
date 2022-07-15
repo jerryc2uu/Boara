@@ -16,17 +16,39 @@ $(document).ready(function(){
    
    //로그인 버튼 클릭 이벤트
    $('#mlogin').click(function(){
-		$(location).attr('href', '/boa/member/login.boa');
+		if(!$('#bno').val()){
+         $('#bno').prop('disabled', true);
+      }
+     	 if(!$('#cno').val()){
+         $('#cno').prop('disabled', true);
+      }
+ 	 $('#frm').attr('action', '/boa/member/login.boa');
+     $('#frm').submit();
 	});
 
-   //로그아웃 버튼 클릭 이벤트
-   $('#mlogout').click(function(){
-   		$(location).attr('href', '/boa/member/logout.boa');
-   }); 
-   
+	 $('#mlogout').click(function(){
+	 	if(!$('#bno').val()){
+         $('#bno').prop('disabled', true);
+      }
+     	 if(!$('#cno').val()){
+         $('#cno').prop('disabled', true);
+      }
+ 	 $('#frm').attr('action', '/boa/member/logout.boa');
+     $('#frm').submit();
+   });
+ 
+  
    // 조인 버튼 클릭 이벤트
    $('#mjoin').click(function(){
-   		$(location).attr('href', '/boa/member/join.boa');
+   		if(!$('#bno').val()){
+         $('#bno').prop('disabled', true);
+      }
+     	 if(!$('#cno').val()){
+         $('#cno').prop('disabled', true);
+      }
+ 	 $('#frm').attr('action', '/boa/member/join.boa');
+     $('#frm').submit();
+ 
    });
 
    $('#msid').click(function(){
@@ -49,6 +71,9 @@ $(document).ready(function(){
     	var sbno = $(this).attr('id');
     	$('#bno').val(sbno);
     	$('#cno').prop('disabled', true);
+    	if(!$('#id').val()){
+    		$('#id').prop('disabled', true);
+    	}
     	$('#frm').attr('action','/boa/board/boardDetail.boa');
  	 	$('#frm').submit();
 
@@ -59,6 +84,9 @@ $(document).ready(function(){
     	var sbno = $(this).attr('id');
     	$('#bno').val(sbno);
     	$('#cno').prop('disabled', true);
+    	if(!$('#id').val()){
+    		$('#id').prop('disabled', true);
+    	}
     	$('#frm').attr('action','/boa/board/boardDetail.boa');
  	 	$('#frm').submit();
 
@@ -83,7 +111,7 @@ $(document).ready(function(){
    });
   
    
-   $('#receme, #sendme, #newme, #detame').css('display', 'none');
+   $('#receme, #sendme, #newme').css('display', 'none');
    
  
    $('#rebtn').click(function(){
