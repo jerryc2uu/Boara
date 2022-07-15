@@ -1,34 +1,5 @@
 $(document).ready(function(){
 
-// 상단 바 처리 ---------------------------------------------------------------------------------
-
-	// 로그인
-	$('#lbtn').click(function(){
-		// 파라미터 세팅
-		$('#cno').prop('disabled', true);
-		
-		$('#frm').attr('action', '/boa/member/login.boa');
-		$('#frm').submit();
-	});
-
-	// 회원가입
-	$('#jbtn').click(function(){
-		// 파라미터 세팅
-		$('#cno').prop('disabled', true);
-		
-		$('#frm').attr('action', '/boa/member/join.boa');
-		$('#frm').submit();
-	});
-
-	// 로그아웃
-	$('#obtn').click(function(){
-		// 파라미터 세팅
-		$('#cno').prop('disabled', true);
-		
-		$('#frm').attr('action', '/boa/member/logout.boa');
-		$('#frm').submit();
-	});
-	
 // 페이지 처리 ----------------------------------------------------------------------------------
 
 	$('.cpbtn').click(function(){

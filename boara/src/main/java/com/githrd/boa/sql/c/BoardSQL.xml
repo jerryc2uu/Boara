@@ -27,6 +27,7 @@
 				WHERE
 					id = #{id}
 			)
+			AND isshow = 'Y'
 	</select>
 	
 	<!-- 게시글 새 썸네일 설정 -->

@@ -114,7 +114,7 @@
 # 게시글 상세 페이지 폼 보기
 
 요청내용 : /boa/board/boardDetail.boa
-파라미터 : bno, nowPage
+파라미터 : bno, nowPage[, id]
 컨트롤러 : www.githrd.boa.controller.c.Board
 담당함수 : boardEdit()
 	  뷰 : /WEB-INF/views/c/board/boardDetail.jsp

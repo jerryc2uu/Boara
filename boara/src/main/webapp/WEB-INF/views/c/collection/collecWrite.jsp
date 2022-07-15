@@ -33,15 +33,18 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 			<a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="mwrite">Write</a>
 			<a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="mcoll">New Collection</a>
 </c:if>
-			<div style="float: right; padding-right:30px;">
+			<div style="float: right; padding-right:30px;"> 
 <c:if test="${empty SID}">
-				<a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white " id="lbtn">Login</a>
-				<a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white " id="jbtn">Login</a>
+				<a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white " id="mjoin">Join</a>
+				<a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white " id="mlogin">Login</a>
 </c:if>
 <c:if test="${not empty SID}">
+				<a class="w3-bar-item w3-button w3-hide-small w3-hover-white" id="message">
+				<img  src="/boa/resources/img/k/message.png" style=" width:55px; height:35px;">
+				</a>
 				<a class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" id="msid">${SID}</a>
-				<a class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"id="obtn">Logout</a>
-</c:if>           
+				<a class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"id="mlogout">Logout</a>
+</c:if>
 			</div>
 		</div>
 	</div>
