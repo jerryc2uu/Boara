@@ -183,6 +183,7 @@ $(document).ready(function(){
 	$('#reshow').click(function(){
 		$('#vw').prop('disabled', true);
 		$('#gnp').prop('disabled', true);
+		$('#nowPage').attr('name', 'bnowPage');
 		
 		$('#frm').attr('action', '/boa/reboard/reboardList.boa');
 		$('#frm').submit();

@@ -189,7 +189,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <c:if test="${POST.price ne 0}">
 		<input type="hidden" name="gnp" id="gnp" value="${POST.price}">
 </c:if>
-		<input type="hidden" name="nowPage" value="${param.nowPage}">
+		<input type="hidden" name="nowPage" id="nowPage" value="${param.nowPage}">
 		<input type="hidden" name="bno" id="bno" value="${POST.bno}">
 		<input type="hidden" name="cno" id="cno" value="${POST.cno}">
 		<input type="hidden" name="id" id="id" value="${SID}">
