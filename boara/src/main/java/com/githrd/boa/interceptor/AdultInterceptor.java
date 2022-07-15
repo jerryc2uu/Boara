@@ -40,12 +40,18 @@ public class AdultInterceptor implements HandlerInterceptor {
 		
 		// 성인 인증 게시글 접근 시도한 경우
 		if(bVO != null) {
-			if(bVO.getForwho().contentEquals("A")) {
+			String forwho = bVO.getForwho();
+			
+			if(forwho.equals("C")) {
+				return;
+			}
+			
+			if(forwho.equals("A")) {
 				if(id == null) {
 					response.sendRedirect("/boa/member/login.boa");
 					return;
 				}
-				if(!bDao.adultCheck(id).contentEquals("Y")) {
+				if((bDao.adultCheck(id)).equals("N")) {
 					request.setAttribute("SID", id);
 					request.setAttribute("VIEW", "/boa/member/myinfo.boa");
 					request.setAttribute("MSG", "성인인증이 필요합니다.");

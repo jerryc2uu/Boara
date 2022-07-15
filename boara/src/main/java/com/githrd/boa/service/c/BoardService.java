@@ -190,19 +190,28 @@ public class BoardService {
 		String bought = "YES";
 		if(bVO.getPrice() != 0) {
 			String body = bVO.getBody();
+			bVO.setBody(body.replaceAll("//r//n", "<br>"));
+			
 			// 로그인 상태가 아닐 시에 미리보기 처리
 			if(id == null) {
 				bought = "NO";
 				bVO.setBought(bought);
 				
 				if(body.length() > 300) {
-					body.substring(0, 300);
+					body = body.substring(0, 300);
 				}
-				bVO.setBody(body);
+				bVO.setBody(body.replaceAll("//r//n", "<br>"));
+				return bVO;
+			}
+			
+			// 작성자 본인일 시
+			if(id.equals(cid)) {
+				bVO.setBody(body.replaceAll("//r//n", "<br>"));
 				return bVO;
 			}
 			
 			bVO.setId(id);
+			
 			int bcnt = bDao.didBuy(bVO);
 			
 			// 미구매시 미리보기 처리
@@ -210,12 +219,16 @@ public class BoardService {
 				bought = "NO";
 				
 				if(body.length() > 300) {
-					body.substring(0, 300);
+					body = body.substring(0, 300);
 				}
-				bVO.setBody(body);
+				bVO.setBody(body.replaceAll("//r//n", "<br>"));
 			}
 			
 			bVO.setBought(bought);
+		}else {
+			// 무료글
+			bVO.setBody(bVO.getBody().replaceAll("/r/n", "<br>"));
+System.out.println(bVO.getBody()); // 추후 제거할것 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		}
 		
 		// 좋아요/찜 여부 처리

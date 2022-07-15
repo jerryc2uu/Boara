@@ -100,18 +100,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 				<div class="inline mgt10">
 			<%-- 좋아요, 찜 기능 구현해야됨!!!! --%>
 <c:if test="${not empty SID}">
-	<c:if test="${POST.price eq 0}">
-					<img src="/boa/img/c/
-		<c:if test="${POST.nowStat eq 'L'}">
-					liked
-		</c:if>
-		<c:if test="${POST.nowStat ne 'L'}">
-					unlike
-		</c:if>
-					.jpg" class="like" id="<c:if test="${POST.nowStat ne 'L'}">un</c:if>like">
-	</c:if>
-	<c:if test="${POST.price ne 0}">
-		<c:if test="${POST.bought eq 'YES'}">
+	<c:if test="${POST.id ne SID}">
+		<c:if test="${POST.price eq 0}">
 					<img src="/boa/img/c/
 			<c:if test="${POST.nowStat eq 'L'}">
 					liked
@@ -119,14 +109,26 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 			<c:if test="${POST.nowStat ne 'L'}">
 					unlike
 			</c:if>
-		.jpg" class="like" id="<c:if test="${POST.nowStat ne 'L'}">un</c:if>like">
+					.jpg" class="like" id="<c:if test="${POST.nowStat ne 'L'}">un</c:if>like">
 		</c:if>
-		<c:if test="${POST.bought ne 'YES'}">
-					<div class="w3-round-large genre jjim
-			<c:if test="${POST.nowStat eq 'J'}">
-					w3-indigo
+		<c:if test="${POST.price ne 0}">
+			<c:if test="${POST.bought eq 'YES'}">
+					<img src="/boa/img/c/
+				<c:if test="${POST.nowStat eq 'L'}">
+					liked
+				</c:if>
+				<c:if test="${POST.nowStat ne 'L'}">
+					unlike
+				</c:if>
+		.jpg" class="like" id="<c:if test="${POST.nowStat ne 'L'}">un</c:if>like">
 			</c:if>
+			<c:if test="${POST.bought ne 'YES'}">
+					<div class="w3-round-large genre jjim
+				<c:if test="${POST.nowStat eq 'J'}">
+					w3-indigo
+				</c:if>
 					" id="<c:if test="${POST.nowStat eq 'J'}">jjimed</c:if><c:if test="${POST.nowStat ne 'J'}">jjimyet</c:if>">+ 찜</div>
+			</c:if>
 		</c:if>
 	</c:if>
 </c:if>
@@ -145,10 +147,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 	
 	<%-- 파라미터용 모달창 --%>
 <c:if test="${not empty param.msg}">
-	<div class="w3-center w3-modal">
+	<div class="w3-center w3-modal" style="display: block;" id="paramModal">
 		<div class="w3-modal-content mxw650 w3-animate-top w3-card-4">
 			<header class="boablue w3-container">
-				<span onclick="document.getElementById('modal').style.display='none'"
+				<span onclick="document.getElementById('paramModal').style.display='none'"
 					class="w3-button w3-display-topright">&times;</span>
 					<h2>INFO</h2>
 			</header>

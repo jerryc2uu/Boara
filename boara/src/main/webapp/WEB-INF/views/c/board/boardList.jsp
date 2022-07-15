@@ -77,52 +77,53 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <c:if test="${not empty PLIST}">
 	<c:forEach var="data" items="${PLIST}">
 		<%-- 게시글 하나 박스 --%>
-			<div class="w3-border-bottom collbox w3-center w3-margin-bottom w3-round">
-				<div class="thumbbox w3-border-right w3-col m2 pbox" id="${data.bno}">
-				
-				<%-- 이미지 작업 --%>
-					<div class="thbox">
+			<div class="w3-col w3-display-container w3-center">
+				<div class="w3-border-bottom collbox w3-center w3-margin-bottom">
+					<div class="thumbbox w3-border-right w3-col m2 pbox" id="${data.bno}">
+					
+					<%-- 이미지 작업 --%>
+						<div class="thbox">
 		<c:if test="${not empty  data.savename}">
-						<img class="thumb" src="/boa/upload/${data.savename}">
+							<img class="thumb" src="/boa/upload/${data.savename}">
 		</c:if>
 		<c:if test="${empty data.savename}">
-						<img class="thumb" src="/boa/resources/img/noimage.jpg">
+							<img class="thumb" src="/boa/resources/img/noimage.jpg">
 		</c:if>
-					</div>
+						</div>
 				
 					
 					
 		<c:if test="${data.price ne 0}">
-					<h4 class="inline nomg">${data.price}P</h4>
+						<h4 class="inline nomg">${data.price}P</h4>
 		</c:if>
-				</div>
-				<div class="colldetail w3-margin-left w3-col m7 pbox" id="${data.bno}">
-					<div class="w3-padding w3-left w3-col h100" id="${data.bno}">
+					</div>
+					<div class="colldetail w3-margin-left w3-col m7 pbox" id="${data.bno}">
+						<div class="w3-padding w3-left w3-col h100" id="${data.bno}">
 	<c:if test="${data.isshow eq 'A'}">
-						<div class="noti w3-round w3-left">공지</div>
+							<div class="noti w3-round w3-left">공지</div>
 	</c:if>
 	<c:if test="${data.forwho eq 'A'}">
-						<div class="adult w3-round w3-left">성인</div>
+							<div class="adult w3-round w3-left">성인</div>
 	</c:if>
 	<c:if test="${fn:length(data.title) > 15}">
-			 			<h1 class="w3-left inline">${fn:substring(data.title, 0, 15)}...</h1>
+			 				<h1 class="w3-left inline">${fn:substring(data.title, 0, 15)}...</h1>
 	</c:if>
 	<c:if test="${fn:length(data.title) <= 15}">
-			 			<h1 class="w3-left inline">${data.title}</h1>
+			 				<h1 class="w3-left inline">${data.title}</h1>
 	</c:if>
-					</div>
+						</div>
 	<c:if test="${not empty data.genre}">
 		<c:forEach var="gnr" items="${data.genre}">
 						<div class="genre w3-round w3-left">${gnr}</div>
 		</c:forEach>
 	</c:if>
 		<c:if test="${fn:length(data.body) > 20 }">
-					<h4 class="w3-left-align c-left pdt20">${fn:substring(data.body, 0, 20)}...</h4>
+						<h4 class="w3-left-align c-left pdt20">${fn:substring(data.body, 0, 20)}...</h4>
 		</c:if>
 		<c:if test="${fn:length(data.body) <= 20 }">
-					<h4 class="w3-left-align c-left pdt20">${data.body}</h4>
+						<h4 class="w3-left-align c-left pdt20">${data.body}</h4>
 		</c:if>
-				</div>
+					</div>
 				
 					<div class="w3-col m2" id="${data.bno}">
 						<h6 class="w3-col w3-right-align pdt20 w3-text-gray">조회수 : ${data.click}</h6>
@@ -132,6 +133,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 	</c:if>
 					</div>
 				
+				</div>
 			</div>
 	</c:forEach>
 </c:if>
