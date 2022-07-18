@@ -19,6 +19,7 @@
 	<bean class="com.githrd.boa.dao.k.MemberDao" id="mDao"/>
 	<bean class="com.githrd.boa.dao.k.MainBoardDao" id="mbDao"/>
 	<bean class="com.githrd.boa.service.k.MemberService" id="mSrvc" />
+	<bean class="com.githrd.boa.service.k.MailsendService" id="mailSrvc" />
 	
 	<!-- 최이지 -->
 	<bean class="com.githrd.boa.dao.c.CollectionDao" id="cDao"/>
