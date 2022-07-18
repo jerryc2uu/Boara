@@ -11,17 +11,18 @@
 		FROM
 			(
 				SELECT
-					NVL(gnr, 'empty') sgnere
+					NVL(gnr, 'empty') sgenre
 				FROM
 					board, viewlog
 				WHERE
 					bno = vbno
 					AND vmno = (SELECT mno FROM member WHERE id = #{id})
+					AND gnr IS NOT NULL
 				ORDER BY
 					vdate DESC
 			
 			)
 		WHERE
-			ROWNUM BETWEEN 1 AND 10
+			ROWNUM BETWEEN 1 AND 20
 	</select>
 </mapper>

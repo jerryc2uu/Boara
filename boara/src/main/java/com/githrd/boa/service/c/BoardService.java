@@ -17,6 +17,9 @@ package com.githrd.boa.service.c;
  * 
  * 			2022.06.29	-	함수 수정(setBDetail)
  * 								담당자 : 최이지
+ * 
+ * 			2022.07.15	-	선호 장르 조회를 위한 함수 수정(setBDetail)
+ * 								담당자 : 최이지
  *
  */
 
@@ -190,7 +193,6 @@ public class BoardService {
 		String bought = "YES";
 		if(bVO.getPrice() != 0) {
 			String body = bVO.getBody();
-			bVO.setBody(body.replaceAll("//r//n", "<br>"));
 			
 			// 로그인 상태가 아닐 시에 미리보기 처리
 			if(id == null) {
@@ -200,13 +202,13 @@ public class BoardService {
 				if(body.length() > 300) {
 					body = body.substring(0, 300);
 				}
-				bVO.setBody(body.replaceAll("//r//n", "<br>"));
+				bVO.setBody(body.replaceAll("\n", "<br>"));
 				return bVO;
 			}
 			
 			// 작성자 본인일 시
 			if(id.equals(cid)) {
-				bVO.setBody(body.replaceAll("//r//n", "<br>"));
+				bVO.setBody(body.replaceAll("\n", "<br>"));
 				return bVO;
 			}
 			
@@ -221,14 +223,14 @@ public class BoardService {
 				if(body.length() > 300) {
 					body = body.substring(0, 300);
 				}
-				bVO.setBody(body.replaceAll("//r//n", "<br>"));
 			}
 			
+			bVO.setBody(body.replaceAll("\n", "<br>"));
 			bVO.setBought(bought);
+			
 		}else {
 			// 무료글
-			bVO.setBody(bVO.getBody().replaceAll("/r/n", "<br>"));
-System.out.println(bVO.getBody()); // 추후 제거할것 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			bVO.setBody(bVO.getBody().replaceAll("\n", "<br>"));
 		}
 		
 		// 좋아요/찜 여부 처리
