@@ -40,17 +40,17 @@
 			<input type="hidden" name="cid" id="cid" value="${param.cid}">
 </c:if>
 			<div class="w3-col  mgt30">
-				<label for="id" class="w3-col s2 w3-right-align w3-text-grey ft22">I D : </label>
+				<label for="id" class="w3-col s2 w3-right-align w3-text-grey ft18">I D : </label>
 				<div class="w3-col m9 ">
 					<input type="text" name="id" id="id" placeholder="아이디를 입력하세요"
-							class="w3-col ft18 w3-input w3-border-bottom w3-margin-left">
+							class="w3-col ft15 w3-input w3-border-bottom w3-margin-left">
 				</div>
 			</div>
 			<div class="w3-col w3-margin-top w3-margin-bottom">
-				<label for="pw" class="w3-col s2 w3-right-align w3-text-grey ft22">P W : </label>
+				<label for="pw" class="w3-col s2 w3-right-align w3-text-grey ft18">P W : </label>
 				<div class="w3-col m9">
 					<input type="password" name="pw" id="pw" placeholder="비밀번호를 입력하세요"
-							class="w3-col ft18 w3-input w3-border-bottom w3-margin-left">
+							class="w3-col ft15 w3-input w3-border-bottom w3-margin-left">
 				</div>
 			</div>
 		</form>

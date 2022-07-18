@@ -111,7 +111,7 @@ $(document).ready(function(){
    });
   
    
-   $('#receme, #sendme, #newme').css('display', 'none');
+   $('#receme, #sendme, #newme, #detame').css('display', 'none');
    
  
    $('#rebtn').click(function(){
@@ -139,7 +139,7 @@ $(document).ready(function(){
    								+ '<div class="s2 w3-col">' + arr[i].mdate + '</div>'
    					}
    					
-   					var str = ' <div class="w3-col h40" id=" ' + arr[i].mgno + ' ">'
+   					var str = ' <div class="w3-col h40 detail w3-button" id=" ' + arr[i].mgno + ' ">'
    							+ '<div class="s1 w3-col">'+(i+1)+'</div>'
    							+ strr + '</div>';
    				$('#ajaxre').append(str);
@@ -169,7 +169,7 @@ $(document).ready(function(){
    				$('#ajaxse').html('');
    			
    				for(var i = 0; i< arr.length ; i++){
-   					var str = ' <div class="w3-col h40" id=" ' + arr[i].mgno + ' ">'
+   					var str = ' <div class="w3-col detail h40 w3-button" id=" ' + arr[i].mgno + ' ">'
    							+ '<div class="s1 w3-col">'+(i+1)+'</div>'
    							+ '<div class="s2 w3-col">' + arr[i].recvid + '</div>'
    							+ '<div class="s7 w3-col">' + arr[i].title + '</div>' 
@@ -236,7 +236,7 @@ $(document).ready(function(){
 		var rid = $('#recvid').val();
 		var sti = $('#title').val();
 		var sbo = $('#body').val();
-
+		
 		$.ajax({
    			url: '/boa/sendMess.boa',
    			type: 'post',
@@ -262,45 +262,54 @@ $(document).ready(function(){
    			}
    		});
 	});
+   		
+		$(document).on('click', ".detail", function(){
+			var sno = $(this).attr('id');
+			var sid = $('#id').val();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		$.ajax({
+			url: '/boa/messDetail.boa',
+			type: 'post',
+			dataType: 'json',
+			data:{
+				mgno : sno,
+				id	 : sid 
+				
+			},
+			success: function(data){
+				$('#receme, #sendme, #newme, #detame, #reply').css('display', 'none');
+   				$('#detame').css('display', 'block');
+					$('#mgn').val(data.mgno);
+					$('#re').html(data.recvid);
+					$('#se').html(data.sendid);
+					$('#ti').html(data.title);
+					$('#bo').html(data.body);
+					$('#da').html(data.mdate);
+					$('#rea').html(data.read);
+					if(data.recvid == sid){
+					$('#reply').css('display', 'none');
+					$('.repl').append('<p class="w3-col s3 dets w3-text-white w3-indigo w3-large mar"  id="reply">reply</p> ');
+					}
+			},
+			error: function(){
+				$('#succ').css('display', 'block');
+   					$('.sufa').html('### 통신오류 ###');
+			}
+		});
+	});
+   	
+   	
+   	$(document).on('click', "#reply", function(){
+   		var reid = $('#se').html();
+   		alert(reid)
+   		
+   		$('#detame').css('display', 'none');
+   		$('#newme').css('display', 'block');
+   		$('#recvid').html('');
+   		$('#recvid').append('<option class="ft13" value=' + reid + '>' + reid + '</option>');
+   		
+   	
+   	});	
 
 
 });

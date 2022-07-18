@@ -1,3 +1,6 @@
+
+
+
 .pic { 
 	border: 1px solid gray;
 	overflow: hidden;
@@ -79,7 +82,7 @@ display: -webkit-box;
 	font-size:18px;
 	float:left;
 	width:24.99999%;
-	padding:0 8px;
+	padding:0px!important;
 	margin-top: 10px;
 	
 }
@@ -89,6 +92,15 @@ display: -webkit-box;
 	border:1px solid #ccc;
 	height: 50px;
 }
+.dets{
+	font-size:18px;
+	margin : 5px;
+	padding : 0px;
+	height: 35px;
+	border:1px solid #ccc;
+	text-align:center!important;
+}
+
 .mt80 {
 	margin-top: 80px;
 }
@@ -104,8 +116,14 @@ display: -webkit-box;
 .ft22 {
 	font-size: 22pt;
 }
+.ft20 {
+	font-size: 20pt;
+}
 .ft18 {
 	font-size: 18pt;
+}
+.ft16 {
+	font-size: 16pt;
 }
 .ft15 {
 	font-size: 15pt;
@@ -165,4 +183,24 @@ display: -webkit-box;
 	margin-top: 5px;	
 	margin-bottom: 5px;	
 	padding : 0px;
+}
+.mg10 {
+	margin-top: 10px;	
+	margin-bottom: 10px;	
+	padding : 0px;
+}
+.mg0{
+	margin : 0px;
+}
+.pd3{
+	padding : 3px;
+}
+.mg5{
+	margin : 5px;
+}
+.mg5{
+	margin-top : 5px;
+}
+.mar{
+	margin-left: 350px;
 }

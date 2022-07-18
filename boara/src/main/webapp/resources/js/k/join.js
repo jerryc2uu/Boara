@@ -1,12 +1,7 @@
 $(document).ready(function(){
-	// 아이디 체크 버튼
-	$('#idck').click(function(){
+	// 아이디 중복검사
+	$('#id').change(function(){
 		var sid = $('#id').val();
-		if(!sid){
-			$('#id').focus();
-			alert("아이디를 입력하세요!")
-			return;
-		}
 		 
 		$.ajax({
 			url: '/boa/member/idCheck.boa',
@@ -37,20 +32,16 @@ $(document).ready(function(){
 			
 	});
 		
-	// 메일 체크 버튼
-	$('#mailck').click(function(){
-		var smail = $('#mail').val();
-		if(!smail){
-			$('#mail').focus();
-			alert("메일주소를 입력하세요!")
-			return;
-		}
+	// 메일 중복검사
+	$('#email').change(function(){
+		var smail = $('#email').val();
+
 		$.ajax({
 			url: '/boa/member/mailCheck.boa',
 			type: 'post',
 			dataType: 'json',
 			data: {
-				mail: smail
+				email: smail
 			},
 			success: function(data){
 				var result = data.result;
@@ -72,15 +63,10 @@ $(document).ready(function(){
 				
 			});
 			
-	// 전화번호 체크 버튼
-	$('#telck').click(function(){
+	// 전화번호 중복검사
+	$('#tel').change(function(){
 	var stel = $('#tel').val();
 	
-		if(!stel){
-			$('#tel').focus();
-			alert("전화번호를 입력하세요!")
-			return;
-		}
 		$.ajax({
 			url: '/boa/member/telCheck.boa',
 			type: 'post',
@@ -114,7 +100,8 @@ $(document).ready(function(){
 	
 		var pwResult = pwPat.test(spw);
 		if(!pwResult){
-		alert('비밀번호를 다시 입력하세요');
+		$('#id01').css('display', 'block');
+		$('#mod').html('비밀번호를 다시 입력하세요');
 		$('#pw').val('');
 		}
 	
@@ -123,10 +110,11 @@ $(document).ready(function(){
 	// 전화번호 정규 표현식
 	$('#tel').change(function(){
 		var stel = $('#tel').val();
-		var pwTel =  /^[0-9].{0,11}$/;
+		var pwTel =  /^[0-9].{10,11}$/;
 	var telResult = pwTel.test(stel);
 		if(!telResult){
-		alert('전화번호를 다시 입력하세요');
+		$('#id01').css('display', 'block');
+		$('#mod').html('전화번호를 다시 입력하세요');
 		$('#tel').val('');
 		}
 	});
@@ -166,12 +154,13 @@ $(document).ready(function(){
 
 	
 		
-		var el = $('#name, #id, #pw, #tel, #mail, #file');  //, #certi
+		var el = $('#name, #id, #pw, #tel, #email, #file, #certi'); 
 		
 		for(var i = 0 ; i < el.length ; i++ ){
 			var txt = $(el).eq(i).val();
 			if(!txt){
-				alert('필수 입력사항을 확인하세요.');
+			$('#id01').css('display', 'block');
+			$('#mod').html('필수 입력사항을 입력해주세요');
 				$(el).eq(i).focus();
 				return;
 			}
@@ -186,6 +175,51 @@ $(document).ready(function(){
 		$('#img1').attr('src', path);	
 		
 	});
+	
+	
+	// 메일 인증
+	$('#mailck').click(function(){
+		var email = $('#email').val();
+		var ser = $('#certi').val();
+		if(!email){
+			$('#id01').css('display', 'block');
+			$('#mod').html('이메일을 입력하세요');
+			$('#email').focus();
+		}
+
+		
+		$.ajax({
+				type : 'GET',
+				url : '/boa/member/certi.boa?email=' + email,
+				success : function (data) {
+					$('#certi').attr('disabled',false);
+					alert(data);
+					$('#code').val(data);
+					$('#id01').css('display', 'block');
+					$('#color').css('background-color', 'green');
+					$('#head').html('SUCCESS');
+					$('#mod').html('인증번호가 전송되었습니다.');
+				}			
+			}); 
+		}); 
+		
+		$('#cerck').click(function(){
+			var msgcode = $('#certi').val();
+			var code = $('#code').val();
+			
+			if(msgcode == code){
+				$('#cermsg').html('인증번호가 일치합니다.');
+				$('#cermsg').removeClass('w3-text-green w3-text-red').addClass('w3-text-green');
+				$('#cermsg').css('display', 'block');
+				$('#certi').css('background-color', 'lightgray').prop('readonly', true);
+			}else if(msgcode != code){
+				$('#cermsg').html('인증번호가 일치하지 않습니다.');
+				$('#cermsg').removeClass('w3-text-green w3-text-red').addClass('w3-text-red');
+				$('#cermsg').css('display', 'block');
+				$('#certi').val('');
+			}
+		});
+
 	
 });
 	

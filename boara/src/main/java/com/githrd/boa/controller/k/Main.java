@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.githrd.boa.dao.c.BoardDao;
 import com.githrd.boa.dao.k.MainBoardDao;
+import com.githrd.boa.service.k.MemberService;
 import com.githrd.boa.util.k.PageUtil;
 import com.githrd.boa.vo.k.FileVO;
 import com.githrd.boa.vo.k.MessageVO;
@@ -34,6 +35,7 @@ import com.githrd.boa.vo.k.SearchVO;
  *				2022.07.06	-		게시글 검색(reference boardList.jsp)
  *				2022.07.12	- 		발신, 수신 메세지 조회
  *				2022.07.13 	-		수신자 조회, 쪽지보내기
+ *				2022.07.17	-		쪽지 상세보기
  */
 
 @Controller
@@ -42,6 +44,8 @@ public class Main {
 	MainBoardDao mbDao;
 	@Autowired
 	BoardDao bDao;
+	@Autowired
+	MemberService mSrvc;
 	
 	@RequestMapping({"/", "/main.boa"})
 	public ModelAndView getMain(ModelAndView mv, HttpSession session, FileVO fVO) {
@@ -107,6 +111,7 @@ public class Main {
 	public Map<String, String> sendMess (MessageVO msVO){
 		HashMap<String, String> map = new HashMap<String, String>();
 		String result = "NO";
+		msVO.setBody(msVO.getBody().replaceAll("\n", "<br>"));
 		int cnt = mbDao.addMess(msVO);
 		msVO.setCnt(cnt);
 		if(cnt == 1) {
@@ -114,6 +119,13 @@ public class Main {
 		}
 		map.put("result", result);
 		return map;
+	}
+	
+	@RequestMapping("/messDetail.boa")
+	@ResponseBody
+	public MessageVO messDetail (MessageVO msVO){
+		msVO = mSrvc.mesdetail(msVO);
+		return msVO;
 	}
 }
  

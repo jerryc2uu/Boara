@@ -73,9 +73,9 @@ img{
 	      <header class="w3-container w3-indigo"> 
 	        <span id="exit" class="w3-button w3-display-topright">&times;</span>
 		    <div class="w3-col ft14 h50">
-		        <div id="rebtn" class="w3-hover-white w3-button jjbtn">받은쪽지함</div>
-		        <div id="sebtn" class="w3-hover-white w3-button jjbtn">보낸쪽지함</div>
-		        <div id="newbtn" class="w3-hover-white w3-button jjbtn">쪽지보내기</div>
+		        <div id="rebtn" class=" w3-button jjbtn">받은쪽지함</div>
+		        <div id="sebtn" class=" w3-button jjbtn">보낸쪽지함</div>
+		        <div id="newbtn" class="w3-button jjbtn">쪽지보내기</div>
 	        </div>
 	      </header>
 	      <!-- 받은 쪽지함 -->
@@ -132,37 +132,44 @@ img{
 			   </form>
 		   </div>
 		   
-		   
-		    <div id="detame" class=" w3-col mgtb30">
-		    	<div class="w3-col mgtb10 ">
-			      	<label for="sendid" class="w3-col s3 w3-center" >[ 보내는사람 ]</label>
-			      	<h4 class="w3-col w3-border s8 w3-center " id="mid" name="mid" value="${SID}"> </h4>
-			      </div>
-		    
-			      <div class="w3-col mgtb10 ">
-			      	<label for="recv" class="w3-col s3 w3-center" >[ 받는사람 ]</label>
-			      	<h5 id="recv"  class="w3-col w3-border s8" >ksoy</h54>
-			      </div>
-			      <div class="w3-col mgtb10 ">
-			      	<label for="recv" class="w3-col s3 w3-center" >[ 보낸사람 ]</label>
-			      	<h5 id="recv"  class="w3-col w3-border s8" >ksoy</h5>
-			      </div>
-			      <div class="w3-col mgtb10">
-			      	<label for="ttitle" class="w3-col s3 w3-center">[ 제목 ]</label>
-			      	<h5 id="ttitle"  class="w3-col w3-border s8" >안녕하세요</h5>
-			      </div>
-			      <div class="w3-col mgtb10">
-				      	<label for="body" class="w3-col s3 w3-center">[ 내용 ]</label>
-				      	<div class="w3-col s8">
-					    	<h5 id="body"  class="w3-col w3-border" >!!@!!!!!!!!!!!!!!!!!!!!!!ㅁㄴㄹ너이라무내여ㅐ누ㅕㅑ유ㅕㅑㅁㄴ유ㅑㄴ며야ㅠ녀뉴ㅑㅣㅕ</h5>
-							<div class="w3-col w3-center w3-margin-top">
-								<div class="w3-text-white w3-indigo w3-xarge w3-button" id="reply">reply</div> 
-							</div>
-			     		</div>
-	    		  </div>
-			   </div>
+		   <!-- 쪽지 상세보기 -->
+		    <div id="detame" class="w3-col mgtb30">
+		    	<input id="mgn" type="hidden" >
+		    	<div class="w3-col  ">
+			      	<div class="w3-col s3 w3-center mg5" >[ 받는사람 ]</div>
+			      	<p class="w3-col s8 w3-center dets" id="re" ></p>
+			    </div>
+			    
+		    	<div class="w3-col  ">
+			      	<div class="w3-col s3 w3-center mg5" >[ 보낸사람 ]</div>
+			      	<p class="w3-col s8 w3-center dets" id="se" ></p>
+			    </div>
+			    
+		    	<div class="w3-col  ">
+			      	<div class="w3-col s3 w3-center mg5" >[ 제목 ]</div>
+			      	<p class="w3-col s8 w3-center dets" id="ti" ></p>
+			    </div>
+		    	
+		    	<div class="w3-col  ">
+			      	<div class="w3-col s3 w3-center mg5" >[ 내용 ]</div>
+			     	<div class="w3-col s8 w3-center dets"  style="height:150px;" id="bo" ></div>
+			    </div>
+			    
 			   
+			 	<div class="w3-col  ">
+			      	<div class="w3-col s3 w3-center mg5" >[ 수신일 ]</div>
+			      	<p class="w3-col s8 w3-center dets" id="da" ></p>
+			    </div>
+			 	
+			 	<div class="w3-col repl ">
+			      	<div class="w3-col s3 w3-center mg5 " >[ 수신확인 ]</div>
+			      	<p class="w3-col s8 w3-center dets" id="rea" ></p>
+			    </div>
+	
 		
+				
+		
+			</div>
 			   
 		</div>
 	</div>	
@@ -184,11 +191,11 @@ img{
 	    <div class="swiper mySwiper mt80">
 	      <div class="swiper-wrapper">
 	<c:forEach var="list" items="${HLIST}" >
-	        <div class="swiper-slide" id="${list.bno}">
-	        	<div class="swiperbox">
+	        <div class="swiper-slide " id="${list.bno}">
+	        	<div class="swiperbox ">
 	      <c:if test="${list.savename == 'no'}">
 		        	<img class="hot" src="/boa/resources/img/noimage.jpg" id="${list.bno}">
-		  </c:if>
+		  </c:if>	
 		 <c:if test="${list.savename != 'no'}">
 		  			<img class="hot" src="/boa/resources/upload/${list.savename}" id="${list.bno}">
 		  </c:if>
@@ -237,7 +244,7 @@ img{
          <div class=" w3-center w3-col" id="img_container">
  <c:forEach var="data" items="${LIST}" >      
 			<div class="inblock w3-center mgl10" >
-				<div class="pic" >
+				<div class="pic w3-round-medium" >
 					<img class="top" id="${data.bno}" src="/boa/resources/upload/${data.savename}">
 				</div>
 				<div class="w3-center w3-text-grey w3-large">

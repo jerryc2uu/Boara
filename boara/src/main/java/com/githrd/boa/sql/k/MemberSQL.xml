@@ -49,7 +49,7 @@
 	
 	<select id="mailCnt" resultType="int" parameterType="String">
 		<include refid="selCnt" />
-			mail = #{mail}
+			mail = #{email}
 	</select>
 	
 	<select id="telCnt" resultType="int" parameterType="String">
@@ -68,7 +68,7 @@
 		INSERT INTO
 			member(mno ,id, pw, name, birth, mail, tel, isshow)
 		VALUES(
-			#{mno}, #{id}, #{pw}, #{name}, TO_DATE(#{birth}, 'yyyy/MM/dd'), #{mail}, #{tel}, 'Y'
+			#{mno}, #{id}, #{pw}, #{name}, TO_DATE(#{birth}, 'yyyy/MM/dd'), #{email}, #{tel}, 'Y'
 		)
 		
 	</insert>
@@ -139,7 +139,7 @@
  	
  	<select id="getIdInfo" resultType="mVO" parameterType="String">
  		SELECT
-		    mno, name, id, pw, TO_CHAR(birth, 'yyyy/MM/dd') birth, mail, tel
+		    mno, name, id, pw, TO_CHAR(birth, 'yyyy/MM/dd') birth, mail email, tel
         FROM
 		    member 
 		WHERE
@@ -174,17 +174,14 @@
  		UPDATE
  			member
  		<set>
- 			<if test="mail neq null">
- 				mail = #{mail},
+ 			<if test="email neq null">
+ 				mail = #{email},
  			</if>
  			<if test="tel neq null">
  				tel = #{tel},
  			</if>
  			<if test="pw neq null">
  				pw = #{pw},
- 			</if>
- 			<if test="birth neq null">
- 				birth = #{birth},
  			</if>
  		</set>
  		WHERE

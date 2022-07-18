@@ -64,12 +64,12 @@ main
 # pw 찾기 처리 요청 - 비동기통신
 요청내용	: 	/boa/member/pwSearchProc.boa
 파라미터	:	id, mail
-처리함수	:	pwSearch()
+처리함수	:	certi()
 컨트롤러	: 	com.githrd.boa.controller.k.Member
 뷰			:	
 ------------------------------------------------------------------ 
 # 아이디 중복 체크 처리 요청 - 비동기통신 
-요청내용	: 	/boa/member/idCheck.blp
+요청내용	: 	/boa/member/idCheck.boa
 파라미터	:	id
 처리함수	:	idCheck()
 컨트롤러	: 	com.githrd.boa.controller.k.Member
@@ -77,14 +77,21 @@ main
 ------------------------------------------------------------------
 
 # 메일 중복 처리 요청 - 비동기통신 
-요청내용	: 	/boa/member/mailCheck.blp
+요청내용	: 	/boa/member/mailCheck.boa
+파라미터	:	mail
+처리함수	:	mailCheck()
+컨트롤러	: 	com.githrd.boa.controller.k.Member
+뷰			:	json
+------------------------------------------------------------------
+# 메일 인증번호요청  
+요청내용	: 	/boa/member/certi.boa
 파라미터	:	mail
 처리함수	:	mailCheck()
 컨트롤러	: 	com.githrd.boa.controller.k.Member
 뷰			:	json
 ------------------------------------------------------------------
 # 전화번호 중복 처리 요청 - 비동기통신 
-요청내용	: 	/boa/member/telCheck.blp
+요청내용	: 	/boa/member/telCheck.boa
 파라미터	:	tel
 처리함수	:	telCheck()
 컨트롤러	: 	com.githrd.boa.controller.k.Member
@@ -93,7 +100,7 @@ main
 
 # join 처리 요청
 요청내용	: 	/boa/member/joinProc.boa
-파라미터	:	name, id, pw, mail, tel, file
+파라미터	:	name, id, pw, email, tel, birth, file
 컨트롤러	: 	com.githrd.boa.controller.k.Member
 처리함수	:	joinProc()
 뷰			:	성공 /WEB-INF/views/main.jsp
@@ -115,7 +122,7 @@ main
 ------------------------------------------------------------------
 # 회원정보 수정 처리 요청
 요청내용	: 	/boa/member/editInfoProc.boa
-파라미터	:	id, pw, mail, tel, file
+파라미터	:	id, pw, email, tel, file
 처리함수	:	editProc()
 컨트롤러	: 	com.githrd.boa.controller.k.Member
 뷰			:	
@@ -188,6 +195,13 @@ main
 파라미터	: 	id, recvid, title, body
 컨트롤러	: 	com.githrd.boa.controller.k.Main
 처리함수	: 	sendProc()
+      뷰	: 	json
+------------------------------------------------------------------
+# 쪽지 쓰기 요청
+요청내용	: 	/boa/messDetail.boa
+파라미터	: 	id, mgno
+컨트롤러	: 	com.githrd.boa.controller.k.Main
+처리함수	: 	messDetail()
       뷰	: 	json
 ------------------------------------------------------------------
 

@@ -52,8 +52,8 @@ public class MemberDao {
 		return sqlSession.selectOne("mSQL.idCnt", id);
 	}
 	// mail 중복 체크
-	public int getmailCnt(String mail) {
-		return sqlSession.selectOne("mSQL.mailCnt", mail);
+	public int getmailCnt(String email) {
+		return sqlSession.selectOne("mSQL.mailCnt", email);
 	}
 	// tel 중복 체크
 	public int gettelCnt(String tel) {

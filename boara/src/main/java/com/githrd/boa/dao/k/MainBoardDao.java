@@ -13,6 +13,7 @@ package com.githrd.boa.dao.k;
  *				2022.07.06	-		게시글 검색
  *				2022.07.12	- 		발신, 수신 메세지 조회
  *				2022.07.13 	-		수신자 조회, 쪽지보내기
+ *				2022.07.17	-		쪽지 상세보기
  * 
  *
  */
@@ -71,6 +72,15 @@ public class MainBoardDao {
 	// 쪽지보내기
 	public int addMess(MessageVO msVO) {
 		return sqlSession.insert("maSQL.sendMess", msVO);
+	}
+	
+	// 쪽지 상제보기
+	public int updatread(MessageVO msVO) {
+		return sqlSession.update("maSQL.readmess", msVO);
+	}
+	// 쪽지 상제보기
+	public MessageVO getMessDetail(MessageVO msVO) {
+		return sqlSession.selectOne("maSQL.messDetail", msVO);
 	}
 	
 }

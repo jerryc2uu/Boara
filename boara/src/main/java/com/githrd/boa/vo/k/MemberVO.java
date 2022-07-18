@@ -21,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class MemberVO {
 	private int mno, cnt,
 				bno, pno, gnp, pcode, sumpoint;	 // 포인트 처리
-	private String id, name, pw, mail, tel, sdate, result, isshow, certi, birth;
+	private String id, name, pw, email, tel, sdate, result, isshow, certi, birth;
 	private Date jdate;
 	ArrayList<FileVO> list;	// 파일 관련 정보 기억
 	private MultipartFile file;	// 업로드된 파일 기억
@@ -85,11 +85,11 @@ public class MemberVO {
 	public void setPw(String pw) {
 		this.pw = pw;
 	}
-	public String getMail() {
-		return mail;
+	public String getEmail() {
+		return email;
 	}
-	public void setMail(String mail) {
-		this.mail = mail;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getTel() {
 		return tel;
@@ -121,17 +121,17 @@ public class MemberVO {
 	public void setCerti(String certi) {
 		this.certi = certi;
 	}
-	public Date getJdate() {
-		return jdate;
-	}
-	public void setJdate(Date jdate) {
-		this.jdate = jdate;
-	}
 	public String getBirth() {
 		return birth;
 	}
 	public void setBirth(String birth) {
 		this.birth = birth;
+	}
+	public Date getJdate() {
+		return jdate;
+	}
+	public void setJdate(Date jdate) {
+		this.jdate = jdate;
 	}
 	public ArrayList<FileVO> getList() {
 		return list;
@@ -148,10 +148,10 @@ public class MemberVO {
 	@Override
 	public String toString() {
 		return "MemberVO [mno=" + mno + ", cnt=" + cnt + ", bno=" + bno + ", pno=" + pno + ", gnp=" + gnp + ", pcode="
-				+ pcode + ", sumpoint=" + sumpoint + ", id=" + id + ", name=" + name + ", pw=" + pw + ", mail=" + mail
+				+ pcode + ", sumpoint=" + sumpoint + ", id=" + id + ", name=" + name + ", pw=" + pw + ", email=" + email
 				+ ", tel=" + tel + ", sdate=" + sdate + ", result=" + result + ", isshow=" + isshow + ", certi=" + certi
-				+ ", jdate=" + jdate + ", birth=" + birth + ", list=" + list + ", file=" + file + "]";
+				+ ", birth=" + birth + ", jdate=" + jdate + ", list=" + list + ", file=" + file + "]";
 	}
-	
+
 	
 	}

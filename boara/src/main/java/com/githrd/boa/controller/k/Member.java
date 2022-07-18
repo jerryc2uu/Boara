@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.githrd.boa.dao.k.MemberDao;
+import com.githrd.boa.service.k.MailsendService;
 import com.githrd.boa.service.k.MemberService;
 import com.githrd.boa.vo.k.FileVO;
 import com.githrd.boa.vo.k.MemberVO;
@@ -34,6 +35,8 @@ import com.githrd.boa.vo.k.MemberVO;
  * 				2022.06.21 	-		탈퇴처리
  * 				2022.06.23 	-		회원가입
  * 				2022.06.26 	- 		회원정보 수정
+ * 				2022.07.16	-		이메일 인증
+ * 
  * 				
  *  *
  */
@@ -47,6 +50,8 @@ public class Member {
 	MemberDao mDao;
 	@Autowired
 	MemberService mSrvc;
+	@Autowired
+	private MailsendService mailSrvc;
 	
 	@RequestMapping("/login.boa")
 	public ModelAndView loginForm(ModelAndView mv, HttpSession session) {
@@ -158,14 +163,14 @@ public class Member {
 		}
 	
 	@RequestMapping(path="/mailCheck.boa", 
-			method=RequestMethod.POST, params="mail")
+			method=RequestMethod.POST, params="email")
 	
 	@ResponseBody
-	public Map<String, String> mailCheck(String mail) {
+	public Map<String, String> mailCheck(String email) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		String result = "NO";
 		
-		int cnt = mDao.getmailCnt(mail);
+		int cnt = mDao.getmailCnt(email);
 		
 		if(cnt == 0) {
 			result = "OK";
@@ -328,27 +333,13 @@ public class Member {
 		mv.setView(rv);
 		return mv;
 	}
-	/* 본인인증 
-	@RequestMapping(path="/certify.boa", method=RequestMethod.POST)
-	public ModelAndView certify (ModelAndView mv, String imp_uid) {
-		String imp = imp_uid;
-		// 성공
-		if(imp != null) {
-			
-			
-		}
-		
-		String view = "k/join";
-		
-		mv.setViewName(view);
-		
-		return mv;
+	
+	@RequestMapping(value="/certi.boa", method= RequestMethod.GET)
+	@ResponseBody
+	public String certi(String email) {
+	System.out.println("이메일 인증 들어옴");
+	System.out.println(email);
+	return mailSrvc.joinEmail(email);
+
 	}
-	*/
-	
-	
-	
-	
-	
-	
 }

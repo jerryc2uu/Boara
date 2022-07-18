@@ -59,7 +59,7 @@ $(document).ready(function(){
 		
 	
 		// 수정데이터
-		var mail = $('#mail').val();
+		var email = $('#email').val();
 		var tel = $('#tel').val();
 		var pw = $('#pw').val();
 		var birth = $('#birth').val();
@@ -68,8 +68,8 @@ $(document).ready(function(){
 		if(!pw){
 			$('#pw').prop('disabled', true);
 		}
-		if(tmail == mail) {
-			$('#mail').prop('disabled', true);
+		if(tmail == email) {
+			$('#email').prop('disabled', true);
 		}
 		if(ttel == tel) {
 			$('#tel').prop('disabled', true);
@@ -77,9 +77,10 @@ $(document).ready(function(){
 		if(!fno){
 			$('#fno').prop('disabled', true);
 		}
-		if(!pw && (tmail == mail) && (ttel == tel)   &&!fno){
+		if(!pw && (tmail == email) && (ttel == tel)   &&!fno){
 			// 수정을 X
-			alert('수정된 개인정보가 없습니다.');
+			$('#id01').css('display', 'block');
+			$('#me').html('수정된 개인정보가 없습니다.');
 			return;
 		}
 		$('#frm').submit();

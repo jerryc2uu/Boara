@@ -1,6 +1,6 @@
 package com.githrd.boa.service.k;
 /**
- *  member 관련 부가기능 관리할 클래스
+ *  member+transactional 관련 부가기능 관리할 클래스
  * 	@author 김소연
  * 	@since 2022.06.23
  * 	@version v.1.0
@@ -15,15 +15,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.githrd.boa.dao.k.MemberDao;
+import com.githrd.boa.dao.k.*;
 import com.githrd.boa.util.k.FileUtil;
-import com.githrd.boa.vo.k.FileVO;
-import com.githrd.boa.vo.k.MemberVO;
+import com.githrd.boa.vo.k.*;
 
 public class MemberService {
 	
 	@Autowired
 	MemberDao mDao;
+	@Autowired
+	MainBoardDao mbDao;
 	
 	// 단일 파일 업로드
 	public FileVO uploadProc(MultipartFile file) {
@@ -77,7 +78,7 @@ public class MemberService {
 	
 	@Transactional
 	public void editMemberData(MemberVO mVO) {
-		if(mVO.getMail() != null || mVO.getTel() != null || mVO.getPw() != null) {
+		if(mVO.getEmail() != null || mVO.getTel() != null || mVO.getPw() != null) {
 			mDao.updateInfo(mVO);
 		}
 		// 수정된 파일 추가
@@ -90,5 +91,14 @@ public class MemberService {
 		
 	}
 	
-	
+	@Transactional
+	public MessageVO mesdetail(MessageVO msVO) {
+		int num = mbDao.updatread(msVO);
+		if(num == 1) {
+			msVO = mbDao.getMessDetail(msVO);
+		} else {
+			msVO = mbDao.getMessDetail(msVO);
+		}
+		return msVO;
+	}
 }

@@ -15,9 +15,12 @@
   			작업이력 ]
   				2022.06.29	-	담당자 ] 김소연
  								클래스제작, 조회수 top5 게시글 조회
- 				2022.07.04		컬렉션 제목 검색 
- 				2022.07.06		게시글 제목 검색
- 				2022.07.06		hot 게시물 노출
+ 				2022.07.04	-	컬렉션 제목 검색 
+ 				2022.07.06	-	게시글 제목 검색
+ 				2022.07.06	-	hot 게시물 노출
+ 				2022.07.12	- 	발신, 수신 메세지 조회
+ 				2022.07.13 	-	수신자 조회, 쪽지보내기
+ 				2022.07.17	-	쪽지 상세보기
  
   -->
 <mapper namespace="maSQL">
@@ -199,5 +202,25 @@
 		   #{mgno}, #{id}, #{recvid}, #{title} ,#{body}
 		   )
 	</insert>
+	
+	<!-- 상세보기 클릭시 읽음처리 -->
+	<update id="readmess" parameterType="msVO">
+		UPDATE
+		    message
+		SET
+		    read = sysdate 
+		WHERE
+		    read is null
+		    AND mgno = #{mgno}
+		    AND recvid = #{id}
+	</update>
 
+	<select id="messDetail" resultType="msVO" parameterType="msVO">
+		SELECT
+		    mgno, sendid, recvid, title, body, to_char(mdate, 'yyyy/MM/dd HH:mm:ss') mdate, NVL(to_char(read, 'yyyy/MM/dd HH:mm:ss'), '읽지않음') read
+		FROM
+		    message
+		WHERE
+		    mgno = #{mgno}
+	</select>
 </mapper>
