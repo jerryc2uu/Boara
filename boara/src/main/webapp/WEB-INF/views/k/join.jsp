@@ -11,68 +11,6 @@
 <script type="text/javascript" src="/boa/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/boa/js/k/join.js"></script>
 
-
-<!-- jQuery -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-  <!-- iamport.payment.js -->
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script><script type="text/javascript">
-
-/*
-var IMP = window.IMP; 
-IMP.init('imp53161363'); 
-
- IMP.certification({
-	 m_redirect_url : "k/join",
-	 popup : true 
- }, function (rsp) { // callback
-	 if ( rsp.success ) {
-         // 인증성공
-        console.log(rsp.imp_uid);
-		alert("1. " + rsp.imp_uid);        
-        alert("1. 성공");
-       $.ajax({
-                type : 'POST',
-                url: '/boa/member/join.boa',
-                dataType: "json",
-            	data: {
-            		imp_uid : rsp.imp_uid
-            		}
-       		}).done(function(){
-            	 takeResponseAndHandle(rsp)
-            });
-	  } else {
-	         // 인증취소 또는 인증실패
-	        var msg = '인증에 실패하였습니다.';
-	        msg += '에러내용 : ' + rsp.error_msg;
-	 
-	        alert(msg);
-	        $('#certi').prop('disabled', true);
-	        $('frm').attr('action', '/boa/member/join.boa');
-	        $('#frm').submit();
-	    }
-	});
- 
-	 function takeResponseAndHandle(rsp) {
-		    if ( rsp.success ) {
-		        // 인증성공
-		        
-		        $('#certi').val('Y')
-		    } else {
-		         // 인증취소 또는 인증실패
-		        var msg = '인증에 실패하였습니다.';
-		        msg += '에러내용 : ' + rsp.error_msg;
-	
-		        alert(msg);
-		        $('#certi').prop('disabled', true);
-		        $('frm').attr('action', '/boa/member/join.boa');
-		        $('#frm').submit();
-		    }
-		}
-
-*/
-
-	 
- </script>
 <style type="text/css">
 	.main {
 	max-width :900px;
@@ -100,6 +38,15 @@ IMP.init('imp53161363');
 <c:if test="${not empty param.vw}">
 			<input type="hidden" name="vw" value="${param.vw}">
 			<input type="hidden" name="nowPage" value="${param.nowPage}">
+</c:if>
+<c:if test="${not empty param.cno}">
+			<input type="hidden" name="cno" id="cno" value="${param.cno}">
+</c:if>
+<c:if test="${not empty param.bno}">
+			<input type="hidden" name="bno" id="bno" value="${param.bno}">
+</c:if>
+<c:if test="${not empty param.cid}">
+			<input type="hidden" name="cid" id="cid" value="${param.cid}">
 </c:if>
 			<div class="mgt20  w3-content">
 				<label for="name" class="w3-col s3 w3-right-align ft16">회원이름 : </label>
@@ -196,6 +143,6 @@ IMP.init('imp53161363');
 	        <h5 id="mod">통신오류</h5>
 	      </div>
 	    </div>
-	  </div>
+	</div>
 </body>
 </html>

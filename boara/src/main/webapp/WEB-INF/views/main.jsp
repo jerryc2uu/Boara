@@ -165,10 +165,8 @@ img{
 			      	<div class="w3-col s3 w3-center mg5 " >[ 수신확인 ]</div>
 			      	<p class="w3-col s8 w3-center dets" id="rea" ></p>
 			    </div>
-	
-		
-				
-		
+				<div id="delm" class="w3-col mar s3 dets w3-text-white w3-indigo">삭제</div>
+
 			</div>
 			   
 		</div>
@@ -245,7 +243,12 @@ img{
  <c:forEach var="data" items="${LIST}" >      
 			<div class="inblock w3-center mgl10" >
 				<div class="pic w3-round-medium" >
-					<img class="top" id="${data.bno}" src="/boa/resources/upload/${data.savename}">
+<c:if test="${data.savename == 'no'}">
+   	<img class="top" src="/boa/resources/img/noimage.jpg" id="${data.bno}">
+</c:if>	
+<c:if test="${data.savename != 'no'}">
+	<img class="top" src="/boa/resources/upload/${data.savename}" id="${data.bno}">
+</c:if>
 				</div>
 				<div class="w3-center w3-text-grey w3-large">
 				${data.title}
@@ -254,6 +257,8 @@ img{
 </c:forEach>
 	  	 </div>
 	  	 <!-- 컬렉션 리스트 보이는 곳 끝 -->
+		 
+			
 			
       </div>
    </div>

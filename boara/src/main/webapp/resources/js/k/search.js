@@ -54,6 +54,10 @@ $(document).ready(function(){
 		var str = $(this).attr('id');
 		$('#bno').val(str);
 		$('#cno').prop('disabled', true);
+		$('#sel').prop('disabled', true);
+		if(!$('#id').val()){
+    		$('#id').prop('disabled', true);
+    	}
 		$('#frm').attr('action','/boa/board/boardDetail.boa');
 		$('#frm').submit();
 	

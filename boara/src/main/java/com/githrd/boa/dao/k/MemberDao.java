@@ -65,8 +65,13 @@ public class MemberDao {
 		return sqlSession.selectOne("mSQL.idSeacch", mVO);
 	}
 	// pw 찾기
-	public String getSearchPw(MemberVO mVO) {
+	public int getSearchPw(MemberVO mVO) {
 		return sqlSession.selectOne("mSQL.pwSeacch", mVO);
+	}
+	
+	// pw 변경
+	public int updatePw(MemberVO mVO) {
+		return sqlSession.update("mSQL.updatePw", mVO);
 	}
 	
 	// 아이디로 회원정보조회
@@ -91,4 +96,5 @@ public class MemberDao {
 	public int getDelMember(MemberVO mVO) {
 		return sqlSession.update("mSQL.delMember", mVO);
 	}
+	
 }

@@ -119,22 +119,31 @@
 	WHERE
 		name= #{name}
 		AND tel = #{tel}
+		AND isshow = 'Y'
 	</select>
 	
-	<select id="pwSeacch" resultType="String" parameterType="mVO">
+	<select id="pwSeacch" resultType="int" parameterType="mVO">
 	SELECT
-		pw
+		COUNT(*)
 	FROM
 		member
 	WHERE
 		id= #{id}
-		AND mail = #{mail}
+		AND tel = #{tel}
+		AND isshow = 'Y'
 	</select>
 	
+	<update id="updatePw"  parameterType="mVO">
+		UPDATE
+			member
+		SET
+			pw = #{pw}
+		WHERE
+			isshow = 'Y'
+			AND tel = #{tel}
+	</update>
 
 
- 
- 
  	<!-- 회원정보 수정시 불러올 데이터 -->
  	
  	<select id="getIdInfo" resultType="mVO" parameterType="String">
@@ -208,4 +217,6 @@
  			AND id = #{id}
  			AND pw = #{pw}
  	</select>
+ 	
+ 	
 </mapper>

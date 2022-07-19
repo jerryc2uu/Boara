@@ -186,7 +186,6 @@ $(document).ready(function(){
 			$('#mod').html('이메일을 입력하세요');
 			$('#email').focus();
 		}
-
 		
 		$.ajax({
 				type : 'GET',
