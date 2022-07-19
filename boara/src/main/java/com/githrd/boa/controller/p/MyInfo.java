@@ -226,13 +226,6 @@ public class MyInfo {
 		
 	}
 	
-	//나의 구독 리스트
-	@RequestMapping("/mySub.boa")
-	public ModelAndView mySub(ModelAndView mv) {
-		mv.setViewName("p/mySub");
-		return mv;
-	}
-	
 	//포인트 환불하기
 	@RequestMapping("/canclePay.boa")
 	public ModelAndView canclePay(ModelAndView mv, MyInfoVO iVO) {

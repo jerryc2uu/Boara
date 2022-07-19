@@ -30,6 +30,11 @@ public class BoardpDao {
 		return sqlSession.insert("pSQL.buyBoard", iVO);
 	}
 	
+	//게시글 판매 함수
+	public int selBoard(MyInfoVO iVO) {
+		return sqlSession.insert("pSQL.selBoard", iVO);
+	}
+	
 	//핫 포스팅 등록 처리 함수
 	public int hotBoardProc(MyInfoVO iVO) {
 		return sqlSession.insert("pSQL.hotBoardProc", iVO);

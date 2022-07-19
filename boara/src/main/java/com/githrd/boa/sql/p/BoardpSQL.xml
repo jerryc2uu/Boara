@@ -10,10 +10,10 @@
 		FROM
 		    point
 		WHERE
-		    pdate =
+		    pno =
 		    (
 		    SELECT
-		        MAX(pdate)
+		        MAX(pno)
 		    FROM
 		        point
 		    WHERE
@@ -67,7 +67,45 @@
 		            ) = pno) - #{gnp}, #{bno}
 		)
 	</insert>
-	
+	<!-- 게시글 구매 시 작가한테 포인트 추가 -->
+	<insert id="selBoard" parameterType="iVO">
+		INSERT INTO
+			    point(pno, mno, gnp, pcode, sumpoint)
+			VALUES(
+			    (SELECT
+			        NVL(MAX(pno) + 1, 1000000001) 
+			     FROM
+			        point),
+			    (
+			    SELECT
+			        mno
+			    FROM
+			        member
+			    WHERE
+			        id = #{wid}
+			    ), 500, 104, 
+			        (SELECT
+			            sumpoint
+			        FROM
+			            point
+			        WHERE
+			            (
+			            SELECT
+			                MAX(pno)
+			            FROM
+			                point
+			            WHERE
+			                mno = (
+			                    SELECT
+			                        mno
+			                    FROM
+			                        member
+			                    WHERE
+			                        id = #{wid}
+			                    )
+			            ) = pno) + #{gnp}
+			)
+	</insert>
 	<!-- 핫 포스팅 등록 -->
 	<insert id="hotBoardProc" parameterType="iVO">
 		INSERT INTO

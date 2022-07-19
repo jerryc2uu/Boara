@@ -2,6 +2,7 @@ package com.githrd.boa.service.p;
 
 import java.io.*;
 
+
 import java.net.URL;
 import java.util.Map;
 
@@ -23,6 +24,7 @@ public class IamPort {
 	@Autowired
 	MyInfoDao iDao;
 	
+	//결제 취소
 	@Transactional
 	public void refundPoint(MyInfoVO iVO) {
 		

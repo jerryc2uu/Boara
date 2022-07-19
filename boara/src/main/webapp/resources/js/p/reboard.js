@@ -23,6 +23,11 @@ $(document).ready(function(){
 		$('#bno').prop('disabled', false);
 		$('#cno').prop('disabled', false);
 		$('#frm').attr('action', '/boa/reboard/reboardList.boa');
+		 
+		if(!$('#id').val()){
+          $('#id').prop('disabled', true);
+        }
+		
 		$('#frm').submit();
 	});
 	

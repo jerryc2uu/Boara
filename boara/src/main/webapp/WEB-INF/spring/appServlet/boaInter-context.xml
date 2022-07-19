@@ -16,22 +16,9 @@
 	<interceptors>
 		<interceptor>
 			<!-- 박소연 -->
-			<mapping path = "/reboard/reboardWrite.boa" />
-			<mapping path = "/reboard/reboardWriteProc.boa" />
-			<mapping path = "/reboard/reboardComment.boa" />
-			<mapping path = "/reboard/reboardCommentProc.boa" />
-			<mapping path = "/reboard/reboardEdit.boa" />
-			<mapping path = "/reboard/reboardEditProc.boa" />
-			<mapping path = "/reboard/reboardDel.boa" />
-			<mapping path = "/member/myinfo.boa" />
-			<mapping path = "/member/mybuy.boa" />
-			<mapping path = "/member/mypoint.boa" />
-			<mapping path = "/member/mylike.boa" />
-			<mapping path = "/member/myjjim.boa" />
-			<mapping path = "/member/myboard.boa" />
-			<mapping path = "/member/myreboard.boa" />
-			<mapping path = "/member/addPoint.boa" />
-			<mapping path = "/member/addPointProc.boa" />
+			<mapping path = "/reboard/reboard*.boa" />
+			<mapping path = "/member/my*.boa" />
+			<mapping path = "/member/add*.boa" />
 			<mapping path = "/member/canclePay.boa" />
 			<mapping path = "/board/buyBoard.boa" />
 			<mapping path = "/board/hotBoardProc.boa" />

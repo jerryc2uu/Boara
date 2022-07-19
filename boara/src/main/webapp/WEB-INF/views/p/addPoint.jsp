@@ -72,18 +72,6 @@ font-weight: lighter ;
 				<h1>충전할 포인트</h1>
 			</div>
 			<div class="w3-content w3-col w3-center" style="margin-left: 105px; margin-bottom: 20px;">
-<!-- test -->
-	            <label>
-	            	<div class="w3-col m3">
-		            	<div class="w3-col w3-center w3-border">
-		            		<h1>100P</h1>
-		            	</div>
-		            	<div class="w3-col">
-							<input type="radio" name="money" value="100">
-						</div>
-	            	</div>
-	            </label>
-<!-- test -->
 	            <label>
 	            	<div class="w3-col m3">
 		            	<div class="w3-col w3-center w3-border">

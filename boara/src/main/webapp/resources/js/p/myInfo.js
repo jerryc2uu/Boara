@@ -55,9 +55,11 @@ $(document).ready(function(){
 			
 			$('#myPoint').css('display', 'block');
 			
-		} else if(msg == '구독 목록') {
+		} else if(msg == '나의 컬렉션') {
 			
-			$('#mySub').css('display', 'block');
+			$('#id').attr('name', 'cid');
+			$('#frm').attr('action', '/boa/collection/collecList.boa');
+			$('#frm').submit();
 		}
 	
 	});

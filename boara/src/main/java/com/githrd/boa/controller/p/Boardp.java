@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.githrd.boa.dao.c.BoardDao;
 import com.githrd.boa.dao.p.BoardpDao;
+import com.githrd.boa.vo.c.BoardVO;
 import com.githrd.boa.vo.p.MyInfoVO;
 
 @Controller
@@ -19,9 +21,12 @@ public class Boardp {
 	@Autowired
 	BoardpDao pDao;
 	
+	@Autowired
+	BoardDao bDao;
+	
 	//게시글 구매 처리
 	@RequestMapping("/buyBoard.boa")
-	public ModelAndView buyBoard(ModelAndView mv, MyInfoVO iVO, String nowPage) {
+	public ModelAndView buyBoard(ModelAndView mv, MyInfoVO iVO, BoardVO bVO, String nowPage) {
 		
 		mv.addObject("MSG", "게시글 구매에 성공했습니다.");
 		iVO.setResult("NO");
@@ -38,12 +43,17 @@ public class Boardp {
 			
 			int bno = iVO.getBno();
 			int cnt = pDao.buyBoard(iVO);
+			int wnt = pDao.selBoard(iVO);
+			
 			iVO.setResult("OK");
 			
-			if(cnt != 1) {
+			if(cnt != 1 || wnt != 1) {
 				mv.addObject("MSG", "게시글 구매에 실패했습니다.");
 				iVO.setResult("NO");
 			}
+			
+			bDao.cntStat(bVO);
+			bDao.discard(bVO);
 			
 		}
 		

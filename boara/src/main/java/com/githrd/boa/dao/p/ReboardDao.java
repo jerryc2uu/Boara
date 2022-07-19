@@ -51,6 +51,7 @@ public class ReboardDao {
 	public int reboardEditProc(ReboardVO rVO) {
 		return sqlSession.update("rSQL.reboardEditProc", rVO);
 	}
+	
 	//댓글 삭제 처리 함수
 	public int delReboard(int rno) {
 		return sqlSession.update("rSQL.delReboard", rno);

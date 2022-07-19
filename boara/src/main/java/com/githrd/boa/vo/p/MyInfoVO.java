@@ -8,7 +8,7 @@ public class MyInfoVO {
 	private int mno, cno, bno, rno, rcnt, bcnt, sumpoint, click, 
 				startCont, endCont, nowPage, pno, gnp, pcode, price, rowno, hno;
 	private String id, name, body, pw, mail, tel, sdate, savename, title, cname, detail, 
-				result, message, merchant_uid, imp_uid, isRefund;
+				result, message, merchant_uid, imp_uid, isRefund, wid;
 	private Date jdate, wdate;
 	
 	public int getMno() {
@@ -226,6 +226,12 @@ public class MyInfoVO {
 	public void setIsRefund(String isRefund) {
 		this.isRefund = isRefund;
 	}
+	public String getWid() {
+		return wid;
+	}
+	public void setWid(String wid) {
+		this.wid = wid;
+	}
 	@Override
 	public String toString() {
 		return "MyInfoVO [mno=" + mno + ", cno=" + cno + ", bno=" + bno + ", rno=" + rno + ", rcnt=" + rcnt + ", bcnt="
@@ -235,7 +241,6 @@ public class MyInfoVO {
 				+ ", pw=" + pw + ", mail=" + mail + ", tel=" + tel + ", sdate=" + sdate + ", savename=" + savename
 				+ ", title=" + title + ", cname=" + cname + ", detail=" + detail + ", result=" + result + ", message="
 				+ message + ", merchant_uid=" + merchant_uid + ", imp_uid=" + imp_uid + ", isRefund=" + isRefund
-				+ ", jdate=" + jdate + ", wdate=" + wdate + "]";
+				+ ", wid=" + wid + ", jdate=" + jdate + ", wdate=" + wdate + "]";
 	}
-	
 }
