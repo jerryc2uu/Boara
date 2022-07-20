@@ -71,6 +71,15 @@ import com.githrd.boa.vo.k.MessageVO;
 		  memberLog.info(mVO.getId() + " 님이 회원정보를 수정했습니다."); 
 		  } 
 	  }
+  // 비밀번호 변경
+  @After("execution(* com.githrd.boa.controller.k.Member.updatePw(..))")
+  public void upPw(JoinPoint join) { 
+	  MemberVO mVO = (MemberVO) join.getArgs()[0];
+	 
+	  if(mVO.getCnt() == 1) { 
+		  memberLog.info(mVO.getId() + " 님이 비밀번호를 변경 했습니다."); 
+		  } 
+	  }
   
    //탈퇴
 

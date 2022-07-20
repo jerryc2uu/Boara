@@ -14,6 +14,7 @@ package com.githrd.boa.dao.k;
  * 				2022.06.21 	-		탈퇴처리
  * 				2022.06.23 	-		회원가입
  * 				2022.06.26 	- 		회원정보 수정
+ * 				2022.07.20	-		로그인 날짜, 휴먼유저 스케쥴러
  *
  */
 import java.util.List;
@@ -32,6 +33,10 @@ public class MemberDao {
 	// 로그인 처리
 	public int getLogin(MemberVO mVO) {
 		return sqlSession.selectOne("mSQL.login", mVO);
+	}
+	// 로그인 날짜 처리
+	public int updateLo(MemberVO mVO) {
+		return sqlSession.update("mSQL.upLodate", mVO);
 	}
 	// 회원가입
 	public int addMember(MemberVO mVO) {
@@ -96,5 +101,12 @@ public class MemberDao {
 	public int getDelMember(MemberVO mVO) {
 		return sqlSession.update("mSQL.delMember", mVO);
 	}
-	
+	// lodate 1년이상 조회
+	public List<MemberVO> getUpId(){
+		return sqlSession.selectList("mSQL.selUpId");
+	}
+	// 휴먼 처리함수
+	public int upIsshow() {
+		return sqlSession.update("mSQL.upIsshow");
+		}
 }

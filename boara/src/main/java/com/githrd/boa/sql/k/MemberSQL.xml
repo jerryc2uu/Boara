@@ -20,11 +20,39 @@
  				2022.06.21	-	탈퇴 
  				2022.06.23 	-	회원가입
  				2022.06.23	-	회원정보수정(+프로필 이미지 변경)
+ 				2022.07.20	-	휴먼 계정 처리	
   									
   
   -->
 <mapper namespace="mSQL">
-
+	
+	<select id="selUpId" resultType="mVO">
+		SELECT
+		    id
+		FROM
+		    member
+		WHERE
+		    sysdate-365 <![CDATA[>=]]> lodate
+		    AND isshow = 'Y'
+	</select>
+	
+	<update id="upIsshow">
+		UPDATE
+		    member
+		SET
+		    isshow='R'
+		WHERE
+		    id in(
+		         SELECT
+		            id
+		        FROM
+		            member
+		        WHERE
+		            sysdate-365 <![CDATA[>=]]> lodate
+		            AND isshow = 'Y'
+		    )
+	</update>
+	
 	<!-- 멤버 테이블에서 COUNT 조회 재사용 -->
 	<sql id="selCnt">
 		SELECT
@@ -33,6 +61,22 @@
 			member
 		WHERE
 	</sql>
+	
+	<!-- 로그인 처리 후 lodate 추가 -->
+	<update id="upLodate"  parameterType="mVO">
+		UPDATE
+			member
+		SET
+			lodate = sysdate
+		WHERE
+			id = #{id}
+			AND isshow = 'Y'
+			AND pw = #{pw}
+	</update>
+	
+	<!-- 로그인 처리 전 휴먼 조회 -->	
+	
+	
 	
 	<!-- 로그인 처리  -->
 	<select id="login" resultType="int" parameterType="mVO">
@@ -66,9 +110,9 @@
 		</selectKey>
 		
 		INSERT INTO
-			member(mno ,id, pw, name, birth, mail, tel, isshow)
+			member(mno ,id, pw, name, birth, mail, tel, isshow, lodate)
 		VALUES(
-			#{mno}, #{id}, #{pw}, #{name}, TO_DATE(#{birth}, 'yyyy/MM/dd'), #{email}, #{tel}, 'Y'
+			#{mno}, #{id}, #{pw}, #{name}, TO_DATE(#{birth}, 'yyyy/MM/dd'), #{email}, #{tel}, 'Y', sysdate
 		)
 		
 	</insert>

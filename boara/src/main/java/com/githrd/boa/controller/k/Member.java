@@ -38,7 +38,6 @@ import com.githrd.boa.vo.k.MemberVO;
  * 				2022.07.16	-		이메일 인증
  * 				2022.07.19  - 		탈퇴 본인 인증
  * 				2022.07.19  - 		비밀번호 문자 인증
- * 
  * 				
  *  *
  */
@@ -109,6 +108,7 @@ public class Member {
 		
 		if(cnt == 1) {
 			session.setAttribute("SID", mVO.getId());
+			mDao.updateLo(mVO);
 		} else {
 			 view = "/boa/member/login.boa";
 		}
@@ -277,6 +277,7 @@ public class Member {
 		String result = "NO";
 		
 		int cnt = mDao.updatePw(mVO);
+		mVO.setCnt(cnt);
 		if(cnt == 1) {
 			result= "OK";
 		}
