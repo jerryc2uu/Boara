@@ -20,6 +20,7 @@
 <script type="text/javascript" src="/boa/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/boa/js/k/main.js"></script>
 <script type="text/javascript" src="/boa/js/k/search.js"></script>
+<script type="text/javascript" src="/boa/js/c/recommend.js"></script>
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
@@ -256,10 +257,17 @@ img{
 			</div>
 </c:forEach>
 	  	 </div>
-	  	 <!-- 컬렉션 리스트 보이는 곳 끝 -->
-		 
-			
-			
+	  	 
+	  	 <!-- 최이지 도서 추천  -->
+<c:if test="${not empty SID}">
+   <div class="w3-col" style="margin: 50px 0px 20px 130px ;" id="recobox">
+      <input type="hidden" id="gno" value="${GNO}">
+      <h3 class="ft22" >${SID}님을 위한 interpark 도서 추천</h3>
+      <div class="w3-col" id="recommend" >
+      <%--반복 append --%>
+      </div>
+   </div>
+</c:if>		 
       </div>
    </div>
    

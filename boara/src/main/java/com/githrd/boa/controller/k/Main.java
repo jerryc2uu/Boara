@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.githrd.boa.dao.c.BoardDao;
 import com.githrd.boa.dao.k.MainBoardDao;
+import com.githrd.boa.service.c.Recommend;
 import com.githrd.boa.service.k.MemberService;
 import com.githrd.boa.util.k.PageUtil;
 import com.githrd.boa.vo.k.FileVO;
@@ -27,15 +28,17 @@ import com.githrd.boa.vo.k.SearchVO;
  * @version	v.1.0
  * 
  * 			작업이력 ]
- * 				2022.06.12	-	담당자 : 김소연
- * 									클래스 제작, 
- * 									메인화면 보기 요청 처리
- * 				2022.06.29  - 		top 게시글 조회(일주일)
+ * 				2022.06.12	-		클래스 제작, 메인
+ * 				2022.06.29  - 		top 게시글 조회
  * 				2022.07.03	-		컬렉션 검색(reference collectList.jsp)
- *				2022.07.06	-		게시글 검색(reference boardList.jsp)
+ *				2022.07.06	-		게시글 검색(reference boardList.jsp), hot 게시글
  *				2022.07.12	- 		발신, 수신 메세지 조회
  *				2022.07.13 	-		수신자 조회, 쪽지보내기
  *				2022.07.17	-		쪽지 상세보기
+ *										담당자 : 김소연
+ *
+ *				2022.07.18	-		도서 추천api 추가
+ *										담당자 : 최이지
  */
 
 @Controller
@@ -46,11 +49,14 @@ public class Main {
 	BoardDao bDao;
 	@Autowired
 	MemberService mSrvc;
+	@Autowired
+	Recommend reco;
 	
 	@RequestMapping({"/", "/main.boa"})
 	public ModelAndView getMain(ModelAndView mv, HttpSession session, FileVO fVO) {
 		List<FileVO> hList = mbDao.getHotBoard();
 		List<FileVO> list = mbDao.getTopBoard();
+		mv.addObject("GNO", reco.susume(session));
 		mv.addObject("HLIST", hList);
 		mv.addObject("LIST", list);
 		mv.setViewName("main");
