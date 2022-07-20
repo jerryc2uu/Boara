@@ -36,6 +36,8 @@ import com.githrd.boa.vo.k.MemberVO;
  * 				2022.06.23 	-		회원가입
  * 				2022.06.26 	- 		회원정보 수정
  * 				2022.07.16	-		이메일 인증
+ * 				2022.07.19  - 		탈퇴 본인 인증
+ * 				2022.07.19  - 		비밀번호 문자 인증
  * 
  * 				
  *  *
@@ -58,7 +60,7 @@ public class Member {
 		mv.setViewName("k/login");
 		return mv;
 	}
-
+/*
 	@RequestMapping(path="/loginProc.boa", method=RequestMethod.POST, params= {"id", "pw"})
 	public ModelAndView loginProc(MemberVO mVO, HttpSession session, ModelAndView mv, RedirectView rv) {
 		
@@ -93,20 +95,48 @@ public class Member {
 		mv.setViewName("k/redirect");
 			return mv;
 	}	
+
+*/
+
+	@RequestMapping("/loginProc.boa")
+	public ModelAndView loginProc(MemberVO mVO, HttpSession session, ModelAndView mv, RedirectView rv, String vw, String nowPage) {
+		int cnt = mDao.getLogin(mVO);
+		mVO.setCnt(cnt);
+		String view = "/boa/main.boa";
+		if(vw != null) {
+			 view = vw;
+		}
+		
+		if(cnt == 1) {
+			session.setAttribute("SID", mVO.getId());
+		} else {
+			 view = "/boa/member/login.boa";
+		}
+		mv.addObject("VIEW", view);
+		mv.addObject("NOWPAGE", nowPage);
+		mv.setViewName("k/redirect");
+			return mv;
+	}	
+	
+	
+	
 	@RequestMapping("/join.boa")
 	public ModelAndView join(ModelAndView mv) {
 		mv.setViewName("k/join");
 		return mv;
 	}
-	
+
 	@RequestMapping("/joinProc.boa")
 	public ModelAndView joinProc(ModelAndView mv,HttpSession session, MemberVO mVO, String vw, String nowPage) {
 		String view = "/boa/main.boa";
 		try {
 			mSrvc.addMemberData(mVO);
 			if(vw != null) {
-				view = vw;
+				 view = vw;
+			}else {
+				view = "/boa/main.boa";
 			}
+			
 			if(nowPage != null) {
 				mv.addObject("NOWPAGE", nowPage);
 			}
@@ -224,22 +254,50 @@ public class Member {
 	}
 	
 	// pw 찾기 
-	@RequestMapping(path="/pwSearchProc.boa", 
-			method=RequestMethod.POST, params= {"id", "mail"})
+	@RequestMapping("/pwSearchProc.boa")
 	@ResponseBody
 	public Map<String, String> pwSearch(MemberVO mVO) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		String result = "NO";
 		
-		String spw = mDao.getSearchPw(mVO);
-		if(spw != null) {
+		int cnt = mDao.getSearchPw(mVO);
+		if(cnt == 1) {
 			result= "OK";
 		}
 		map.put("result", result);
-		map.put("pw", spw);
 		
 		return map;
 	}
+	
+	// pw 변경 
+	@RequestMapping("/updatePw.boa")
+	@ResponseBody
+	public Map<String, String> updatePw(MemberVO mVO) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		String result = "NO";
+		
+		int cnt = mDao.updatePw(mVO);
+		if(cnt == 1) {
+			result= "OK";
+		}
+		map.put("result", result);
+		
+		return map;
+	}
+	
+	
+	@RequestMapping(path="/telCheck.boa", method = RequestMethod.GET)
+	@ResponseBody
+	public String sendSMS(String tel) {
+		//난수 생성
+		int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);
+
+		mailSrvc.certifiedPhoneNumber(tel,randomNumber);
+		
+		return Integer.toString(randomNumber);
+	}
+	
+	
 	
 	
 	
@@ -334,11 +392,24 @@ public class Member {
 		return mv;
 	}
 	
+	
+	@RequestMapping("/pwCk.boa")
+	@ResponseBody
+	public Map<String, String> pwCk (MemberVO mVO){
+		HashMap<String, String> map = new HashMap<String, String>();
+		String ck = "NO";
+		int cnt = mDao.getLogin(mVO);
+		if(cnt == 1) {
+			ck = "OK";
+		}
+		map.put("ck", ck);
+		return map;
+	}
+	
+	
 	@RequestMapping(value="/certi.boa", method= RequestMethod.GET)
 	@ResponseBody
 	public String certi(String email) {
-	System.out.println("이메일 인증 들어옴");
-	System.out.println(email);
 	return mailSrvc.joinEmail(email);
 
 	}

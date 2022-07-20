@@ -61,10 +61,17 @@ main
 컨트롤러	: 	com.githrd.boa.controller.k.Member
 뷰			:	json
 ------------------------------------------------------------------   
-# pw 찾기 처리 요청 - 비동기통신
+# idtel 확인 요청 - 비동기통신
 요청내용	: 	/boa/member/pwSearchProc.boa
 파라미터	:	id, mail
 처리함수	:	certi()
+컨트롤러	: 	com.githrd.boa.controller.k.Member
+뷰			:	
+------------------------------------------------------------------ 
+# pw 변경 처리 요청 - 비동기 통신
+요청내용	: 	/boa/member/updatePw.boa
+파라미터	:	pw, tel
+처리함수	:	updatePw()
 컨트롤러	: 	com.githrd.boa.controller.k.Member
 뷰			:	
 ------------------------------------------------------------------ 

@@ -310,6 +310,12 @@ $(document).ready(function(){
    		
    	
    	});	
+   	
+   	$(document).on('click', "#delm", function(){
+   		var smgn = $('#mgn').val();
+   		alert(smgn);
+   	
+   	});
 
 
 });
