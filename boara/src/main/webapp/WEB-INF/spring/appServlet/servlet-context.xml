@@ -48,7 +48,9 @@
 	<beans:import resource="boaInter-context.xml" />
 	
 	<!-- mail -->
-    <context:component-scan base-package="spring.service" />
 	<context:component-scan base-package="com.githrd.boa" />
+	
+	<!-- quartz 설정파일 -->
+    <beans:import resource="scheduler-context.xml" />
 	
 </beans:beans>
