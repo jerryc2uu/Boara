@@ -12,6 +12,9 @@ package com.githrd.boa.service.c;
  *			2022.07.18	-	함수 수정(susume)
  *								담당자 : 최이지
  *
+ *			2022.07.21	-	함수 오류 수정(susume)
+ *								담당자 : 최이지
+ *
  */
 
 import java.util.*;
@@ -84,6 +87,7 @@ public class Recommend {
 		}
 		
 		// api용 장르 값으로 변환
+		if(cate == 0) return cate;
 		cate = map.get(cate);
 		return cate;
 	}

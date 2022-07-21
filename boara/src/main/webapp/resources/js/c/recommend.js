@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	// 최다 조회 장르값 받기
-	if(!$('#gno').val()) {
+	if(!$('#gno').val() || $('#gno').val() == 0) {
 		$('#recobox').css('display', 'none');
 		return;
 	}
