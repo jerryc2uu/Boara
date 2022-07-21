@@ -114,22 +114,5 @@ public class IamPort {
  
 		br.close();
 	}
-	/*
-	 * // 아임포트로 취소요청 메서드 public static void cancelPayment(MyInfoVO iVO) { HttpClient
-	 * client = HttpClientBuilder.create().build(); HttpPost post = new
-	 * HttpPost(IMPORT_CANCEL_URL); Map<String, String> map = new HashMap<String,
-	 * String>(); post.setHeader("Authorization", dto.getToken());
-	 * map.put("imp_uid", iVO.getImpId()); map.put("merchant_uid",
-	 * dto.getMerchantId()); map.put("amount", dto.getAmount()); map.put("checksum",
-	 * dto.getChecksum()); String asd = ""; try { post.setEntity(new
-	 * UrlEncodedFormEntity(convertParameter(map))); HttpResponse res =
-	 * client.execute(post); ObjectMapper mapper = new ObjectMapper(); String enty =
-	 * EntityUtils.toString(res.getEntity()); JsonNode rootNode =
-	 * mapper.readTree(enty); asd = rootNode.get("response").asText(); } catch
-	 * (Exception e) { throw new IamportException(e.getMessage()); } if
-	 * (asd.equals("null")) { throw new IamportException("환불실패"); } }
-	 */
-
-	
 	
 }

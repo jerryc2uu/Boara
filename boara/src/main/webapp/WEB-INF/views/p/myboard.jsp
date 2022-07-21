@@ -19,7 +19,8 @@
 		//게시물 하나 클릭 시 해당 게시물 상세 페이지로 이동
 		$('.brdList').click(function(){
 			var sbno = $(this).parent().attr('id');
-			window.top.location.href = '/boa/board/boardDetail.boa?bno=' + sbno;
+			var sid = $('#id').val();
+			window.top.location.href = '/boa/board/boardDetail.boa?bno=' + sbno + '&id=' + sid;
 		});
 		
 		$('.hotBoard').click(function(){

@@ -69,6 +69,20 @@
 처리함수	:	myInfo()
 뷰			:	/WEB-INF/views/p/myInfo.jsp
 --------------------------------------------
+# 내가 작성한 게시글 폼 보기 요청
+요청내용	:	/boa/member/myboard.boa
+파라미터	:	id, [nowPage]
+컨트롤러	:	com.githrd.boa.controller.p.MyInfo
+처리함수	:	myBoard()
+뷰			:	/WEB-INF/views/p/myboard.jsp
+--------------------------------------------
+# 내가 작성한 댓글 폼 보기 요청
+요청내용	:	/boa/member/myreboard.boa
+파라미터	:	id, [nowPage]
+컨트롤러	:	com.githrd.boa.controller.p.MyInfo
+처리함수	:	myReboard()
+뷰			:	/WEB-INF/views/p/myreboard.jsp
+--------------------------------------------
 # 구매글 리스트 폼 보기 요청
 요청내용	:	/boa/member/mybuy.boa
 파라미터	:	id, [nowPage]
@@ -82,6 +96,13 @@
 컨트롤러	:	com.githrd.boa.controller.p.MyInfo
 처리함수	:	myLike()
 뷰			:	/WEB-INF/views/p/myLike.jsp
+--------------------------------------------
+# 찜 리스트 폼 보기 요청
+요청내용	:	/boa/member/myjjim.boa
+파라미터	:	id, [nowPage]
+컨트롤러	:	com.githrd.boa.controller.p.MyInfo
+처리함수	:	myJJim()
+뷰			:	/WEB-INF/views/p/myJJim.jsp
 --------------------------------------------
 # 포인트 이용 내역 폼 보기 요청
 요청내용	:	/boa/member/mypoint.boa
