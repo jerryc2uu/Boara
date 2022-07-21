@@ -200,7 +200,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 </c:if>
 		<input type="hidden" name="bno" id="bno" value="${POST.bno}">
 		<input type="hidden" name="cno" id="cno" value="${POST.cno}">
+<c:if test="${not empty SID}">
 		<input type="hidden" name="id" id="id" value="${SID}">
+</c:if>
+		<input type="hidden" name="wid" id="wid" value="${POST.id}">
 		<input type="hidden" name="vw" value="/boa/board/boardDetail.boa">
 	</form>
 

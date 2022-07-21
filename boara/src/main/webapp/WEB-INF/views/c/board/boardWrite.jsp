@@ -119,7 +119,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 				
 				<%-- 데이터 전송용 --%>
 				<input type="hidden" name="sgenre" id="genre">
-				<input type="hidden" name="id" value="${SID}">
+				<input type="hidden" name="id" id="id" value="${SID}">
 				<input type="hidden" name="vw" value="/boa/board/boardWrite.boa">
 			</form>
 		</div>
