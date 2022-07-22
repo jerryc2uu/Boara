@@ -11,7 +11,7 @@
 						https://www.springframework.org/schema/batch/spring-batch.xsd
 						http://www.springframework.org/schema/context 
 						https://www.springframework.org/schema/context/spring-context.xsd">
-	
+	<!-- 김소연 -->
 	<bean id="updateTask" class="com.githrd.boa.scheduler.UpShow" />
 	
 	<bean name="updateJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean"
@@ -20,6 +20,7 @@
 		<property name="jobDataAsMap">
 			<map>
 				<entry key="upIsshow" value-ref="updateTask" />
+				<entry key="autoPoints" value-ref="autoPoint" />
 			</map>
 		</property>
 	</bean>
@@ -28,10 +29,32 @@
 		p:startDelay="1000"
 		p:cronExpression="0 0 0 * * ?"><!-- 매년 매일 0시 0분 0초에 실행 -->
 	</bean>
+	
+	
+	
+	<!-- 박소연 -->
+	<bean id="autoPoint" class="com.githrd.boa.scheduler.p.AutoPoint" />
+	<bean name="autoPointJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean"
+		p:jobClass="com.githrd.boa.scheduler.p.AutoPointJob"
+		p:durability="true">
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="autoPoints" value-ref="autoPoint" />
+			</map>
+		</property>
+	</bean>
+	<bean id="autoTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"
+		p:jobDetail-ref="autoPointJob"
+		p:startDelay="1000"
+		p:cronExpression="0 * * * * ?"><!-- 1분마다 실행 -->
+	</bean>
+	
+	<!-- 공통 -->
 	<bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>
 				<ref bean="cronTrigger" />
+				<ref bean="autoTrigger" />
 			</list>
 		</property>
 	</bean>

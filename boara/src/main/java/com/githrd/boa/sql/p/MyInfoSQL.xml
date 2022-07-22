@@ -32,16 +32,22 @@
 		                        member
 		                    WHERE
 		                        id = #{id})
-		    ) bcnt
-		    
+		    ) bcnt, a.isAuto isAuto
 		FROM
-		    member m, imgfile i, point p
+		    member m, imgfile i, point p, autopayment a
 		WHERE
 		    id = #{id}
+		    AND a.mno(+) = p.mno
 		    AND m.mno = i.mno
 		    AND i.isshow = 'C'
 		    AND i.whereis = 'M'
 		    AND m.mno = p.mno
+		    AND a.tno = (SELECT
+		                    MAX(tno)
+		                FROM
+		                    autopayment
+		                WHERE
+		                    id = #{id})
 		    AND pno = (
 		                    SELECT
 		                        MAX(pno)
@@ -55,7 +61,7 @@
 		                                    FROM member
 		                                    WHERE id =#{id})
 		                                )
-		                        AND mno = (SELECT mno FROM member WHERE id =#{id})
+		                        AND mno = (SELECT mno FROM member WHERE id = #{id})
 		                    GROUP BY
 		                        pdate
 		                )
@@ -124,15 +130,15 @@
 	<!-- 포인트 내역 조회-->
 	<select id="myPoint" resultType="iVO" parameterType="iVO">
 		SELECT
-		    pno, gnp, sdate, pcode, detail, NVL(merchant_uid, 0) merchant_uid, NVL(imp_uid, 0) imp_uid, NVL(isRefund, 0) isRefund
+		    pno, gnp, sdate, pcode, detail, NVL(merchant_uid, 0) merchant_uid, NVL(imp_uid, 0) imp_uid, NVL(isRefund, 0) isRefund, NVL(isAuto, 0) isAuto
 		FROM
 		    (
 		    SELECT
-		        ROWNUM rno, pno, gnp, sdate, pcode, detail, merchant_uid, imp_uid, isRefund
+		        ROWNUM rno, pno, gnp, sdate, pcode, detail, merchant_uid, imp_uid, isRefund, isAuto
 		    FROM
 		        (
 		        SELECT
-		            pno, p.gnp gnp, TO_CHAR(p.pdate, 'yyyy/MM/dd') sdate, p.pcode pcode, detail, p.merchant_uid, p.imp_uid, p.isRefund
+		            pno, p.gnp gnp, TO_CHAR(p.pdate, 'yyyy/MM/dd') sdate, p.pcode pcode, detail, p.merchant_uid, p.imp_uid, p.isRefund, p.isAuto
 		        FROM
 		            point p, detailcode d
 		        WHERE   
@@ -363,6 +369,23 @@
 		    rowno BETWEEN #{startCont} AND #{endCont}
 	</select>
 	
+	<!-- 자동충전 해지 처리 -->
+	<update id="cancleAuto" parameterType="iVO">
+		UPDATE
+		    autopayment
+		SET
+		    isAuto = 'N'
+		WHERE
+		    mno = (
+		            SELECT
+		                mno
+		            FROM
+		                member
+		            WHERE
+		                id = #{id}
+		            )
+		    AND isAuto = 'A'
+	</update>
 	<!-- 포인트 충전 폼보기 -->
 	<select id="addPoint" resultType="iVO" parameterType="iVO">
 		SELECT
@@ -386,10 +409,11 @@
 		            )
 		    ) = pno
 	</select>
-	<!-- 포인트 충전 -->
+	
+	<!-- 포인트 일반 & 자동 충전 처리-->
 	<insert id="addPointProc" parameterType="iVO">
 		INSERT INTO
-		    point(pno, mno, gnp, pcode, sumpoint, merchant_uid, imp_uid, isRefund)
+		    point(pno, mno, gnp, pcode, sumpoint, merchant_uid, imp_uid, isRefund, isAuto)
 		VALUES(
 		    (SELECT
 		        NVL(MAX(pno) + 1, 1000000001) 
@@ -422,8 +446,88 @@
 		                    WHERE
 		                        id = #{id}
 		                    )
-		            ) = pno) + #{gnp}, #{merchant_uid}, #{imp_uid}, 'N'
+		            ) = pno) + #{gnp}, #{merchant_uid}, #{imp_uid}, 'N', #{isAuto}
 		)
+	</insert>
+	
+	<!-- 자동 충전 시 AUTOPAYMENT 테이블에 회원 정보 삽입 -->
+	<insert id="addAuto" parameterType="iVO">
+		INSERT INTO
+	    	autopayment(tno, mno, isAuto)
+		VALUES(
+		    (SELECT
+		        NVL(MAX(tno) + 1, 100001) 
+		     FROM
+		        autopayment), (
+		                SELECT
+		                    mno
+		                FROM
+		                    member
+		                WHERE
+		                    id = #{id}
+		                ), 'A'    
+		)
+	</insert>
+	
+	
+	<!-- 포인트 자동 충전 스케줄러 -->
+	
+	<!-- 자동 충전 신청한 회원들 정보 조회 -->
+	<select id="selAuto" resultType="iVO">
+		SELECT
+		    p.mno mno, m.id, p.gnp gnp, a.sumpoint sumpoint
+		FROM
+		    point p,
+		        (SELECT
+		                sumpoint, mno
+		            FROM
+		                point
+		            WHERE
+		                pno IN (
+		                        SELECT
+		                            MAX(pno)
+		                        FROM
+		                            point
+		                        GROUP BY
+		                            mno
+		                        )
+		                AND mno IN (
+		                            SELECT
+		                                mno
+		                            FROM
+		                                autopayment
+		                            WHERE
+		                                isauto = 'A'
+		                            )
+		                    ) a, member m
+		WHERE
+		    p.mno = a.mno
+		    AND p.mno = m.mno
+		    AND isauto = 'A'
+		    AND pno IN (
+		                SELECT
+		                    MAX(pno)
+		                FROM
+		                    point
+		                WHERE
+		                    isauto = 'A'
+		                GROUP BY
+		                    mno
+		                ) 
+	</select>
+	<!-- 자동 충전 회원 포인트 자동 충전 처리 -->
+	<insert id="autoPayment" parameterType="iVO">
+		<selectKey keyProperty="pno" resultType="int" order="BEFORE">
+			SELECT
+		        NVL(MAX(pno) + 1, 1000000001) 
+		     FROM
+		        point
+		</selectKey>
+		INSERT INTO
+		    point(pno, mno, gnp, pcode, sumpoint, isRefund, isAuto)
+		VALUES(
+		    #{pno}, #{mno}, #{gnp}, 101, #{sumpoint} + #{gnp}, 'N', 'A'
+		)	
 	</insert>
 	
 	<!-- 환불 처리 시 기존 포인트 충전 Y로 변경 -->

@@ -38,6 +38,7 @@ font-weight: lighter ;
 		<input type="hidden" name="gnp" id="gnp">
 		<input type="hidden" name="merchant_uid" id="mer">
 		<input type="hidden" name="imp_uid" id="imp">
+		<input type="hidden" name="isAuto" id="isAuto">
 	</form>
 	
 	<!-- Navbar -->
@@ -78,7 +79,7 @@ font-weight: lighter ;
 		            		<h1>1000P</h1>
 		            	</div>
 		            	<div class="w3-col">
-							<input type="radio" name="money" value="1000">
+							<input type="radio" name="money" value="1000" checked="checked">
 						</div>
 	            	</div>
 	            </label>
@@ -134,6 +135,14 @@ font-weight: lighter ;
 						</div>
 					</div>
 				</label>
+	        </div>
+	        <div class="w3-col w3-padding w3-border-top w3-border-bottom" style="margin-top: 20px; margin-bottom: 15px;">
+	        	<div class="w3-col m6 w3-border-right">
+					<label><input type="radio" name="isAuto" id="isAuto" value="N" checked="checked">일반충전</label>
+	        	</div>
+	        	<div class="w3-col m6">
+					<label><input type="radio" name="isAuto" id="isAuto" value="A">자동충전</label>	
+	        	</div>
 	        </div>
 	        <div class="w3-content w3-col w3-center">
 	        	<h3>현재 보유 포인트 : ${DATA.sumpoint} P</h3>

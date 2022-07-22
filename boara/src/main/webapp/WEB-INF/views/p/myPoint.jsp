@@ -69,11 +69,19 @@ font-weight: lighter ;
 		<c:if test="${data.pcode eq 205}">
 				<div class="w3-col m2 w3-left"><div class="btnbox w3-orange parent">환불</div></div>
 		</c:if>
-				<div class="w3-col m4 w3-center">${data.detail}</div>  
+				<div class="w3-col m4 w3-center">${data.detail}
+					<c:if test="${data.isAuto == 'N'}"> (일반)</c:if>
+					<c:if test="${data.isAuto == 'A'}"> (자동)</c:if>
+				</div>  
 				<div class="w3-col m3">${data.sdate}</div>
 				<div class="w3-col m1">${data.gnp}</div>
 			<c:if test="${data.isRefund == 'N'}">
-				<div class="w3-col m2 w3-right w3-indigo w3-hover-orange canclePay" id="${data.imp_uid}">환불하기</div>
+				<c:if test="${data.imp_uid ne '0'}">
+					<div class="w3-col m2 w3-right w3-indigo w3-hover-orange canclePay" id="${data.imp_uid}">환불하기</div>
+				</c:if>
+				<c:if test="${data.imp_uid eq '0'}">
+					<div class="w3-col m2 w3-right w3-blue w3-hover-yellow canclePay" id="${data.imp_uid}">환불하기</div>
+				</c:if>
 			</c:if>
 			<c:if test="${data.isRefund == 'Y'}">
 				<div class="w3-col m2 w3-right">환불완료</div>

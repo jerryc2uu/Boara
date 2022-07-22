@@ -23,6 +23,13 @@ $(document).ready(function(){
 		$('#frm').submit();
 	});
 	
+	//자동 충전 해지 버튼
+	$('#notAuto').click(function(){
+		$('#id').val();
+		$('#frm').attr('action', '/boa/member/cancleAuto.boa');
+		$('#frm').submit();
+	});
+	
 	$('dd').click(function(){
 		
 		$('iframe').css('display', 'none');
@@ -96,12 +103,13 @@ $(document).ready(function(){
 		IMP.init('imp45012205');
 		
 		var money = $('input[name="money"]:checked').val();
-		
+		var isAuto = $('input[name="isAuto"]:checked').val();
 		sid = $(this).parent().attr('id');
-		//alert(sid);
 		
 		$('#gnp').val(money);
+		$('#isAuto').val(isAuto);
 		
+		alert(isAuto);
 		
 		IMP.request_pay({
 		    pg : 'inicis',
@@ -155,7 +163,6 @@ $(document).ready(function(){
       var gnp = $(this).prev().text();
       $('#gnp').val(gnp);
       
-      alert('환불');
       $('#frm').attr('action', '/boa/member/canclePay.boa');
       $('#frm').submit();
 	});

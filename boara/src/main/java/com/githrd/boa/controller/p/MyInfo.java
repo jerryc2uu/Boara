@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.githrd.boa.dao.p.MyInfoDao;
 import com.githrd.boa.service.p.IamPort;
@@ -198,6 +199,24 @@ public class MyInfo {
 		return mv;
 	}
 	
+	//자동 충전 해지 처리
+	@RequestMapping("/cancleAuto.boa")
+	public ModelAndView cancleAuto(ModelAndView mv, MyInfoVO iVO) {
+		
+		int cnt = iDao.cancleAuto(iVO);
+		System.out.println("cnt : " + cnt);
+		mv.addObject("MSG", "포인트 자동 충전이 해지되었습니다.");
+
+		if(cnt != 1) {
+			mv.addObject("MSG", "포인트 자동 충전 해지에 실패했습니다. 다시 시도해주세요.");
+			
+		}
+		
+		mv.addObject("VIEW", "/boa/member/myinfo.boa");
+		mv.setViewName("p/redirect");
+		return mv;
+	}
+	
 	//포인트 충전 폼보기
 	@RequestMapping("/addPoint.boa")
 	public ModelAndView addPoint(ModelAndView mv, MyInfoVO iVO) {
@@ -218,9 +237,22 @@ public class MyInfo {
 			view = "/boa/member/addpoint.boa";
 		}
 		
+		mv.addObject("MSG", gnp + " 포인트 충전에 성공했습니다.");
+
+		System.out.println("isauto : " + iVO.getIsAuto());
+		
+		if(iVO.getIsAuto().equals("A")) {
+			
+			int result = iDao.addAuto(iVO);
+
+			if(result == 1) {
+				mv.addObject("MSG", gnp + " 포인트 자동 충전에 성공했습니다.\r\n앞으로 매달 1일 자동 충전됩니다.");
+				
+			}
+		}
+		
 		iVO.setResult("OK");
 		mv.addObject("VIEW", view);
-		mv.addObject("MSG", gnp + " 포인트 충전에 성공했습니다.");
 		mv.setViewName("p/redirect");
 		return mv;
 		

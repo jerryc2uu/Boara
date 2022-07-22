@@ -8,7 +8,7 @@ public class MyInfoVO {
 	private int mno, cno, bno, rno, rcnt, bcnt, sumpoint, click, 
 				startCont, endCont, nowPage, pno, gnp, pcode, price, rowno, hno;
 	private String id, name, body, pw, mail, tel, sdate, savename, title, cname, detail, 
-				result, message, merchant_uid, imp_uid, isRefund, wid;
+				result, message, merchant_uid, imp_uid, isRefund, wid, isAuto;
 	private Date jdate, wdate;
 	
 	public int getMno() {
@@ -232,6 +232,12 @@ public class MyInfoVO {
 	public void setWid(String wid) {
 		this.wid = wid;
 	}
+	public String getIsAuto() {
+		return isAuto;
+	}
+	public void setIsAuto(String isAuto) {
+		this.isAuto = isAuto;
+	}
 	@Override
 	public String toString() {
 		return "MyInfoVO [mno=" + mno + ", cno=" + cno + ", bno=" + bno + ", rno=" + rno + ", rcnt=" + rcnt + ", bcnt="
@@ -241,6 +247,7 @@ public class MyInfoVO {
 				+ ", pw=" + pw + ", mail=" + mail + ", tel=" + tel + ", sdate=" + sdate + ", savename=" + savename
 				+ ", title=" + title + ", cname=" + cname + ", detail=" + detail + ", result=" + result + ", message="
 				+ message + ", merchant_uid=" + merchant_uid + ", imp_uid=" + imp_uid + ", isRefund=" + isRefund
-				+ ", wid=" + wid + ", jdate=" + jdate + ", wdate=" + wdate + "]";
+				+ ", wid=" + wid + ", isAuto=" + isAuto + ", jdate=" + jdate + ", wdate=" + wdate + "]";
 	}
+	
 }
