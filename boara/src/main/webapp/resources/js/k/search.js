@@ -12,10 +12,15 @@ $(document).ready(function(){
 		$('#frm').submit();
 	});
 	
+	// 페이지 전체 엔터 키 막기
+      $(document).keypress(function(e) { 
+      		if (e.keyCode == 13) e.preventDefault(); 
+      });
+
 	
 	// search 버튼 클릭
 	$('#sertitle').click(function(){
-	
+		
 		var ssel= $('#sel > option:selected').val();
 		$('#sel').val(ssel);
 		

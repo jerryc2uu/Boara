@@ -187,7 +187,7 @@ $(document).ready(function(){
    });
 
    $('#newbtn').click(function(){
-   		$('#receme, #sendme, #newme, #detame').css('display', 'none');
+   		$('#receme, #sendme, #newme, #detame, #delete').css('display', 'none');
    		$('#newme').css('display', 'block');
    		var sid = $('#id').val();
    		
@@ -251,10 +251,11 @@ $(document).ready(function(){
    				var result = data.result;
 				if(result == 'OK'){
 					$('#succ').css('display', 'block');
+					$('.sufa').html('메세지 전송이 성공했습니다.');
 					document.frm1.reset();
    				} else{
    					$('#succ').css('display', 'block');
-   					$('.sufa').html('메세지 전송이 실패되었습니다.');
+   					$('.sufa').html('메세지 전송이 실패됐습니다.');
    				}
    			},
    			error: function(){
@@ -277,7 +278,7 @@ $(document).ready(function(){
 				
 			},
 			success: function(data){
-				$('#receme, #sendme, #newme, #detame, #reply').css('display', 'none');
+				$('#receme, #sendme, #newme, #detame, #reply, #delete').css('display', 'none');
    				$('#detame').css('display', 'block');
 					$('#mgn').val(data.mgno);
 					$('#re').html(data.recvid);
@@ -287,8 +288,12 @@ $(document).ready(function(){
 					$('#da').html(data.mdate);
 					$('#rea').html(data.read);
 					if(data.recvid == sid){
-					$('#reply').css('display', 'none');
-					$('.repl').append('<p class="w3-col s3 dets w3-text-white w3-indigo w3-large mar"  id="reply">reply</p> ');
+						$('#reply').css('display', 'none');
+						$('.repl').append('<p class="w3-col s3 dets w3-text-white w3-indigo w3-large mar"  id="reply">reply</p> ');
+					}
+					if(data.sendid == sid){
+						$('#delete').css('display', 'none');
+						$('.repl').append('<p class="w3-col s3 dets w3-text-white w3-indigo w3-large mar"  id="delete">delete</p> ');
 					}
 			},
 			error: function(){
@@ -311,10 +316,35 @@ $(document).ready(function(){
    	
    	});	
    	
-   	$(document).on('click', "#delm", function(){
+   	$(document).on('click', "#delete", function(){
    		var smgn = $('#mgn').val();
-   		alert(smgn);
-   	
+   		var sid = $('#id').val();
+   		
+   		// 보낸사람만 쪽지 삭제
+   		$.ajax({
+			url : '/boa/delMess.boa',
+			type : 'post',
+			dataType : 'json',
+			data : {
+				id : sid,
+				mgno : smgn
+			},
+			success : function(data){
+				var result = data.result;
+				if(result == 'OK'){
+					$('#succ').css('display', 'block');
+   					$('.sufa').html('쪽시 삭제가 성공했습니다.');
+   					$('#detame').css('display', 'none');
+				} else {
+					$('#succ').css('display', 'block');
+   					$('.sufa').html('쪽시 삭제가 실패됐습니다.');
+				}
+			}, 		
+   			error: function(){
+				$('#succ').css('display', 'block');
+   					$('.sufa').html('### 통신오류 ###');
+   			}
+   		});
    	});
 
 

@@ -66,7 +66,9 @@ public class MemberService {
 	public void addMemberData(MemberVO mVO) {
 		// 회원정보 데이터 입력
 		mDao.addMember(mVO);
-		
+		mDao.addPoint(mVO);
+		mDao.adult(mVO);
+		mDao.joinMess(mVO);
 		if(mVO.getFile() != null) {
 			// 파일정보테이블에 파일정보들 입력
 			FileVO file = uploadProc(mVO.getFile());

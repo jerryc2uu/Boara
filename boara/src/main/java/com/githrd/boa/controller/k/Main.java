@@ -133,5 +133,19 @@ public class Main {
 		msVO = mSrvc.mesdetail(msVO);
 		return msVO;
 	}
+	
+	@RequestMapping("/delMess.boa")
+	@ResponseBody
+	public Map<String, String> delMess (MessageVO msVO){
+		HashMap<String, String> map = new HashMap<String, String>();
+		String result = "NO";
+		int cnt = mbDao.delMess(msVO);
+		msVO.setCnt(cnt);
+		if(cnt == 1) {
+			result = "OK";
+		}
+		map.put("result", result);
+		return map;
+	}
 }
  

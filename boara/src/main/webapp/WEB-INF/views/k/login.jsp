@@ -64,17 +64,53 @@
 		</div>
 		<div class="w3-col w3-padding w3-card-4 w3-hide"><span id="msg">${SID} 님은 이미 로그인했습니다.</span></div>
 	</div>
-	
-	<div id="id01" class="w3-modal">
+		  
+	  <!-- 통신오류 모달창 -->
+	  <div id="id01" class="w3-modal">
 	    <div class="w3-modal-content">
 	      <header class="w3-container w3-red"> 
 	        <span onclick="document.getElementById('id01').style.display='none'" 
 	        class="w3-button w3-display-topright">&times;</span>
-	        <h4 class="w3-center">통신오류</h4>
+	        <h4 class="w3-center">ERROR</h4>
 	      </header>
-	      <div class="w3-container">
-	        <h4> </h4>
+	      <div class="w3-container w3-center">
+	        <h4 id="mod">통신오류</h4>
 	      </div>
+	    </div>
+	  </div>
+	  
+	  <!-- 휴면계정 인증 모달창 -->
+	  <div id="id02" class="w3-modal">
+	    <div class="w3-modal-content">
+	      <header class="w3-container w3-indigo"> 
+	        <span onclick="document.getElementById('id02').style.display='none'" 
+	        class="w3-button w3-display-topright">&times;</span>
+	        <h4 class="w3-center">휴면계정 해제</h4>
+	      </header>
+	      <div class="w3-col  w3-white w3-margin-bottom w3-container w3-text-grey ">
+	      	<div class="mgt20 w3-content">
+				<label for="email" class="w3-right-align w3-col s2 ftj14">회원메일 : </label>
+				<div class="w3-col m9">
+					<input type="text" name="email" id="email" class="ft12 w3-margin-bottom w3-margin-left  w3-col m9 w3-input w3-border w3-round-medium"
+							placeholder="메일을 입력하세요">	
+					<div class=" w3-col s2 w3-right w3-button w3-indigo w3-round-medium ft12 " id="mailck">certify</div>
+					<span class="w3-col mgb10 w3-center ft10 w3-text-green w3-margin-bottom" id="mailmsg">인증번호 전송 처리 메세지</span>
+				</div>
+			</div>
+	        <div class="mgt20 w3-content">
+				<label for="certi" class="w3-right-align w3-col s2 ftj14">본인인증 : </label>
+				<div class="w3-col m9">
+					<input id="certi" name="certi"class="form-control w3-margin-left  w3-margin-bottom ft12 w3-col m9 w3-input w3-border"  disabled="disabled" placeholder="인증번호 6자리를 입력해주세요"  maxlength="6">
+					<div class=" w3-col s2 w3-right w3-button w3-indigo w3-round-medium ft12" id="cerck">check</div>
+					<span class="w3-col mgb10 w3-center ft10 w3-text-green w3-margin-bottom" id="cermsg">인증번호 체크 처리 메세지</span>
+					<input id="code" name="code" style="display:none;">
+				</div>
+			</div>
+			<div class="w3-center">
+				<div id="clear" class="inblock w3-center mgtb30 w3-button w3-indigo w3-round-medium w150">해제</div>
+				<span class="w3-col mgb10 w3-center ft10 w3-text-green w3-margin-bottom" id="error">통신에러</span>
+			</div>
+			</div>
 	    </div>
 	  </div>
 

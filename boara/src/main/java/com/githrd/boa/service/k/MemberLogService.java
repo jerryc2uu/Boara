@@ -101,5 +101,27 @@ import com.githrd.boa.vo.k.MessageVO;
 		  
 	  } 
   }
+  
+  //쪽지 전송
+  @After("execution(* com.githrd.boa.controller.k.Main.delMess(..))")
+  public void delmessage(JoinPoint join) { 
+	  MessageVO msVO = (MessageVO)join.getArgs()[0]; 
+	  if(msVO.getCnt() == 1) {  
+		  memberLog.info(msVO.getId() + " 님이 no." + msVO.getMgno() + "번 쪽지를 삭제 했습니다."); 
+		  
+	  } 
+  }
+  
+  // 휴면 해제
+  @After("execution(* com.githrd.boa.controller.k.Member.huClear(..))")
+  public void huClear(JoinPoint join) { 
+	  MemberVO mVO = (MemberVO)join.getArgs()[0]; 
+	  if(mVO.getCnt() == 1) {  
+		  memberLog.info(mVO.getId() + " 님이 휴면 해제됐습니다."); 
+	  } 
+  }
+  
+  
+  
 }
  

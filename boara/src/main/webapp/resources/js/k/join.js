@@ -87,12 +87,12 @@ $(document).ready(function(){
 					}
 						$('#telmsg').css('display', 'block');
 					},
-					error: function(){
-						$('#id01').css('display', 'block');
-					}
-				});
-				
-			});
+			error: function(){
+				$('#id01').css('display', 'block');
+			}
+		});
+	});
+	
 	// 비밀번호 정규 표현식
 	$('#pw').change(function(){
 		var spw = $('#pw').val();
@@ -180,7 +180,6 @@ $(document).ready(function(){
 	// 메일 인증
 	$('#mailck').click(function(){
 		var email = $('#email').val();
-		var ser = $('#certi').val();
 		if(!email){
 			$('#id01').css('display', 'block');
 			$('#mod').html('이메일을 입력하세요');

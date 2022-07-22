@@ -31,6 +31,20 @@ main
 처리함수	:	loginForm()
 뷰			:	/WEB-INF/views/k/login.jsp
 ------------------------------------------------------------------
+# 휴면 확인 - 비동기통신
+요청내용	: 	/boa/member/humeonCk.boa
+파라미터	:	id, pw
+컨트롤러	: 	com.githrd.boa.controller.k.Member
+처리함수	:	humanCk()
+뷰			:	
+------------------------------------------------------------------
+# 휴면 해제 - 비동기통신
+요청내용	: 	/boa/member/huClear.boa
+파라미터	:	id, pw
+컨트롤러	: 	com.githrd.boa.controller.k.Member
+처리함수	:	huClear()
+뷰			:	
+------------------------------------------------------------------
 # login 처리 요청
 요청내용	: 	/boa/member/loginProc.boa
 파라미터	:	id, pw 
@@ -209,6 +223,13 @@ main
 파라미터	: 	id, mgno
 컨트롤러	: 	com.githrd.boa.controller.k.Main
 처리함수	: 	messDetail()
+      뷰	: 	json
+------------------------------------------------------------------
+# 쪽지 삭제(Y)
+요청내용	: 	/boa/delMess.boa
+파라미터	: 	id, mgno
+컨트롤러	: 	com.githrd.boa.controller.k.Main
+처리함수	: 	delMess()
       뷰	: 	json
 ------------------------------------------------------------------
 

@@ -14,7 +14,9 @@ package com.githrd.boa.dao.k;
  * 				2022.06.21 	-		탈퇴처리
  * 				2022.06.23 	-		회원가입
  * 				2022.06.26 	- 		회원정보 수정
- * 				2022.07.20	-		로그인 날짜, 휴먼유저 스케쥴러
+ * 				2022.07.20	-		로그인 날짜, 휴면유저 스케쥴러
+ * 				2022.07.21	- 		휴면 조회, 해제
+ * 				2022.07.22	-		성인등록, 회원가입쪽지
  *
  */
 import java.util.List;
@@ -30,6 +32,18 @@ public class MemberDao {
 	@Autowired
 	SqlSessionTemplate sqlSession;
 	
+	// 회원 조회
+	public int getMemb(MemberVO mVO) {
+		return sqlSession.selectOne("mSQL.selmemb", mVO);
+	}
+	// 로그인 전 휴면회원 조회
+	public String gethumeon(MemberVO mVO) {
+		return sqlSession.selectOne("mSQL.humeon", mVO);
+	} 
+	// 휴면회원 해제
+	public int humeonClear(MemberVO mVO) {
+		return sqlSession.update("mSQL.humeonCear", mVO);
+	} 
 	// 로그인 처리
 	public int getLogin(MemberVO mVO) {
 		return sqlSession.selectOne("mSQL.login", mVO);
@@ -42,9 +56,17 @@ public class MemberDao {
 	public int addMember(MemberVO mVO) {
 		return sqlSession.insert("mSQL.join", mVO);
 	}
-	
+	// 포인트
 	public int addPoint(MemberVO mVO) {
 		return sqlSession.insert("mSQL.addPoint", mVO);
+	}
+	// idault 추가
+	public int adult(MemberVO mVO) {
+		return sqlSession.update("mSQL.adult", mVO);
+	}
+	// 첫회원가입 쪽지
+	public int joinMess(MemberVO mVO) {
+		return sqlSession.insert("mSQL.joinmess", mVO);
 	}
 	
 	// 회원가입시 프로필 사진 추가
@@ -92,7 +114,6 @@ public class MemberDao {
 	public int getDelImg(int fno) {
 		return sqlSession.update("mSQL.delImg", fno);
 	}
-	
 	// 회원정보 수정
 	public int updateInfo(MemberVO mVO) {
 		return sqlSession.update("mSQL.editInfo", mVO);

@@ -38,6 +38,7 @@ import com.githrd.boa.vo.k.MemberVO;
  * 				2022.07.16	-		이메일 인증
  * 				2022.07.19  - 		탈퇴 본인 인증
  * 				2022.07.19  - 		비밀번호 문자 인증
+ * 				2022.07.21 - 		휴면 확인, 해제
  * 				
  *  *
  */
@@ -108,7 +109,10 @@ public class Member {
 		
 		if(cnt == 1) {
 			session.setAttribute("SID", mVO.getId());
-			mDao.updateLo(mVO);
+			
+			if(mVO.getId() != null) {
+				mDao.updateLo(mVO);
+			}
 		} else {
 			 view = "/boa/member/login.boa";
 		}
@@ -141,7 +145,6 @@ public class Member {
 				mv.addObject("NOWPAGE", nowPage);
 			}
 			session.setAttribute("SID", mVO.getId());
-			mDao.addPoint(mVO);
 			mVO.setResult("OK");
 			
 		} catch(Exception e) {
@@ -171,10 +174,43 @@ public class Member {
 		mv.setViewName("k/redirect");
 		return mv;
 	}
-
+	// 휴면 확인
+	@RequestMapping("/humeonCk.boa")
+	@ResponseBody
+	public Map<String, String> humanCk(MemberVO mVO){
+		HashMap<String, String>map = new HashMap<String, String>();
+		String result = "XX";
+		int cnt = mDao.getMemb(mVO);
+		String isshow = mDao.gethumeon(mVO);
+		if(cnt == 1) { 
+			if(isshow.equals("Y") || isshow.equals("A") ) {
+				result = "OK";
+			}else {
+				result = "NO";
+			}
+		} 
+		map.put("result", result);
+		
+		return map;
+	}
 	
+	// 휴면 해제
+	@RequestMapping("/huClear.boa")
+	@ResponseBody
+	public Map<String, String> huClear(MemberVO mVO){
+		HashMap<String, String>map = new HashMap<String, String>();
+			String result = "NO";
+			int cnt = mDao.humeonClear(mVO);
+			mVO.setCnt(cnt);
+			if(cnt == 1) {
+				result = "OK";
+			} 	
+			map.put("result", result);
+			return map;
+	}
 	
-	// 회원가입정보 중복 체크
+	// 회원가입정보 중복 체크(id, mail, tel)
+	
 	@RequestMapping(path="/idCheck.boa", 
 			method=RequestMethod.POST, params="id")
 	@ResponseBody

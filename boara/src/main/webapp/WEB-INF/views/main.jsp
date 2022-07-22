@@ -69,7 +69,7 @@ img{
   	  <h1 class="pdt40 w3-xxxlarge dfn"><b>Boara</b></h1>
 	</header>
 
-	<div id="id01" class="w3-padding mgtb30 w3-modal" >
+	<div id="id01" class="w3-padding w3-modal" >
 		<div class="w3-modal-content  w3-card-4 w3-right" style="width: 700px; ">
 	      <header class="w3-container w3-indigo"> 
 	        <span id="exit" class="w3-button w3-display-topright">&times;</span>
@@ -166,8 +166,6 @@ img{
 			      	<div class="w3-col s3 w3-center mg5 " >[ 수신확인 ]</div>
 			      	<p class="w3-col s8 w3-center dets" id="rea" ></p>
 			    </div>
-				<div id="delm" class="w3-col mar s3 dets w3-text-white w3-indigo">삭제</div>
-
 			</div>
 			   
 		</div>

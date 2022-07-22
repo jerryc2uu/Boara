@@ -104,7 +104,7 @@
 			<div class="mgt20 w3-content">
 				<label for="certi" class="w3-col s3 w3-right-align ft16">본인인증 : </label>
 				<div class="w3-col m8">
-					<input id="certi" class="form-control w3-margin-left w3-margin-bottom ft12 w3-col m9 w3-input w3-border"  disabled="disabled" placeholder="인증번호 6자리를 입력해주세요"  maxlength="6">
+					<input id="certi" name="certi" class="form-control w3-margin-left w3-margin-bottom ft12 w3-col m9 w3-input w3-border"  disabled="disabled" placeholder="인증번호 6자리를 입력해주세요"  maxlength="6">
 					<div class=" w3-col m2 w3-right w3-button w3-indigo w3-text-white w3-round-medium ft15" id="cerck">check </div>
 					<span class="w3-col mgb10 w3-center w3-text-green w3-margin-bottom" id="cermsg">인증번호 체크 처리 메세지</span>
 					<input id="code" name="code" style="display:none;">

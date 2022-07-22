@@ -83,4 +83,9 @@ public class MainBoardDao {
 		return sqlSession.selectOne("maSQL.messDetail", msVO);
 	}
 	
+	// 쪽지 삭제
+	public int delMess(MessageVO msVO) {
+		return sqlSession.update("maSQL.delMess", msVO);
+	}
+	
 }

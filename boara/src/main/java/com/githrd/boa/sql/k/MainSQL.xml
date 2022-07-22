@@ -224,4 +224,14 @@
 		WHERE
 		    mgno = #{mgno}
 	</select>
+	
+	<update id="delMess" parameterType="msVO">
+		UPDATE
+		    message
+		SET
+		    isshow = 'N' 
+		WHERE
+			sendid = #{id}
+		    AND mgno = #{mgno}
+	</update>
 </mapper>
