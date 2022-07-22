@@ -109,8 +109,6 @@ $(document).ready(function(){
 		$('#gnp').val(money);
 		$('#isAuto').val(isAuto);
 		
-		alert(isAuto);
-		
 		IMP.request_pay({
 		    pg : 'inicis',
 		    pay_method : 'card',
