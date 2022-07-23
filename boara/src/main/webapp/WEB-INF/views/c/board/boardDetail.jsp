@@ -138,7 +138,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 					<div class="genre w3-round" id="reshow">댓글 보기</div>
 					<div class="genre w3-round" id="upcoll">컬렉션으로</div>
 				</div>
-<c:if test="${POST.id eq SID}">
+<c:if test="${POST.id eq SID && not empty SID}">
 				<div style="text-align:right">
 					<div class="genre w3-round" id="ebtn">수정</div>
 					<div class="genre w3-round" id="dbtn">삭제</div>

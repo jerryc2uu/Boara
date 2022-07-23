@@ -46,7 +46,8 @@
 	<bean id="autoTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"
 		p:jobDetail-ref="autoPointJob"
 		p:startDelay="1000"
-		p:cronExpression="0 * * * * ?"><!-- 1분마다 실행 -->
+		p:cronExpression="0 0 0 1 1/1 ? *"><!-- 매달 1일 실행 -->
+<!-- 		p:cronExpression="0/10 * * * * ?">10초 마다 실행 -->
 	</bean>
 	
 	<!-- 공통 -->

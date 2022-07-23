@@ -67,6 +67,7 @@
 		            ) = pno) - #{gnp}, #{bno}
 		)
 	</insert>
+	
 	<!-- 게시글 구매 시 작가한테 포인트 추가 -->
 	<insert id="selBoard" parameterType="iVO">
 		INSERT INTO
@@ -83,7 +84,7 @@
 			        member
 			    WHERE
 			        id = #{wid}
-			    ), 500, 104, 
+			    ), #{gnp}, 105, 
 			        (SELECT
 			            sumpoint
 			        FROM
@@ -131,7 +132,7 @@
 		    FROM
 		        member
 		    WHERE
-		        id = 'psoy'
+		        id = #{id}
 		    ), -5000, 204, 
 		        (SELECT
 		            sumpoint
@@ -150,7 +151,7 @@
 		                    FROM
 		                        member
 		                    WHERE
-		                        id = 'psoy'
+		                        id = #{id}
 		                    )
 		            ) = pno) - 5000
 		)

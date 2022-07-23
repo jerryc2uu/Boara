@@ -77,6 +77,7 @@ img {
 							<input type="hidden" id="mno" name="mno" value="${DATA.mno}">
 							<input type="hidden" id="rno" name="rno" value="${DATA.rno}">
 							<input type="hidden" id="cno" name="cno" value="${param.cno}">
+							<input type="hidden" id="id" name="id" value="${SID}">
 							<input type="hidden" id="bnowPage" name="bnowPage" value="${param.bnowPage}">
 						<c:if test="${SID eq DATA.id}">
 							<textarea class="w3-col w3-padding ft12" id="body" name="body"

@@ -55,6 +55,9 @@ font-weight: lighter ;
 
 		<!-- 페이지 본문 -->
 		<!-- 전체 포인트 내역 -->
+<c:if test="${empty LIST}">
+		<div class="w3-col w3-round-large w3-card-4 w3-margin-bottom w3-margin-top w3-padding w3-center">해당 내역이 없습니다.</div>
+</c:if>
 	<c:forEach var="data" items="${LIST}">
 			<div class="w3-col w3-round-large w3-card-4 w3-margin-bottom w3-margin-top w3-padding w3-center" style="line-height:70px;">
 		<c:if test="${data.pcode lt 200 && data.pcode ne 101}">

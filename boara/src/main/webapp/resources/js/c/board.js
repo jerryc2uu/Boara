@@ -139,6 +139,7 @@ $(document).ready(function(){
 		$('#mdcontext').html('게시글을 구매하시겠습니까?');
 		$('#modal, #buy, #cancel').css('display', 'block');
 	});
+	
 	$('#buy').click(function(){
 		$('#vw').prop('disabled', true);
 		$('#frm').attr('action', '/boa/board/buyBoard.boa');
@@ -182,7 +183,7 @@ $(document).ready(function(){
 		$('#vw').prop('disabled', true);
 		$('#gnp').prop('disabled', true);
 		
-		$('#frm').attr('action', '/boara/board/boardEdit.boa');
+		$('#frm').attr('action', '/boa/board/boardEdit.boa');
 		$('#frm').submit();
 	});
 

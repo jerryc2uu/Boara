@@ -19,9 +19,8 @@
 		//게시물 하나 클릭 시 해당 게시물 상세 페이지로 이동
 		$('.brdList').click(function(){
 			var sbno = $(this).parent().attr('id');
-//			alert(sbno);	05.29 최이지 주석처리
-			window.top.location.href = '/boa/board/boardDetail.boa?bno=' + sbno;
-			//$(top.document).attr('href',  '/boara/board/boardDetail.boa?bno=' + sbno)
+			var sid = $('#id').val();
+			window.top.location.href = '/boa/board/boardDetail.boa?bno=' + sbno + '&id=' + sid;
 		});
 	});
 </script>

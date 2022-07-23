@@ -27,8 +27,10 @@
 			var sbno = $(this).parent().attr('id');
 	        var sid = $('#id').val();
 	        
-			if(confirm("HOT 게시글로 등록하시겠습니까? 5000 포인트가 차감됩니다.")){
-				
+	        $('#modal, #yes').css('display', 'block');
+			
+	        $('#yes').click(function(){
+	        	
 	         $.ajax({
 	            url: '/boa/board/hotBoardProc.boa',
 	            type: 'post',
@@ -50,8 +52,8 @@
 	               alert('### 통신오류 ###');
 	            }
 	         });
-
-			}
+			
+	        })
 		});
 	});
 </script>
@@ -77,6 +79,9 @@
 				<div class="w3-col m1 w3-border-right">조회수</div>
 				<div class="w3-col m1">HOT</div>
 			</div>
+	<c:if test="${empty LIST}">
+			<div class="w3-col w3-white w3-center w3-border">작성한 게시글이 없습니다.</div>
+	</c:if>
 <c:forEach var="data" items="${LIST}">
 			<div class="w3-col w3-white w3-center w3-border" id="${data.bno}">
 				<div class="w3-col m1 w3-border-right brdList">${data.bno}</div>
@@ -121,7 +126,22 @@
 			</div>
 		</div>
 		<!-- 페이지 처리 태그 끝 -->
-		
+
+<!-- 메세지 출력 모달창 -->
+	<div id="modal" class="w3-modal" style="display:none;">
+	    <div class="w3-modal-content mxw650 w3-animate-top w3-card-4">
+	      <header class="w3-container w3-indigo"> 
+	        <span onclick="document.getElementById('modal').style.display='none'" 
+	        class="w3-button w3-display-topright">&times;</span>
+	        <h2>BOARA Message</h2>
+	      </header>
+	      <div class="w3-container w3-center">
+	        <h4>HOT 게시글로 등록하시겠습니까? 5000 포인트가 차감됩니다.</h4>
+	        <div class="w3-margin-bottom w3-right" id="yes" style="display:none;">예</div>
+	      </div>
+	    </div>
+ 	</div>
+
 	</div>
 </body>
 </html>

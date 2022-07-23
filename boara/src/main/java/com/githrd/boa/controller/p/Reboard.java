@@ -39,7 +39,6 @@ public class Reboard {
 		
 		//페이징 처리
 		int total = rDao.getTotal(rVO);
-		System.out.println(total);
 		int bno = rVO.getBno();
 		int cno = rVO.getCno();
 		
@@ -54,9 +53,6 @@ public class Reboard {
 			List<ReboardVO> list = rDao.getList(rVO);
 			
 			mv.addObject("LIST", list);
-			//mv.addObject("CNO", list.get(0).getCno());
-		
-			System.out.println(list);
 		
 		} else {
 			page.setPage(1);
@@ -73,7 +69,6 @@ public class Reboard {
 	//새 댓글 작성 폼보기 요청
 	@RequestMapping("/reboardWrite.boa")
 	public ModelAndView reboardWrite(ModelAndView mv, ReboardVO rVO) {
-		System.out.println(rVO.getNowPage());
 		rVO = rDao.getWriterInfo(rVO);
 		mv.addObject("DATA", rVO);
 		mv.setViewName("p/reboardWrite");

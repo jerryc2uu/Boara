@@ -23,8 +23,8 @@ public class MyInfoDao {
 	SqlSessionTemplate sqlSession;
 	
 	//마이페이지 메인 정보 조회 함수
-	public MyInfoVO getMyInfo(String id) {
-		return sqlSession.selectOne("iSQL.getMyInfo", id);
+	public MyInfoVO getMyInfo(MyInfoVO iVO) {
+		return sqlSession.selectOne("iSQL.getMyInfo", iVO);
 	}
 
 	//구매글 수 조회 함수
@@ -105,7 +105,6 @@ public class MyInfoDao {
 	
 	//매달 1일 자동 충전 처리
 	public int autoPayment(MyInfoVO iVO) {
-		System.out.println("dao iVO : " + iVO);
 		return sqlSession.insert("iSQL.autoPayment", iVO);
 	}
 	

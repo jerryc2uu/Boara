@@ -120,7 +120,7 @@
 --------------------------------------------
 # 포인트 충전 처리 요청
 요청내용	:	/boa/member/addPointProc.boa
-파라미터	:	id, gnp
+파라미터	:	id, gnp, isAuto
 컨트롤러	:	com.githrd.boa.controller.p.MyInfo
 처리함수	:	addPointProc()
 뷰			:	/WEB-INF/views/p/redirect.jsp
@@ -132,6 +132,15 @@
 파라미터	:	id, gnp, imp_uid
 컨트롤러	:	com.githrd.boa.controller.p.MyInfo
 처리함수	:	canclePay()
+뷰			:	/WEB-INF/views/p/redirect.jsp
+					성공 : /boa/member/myinfo.boa
+					실패 : /boa/member/myinfo.boa
+--------------------------------------------
+# 자동 충전 해지 요청
+요청내용	:	/boa/member/canclePay.boa
+파라미터	:	id
+컨트롤러	:	com.githrd.boa.controller.p.MyInfo
+처리함수	:	cancleAuto()
 뷰			:	/WEB-INF/views/p/redirect.jsp
 					성공 : /boa/member/myinfo.boa
 					실패 : /boa/member/myinfo.boa

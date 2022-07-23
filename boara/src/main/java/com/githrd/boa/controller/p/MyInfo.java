@@ -44,8 +44,7 @@ public class MyInfo {
 	//마이페이지 메인 보기 요청
 	@RequestMapping("/myinfo.boa")
 	public ModelAndView myInfo(ModelAndView mv, MyInfoVO iVO) {
-		String id = iVO.getId();
-		iVO = iDao.getMyInfo(id);		
+		iVO = iDao.getMyInfo(iVO);		
 		mv.addObject("DATA", iVO);
 		mv.setViewName("p/myInfo");
 		return mv;
@@ -204,7 +203,6 @@ public class MyInfo {
 	public ModelAndView cancleAuto(ModelAndView mv, MyInfoVO iVO) {
 		
 		int cnt = iDao.cancleAuto(iVO);
-		System.out.println("cnt : " + cnt);
 		mv.addObject("MSG", "포인트 자동 충전이 해지되었습니다.");
 
 		if(cnt != 1) {
@@ -229,8 +227,10 @@ public class MyInfo {
 	//포인트 충전 처리
 	@RequestMapping("/addPointProc.boa")
 	public ModelAndView addPointProc(ModelAndView mv, MyInfoVO iVO) {
+		
 		int cnt = iDao.addPointProc(iVO);
 		int gnp = iVO.getGnp();
+		
 		String view =  "/boa/member/myinfo.boa";
 		
 		if(cnt != 1) {
@@ -238,15 +238,13 @@ public class MyInfo {
 		}
 		
 		mv.addObject("MSG", gnp + " 포인트 충전에 성공했습니다.");
-
-		System.out.println("isauto : " + iVO.getIsAuto());
 		
 		if(iVO.getIsAuto().equals("A")) {
 			
 			int result = iDao.addAuto(iVO);
 
 			if(result == 1) {
-				mv.addObject("MSG", gnp + " 포인트 자동 충전에 성공했습니다.\r\n앞으로 매달 1일 자동 충전됩니다.");
+				mv.addObject("MSG", gnp + " 포인트 자동 충전에 성공했습니다. 매달 1일 자동 충전됩니다.");
 				
 			}
 		}

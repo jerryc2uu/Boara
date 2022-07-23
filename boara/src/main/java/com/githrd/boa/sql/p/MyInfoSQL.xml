@@ -4,67 +4,70 @@
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="iSQL">
 	<!-- 마이페이지 메인 폼보기 (가입일, 게시글, 댓글, 총 포인트) -->
-	<select id="getMyInfo" resultType="iVO" parameterType="string">
+	<select id="getMyInfo" resultType="iVO" parameterType="iVO">
 		SELECT
-		    m.jdate jdate, i.savename savename, p.sumpoint,
-		    (
-		        SELECT
-		            COUNT(*)
-		        FROM
-		            reply
-		        WHERE
-		            mno = (SELECT
-		                        mno
-		                    FROM
-		                        member
-		                    WHERE
-		                        id = #{id}) 
-		    ) rcnt,
-		    (
-		        SELECT
-		            COUNT(*)
-		        FROM
-		            board        
-		        WHERE
-		            mno = (SELECT
-		                        mno
-		                    FROM
-		                        member
-		                    WHERE
-		                        id = #{id})
-		    ) bcnt, a.isAuto isAuto
+   			 jdate, savename, sumpoint, rcnt, bcnt, isAuto, tno
 		FROM
-		    member m, imgfile i, point p, autopayment a
-		WHERE
-		    id = #{id}
-		    AND a.mno(+) = p.mno
-		    AND m.mno = i.mno
-		    AND i.isshow = 'C'
-		    AND i.whereis = 'M'
-		    AND m.mno = p.mno
-		    AND a.tno = (SELECT
-		                    MAX(tno)
+		    (
+		        SELECT
+		            m.jdate jdate, i.savename savename, p.sumpoint sumpoint,
+		            (
+		                SELECT
+		                    COUNT(*)
 		                FROM
-		                    autopayment
+		                    reply
 		                WHERE
-		                    id = #{id})
-		    AND pno = (
-		                    SELECT
-		                        MAX(pno)
-		                    FROM
-		                        point
-		                    WHERE
-		                        pdate = (SELECT MAX(pdate)
-		                                FROM point
-		                                WHERE mno = (
-		                                    SELECT mno
-		                                    FROM member
-		                                    WHERE id =#{id})
-		                                )
-		                        AND mno = (SELECT mno FROM member WHERE id = #{id})
-		                    GROUP BY
-		                        pdate
-		                )
+		                    mno = (SELECT
+		                                mno
+		                            FROM
+		                                member
+		                            WHERE
+		                                id = #{id}) 
+		            ) rcnt,
+		            (
+		                SELECT
+		                    COUNT(*)
+		                FROM
+		                    board        
+		                WHERE
+		                    mno = (SELECT
+		                                mno
+		                            FROM
+		                                member
+		                            WHERE
+		                                id = #{id})
+		            ) bcnt, a.isAuto isAuto, a.tno
+		        FROM
+		            member m, imgfile i, point p, autopayment a
+		        WHERE
+		            m.id = #{id}
+		            AND a.mno(+) = p.mno
+		            AND m.mno = i.mno
+		            AND i.isshow = 'C'
+		            AND i.whereis = 'M'
+		            AND m.mno = p.mno
+		            AND pno = (
+		                            SELECT
+		                                MAX(pno)
+		                            FROM
+		                                point
+		                            WHERE
+		                                pdate = (SELECT MAX(pdate)
+		                                        FROM point
+		                                        WHERE mno = (
+		                                            SELECT mno
+		                                            FROM member
+		                                            WHERE id = #{id})
+		                                        )
+		                                AND mno = (SELECT mno FROM member WHERE id = #{id})
+		                            GROUP BY
+		                                pdate
+		                        )
+		        ORDER BY
+		            tno DESC
+		        )
+		WHERE
+		    ROWNUM = 1
 	</select>	
 	
 	<!-- 구매글 수 조회 -->
@@ -556,7 +559,7 @@
 		        member
 		    WHERE
 		        id = #{id}
-		    ), #{gnp}, 205, 
+		    ), -#{gnp}, 205, 
 		        (SELECT
 		            sumpoint
 		        FROM
