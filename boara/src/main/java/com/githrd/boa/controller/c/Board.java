@@ -15,6 +15,7 @@ package com.githrd.boa.controller.c;
  * 			2022.06.29	-	함수 추가(likeProc, jjimProc, discardMark)
  * 							로그 처리를 위한 함수 수정(boardWriteProc, boardEditProc, boardDel)
  * 								담당자 : 최이지
+ * 
  */
 
 import java.util.*;
