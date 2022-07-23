@@ -130,7 +130,6 @@ font-weight: lighter ;
 	            <iframe id="myBuy" src="/boa/member/mybuy.boa" style="display: none; position: absolute; width: 100%; height: 100%;" frameBorder="0"></iframe>
 	            <iframe id="myPoint" src="/boa/member/mypoint.boa" style="display: none; position: absolute; width: 100%; height: 100%;" frameBorder="0"></iframe>
 	            <iframe id="myBoard" src="/boa/member/myboard.boa" style="display: none; position: absolute; width: 100%; height: 100%;" frameBorder="0"></iframe>
-	            <iframe id="mySub" src="/boa/member/mySub.boa" style="display: none; position: absolute; width: 100%; height: 100%;" frameBorder="0"></iframe>
 	            <iframe id="myReboard" src="/boa/member/myreboard.boa" style="display: none; position: absolute; width: 100%; height: 100%;" frameBorder="0"></iframe>
 	         </div>
 			</div>
