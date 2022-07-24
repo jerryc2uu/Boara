@@ -1,5 +1,9 @@
 
+img{
+	width: 225px;
+	height: 265px;
 
+}
 
 .pic { 
 	border: 1px solid gray;
@@ -209,6 +213,9 @@ display: -webkit-box;
 }
 .mar{
 	margin-left: 350px;
+}
+.mar2{
+	margin-left: 200;
 }
 .mar3{
 	margin-left: 300px;

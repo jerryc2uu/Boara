@@ -86,6 +86,21 @@ $(document).ready(function(){
 		$('#frm').submit();
 	});	
 	
+	// 비밀번호 정규 표현식
+	$('#pw').change(function(){
+		var spw = $('#pw').val();
+		var pwPat = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{7,15}$/;
+	
+		var pwResult = pwPat.test(spw);
+		if(!pwResult){
+		$('#id01').css('display', 'block');
+		$('#me').html('비밀번호를 다시 입력하세요');
+		$('#pw').val('');
+		}
+	
+	});
+	
+	
 	// 비밀번호 일치 확인
 	$('#repw').keyup(function(){
 		var spw = $('#pw').val();
@@ -104,18 +119,13 @@ $(document).ready(function(){
 	});
 	
 	//-------------------------------------------------------------------------------
-	
-	$('#mecertifi, #repw').css('display','none');
-	
-	$('#pw').keyup(function(){
-		 $('#repw').css('display','block');
-	});
-	
-	
+	// 탈퇴
+	$('#mecertifi').css('display','none');
+
 
 	// 비밀번호 일치시 본인인증 창 노출
-	$('#repw').blur(function(){
-		var spw = $('#repw').val();
+	$('#drepw').blur(function(){
+		var spw = $('#drepw').val();
 		var sid = $('#id').val();
 		
 		$.ajax({
@@ -148,9 +158,9 @@ $(document).ready(function(){
 		IMP.init('imp53161363'); 
 
 		var sname = $('#dname').val();
-		var stel = $('#dtel').val();
 		
 		 IMP.certification({
+		 	 name : sname,
 			 popup : true 
 		 }, function (rsp) { 
 			 if ( rsp.success ) {
@@ -171,7 +181,7 @@ $(document).ready(function(){
 	
 	// 체크시 탈퇴 버튼 노출
 	$('#delete').click(function(){
-		var el = $('#dname, #dtel, #mecerti'); 
+		var el = $('#dname, #dpw, #mecerti'); 
 		for(var i = 0 ; i < el.length ; i++ ){
 			var txt = $(el).eq(i).val();
 			if(!txt){

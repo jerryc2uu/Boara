@@ -20,19 +20,12 @@ $(document).ready(function(){
 	
 	// search 버튼 클릭
 	$('#sertitle').click(function(){
-		
 		var ssel= $('#sel > option:selected').val();
-		$('#sel').val(ssel);
 		
-		var el = $('#sel', '#search'); 
-		
-		for(var i = 0 ; i < el.length ; i++ ){
-			var txt = $(el).eq(i).val();
-			if(!txt){
-				$(el).eq(i).focus();
+		if(ssel == 'no'){
 				return;
 			}
-		}
+		$('#sel').val(ssel);
 		
 		if(!$('#bno').val()){
 	         $('#bno').prop('disabled', true);

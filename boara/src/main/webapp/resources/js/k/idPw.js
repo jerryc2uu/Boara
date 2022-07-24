@@ -45,7 +45,7 @@ $(document).ready(function(){
 		});
 	});
 	
-	$('#smstag, #certi, #srchPwResult, #repwmsg').css('display', 'none');
+	$('#smstag, #certi, #repwmsg').css('display', 'none');
 	
 	
 	// id, tel ajax 처리후 본인인증 버튼 노출
@@ -87,7 +87,9 @@ $(document).ready(function(){
 	// 휴대폰 번호 인증
 		var code2 = "";
 		$("#certi").click(function(){
-			alert("인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주십시오.");
+			$('#id01').css('display', 'block');
+			$('#color').css('background-color', 'green');
+			$('#mod').html('인증번호 발송이 완료되었습니다.');
 			var tel = $("#tele").val();
 			$.ajax({
 		        type:"GET",
@@ -95,7 +97,6 @@ $(document).ready(function(){
 		        cache : false,
 		        success:function(data){
 		        	if(data == "error"){
-		        		alert("휴대폰 번호가 올바르지 않습니다.")
 						$('#id01').css('display', 'block');
 						$('#mod').html("유효한 번호를 입력해주세요.");
 						$("#phone").attr("autofocus",true);
@@ -116,6 +117,7 @@ $(document).ready(function(){
 			$('#srchPwResult').css('display', 'block');
 		}else{
 			$('#id01').css('display', 'block');
+			$('#color').css('background-color', 'red');
 			$('#mod').html("인증번호를 확인 부탁드립니다.");
 		}
 	});
@@ -128,6 +130,7 @@ $(document).ready(function(){
 		var pwResult = pwPat.test(spw);
 		if(!pwResult){
 		$('#id01').css('display', 'block');
+		$('#color').css('background-color', 'red');
 		$('#mod').html('비밀번호를 다시 입력하세요');
 		$('#pw').val('');
 		}

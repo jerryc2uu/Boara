@@ -191,7 +191,6 @@ $(document).ready(function(){
 				url : '/boa/member/certi.boa?email=' + email,
 				success : function (data) {
 					$('#certi').attr('disabled',false);
-					alert(data);
 					$('#code').val(data);
 					$('#id01').css('display', 'block');
 					$('#color').css('background-color', 'green');

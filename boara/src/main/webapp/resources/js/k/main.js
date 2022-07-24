@@ -107,7 +107,7 @@ $(document).ready(function(){
    });
    $('#exit1').click(function(){
    		$('#succ').css('display', 'none');
-   		$('#id01').css('display', 'none');
+   		 $('#receme, #sendme, #newme, #detame').css('display', 'none');
    });
   
    
@@ -148,7 +148,8 @@ $(document).ready(function(){
    					$('#receme').css('display', 'block');
    				},
    			error: function(){
-				alert('### 수신메세지 조회 실패 ###');
+   				$('#succ').css('display', 'block');
+				$('.sufa').html('### 수신메세지 조회 실패 ###');
 			}
 		});
    });
@@ -181,7 +182,8 @@ $(document).ready(function(){
    					
    				},
    			error: function(){
-				alert('### 발신메세지 조회 실패 ###');
+				$('#succ').css('display', 'block');
+				$('.sufa').html('### 발신메세지 조회 실패 ###');
 			}
 		});
    });
@@ -206,7 +208,8 @@ $(document).ready(function(){
  				
    			},
    			error: function(){
-   				alert('### id 조회 실패 ###');
+   				$('#succ').css('display', 'block');
+				$('.sufa').html('### 통신오류 ###');
    			}
    		});
    });
@@ -216,8 +219,8 @@ $(document).ready(function(){
 		var pwtitle = /^.{1,20}$/;
 	var tiResult = pwtitle.test(stitle);	
    	if(!tiResult){
-   		alert('제목은 최대 20자 입니다.');
    		$('.ch').val('');
+   		$('.ch').focus();
  	}
 	});
 	
@@ -227,7 +230,6 @@ $(document).ready(function(){
 		for(var i = 0 ; i < el.length ; i++ ){
 			var txt = $(el).eq(i).val();
 			if(!txt){
-				alert('필수 입력사항을 확인하세요.');
 				$(el).eq(i).focus();
 				return;
 			}
@@ -259,7 +261,8 @@ $(document).ready(function(){
    				}
    			},
    			error: function(){
-   				alert('### id 조회 실패 ###');
+   				$('#succ').css('display', 'block');
+				$('.sufa').html('### 통신오류 ###');
    			}
    		});
 	});
@@ -298,7 +301,7 @@ $(document).ready(function(){
 			},
 			error: function(){
 				$('#succ').css('display', 'block');
-   					$('.sufa').html('### 통신오류 ###');
+   				$('.sufa').html('### 통신오류 ###');
 			}
 		});
 	});
@@ -306,8 +309,6 @@ $(document).ready(function(){
    	
    	$(document).on('click', "#reply", function(){
    		var reid = $('#se').html();
-   		alert(reid)
-   		
    		$('#detame').css('display', 'none');
    		$('#newme').css('display', 'block');
    		$('#recvid').html('');
@@ -342,7 +343,7 @@ $(document).ready(function(){
 			}, 		
    			error: function(){
 				$('#succ').css('display', 'block');
-   					$('.sufa').html('### 통신오류 ###');
+   				$('.sufa').html('### 통신오류 ###');
    			}
    		});
    	});

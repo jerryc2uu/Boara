@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,31 +38,33 @@ img{
 	margin-left: 130px;
  
  }
+/*   #nv, header {
+    background-image: linear-gradient(120deg, #3498db, #8e44ad);
+ }  */
+ 
 </style>
 </head>
 <body>
    <!-- Navbar -->
    <div class="w3-top fix">
-     <div class="w3-bar w3-indigo w3-card w3-left-align w3-xlarge " >
+     <div id="nv" class="w3-bar w3-indigo w3-card w3-left-align w3-xlarge " >
        <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white " id="main">Main</a>
        <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="collection">Collection</a>
 <c:if test="${not empty SID}">      
        <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="mwrite">Write</a>
        <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="mcoll">New Collection</a>
 </c:if>   
-	<div style="float: right; padding-right:30px;">      
 <c:if test="${empty SID}">
-     <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white " id="mjoin">Join</a>
-     <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white " id="mlogin">Login</a>
+     <a class="w3-bar-item w3-button w3-hide-small w3-right w3-padding w3-hover-white " id="mlogin">Login</a>
+     <a class="w3-bar-item w3-button w3-hide-small w3-right w3-padding w3-hover-white " id="mjoin">Join</a>
 </c:if>
 <c:if test="${not empty SID}">
-     <a class="w3-bar-item w3-button w3-hide-small w3-hover-white" id="message">
+     <a class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white"id="mlogout">Logout</a>   
+     <a class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" id="msid">${SID}</a>   
+     <a class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-white" id="message">
      	<img  src="/boa/resources/img/k/message.png" style=" width:55px; height:35px;"  > 
      </a>   
-     <a class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" id="msid">${SID}</a>   
-     <a class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"id="mlogout">Logout</a>   
 </c:if>           
-      </div>  
      </div>
    </div>
    <!-- Header -->
@@ -216,7 +219,7 @@ img{
 		
 		<div class="w3-auto w3-center pdt40" >
 			<select id="sel" name="sel" class="w3-col w3-quarter w3-select w3-center">
-				<option disabled selected>*** 제목 검색 ***</option>
+				<option disabled selected value="no">*** 제목 검색 ***</option>
 				<option value="col">컬렉션</option>
 				<option value="bo">게시글</option>
 				

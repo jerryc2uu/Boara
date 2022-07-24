@@ -139,7 +139,7 @@ $(document).ready(function(){
 		</div>
  
 	<!-- 문장 인증 받았을때 비밀번호 변경할 수 있는 모달창 -->
-	<div class="" id="srchPwResult">
+	<div class="w3-modal" id="srchPwResult">
 		<div class="w3-modal-content w3-animate-top w3-card-4">
 		 	<header class="w3-text-white w3-indigo w3-padding w3-border-bottom w3-xlarge">비밀번호 변경
 		 	 	<span id="pwexit" class="w3-button w3-display-topright">&times;</span>
@@ -158,7 +158,7 @@ $(document).ready(function(){
 					<input type="password" id="repw" class="w3-margin-bottom ft10 w3-margin-left w3-col w3-input w3-border w3-round-medium">
 					<span class="w3-col mgb10 w3-text-red ft10 w3-center" id="repwmsg">비밀번호 체크 처리 메세지</span>
 				</div>
-				<div id="updatePw" class="w3-col w3-margin-top w3-margin-bottom mar">	
+				<div id="updatePw" class="w3-col w3-margin-top w3-margin-bottom mar2">	
 					<div class="w250 w3-center w3-indigo w3-text-white w3-xlarge w3-hover-grey" >변경</div>
 				</div>	
 				

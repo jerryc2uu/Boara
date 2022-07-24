@@ -22,10 +22,16 @@ $(document).ready(function(){
 									+ '<img class="top" src="'+ data.item[i].coverLargeUrl + '">'
 								+ '</a>'
 							+ '</div>'
-							+ '<div class="w3-text-gray w3-large">'
-								+ data.item[i].title + '<br>' + data.item[i].author
-							+ '</div>'
-						+ '</div>'
+								+ '<div class="w3-text-gray w3-large">';
+								
+					if(data.item[i].title.length > 12){
+	               		add += data.item[i].title.substring(0, 12) + '..';
+		            }else{
+		            	add += data.item[i].title;
+		            }
+	           		add += '<br>' + data.item[i].author
+		            	+ '</div>'
+		          	 + '</div>';
 				$('#recommend').append(add);
 			}
 		}

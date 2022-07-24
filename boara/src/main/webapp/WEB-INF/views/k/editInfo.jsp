@@ -49,34 +49,35 @@
 		-->
 			<div class="w3-margin-top  w3-content">
 				<label for="name" class="w3-col m3 w3-right-align ft18">회원이름 : </label>
-				<h4 class="w3-col s8 w3-center ft18  w3-magrin-left ">${DATA.name}</h4>
+				<h4 class="w3-col s8 w3-center ft16  w3-magrin-left ">${DATA.name}</h4>
 			</div>
 			<div class="w3-margin-top  w3-content">
 				<label class="w3-col m3 w3-right-align ft18">아 이 디 : </label>
-				<h4 class="w3-col ft18 s8 w3-center w3-magrin-left w3-magrin-left ">${DATA.id}</h4>
+				<h4 class="w3-col ft16 s8 w3-center w3-magrin-left w3-magrin-left ">${DATA.id}</h4>
 			</div>
 			<div class="w3-margin-top  w3-content">
 				<label class="w3-col m3 w3-right-align ft18">생년월일 : </label>
-				<h4 class="w3-col s8 w3-center ft18  w3-magrin-left ">${DATA.birth}</h4>
+				<h4 class="w3-col s8 w3-center ft16  w3-magrin-left ">${DATA.birth}</h4>
 			</div>
 			<div class="w3-margin-top w3-content">
 				<label for="pw" class="w3-col m3 w3-right-align ft18">비밀번호 : </label>
-				<input type="password" name="pw" id="pw" class="w3-margin-bottom w3-margin-left m8 w3-col ft18 w3-input w3-border w3-round-medium pd3">
+				<input type="password" name="pw" id="pw" class="w3-margin-bottom w3-margin-left m8 w3-col ft13 w3-input w3-border w3-round-medium pd3"
+					placeholder="[대,소문자,숫자,특수문자로 구성된 7~15 글자]">
 			</div>
 			<div class="w3-margin-top  w3-content">
 				<label for="repw" class="w3-col m3 w3-right-align ft18">비밀번호 확인 : </label>
 				<div class="w3-col m8">
-					<input type="password" id="repw" class="w3-margin-bottom w3-margin-left w3-col ft18 input w3-border w3-round-medium pd3">
+					<input type="password" id="repw" class="w3-margin-bottom w3-margin-left w3-col ft13 input w3-border w3-round-medium pd3">
 					<span class="w3-col w3-text-red  w3-center mb5" id="repwmsg"># 비밀번호가 일치하지 않습니다.</span>
 				</div>
 			</div>
 			<div class="w3-margin-top  w3-content">
 				<label for="email" class="w3-col m3 w3-right-align ft18">회원메일 : </label>
-				<input type="text" name="email" id="email" class="w3-margin-bottom w3-margin-left m8 w3-col ft18 w3-input w3-border w3-round-medium pd3" value="${DATA.email}">
+				<input type="text" name="email" id="email" class="w3-margin-bottom w3-margin-left m8 w3-col ft16 w3-input w3-border w3-round-medium pd3" value="${DATA.email}">
 			</div>
 			<div class="w3-margin-top  w3-content">
 				<label for="tel" class="w3-col m3 w3-right-align ft18">전화번호 : </label>
-				<input type="text" name="tel" id="tel" class="w3-margin-bottom w3-margin-left m8 w3-col ft18 w3-input w3-border w3-round-medium pd3" value="${DATA.tel}">
+				<input type="text" name="tel" id="tel" class="w3-margin-bottom w3-margin-left m8 w3-col ft16 w3-input w3-border w3-round-medium pd3" value="${DATA.tel}">
 			</div>
 				
 	<c:forEach var="data" items="${LIST}">

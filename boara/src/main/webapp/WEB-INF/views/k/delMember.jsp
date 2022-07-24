@@ -30,16 +30,24 @@
 			<input type="hidden" id="id" name="id" value="${SID}">
 			
 			<div class="w3-margin-top w3-content">
-				<label for="pw" class="w3-col s3 w3-right-align w3-large">비밀번호 : </label>
+				<label for="dname" class="w3-col s3 w3-right-align w3-large">이름 : </label>
 				<div class="w3-col m8">
-					<input type="password" name="pw" id="pw" class="w3-margin-bottom w3-margin-left w3-col w3-input w3-border w3-round-medium"
+					<input type="text" name="dname" id="dname" class="w3-margin-bottom w3-margin-left w3-col w3-input w3-border w3-round-medium"
+									placeholder="이름을 입력하세요">
+				</div>
+			</div>
+			
+			<div class="w3-margin-top w3-content">
+				<label for="dpw" class="w3-col s3 w3-right-align w3-large">비밀번호 : </label>
+				<div class="w3-col m8">
+					<input type="password" name="dpw" id="dpw" class="w3-margin-bottom w3-margin-left w3-col w3-input w3-border w3-round-medium"
 									placeholder="비밀번호를 입력하세요">
 				</div>
 			</div>
 			<div class="w3-margin-top w3-content">
-				<label for="repw" class="w3-col s3 w3-right-align w3-large">비밀번호 확인 : </label>
+				<label for="drepw" class="w3-col s3 w3-right-align w3-large">비밀번호 확인 : </label>
 				<div class="w3-col m8">
-					<input type="password" id="repw" class="w3-margin-bottom w3-margin-left w3-col w3-input w3-border w3-round-medium">
+					<input type="password" id="drepw" class="w3-margin-bottom w3-margin-left w3-col w3-input w3-border w3-round-medium">
 					<span class="w3-col w3-text-red w3-center w3-margin-bottom" id="repwmsg">비밀번호 체크 처리 메세지</span>
 				</div>
 			</div>
