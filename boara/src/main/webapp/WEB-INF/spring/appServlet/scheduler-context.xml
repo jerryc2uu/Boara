@@ -20,7 +20,6 @@
 		<property name="jobDataAsMap">
 			<map>
 				<entry key="upIsshow" value-ref="updateTask" />
-				<entry key="autoPoints" value-ref="autoPoint" />
 			</map>
 		</property>
 	</bean>
