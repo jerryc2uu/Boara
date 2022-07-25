@@ -59,8 +59,8 @@
 			<div class="w3-half w3-indigo w3-text-white w3-hover-grey w3-xlarge" id="lbtn">Login</div>
 		</div>
 		<div class="w3-col w3-margin-top">
-			<div class="w3-button w3-text-indigo w3-right w3-xlarge" id="check">ID / PW 확인</div>
-			<div class="w3-button w3-text-indigo w3-right w3-xlarge" id="join">JOIN</div>
+			<div class="w3-button w3-text-indigo w3-right w3-large" id="check">ID / PW 확인</div>
+			<div class="w3-button w3-text-indigo w3-right w3-large" id="join">JOIN</div>
 		</div>
 		<div class="w3-col w3-padding w3-card-4 w3-hide"><span id="msg">${SID} 님은 이미 로그인했습니다.</span></div>
 	</div>
@@ -98,7 +98,7 @@
 				</div>
 			</div>
 	        <div class="mgt20 w3-content">
-				<label for="certi" class="w3-right-align w3-col s2 ftj14">본인인증 : </label>
+				<label for="certi" class="w3-right-align w3-col s2 ftj14">인증번호 : </label>
 				<div class="w3-col m9">
 					<input id="certi" name="certi"class="form-control w3-margin-left  w3-margin-bottom ft12 w3-col m9 w3-input w3-border"  disabled="disabled" placeholder="인증번호 6자리를 입력해주세요"  maxlength="6">
 					<div class=" w3-col s2 w3-right w3-button w3-indigo w3-round-medium ft12" id="cerck">check</div>

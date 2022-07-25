@@ -60,44 +60,42 @@ public class Member {
 		mv.setViewName("k/login");
 		return mv;
 	}
-/*
-	@RequestMapping(path="/loginProc.boa", method=RequestMethod.POST, params= {"id", "pw"})
-	public ModelAndView loginProc(MemberVO mVO, HttpSession session, ModelAndView mv, RedirectView rv) {
+
+	// 휴면 확인
+	@RequestMapping("/humeonCk.boa")
+	@ResponseBody
+	public Map<String, String> humanCk(MemberVO mVO){
+		HashMap<String, String>map = new HashMap<String, String>();
+		String result = "XX";
+		int cnt = mDao.getMemb(mVO);
+		String isshow = mDao.gethumeon(mVO);
+		if(cnt == 1) { 
+			if(isshow.equals("Y") || isshow.equals("A") ) {
+				result = "OK";
+			}else {
+				result = "NO";
+			}
+		} 
+		map.put("result", result);
 		
-		int cnt = mDao.getLogin(mVO);
-		mVO.setCnt(cnt);
-		if(cnt == 1) {
-			session.setAttribute("SID", mVO.getId());
-			
-			rv.setUrl("/boa/main.boa");
-		} else {
-			rv.setUrl("/boa/member/login.boa");
-		}
-			mv.setView(rv);
-			return mv;
-	
+		return map;
 	}
 	
-	// 다른게시판에서 로그인 처리를 요청할때 처리함수
-	@RequestMapping(path="/loginProc.boa", method=RequestMethod.POST, params= {"id", "pw", "vw", "nowPage"})
-	public ModelAndView loginProc(MemberVO mVO, HttpSession session, ModelAndView mv, RedirectView rv, String vw, String nowPage) {
-		System.out.println(vw);
-		int cnt = mDao.getLogin(mVO);
-		mVO.setCnt(cnt);
-		String view = vw;
-		if(cnt == 1) {
-			session.setAttribute("SID", mVO.getId());
-		} else {
-			view = "/boa/member/login.boa";
-		}
-		mv.addObject("VIEW", view);
-		mv.addObject("NOWPAGE", nowPage);
-		mv.setViewName("k/redirect");
-			return mv;
-	}	
-
-*/
-
+	// 휴면 해제
+	@RequestMapping("/huClear.boa")
+	@ResponseBody
+	public Map<String, String> huClear(MemberVO mVO){
+		HashMap<String, String>map = new HashMap<String, String>();
+			String result = "NO";
+			int cnt = mDao.humeonClear(mVO);
+			mVO.setCnt(cnt);
+			if(cnt == 1) {
+				result = "OK";
+			} 	
+			map.put("result", result);
+			return map;
+	}
+	
 	@RequestMapping("/loginProc.boa")
 	public ModelAndView loginProc(MemberVO mVO, HttpSession session, ModelAndView mv, RedirectView rv, String vw, String nowPage) {
 		int cnt = mDao.getLogin(mVO);
@@ -174,41 +172,7 @@ public class Member {
 		mv.setViewName("k/redirect");
 		return mv;
 	}
-	// 휴면 확인
-	@RequestMapping("/humeonCk.boa")
-	@ResponseBody
-	public Map<String, String> humanCk(MemberVO mVO){
-		HashMap<String, String>map = new HashMap<String, String>();
-		String result = "XX";
-		int cnt = mDao.getMemb(mVO);
-		String isshow = mDao.gethumeon(mVO);
-		if(cnt == 1) { 
-			if(isshow.equals("Y") || isshow.equals("A") ) {
-				result = "OK";
-			}else {
-				result = "NO";
-			}
-		} 
-		map.put("result", result);
-		
-		return map;
-	}
-	
-	// 휴면 해제
-	@RequestMapping("/huClear.boa")
-	@ResponseBody
-	public Map<String, String> huClear(MemberVO mVO){
-		HashMap<String, String>map = new HashMap<String, String>();
-			String result = "NO";
-			int cnt = mDao.humeonClear(mVO);
-			mVO.setCnt(cnt);
-			if(cnt == 1) {
-				result = "OK";
-			} 	
-			map.put("result", result);
-			return map;
-	}
-	
+
 	// 회원가입정보 중복 체크(id, mail, tel)
 	
 	@RequestMapping(path="/idCheck.boa", 

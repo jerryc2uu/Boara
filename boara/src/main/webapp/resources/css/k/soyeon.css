@@ -1,15 +1,14 @@
 
 img{
-	width: 225px;
-	height: 265px;
+	width: 200px;
+	height: 225px;
 
 }
-
-.pic { 
-	border: 1px solid gray;
-	overflow: hidden;
-	width: 100%
+.img{
+	width: 200px;
+	height: 235px;
 }
+
 .fix {
 	position:fixed!important;
 	z-index:3;
@@ -47,8 +46,8 @@ display: -webkit-box;
         align-items: center;
       }
 .swiperbox{
-    width: 600px;
-    height: 800px;
+    width: 400px;
+    height: 500px;
     overflow: hidden;
 	}
 .swiper-slide img {
@@ -215,11 +214,17 @@ display: -webkit-box;
 	margin-left: 350px;
 }
 .mar2{
-	margin-left: 200;
+	margin-left: 200px;
 }
 .mar3{
 	margin-left: 300px;
 }
 .wd24{
 	width: 24px;
+}
+.swiper-pagination-bullet{
+	width : 14px;
+	height : 14px;
+	margin-top: 20px;
+	margin-left: 10px;
 }

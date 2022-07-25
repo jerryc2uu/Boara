@@ -120,7 +120,7 @@ $(document).ready(function(){
 	
 	//-------------------------------------------------------------------------------
 	// 탈퇴
-	$('#mecertifi').css('display','none');
+	
 
 
 	// 비밀번호 일치시 본인인증 창 노출
@@ -139,7 +139,7 @@ $(document).ready(function(){
 			success : function(data){
 				var result = data.ck
 				if(result == 'OK'){
-					$('#mecertifi').css('display', 'block');
+					$('#delete').focus();
 				}else{
 					$('#id01').css('display', 'block');
 					$('#me').html('회원가입시 사용한 비밀번호로 입력해주세요');
@@ -152,36 +152,9 @@ $(document).ready(function(){
 	});
 	
 	
-	// 본인인증
-	$('#mecertifi').click(function(){
-		var IMP = window.IMP; 
-		IMP.init('imp53161363'); 
-
-		var sname = $('#dname').val();
-		
-		 IMP.certification({
-		 	 name : sname,
-			 popup : true 
-		 }, function (rsp) { 
-			 if ( rsp.success ) {
-		         // 인증성공
-		         $('#mecerti').val('Y');
-			  } else {
-			         // 인증취소 또는 인증실패
-			        var msg = '인증에 실패하였습니다.';
-			        msg += '에러내용 : ' + rsp.error_msg;
-			 
-			        alert(msg);
-			        $('#certi').prop('disabled', true);
-			        $('frm').attr('action', '/boa/member/delMember.boa');
-			        $('#frm').submit();
-			    }
-			});
-	});
-	
 	// 체크시 탈퇴 버튼 노출
 	$('#delete').click(function(){
-		var el = $('#dname, #dpw, #mecerti'); 
+		var el = $('#dname, #dpw'); 
 		for(var i = 0 ; i < el.length ; i++ ){
 			var txt = $(el).eq(i).val();
 			if(!txt){
@@ -194,12 +167,6 @@ $(document).ready(function(){
 		$('#delbox').css('display','block')
 	});
 
-
-	// 탈퇴 모달창
-	$('#dbtn').click(function(){
-		$('#delMo').css('display', 'block');
-	});
-	
 	// 탈퇴 처리 
 	$('#exit').click(function(){
 		
@@ -207,8 +174,11 @@ $(document).ready(function(){
 		$('#frm').submit();
 	});
 	
+	$('#dbtn').click(function(){
+		$('#delMo').css('display', 'block');
+	});
+
 	$('#cancle').click(function(){
 		$('#delMo').css('display', 'none');
 	});
-
 });

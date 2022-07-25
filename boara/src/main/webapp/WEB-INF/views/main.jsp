@@ -27,20 +27,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
 .fa-anchor,.fa-coffee {font-size:200px}
 img{
-	width: 225px;
-	height: 265px;
+	width: 200px;
+	height: 225px;
 
 }
- #img_container{
-    display: flex;
-    width: 230px;
-    height: 270px;
-	margin-left: 130px;
- 
- }
-/*   #nv, header {
-    background-image: linear-gradient(120deg, #3498db, #8e44ad);
- }  */
+
  
 </style>
 </head>
@@ -48,27 +39,27 @@ img{
    <!-- Navbar -->
    <div class="w3-top fix">
      <div id="nv" class="w3-bar w3-indigo w3-card w3-left-align w3-xlarge " >
-       <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white " id="main">Main</a>
-       <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="collection">Collection</a>
+       <a class="w3-bar-item w3-button  w3-padding w3-hover-white " id="main">Main</a>
+       <a class="w3-bar-item w3-button  w3-padding w3-hover-white" id="collection">Collection</a>
 <c:if test="${not empty SID}">      
-       <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="mwrite">Write</a>
-       <a class="w3-bar-item w3-button w3-hide-small w3-padding w3-hover-white" id="mcoll">New Collection</a>
+       <a class="w3-bar-item w3-button  w3-padding w3-hover-white" id="mwrite">Write</a>
+       <a class="w3-bar-item w3-button  w3-padding w3-hover-white" id="mcoll">New Collection</a>
 </c:if>   
 <c:if test="${empty SID}">
-     <a class="w3-bar-item w3-button w3-hide-small w3-right w3-padding w3-hover-white " id="mlogin">Login</a>
-     <a class="w3-bar-item w3-button w3-hide-small w3-right w3-padding w3-hover-white " id="mjoin">Join</a>
+     <a class="w3-bar-item w3-button  w3-right w3-padding w3-hover-white " id="mlogin">Login</a>
+     <a class="w3-bar-item w3-button  w3-right w3-padding w3-hover-white " id="mjoin">Join</a>
 </c:if>
 <c:if test="${not empty SID}">
-     <a class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white"id="mlogout">Logout</a>   
-     <a class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" id="msid">${SID}</a>   
-     <a class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-white" id="message">
+     <a class="w3-bar-item w3-button  w3-right w3-padding-large w3-hover-white"id="mlogout">Logout</a>   
+     <a class="w3-bar-item w3-button  w3-right w3-padding-large w3-hover-white" id="msid">${SID}</a>   
+     <a class="w3-bar-item w3-button  w3-right w3-hover-white" id="message">
      	<img  src="/boa/resources/img/k/message.png" style=" width:55px; height:35px;"  > 
      </a>   
 </c:if>           
      </div>
    </div>
    <!-- Header -->
-    <header class="w3-container w3-indigo w3-center" style="padding:40px 16px; height: 200px;">
+    <header class="w3-container w3-center w3-indigo w3-border-bottom" style=" padding:40px 16px; height: 200px;">
   	  <h1 class="pdt40 w3-xxxlarge dfn"><b>Boara</b></h1>
 	</header>
 
@@ -208,7 +199,7 @@ img{
 	      </div>
 	      <div class="swiper-button-next"></div>
 	      <div class="swiper-button-prev"></div>
-	      <div class="swiper-pagination w3-padding" style="position: relative!important; "></div>
+	      <div class="swiper-pagination mgl10 w3-padding" style="position: relative!important; "></div>
 	    </div>
    
 	<!-- search bar -->
@@ -233,18 +224,17 @@ img{
 	
 	
    <!-- Bottom  -->
-   <div class="w3-row-padding w3-padding-64 w3-container" style="margin: 50px auto;">		
-      <div class="w3-col w3-display-container" style="margin: 0 auto;">
-        	
+   <div class="w3-center">		
          <!-- 컬렉션 리스트 보이는 곳 -->
-         <div class="w3-col" style = "margin-left: 130px; margin-bottom: 20px;">
-            <h3 class="w3-padding ft22" style="float: left;">Weekly <a class='w3-text-red'>TOP!</a> 게시글</h3>
+         <div class="w3-col" style="margin-bottom: 20px;">
+            <h3 class="w3-col w3-padding ft22" >Weekly <span class="w3-text-red">TOP!</span> 게시글</h3>
          </div>
          
-         <div class=" w3-center w3-col" id="img_container">
- <c:forEach var="data" items="${LIST}" >      
-			<div class="inblock w3-center mgl10" >
-				<div class="pic w3-round-medium" >
+         <div >
+ <c:forEach var="data" items="${LIST}" > 
+ 		<div class="inblock">    
+			<div class="w3-col img mgl10" >
+				<div class="inblock" >
 <c:if test="${data.savename == 'no'}">
    	<img class="top" src="/boa/resources/img/noimage.jpg" id="${data.bno}">
 </c:if>	
@@ -252,12 +242,13 @@ img{
 	<img class="top" src="/boa/resources/upload/${data.savename}" id="${data.bno}">
 </c:if>
 				</div>
-				<div class="w3-center w3-text-grey w3-large">
-				${data.title}
+				<div class="w3-col w3-center w3-text-grey w3-midium">
+					${data.title}
 				</div>
 			</div>
+		</div>
 </c:forEach>
-	  	 </div>
+	  </div>
 	  	 
 	  	 <!-- 최이지 도서 추천  -->
 <c:if test="${not empty SID}">
@@ -269,7 +260,6 @@ img{
       </div>
    </div>
 </c:if>		 
-      </div>
    </div>
    
 	

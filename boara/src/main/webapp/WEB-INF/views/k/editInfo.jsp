@@ -48,43 +48,43 @@
 		<!--  
 		-->
 			<div class="w3-margin-top  w3-content">
-				<label for="name" class="w3-col m3 w3-right-align ft18">회원이름 : </label>
-				<h4 class="w3-col s8 w3-center ft16  w3-magrin-left ">${DATA.name}</h4>
+				<label for="name" class="w3-col m3 w3-right-align ft16">회원이름 : </label>
+				<h4 class="w3-col s8 w3-center ftj14 w3-magrin-left ">${DATA.name}</h4>
 			</div>
 			<div class="w3-margin-top  w3-content">
-				<label class="w3-col m3 w3-right-align ft18">아 이 디 : </label>
-				<h4 class="w3-col ft16 s8 w3-center w3-magrin-left w3-magrin-left ">${DATA.id}</h4>
+				<label class="w3-col m3 w3-right-align ft16">아 이 디 : </label>
+				<h4 class="w3-col ftj14 s8 w3-center w3-magrin-left w3-magrin-left ">${DATA.id}</h4>
 			</div>
 			<div class="w3-margin-top  w3-content">
-				<label class="w3-col m3 w3-right-align ft18">생년월일 : </label>
-				<h4 class="w3-col s8 w3-center ft16  w3-magrin-left ">${DATA.birth}</h4>
+				<label class="w3-col m3 w3-right-align ft16">생년월일 : </label>
+				<h4 class="w3-col s8 w3-center ftj14 w3-magrin-left ">${DATA.birth}</h4>
 			</div>
 			<div class="w3-margin-top w3-content">
-				<label for="pw" class="w3-col m3 w3-right-align ft18">비밀번호 : </label>
-				<input type="password" name="pw" id="pw" class="w3-margin-bottom w3-margin-left m8 w3-col ft13 w3-input w3-border w3-round-medium pd3"
+				<label for="pw" class="w3-col m3 w3-right-align ft16">비밀번호 : </label>
+				<input type="password" name="pw" id="pw" class="w3-margin-bottom w3-margin-left m8 w3-col ftj14 w3-input w3-border w3-round-medium pd3"
 					placeholder="[대,소문자,숫자,특수문자로 구성된 7~15 글자]">
 			</div>
 			<div class="w3-margin-top  w3-content">
-				<label for="repw" class="w3-col m3 w3-right-align ft18">비밀번호 확인 : </label>
+				<label for="repw" class="w3-col m3 w3-right-align ft16">비밀번호 확인 : </label>
 				<div class="w3-col m8">
-					<input type="password" id="repw" class="w3-margin-bottom w3-margin-left w3-col ft13 input w3-border w3-round-medium pd3">
+					<input type="password" id="repw" class="w3-margin-bottom w3-margin-left w3-col ftj14 input w3-border w3-round-medium pd3">
 					<span class="w3-col w3-text-red  w3-center mb5" id="repwmsg"># 비밀번호가 일치하지 않습니다.</span>
 				</div>
 			</div>
 			<div class="w3-margin-top  w3-content">
-				<label for="email" class="w3-col m3 w3-right-align ft18">회원메일 : </label>
-				<input type="text" name="email" id="email" class="w3-margin-bottom w3-margin-left m8 w3-col ft16 w3-input w3-border w3-round-medium pd3" value="${DATA.email}">
+				<label for="email" class="w3-col m3 w3-right-align ft16">회원메일 : </label>
+				<input type="text" name="email" id="email" class="w3-margin-bottom w3-margin-left m8 w3-col ftj14 w3-input w3-border w3-round-medium pd3" value="${DATA.email}">
 			</div>
 			<div class="w3-margin-top  w3-content">
-				<label for="tel" class="w3-col m3 w3-right-align ft18">전화번호 : </label>
-				<input type="text" name="tel" id="tel" class="w3-margin-bottom w3-margin-left m8 w3-col ft16 w3-input w3-border w3-round-medium pd3" value="${DATA.tel}">
+				<label for="tel" class="w3-col m3 w3-right-align ft16">전화번호 : </label>
+				<input type="text" name="tel" id="tel" class="w3-margin-bottom w3-margin-left m8 w3-col ftj14 w3-input w3-border w3-round-medium pd3" value="${DATA.tel}">
 			</div>
 				
 	<c:forEach var="data" items="${LIST}">
 	<!-- 사진 삭제 기능 -->
 		<c:if test="${not empty data.savename}">
 			<div class="w3-margin-top  w3-content">
-				<label for="file" class="w3-col m3 w3-right-align ft18">프로필 사진 : </label>
+				<label for="file" class="w3-col m3 w3-right-align ft16">프로필 사진 : </label>
 				<div class="w3-col m8" >
 					<div id="${data.fno}" class="w3-display-container picbox w3-center" >
 						<img  class="w3-display-middle evtPic" style="width: 100%; height: auto;" src="/boa/resources/upload/${data.savename}">
@@ -97,14 +97,14 @@
 		<!-- 사진 삭제 했을 시 추가 기능 -->
 		<c:if test="${empty LIST}">
 			<div class="w3-margin-top w3-content">
-				<label for="file" class="w3-col s3 w3-right-align ft18">프로필 사진 : </label>
+				<label for="file" class="w3-col s3 w3-right-align ft16">프로필 사진 : </label>
 				<div class="w3-col m8" id="filebox">
-					<input type="file" id="file" name="file" class="ft18 upfile w3-input w3-border w3-col w3-margin-left w3-round-medium w3-margin-bottom">
+					<input type="file" id="file" name="file" class="ftj14 upfile w3-input w3-border w3-col w3-margin-left w3-round-medium w3-margin-bottom">
 				</div>
 			</div>
 		
 			<div class="w3-margin-top w3-content">
-				<label class="w3-col s3 w3-right-align ft18">preview : </label>
+				<label class="w3-col s3 w3-right-align ft16">preview : </label>
 				<div class="w3-col m8" >
 					<div class="w3-display-container picbox " >
 						<img id="img1" class="w3-display-middle" style="width: 100%; height: auto;" src="">

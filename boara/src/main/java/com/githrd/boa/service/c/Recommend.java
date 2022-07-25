@@ -35,7 +35,7 @@ public class Recommend {
 		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
 		HashMap<Integer, Integer> gnoMap = new HashMap<Integer, Integer>();
 		int cate = 0;
-		
+	
 		if(session.getAttribute("SID") == null) return cate;	// 조회한 글이 없으면 0 반환
 		
 		// boara 장르와 interpark api 장르 코드 매치할 맵 작성
@@ -53,10 +53,10 @@ public class Recommend {
 		map.put(1012, 205);
 		map.put(1011, 215);
 		map.put(1016, 215);
-		map.put(1014, 214);
-		map.put(1013, 214);
-		map.put(1017, 214);
-		map.put(1018, 214);
+		map.put(1014, 101);
+		map.put(1013, 101);
+		map.put(1017, 101);
+		map.put(1018, 101);
 		map.put(1019, 128);
 		map.put(1020, 207);
 		

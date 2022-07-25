@@ -320,9 +320,8 @@
  		SET
  			isshow = 'N'
  		WHERE
- 			isshow IN('Y','N')
+ 			isshow = 'Y'
  			AND id = #{id}
- 			AND pw = #{pw}
  	</select>
  	
  	
