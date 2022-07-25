@@ -7,7 +7,7 @@
 파라미터 : [cid, nowPage, msg]
 컨트롤러 : www.githrd.boa.controller.c.Collection
 담당함수 : collecList()
-	  뷰 : /WEB-INF/views/c/collection/collecList.jsp
+      뷰 : /WEB-INF/views/c/collection/collecList.jsp
 ----------------------------------------------------------
 # 컬렉션 삭제 요청
 
@@ -15,7 +15,7 @@
 파라미터 : cno, nowPage[, cid]
 컨트롤러 : www.githrd.boa.controller.c.Collection
 담당함수 : collecDel()
-	  뷰 : /WEB-INF/views/c/collection/collecList.jsp
+      뷰 : /WEB-INF/views/c/collection/collecList.jsp
 ----------------------------------------------------------
 # 컬렉션 작성 페이지 폼 보기
 
@@ -23,15 +23,7 @@
 파라미터 : -
 컨트롤러 : www.githrd.boa.controller.c.Collection
 담당함수 : collecWrite()
-	  뷰 : /WEB-INF/views/c/collection/collecWrite.jsp
-----------------------------------------------------------
-# 컬렉션 작성 페이지 폼 보기
-
-요청내용 : /boa/collection/collecWrite.boa
-파라미터 : -
-컨트롤러 : www.githrd.boa.controller.c.Collection
-담당함수 : collecWrite()
-	  뷰 : /WEB-INF/views/c/collection/collecWrite.jsp
+      뷰 : /WEB-INF/views/c/collection/collecWrite.jsp
 ----------------------------------------------------------
 # 컬렉션 작성 요청
 
@@ -39,7 +31,7 @@
 파라미터 : cid, cname[, sgenre, descr, thumb]
 컨트롤러 : www.githrd.boa.controller.c.Collection
 담당함수 : collecWriteProc()
-	  뷰 : forward : redirect.jsp
+      뷰 : forward : redirect.jsp
 	  		/boa/collection/collecList.boa
 ----------------------------------------------------------
 # 컬렉션 수정 페이지 폼 보기
@@ -48,7 +40,7 @@
 파라미터 : cno, nowPage[, cid]
 컨트롤러 : www.githrd.boa.controller.c.Collection
 담당함수 : collecEdit()
-	  뷰 : /WEB-INF/views/c/collection/collecEdit.jsp
+      뷰 : /WEB-INF/views/c/collection/collecEdit.jsp
 ----------------------------------------------------------
 # 컬렉션 수정 요청
 
@@ -56,7 +48,7 @@
 파라미터 : nowPage[, cid, cname, sgenre, descr, thumb, fno]
 컨트롤러 : www.githrd.boa.controller.c.Collection
 담당함수 : collecWriteProc()
-	  뷰 : forward : redirect.jsp
+      뷰 : forward : redirect.jsp
 	  		/boa/collection/collecList.boa
 ==========================================================
 게시글 관련 요청 설계
@@ -67,7 +59,7 @@
 파라미터 : cno[, nowPage, msg]
 컨트롤러 : www.githrd.boa.controller.c.Board
 담당함수 : boardList()
-	  뷰 : /WEB-INF/views/c/board/boardList.jsp
+      뷰 : /WEB-INF/views/c/board/boardList.jsp
 ----------------------------------------------------------
 # 게시글 삭제 요청
 
@@ -75,7 +67,7 @@
 파라미터 : bno, nowPage, cno
 컨트롤러 : www.githrd.boa.controller.c.Board
 담당함수 : boardDel()
-	  뷰 : /WEB-INF/views/c/board/boardList.jsp
+      뷰 : /WEB-INF/views/c/board/boardList.jsp
 ----------------------------------------------------------
 # 게시글 작성 페이지 폼 보기
 
@@ -83,7 +75,7 @@
 파라미터 : id
 컨트롤러 : www.githrd.boa.controller.c.Board
 담당함수 : boardWrite()
-	  뷰 : /WEB-INF/views/c/board/boardWrite.jsp
+      뷰 : /WEB-INF/views/c/board/boardWrite.jsp
 ----------------------------------------------------------
 # 게시글 작성 요청
 
@@ -91,16 +83,16 @@
 파라미터 : cno, title, isshow, forwho, price, body[, sgenre, thumb]
 컨트롤러 : www.githrd.boa.controller.c.Board
 담당함수 : boardWriteProc()
-	  뷰 : forward : redirect.jsp
+      뷰 : forward : redirect.jsp
 	  		/boa/board/boardList.boa
 ----------------------------------------------------------
 # 게시글 수정 페이지 폼 보기
 
 요청내용 : /boa/board/boardEdit.boa
-파라미터 : bno, nowPage
+파라미터 : bno[, nowPage]
 컨트롤러 : www.githrd.boa.controller.c.Board
 담당함수 : boardEdit()
-	  뷰 : /WEB-INF/views/c/board/boardEdit.jsp
+      뷰 : /WEB-INF/views/c/board/boardEdit.jsp
 ----------------------------------------------------------
 # 게시글 수정 요청
 
@@ -108,7 +100,7 @@
 파라미터 : bno, cno, nowPage, title, isshow, forwho, price, body[, sgenre, thumb]
 컨트롤러 : www.githrd.boa.controller.c.Board
 담당함수 : boardEditProc()
-	  뷰 : forward : redirect.jsp
+      뷰 : forward : redirect.jsp
 	  		/boa/board/boardList.boa
 ----------------------------------------------------------
 # 게시글 상세 페이지 폼 보기
@@ -117,7 +109,7 @@
 파라미터 : bno[, nowPage, id]
 컨트롤러 : www.githrd.boa.controller.c.Board
 담당함수 : boardEdit()
-	  뷰 : /WEB-INF/views/c/board/boardDetail.jsp
+      뷰 : /WEB-INF/views/c/board/boardDetail.jsp
 ----------------------------------------------------------
 # 게시글 좋아요 처리
 
@@ -125,7 +117,7 @@
 파라미터 : bno, id
 컨트롤러 : www.githrd.boa.controller.c.Board
 담당함수 : likeProc()
-	  뷰 : json
+      뷰 : json
 ----------------------------------------------------------
 # 게시글 찜 처리
 
@@ -133,7 +125,7 @@
 파라미터 : bno, id
 컨트롤러 : www.githrd.boa.controller.c.Board
 담당함수 : jjimProc()
-	  뷰 : json
+      뷰 : json
 ----------------------------------------------------------
 # 게시글 찜/좋아요 해제 처리
 
@@ -141,5 +133,14 @@
 파라미터 : bno, id
 컨트롤러 : www.githrd.boa.controller.c.Board
 담당함수 : discardMark()
-	  뷰 : json
-----------------------------------------------------------
+      뷰 : json
+==========================================================
+추천 도서 관련 요청 설계
+==========================================================
+# 게시글 찜/좋아요 해제 처리
+
+요청내용 : https://book.interpark.com/api/recommend.api
+파라미터 : key, categoryId, output
+컨트롤러 : -
+담당함수 : ajax
+      뷰 : json

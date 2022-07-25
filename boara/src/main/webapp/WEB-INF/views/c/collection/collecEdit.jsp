@@ -240,6 +240,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 				<input type="hidden" id="cno" name="cno" value="${CINFO.cno}">
 				<input type="hidden" id="id" name="id" value="${SID}">
 				<input type="hidden" name="nowPage" value="${param.nowPage}">
+<c:if test="${not empty param.cid}">
+				<input type="hidden" name="cid" value="${param.cid}">
+</c:if>
 				<input type="hidden" name="vw" id="vw" value="/boa/collection/collecEdit.boa">
 			</form>
 			

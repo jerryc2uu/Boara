@@ -287,6 +287,12 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 				<input type="hidden" id="bno" name="bno" value="${BINFO.bno}">
 				<input type="hidden" name="id" value="${SID}">
 				<input type="hidden" name="sgenre" id="genre">
+<c:if test="${empty param.nowPage}">
+				<input type="hidden" name="nowPage" value="1">
+</c:if>
+<c:if test="${not empty param.nowPage}">
+				<input type="hidden" name="nowPage" value="${param.nowPage}">
+</c:if>
 				<input type="hidden" name="vw" value="/boa/board/boardEdit.boa">
 			</form>
 			
