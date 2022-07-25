@@ -57,6 +57,7 @@ $(document).ready(function(){
 					success : function (data) {
 						$('#certi').attr('disabled',false);
 						$('#code').val(data);
+						$('#mailmsg').css('display', 'block');
 						$('#mailmsg').html('인증 메일이 발송되었습니다.');
 					}			
 				}); 

@@ -58,6 +58,21 @@ public class MailsendService {
 			return Integer.toString(authNumber);
 		}
 		
+		public String humeonEmail(String email) {
+			makeRandomNumber();
+			String addr = "soyeoningk@gmail.com"; 
+			String toMail = email;
+			String title = "BOARA 휴면 해제 인증 이메일 입니다.";
+			String body = 
+					"BOARA를 방문해주셔서 감사합니다." + 	
+							"<br><br>" + 
+							"인증 번호는 " + authNumber + "입니다." + 
+							"<br>" + 
+							"해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
+			mailSend(addr, toMail, title, body);
+			return Integer.toString(authNumber);
+		}
+		
 		//이메일 전송 메소드
 		public void mailSend(String addr, String toMail, String title, String body) { 
 			MimeMessage message = mailSender.createMimeMessage();
