@@ -16,22 +16,36 @@ $(document).ready(function(){
 		},
 		success: function(data){
 			for(var i=0; i < 5; i++){
+				var pic = $(document.createElement('img')).prop('src', data.item[i].coverLargeUrl);
+				var width = pic.prop('width');
+				var height = pic.prop('height');
+				
 				var add = '<div class="inblock w3-center mgl10">'
-							+ '<div class="pic">'
-								+ '<a href="' + data.item[i].link + '">'
-									+ '<img class="top" src="'+ data.item[i].coverLargeUrl + '">'
-								+ '</a>'
-							+ '</div>'
-								+ '<div class="w3-text-gray w3-large">';
+							+ '<a href="' + data.item[i].link + '">'
+								+ '<div class="bookbox">'
+									+ '<img src="'+ data.item[i].coverLargeUrl + '"'
+									
+				if(width >= height){
+					add += 'style="height:223px; width:auto; overflow:hidden;"'
+				}else{
+					add += 'style="height:auto; width:198px; overflow:hidden;"'
+				}
+				add += '>'
+								+ '</div>'
+							+ '</a>'
+							+ '<h5 class="w3-text-gray">';
 								
-					if(data.item[i].title.length > 12){
-	               		add += data.item[i].title.substring(0, 12) + '..';
-		            }else{
-		            	add += data.item[i].title;
-		            }
-	           		add += '<br>' + data.item[i].author
-		            	+ '</div>'
-		          	 + '</div>';
+				if(data.item[i].title.length > 12){
+               		add += data.item[i].title.substring(0, 12) + '..';
+	            }else{
+	            	add += data.item[i].title;
+	            }
+				
+           		add += 		'</h5>' + 
+           					+ '<p class="w3-text-gray">' + 
+           						data.item[i].author
+           					+ '</p>'
+           				+ '</div>';
 				$('#recommend').append(add);
 			}
 		}

@@ -173,18 +173,22 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 				action="/boa/board/boardWriteProc.boa">
 				<div class="w3-col w3-margin-bottom w3-margin-top">
 					<label for="title" class="w3-col m3 w3-padding" style="text-align:right">게시글 이름 : </label>
-					<input type="text" class="w3-input w3-col m7" id="title" name="title">
+					<input type="text" class="w3-input w3-col m7" id="btitle" name="title">
 				</div>
 				<div class="w3-col w3-margin-bottom w3-margin-top">
 					<label for="isshow" class="w3-col m3 w3-padding" style="text-align:right">공개 범위 : </label>
-					<label class="w3-col m2 left mgt10"><input type="radio" id="noti" name="isshow" value="A">공지</label>
-					<label class="w3-col m2 left mgt10"><input type="radio" id="noti" name="isshow" value="Y" checked>일반</label>
-					<label class="w3-col m2 left mgt10"><input type="radio" id="noti" name="isshow" value="L">비공개</label>
+					<div class="w3-col m7 w3-center">
+						<label class="w3-third mgt10"><input type="radio" id="noti" name="isshow" value="A" class="w3-margin-right">공지</label>
+						<label class="w3-third mgt10"><input type="radio" id="noti" name="isshow" value="Y" class="w3-margin-right" checked>일반</label>
+						<label class="w3-third mgt10"><input type="radio" id="noti" name="isshow" value="L"class="w3-margin-right">비공개</label>
+					</div>
 				</div>
 				<div class="w3-col w3-margin-bottom w3-margin-top">
 					<label for="forwho" class="w3-col m3 w3-padding" style="text-align:right">이용가 설정 : </label>
-					<label class="w3-col m3 left mgt10"><input type="radio" id="noti" name="forwho" value="A">성인</label>
-					<label class="w3-col m3 left mgt10"><input type="radio" id="noti" name="forwho" value="C" checked>전체 이용가</label>
+					<div class="w3-col m7 w3-center">
+						<label class="w3-half mgt10"><input type="radio" id="noti" name="forwho" value="A" class="w3-margin-right">성인</label>
+						<label class="w3-half mgt10"><input type="radio" id="noti" name="forwho" value="C" class="w3-margin-right" checked>전체 이용가</label>
+					</div>
 				</div>
 				<div class="w3-col w3-margin-bottom w3-margin-top">
 					<label for="cno" class="w3-col m3 w3-padding" style="text-align:right">컬렉션 : </label>
@@ -208,13 +212,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 				<div class="w3-col w3-margin-bottom">
 					<label for="genr" class="w3-col m3 w3-padding right genrcolumn">장르(선택, 최대 5개) : </label>
 <c:forEach var="genr" items="${GLIST}">
-					<label class="w3-col m3 left mgt10"><input type="checkbox" id="genr" name="genr" value="${genr.gno}"> ${genr.gname}</label>
+					<label class="w3-col m2 left mgt10"><input type="checkbox" id="genr" name="genr" value="${genr.gno}"> ${genr.gname}</label>
 </c:forEach>
 				</div>
 				<div class="w3-col w3-margin-bottom">
 					<label for="descr" class="w3-col m3 w3-padding right">내용 : </label>
 					<textarea class="w3-col m7 w3-input w3-padding w3-border w3-margin-bottom norsize" 
-						id="body" name="body" rows="20"></textarea>
+						id="bbody" name="body" rows="20"></textarea>
 				</div>
 				<div class="w3-col w3-margin-bottom">
 					<label for="thumb" class="w3-col m3 w3-padding right">썸네일(선택) : </label>
@@ -234,11 +238,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 				<input type="hidden" name="id" id="id" value="${SID}">
 				<input type="hidden" name="vw" value="/boa/board/boardWrite.boa">
 			</form>
-		</div>
 			
 			<%-- 생성 버튼 --%>
-		<div style="text-align:right">
-			<div class="genre w3-round w3-margin-top" id="wpbtn">작성</div>
+			<div class="w3-container w3-text-right w3-col">
+				<div class="w3-col m3 w3-right">
+					<div class="genre w3-round w3-margin-top" id="wpbtn">게시글 작성</div>
+				</div>
+			</div>
 		</div>
 		
 		

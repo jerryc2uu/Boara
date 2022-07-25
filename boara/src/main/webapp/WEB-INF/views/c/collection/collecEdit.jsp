@@ -185,7 +185,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 					<label for="genr" class="w3-col m3 w3-padding right genrcolumn">장르(선택, 최대 5개) : </label>
 <c:if test="${CINFO.sgenre ne 'empty'}">
 	<c:forEach var="genr" items="${GLIST}">
-						<label class="w3-col m3 left mgt10"><input type="checkbox" id="genr" name="genr" value="${genr.gno}"
+						<label class="w3-col m2 left mgt10"><input type="checkbox" id="genr" name="genr" value="${genr.gno}"
 		<c:forEach var="ckdgnr" items="${CINFO.gnos}">
 			<c:if test="${genr.gno eq ckdgnr}">
 							checked
@@ -242,11 +242,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 				<input type="hidden" name="nowPage" value="${param.nowPage}">
 				<input type="hidden" name="vw" id="vw" value="/boa/collection/collecEdit.boa">
 			</form>
-		</div>
 			
 			<%-- 수정 버튼 --%>
-		<div style="text-align:right">
-			<div class="genre w3-round w3-margin-top" id="epbtn">수정</div>
+			<div class="w3-container w3-text-right w3-col">
+				<div class="w3-col m3 w3-right">
+					<div class="genre w3-round w3-margin-top" id="epbtn">컬렉션 수정</div>
+				</div>
+			</div>
 		</div>
 		
 		<%-- 모달창 --%>

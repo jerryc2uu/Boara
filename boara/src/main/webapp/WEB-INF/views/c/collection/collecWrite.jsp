@@ -178,7 +178,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 				<div class="w3-col w3-margin-bottom">
 					<label for="genr" class="w3-col m3 w3-padding right genrcolumn">장르(선택, 최대 5개) : </label>
 <c:forEach var="genr" items="${GLIST}">
-					<label class="w3-col m3 left mgt10"><input type="checkbox" id="genr" name="genr" value="${genr.gno}"> ${genr.gname}</label>
+					<label class="w3-col m2 left mgt10"><input type="checkbox" id="genr" name="genr" value="${genr.gno}"> ${genr.gname}</label>
 </c:forEach>
 				</div>
 				<div class="w3-col w3-margin-bottom">
@@ -203,11 +203,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 				<input type="hidden" name="id" id="id" value="${SID}">
 				<input type="hidden" name="vw" id="vw" value="/boa/collection/collecWrite.boa">
 			</form>
-		</div>
-		
-		<%-- 생성 버튼 --%>
-		<div style="text-align:right">
-			<div class="genre w3-round w3-margin-top" id="wpbtn">컬렉션 생성</div>
+			
+			<%-- 생성 버튼 --%>
+			<div class="w3-container w3-text-right w3-col">
+				<div class="w3-col m3 w3-right">
+					<div class="genre w3-round w3-margin-top" id="wpbtn">컬렉션 생성</div>
+				</div>
+			</div>
 		</div>
 		
 		<%-- 모달창 --%>

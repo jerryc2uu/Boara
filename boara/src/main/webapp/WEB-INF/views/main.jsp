@@ -17,6 +17,7 @@
 <link rel="stylesheet" type="text/css" href="/boa/css/w3.css">
 <link rel="stylesheet" type="text/css" href="/boa/css/user.css">
 <link rel="stylesheet" type="text/css" href="/boa/css/k/soyeon.css">
+<link rel="stylesheet" type="text/css" href="/boa/css/c/ez.css">
 <script src="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js"></script>
 <script type="text/javascript" src="/boa/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/boa/js/k/main.js"></script>
@@ -250,15 +251,17 @@ img{
 </c:forEach>
 	  </div>
 	  	 
-	  	 <!-- 최이지 도서 추천  -->
+		<!-- 최이지 도서 추천  -->
 <c:if test="${not empty SID}">
-   <div class="w3-col" style="margin: 50px 0px 20px 130px ;" id="recobox">
-      <input type="hidden" id="gno" value="${GNO}">
-      <h3 class="ft22" >${SID}님을 위한 interpark 도서 추천</h3>
-      <div class="w3-col" id="recommend" >
-      <%--반복 append --%>
-      </div>
-   </div>
+		<div class="w3-col" style="margin:70px 0px 20px 0px;" id="recobox">
+			<input type="hidden" id="gno" value="${GNO}">
+			<h3 class="w3-col w3-padding ft22" >${SID}님을 위한 <span class="w3-text-red">interpark</span> 추천 도서</h3>
+			<div class="w3-col" id="recommend" >
+			
+			<%--반복 append --%>
+			
+			</div>
+		</div>
 </c:if>		 
    </div>
    

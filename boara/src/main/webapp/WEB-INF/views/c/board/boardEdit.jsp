@@ -184,36 +184,42 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 				action="/boa/board/boardEditProc.boa">
 				<div class="w3-col w3-margin-bottom w3-margin-top">
 					<label for="title" class="w3-col m3 w3-padding" style="text-align:right">게시글 이름 : </label>
-					<input type="text" class="w3-input w3-col m7" id="title" name="title" value="${BINFO.title}">
+					<input type="text" class="w3-input w3-col m7" id="btitle" name="title" value="${BINFO.title}">
 				</div>
 				<div class="w3-col w3-margin-bottom w3-margin-top">
 					<label for="isshow" class="w3-col m3 w3-padding" style="text-align:right">공개 범위 : </label>
-					<label class="w3-col m2 left mgt10"><input type="radio" id="noti" name="isshow" value="A"
+					<div class="w3-col m9 w3-center">
+						<label class="w3-col m2 mgt10"><input type="radio" id="noti" name="isshow" value="A" class="w3-margin-right"
 <c:if test="${BINFO.isshow eq 'A'}">
-						checked
+							hecked
 </c:if>
-					>공지</label>
-					<label class="w3-col m2 left mgt10"><input type="radio" id="noti" name="isshow" value="Y"
+						>공지</label>
+						<label class="w3-col m2 mgt10"><input type="radio" id="noti" name="isshow" value="Y" class="w3-margin-right"
 <c:if test="${BINFO.isshow eq 'Y'}">
-						checked
+							checked
 </c:if>
-					>일반</label>
-					<label class="w3-col m2 left mgt10"><input type="radio" id="noti" name="isshow" value="L"
+						>일반</label>
+						<label class="w3-col m2 mgt10"><input type="radio" id="noti" name="isshow" value="L" class="w3-margin-right"
 <c:if test="${BINFO.isshow eq 'L'}">
-						checked
+							checked
 </c:if>
-					>비공개</label>
+						>비공개</label>
+					</div>
 				</div>
 				<div class="w3-col w3-margin-bottom w3-margin-top">
 					<label for="forwho" class="w3-col m3 w3-padding" style="text-align:right">이용가 설정 : </label>
+					<div class="w3-col m9 w3-center">
+						<label class="w3-col m3 mgt10"><input type="radio" name="forwho" value="A" class="w3-margin-right"
 <c:if test="${BINFO.forwho eq 'A'}">
-					<label class="w3-col m3 left mgt10"><input type="radio" name="forwho" value="A" checked>성인</label>
-					<label class="w3-col m3 left mgt10"><input type="radio" name="forwho" value="C">전체 이용가</label>
+						checked
 </c:if>
+						>성인</label>
+						<label class="w3-col m3 mgt10"><input type="radio" name="forwho" value="C" class="w3-margin-right"
 <c:if test="${BINFO.forwho eq 'C'}">
-					<label class="w3-col m3 left mgt10"><input type="radio" name="forwho" value="A">성인</label>
-					<label class="w3-col m3 left mgt10"><input type="radio" name="forwho" value="C" checked>전체 이용가</label>
+						checked
 </c:if>
+						>전체 이용가</label>
+					</div>
 				</div>
 				<div class="w3-col w3-margin-bottom w3-margin-top">
 					<label for="price" class="w3-col m3 w3-padding" style="text-align:right">가격 : </label>
@@ -224,7 +230,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 					<label for="genr" class="w3-col m3 w3-padding" style="text-align:right; height: 227.5px;">장르(선택, 최대 5개) : </label>
 <c:if test="${BINFO.sgenre ne 'empty'}">
 	<c:forEach var="genr" items="${GLIST}">
-						<label class="w3-col m3 left mgt10"><input type="checkbox" id="genr" name="genr" value="${genr.gno}"
+						<label class="w3-col m2 left mgt10"><input type="checkbox" id="genr" name="genr" value="${genr.gno}"
 		<c:forEach var="ckdgnr" items="${BINFO.gnos}">
 			<c:if test="${genr.gno eq ckdgnr}">
 							checked
@@ -243,7 +249,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 				<div class="w3-col w3-margin-bottom">
 					<label for="descr" class="w3-col m3 w3-padding right">내용 : </label>
 					<textarea class="w3-col m7 w3-input w3-padding w3-border w3-margin-bottom norsize" 
-						id="body" name="body" rows="20">${BINFO.body}</textarea>
+						id="bbody" name="body" rows="20">${BINFO.body}</textarea>
 				</div>
 				<div class="w3-col w3-margin-bottom">
 					<label for="thumb" class="w3-col m3 w3-padding right">썸네일 변경 : </label>
@@ -283,11 +289,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 				<input type="hidden" name="sgenre" id="genre">
 				<input type="hidden" name="vw" value="/boa/board/boardEdit.boa">
 			</form>
-		</div>
-		
-		<%-- 수정 버튼 --%>
-		<div style="text-align:right">
-			<div class="genre w3-round w3-margin-top" id="epbtn">수정</div>
+			
+			<%-- 수정 버튼 --%>
+			<div class="w3-container w3-text-right w3-col">
+				<div class="w3-col m3 w3-right">
+					<div class="genre w3-round w3-margin-top" id="epbtn">게시글 수정</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	

@@ -207,10 +207,13 @@ $(document).ready(function(){
 	
 	// 작성버튼
 	$('#wpbtn').click(function(){
+		// 쪽지쪽 input태그 무효화
+		$('#title, #body').prop('disabled', true);
+		
 		// 데이터 따오기
-		var title = $('#title').val();
+		var title = $('#btitle').val();
 		var cno = $('#cno').val();
-		var body = $('#body').val().trim();
+		var body = $('#bbody').val().trim();
 		var price = $('#price').val();
 		
 		// 체크박스 : 장르
@@ -245,6 +248,7 @@ $(document).ready(function(){
 		if(!title){
 			$('#mdcontext').html('글 제목은 필수입니다.');
 			$('#modal').css('display', 'block');
+			$('#thumb').prop('disabled', false);
 			$('#title').focus();
 			return;
 		}else if(title.length > 50){
@@ -297,6 +301,9 @@ $(document).ready(function(){
 	});
 	
 	$('#epbtn').click(function(){
+		// 쪽지쪽 input 태그 무효화
+		$('#title, #body').prop('disabled', true);
+		
 		// 유효성 검사 : 원래 값 꺼내기
 		var ttitle = $('#ttitle').val();
 		var tisshow = $('#tisshow').val();
@@ -306,7 +313,7 @@ $(document).ready(function(){
 		var tbody = $('#tbody').val();
 		
 		// 변경 된 값 찾아오기
-		var title = $('#title').val().trim();
+		var title = $('#btitle').val().trim();
 		var isshow = $('[name="isshow"]:checked').val();
 		var forwho = $('[name="forwho"]:checked').val();
 		var price = $('#price').val().trim();
@@ -314,7 +321,7 @@ $(document).ready(function(){
 			$('#price').val('0');
 			price = 0;
 		}
-		var body = $('#body').val().trim();
+		var body = $('#bbody').val().trim();
 		
 		// 체크박스 : 장르
 		var genre = "";
