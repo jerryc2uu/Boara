@@ -8,6 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="/boa/css/w3.css">
 <link rel="stylesheet" type="text/css" href="/boa/css/user.css">
+<link rel="stylesheet" type="text/css" href="/boa/css/k/soyeon.css">
 <script type="text/javascript" src="/boa/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/boa/js/p/reboard.js"></script>
 <script type="text/javascript" src="/boa/js/k/main.js"></script>

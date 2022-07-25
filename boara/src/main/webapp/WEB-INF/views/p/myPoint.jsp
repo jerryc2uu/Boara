@@ -8,6 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="/boa/css/w3.css">
 <link rel="stylesheet" type="text/css" href="/boa/css/user.css">
+<link rel="stylesheet" type="text/css" href="/boa/css/k/soyeon.css">
 <script type="text/javascript" src="/boa/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/boa/js/p/myInfo.js"></script>
 <script type="text/javascript" src="/boa/js/k/main.js"></script>
@@ -43,8 +44,8 @@ font-weight: lighter ;
   	 <!-- 보여질 기능들 -->
 		<div class="w3-rest w3-text-grey w3-margin-left">
 			<div class="w3-content mxw650 w3-margin-top">
-			<div class="w3-button w3-hover-blue w3-indigo btnbox parent" id="allList">전체내역</div>
-			<div class="w3-button w3-hover-blue w3-indigo btnbox parent" id="addList">충전내역</div>
+			<div class="w3-button w3-hover-yellow w3-blue btnbox parent" id="allList">전체내역</div>
+			<div class="w3-button w3-hover-blue w3-green btnbox parent" id="addList">충전내역</div>
 		<div class="w3-col w3-round-large w3-card-4 w3-margin-bottom w3-margin-top w3-padding w3-center">
 			<div class="w3-col m2 w3-left">분류</div>
 			<div class="w3-col m4 w3-center">내용</div>

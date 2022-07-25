@@ -8,6 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="/boa/css/w3.css">
 <link rel="stylesheet" type="text/css" href="/boa/css/user.css">
+<link rel="stylesheet" type="text/css" href="/boa/css/k/soyeon.css">
 <script type="text/javascript" src="/boa/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/boa/js/p/myInfo.js"></script>
 <script type="text/javascript" src="/boa/js/k/main.js"></script>
@@ -182,7 +183,7 @@ font-weight: lighter ;
 
 
    	<div style="margin-left: 100px; margin-right: 100px;">
-	   	<div class="w3-container w3-padding w3-margin w3-border-indigo w3-card-4" style="padding:128px 16px">
+	   	<div class="w3-container w3-padding w3-margin w3-border-indigo w3-card-4" style="padding:128px 30px">
 			<h1>${SID} 님 마이페이지 입니다.</h1>
 		</div>
 	   	<div class="w3-container w3-padding w3-margin w3-border-indigo w3-card-4" style="padding:128px 16px">
@@ -218,15 +219,17 @@ font-weight: lighter ;
 	    
 	   <!-- 사이드 바 -->
 	   
-	   <div class="w3-container w3-padding w3-margin w3-border-indigo w3-card-4" style="padding:128px 16px">
-		   <nav class="navBox w3-left navBox">
-	   			<div class="navBox-div w3-border">
+	   <div class="w3-container w3-padding w3-margin w3-border-indigo w3-card-4" style="padding:128px 16px; height: 600px;">
+		   <nav class="navBox w3-left navBox" style="padding-left: 20px;">
+	   			<div class="navBox-div w3-border" style="width: 247px; padding-left: 20px; height: 580px;">
 	   				<dl>
 						<dt>회원관련</dt>
 							 <dd>회원정보 수정</dd>
 							 <dd>회원 탈퇴</dd>
+						<p></p>
 						<dt>포인트</dt>
 							<dd>포인트 이용 내역</dd>
+						<p></p>
 						<dt>게시물 관련</dt>
 							<dd>나의 컬렉션</dd>
 							<dd>좋아요 목록</dd>
