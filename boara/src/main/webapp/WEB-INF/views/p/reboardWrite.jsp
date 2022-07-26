@@ -196,7 +196,7 @@ img {
 							<input type="hidden" id="cno" name="cno" value="${param.cno}">
 							<input type="hidden" id="bnowPage" name="bnowPage" value="${param.bnowPage}">
 							<input type="hidden" id="id" name="id" value="${SID}" disabled>
-							<textarea class="w3-col w3-padding ft12" id="body" name="body"
+							<textarea class="w3-col w3-padding ft12" id="rbody" name="body"
 										style="resize: none; height:120px;"></textarea>
 						<div class="w3-col w3-right" id="" style="height: 15px;">
 							 <label style="float:left;"><input type="checkbox" name="isshow" id="spo" value="S"> 스포일러 포함 시 체크</label>
