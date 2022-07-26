@@ -169,10 +169,10 @@ img {
    <!-- First Grid -->
    <div class="w3-row-padding w3-padding-64 w3-container">
    		<h1 class="w3-center w3-padding mg0">댓글 수정</h1>
-   		<div style="margin-left: 650px; margin-bottom: 20px;">
-	   		<button class="w3-center w3-indigo w3-hover-grey listbutton" id="boardList" style="border: none;">댓글 리스트</button>
-   		</div>
    		<div style="width: 800px; height: 200px; margin: 0 auto;">
+	   		<div class="w3-padding mxw700 mg0 w3-margin-bottom">
+		   		<button class="w3-indigo w3-hover-grey listbutton" id="goboard" style="border: none;">게시글로</button>
+	   		</div>
 			<div class="w3-col w3-center" style="width: 700px; height: 100%;">
 				<div class="w3-col w3-round-large w3-card-4 w3-margin-bottom w3-padding" style="height: 200px;">
 					<div class="w3-col box120 pdAll10 w3-border-right" style="height: 100%;">
@@ -195,11 +195,11 @@ img {
 							<input type="hidden" id="id" name="id" value="${SID}">
 							<input type="hidden" id="bnowPage" name="bnowPage" value="${param.bnowPage}">
 						<c:if test="${SID eq DATA.id}">
-							<textarea class="w3-col w3-padding ft12" id="body" name="body"
+							<textarea class="w3-col w3-padding ft12" id="rbody" name="body"
 										style="resize: none; height:120px;">${DATA.body}</textarea>
 						</c:if>
 						<c:if test="${SID ne DATA.id}">
-							<textarea readonly class="w3-col w3-padding ft12" id="body" name="body"
+							<textarea readonly class="w3-col w3-padding ft12" id="rbody" name="body"
 										style="resize: none; height:120px;">${DATA.body}</textarea>
 						</c:if>
 						<!-- <div class="w3-col w3-margin-top" style="height: 50px;">

@@ -174,10 +174,10 @@ img {
    <div class="w3-row-padding w3-padding-64 w3-container" style="height: 700px; margin: 0;">
    		<h1 class="w3-center w3-padding mg0">댓글 리스트</h1>
    		<div style="width: 800px; margin: 0 auto;">
-   		<div class="w3-cetner w3-padding mxw700 mg0 w3-margin-bottom">
-	   		<button class="w3-center w3-indigo w3-hover-grey listbutton" id="goboard" style="border: none;">게시글로</button>
-	   		<button class="w3-center w3-indigo w3-hover-grey listbutton" id="newwrite" style="border: none; float:right;">새댓글작성</button>
-   		</div>
+	   		<div class="w3-cetner w3-padding mxw700 mg0 w3-margin-bottom">
+		   		<button class="w3-center w3-indigo w3-hover-grey listbutton" id="goboard" style="border: none;">게시글로</button>
+		   		<button class="w3-center w3-indigo w3-hover-grey listbutton" id="newwrite" style="border: none; float:right;">새댓글작성</button>
+	   		</div>
 
 <c:if test="${CNT eq 0}">
 			<div class="w3-col w3-white w3-center"><h3>작성된 댓글이 없습니다.</h3></div>
@@ -204,7 +204,7 @@ img {
 							<span class="w3-col w3-padding ft12" style="float: left; text-align: left;">${data.body}</span>
 </c:if>
 <c:if test="${data.isshow eq 'S'}">
-							<span class="w3-col w3-padding ft12 spoiler" style="float: left; color: red;" id="${data.isshow}">스포일러 댓글입니다. 확인하고 싶으면 본문을 클릭해주세요.</span>
+							<span class="w3-col w3-padding ft10 spoiler" style="float: left; color: red;" id="${data.isshow}">스포일러 댓글입니다. 확인하고 싶으면 본문을 클릭해주세요.</span>
 							<span class="w3-col w3-padding ft12 sbody" style="float: left; text-align: left; display:none;">${data.body}</span>
 </c:if>						
 						</div>

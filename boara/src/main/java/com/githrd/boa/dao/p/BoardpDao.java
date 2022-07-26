@@ -13,7 +13,9 @@ import com.githrd.boa.vo.p.MyInfoVO;
  * 
  * 			작업이력 ]
  * 				2022.07.05 - 담당자 : 박소연
- * 									클래스 제작
+ * 							클래스 제작
+ * 				2022.07.05 - 총 포인트, 구매, 판매
+ * 				2022.07.06 - 핫 포스팅 등록, 포인트 차감
  */
 public class BoardpDao {
 	

@@ -2,6 +2,7 @@ package com.githrd.boa.controller.p;
 
 import java.util.HashMap;
 
+
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,19 @@ import com.githrd.boa.dao.c.BoardDao;
 import com.githrd.boa.dao.p.BoardpDao;
 import com.githrd.boa.vo.c.BoardVO;
 import com.githrd.boa.vo.p.MyInfoVO;
-
+/**
+ * 이 클래스는 결제 관련 요청을 처리할 클래스
+ * 
+ * @author 박소연
+ * @since 2022.06.12
+ * @version v.1.0
+ * 
+ * 		작업 이력 ]
+ * 			2022.07.05 - 담당자 : 박소연
+ * 							클래스 제작
+ * 			2022.07.05 - 유료 게시글 구매
+ * 			2022.07.06 - 핫 포스팅 등록
+ */
 @Controller
 @RequestMapping("/board")
 public class Boardp {

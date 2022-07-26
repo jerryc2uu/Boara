@@ -2,6 +2,24 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+ * 이 클래스는 마이페이지 관련 요청을 처리할 클래스
+ * 
+ * @author 박소연
+ * @since 2022.06.15
+ * @version v.1.0
+ * 
+ * 		작업 이력 ]
+ * 			2022.06.15 - 담당자 : 박소연
+ * 							클래스 제작
+ * 			2022.06.18 - 마이페이지 메인
+ * 			2022.06.20 - 좋아요, 구매글, 포인트 내역
+ * 			2022.06.21 - 찜, 나의 게시글, 나의 댓글
+ * 			2022.06.22 - 포인트 충전
+ * 			2022.06.24 - 포인트 환불
+ * 			2022.07.22 - 자동 충전, 자동 충전 해지 
+
+ -->
 <mapper namespace="iSQL">
 	<!-- 마이페이지 메인 폼보기 (가입일, 게시글, 댓글, 총 포인트) -->
 	<select id="getMyInfo" resultType="iVO" parameterType="iVO">

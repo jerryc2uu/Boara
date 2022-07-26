@@ -104,17 +104,17 @@ $(document).ready(function(){
 	//============ 2. 새 댓글 작성 페이지================
 	//새 댓글 및 대댓글 등록 버튼
 	$('#cmtbtn').click(function(){
-		var btxt = $('#body').val();
+		var btxt = $('#rbody').val();
 		btxt = btxt.trim();
 		
 		if(!btxt) {
-			$('#body').focus();
+			$('#rbody').focus();
 			return;
 		}
 		
 		if(btxt.length > 200) {
 			btxt = btxt.subString(0, 200);
-			$('#body').val(btxt);
+			$('#rbody').val(btxt);
 			alert('코멘트의 글자수는 200자를 초과할 수 없습니다.');
 			return;
 		}
@@ -125,12 +125,12 @@ $(document).ready(function(){
 	//============ 3. 댓글 수정 페이지================
 	//댓글 등록 버튼
 	$('#editbtn').click(function(){
-		var txt = $('#body').val();
+		var txt = $('#rbody').val();
 		//var otxt = $('#obody').val();
 		
 		if(txt.length > 200) {
 			txt = txt.subString(0, 200);
-			$('#body').val(txt);
+			$('#rbody').val(txt);
 			alert('댓글의 글자수는 200자를 초과할 수 없습니다.');
 			return;
 		}
