@@ -5,7 +5,7 @@ $(document).ready(function(){
 		return;
 	}
 	
-	var recojson = $.ajax({
+	$.ajax({
 		url: 'https://book.interpark.com/api/recommend.api',
 		type: 'GET',
 		dataType: 'jsonp',
@@ -20,20 +20,18 @@ $(document).ready(function(){
 				var width = pic.prop('width');
 				var height = pic.prop('height');
 				
-				var add = '<div class="inblock w3-center mgl10">'
-							+ '<a href="' + data.item[i].link + '">'
-								+ '<div class="bookbox">'
-									+ '<img src="'+ data.item[i].coverLargeUrl + '"'
+				var add = '<div class="inblock w3-center mgl10 bk">'
+							+ '<div class="bookbox">'
+									+ '<img class="bkimg" src="'+ data.item[i].coverLargeUrl + '"'
 									
 				if(width >= height){
 					add += 'style="height:223px; width:auto; overflow:hidden;"'
 				}else{
 					add += 'style="height:auto; width:198px; overflow:hidden;"'
 				}
-				add += '>'
+				add += 'id="' + data.item[i].link + '">'
 								+ '</div>'
-							+ '</a>'
-							+ '<h5 class="w3-text-gray">';
+							+ '<h5 class="w3-text-gray mg0">';
 								
 				if(data.item[i].title.length > 12){
                		add += data.item[i].title.substring(0, 12) + '..';
@@ -41,14 +39,17 @@ $(document).ready(function(){
 	            	add += data.item[i].title;
 	            }
 				
-           		add += 		'</h5>' + 
-           					+ '<p class="w3-text-gray">' + 
-           						data.item[i].author
-           					+ '</p>'
+           		add += '</h5>' 
+           			   + '<p class="w3-text-gray mg0">' + data.item[i].author + '</p>'
            				+ '</div>';
+           		
 				$('#recommend').append(add);
 			}
+			
+			$('.bkimg').click(function(){
+				var id =  $(this).attr('id');
+				$(location).attr('href', id);
+			});
 		}
-		,error: function(){alert('도서추천 통신오류')}
 	});
 });

@@ -253,7 +253,7 @@ img{
 	  	 
 		<!-- 최이지 도서 추천  -->
 <c:if test="${not empty SID}">
-		<div class="w3-col" style="margin:70px 0px 20px 0px;" id="recobox">
+		<div class="inline" style="margin:70px 0px 20px 0px;" id="recobox">
 			<input type="hidden" id="gno" value="${GNO}">
 			<h3 class="w3-col w3-padding ft22" >${SID}님을 위한 <span class="w3-text-red">interpark</span> 추천 도서</h3>
 			<div class="w3-col" id="recommend" >
