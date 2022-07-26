@@ -2,6 +2,19 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+ * 이 클래스는 결제 관련 요청을 처리할 클래스
+ * 
+ * @author 박소연
+ * @since 2022.06.12
+ * @version v.1.0
+ * 
+ * 		작업 이력 ]
+ * 			2022.07.05 - 담당자 : 박소연
+ * 							클래스 제작
+ * 			2022.07.05 - 유료 게시글 구매
+ * 			2022.07.06 - 핫 포스팅 등록
+ -->
 <mapper namespace="pSQL">
 	<!-- 현재 나의 총 포인트 조회 -->
 	<select id="selPoint" parameterType="iVO" resultType="int">

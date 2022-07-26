@@ -204,7 +204,7 @@ img {
 							<span class="w3-col w3-padding ft12" style="float: left; text-align: left;">${data.body}</span>
 </c:if>
 <c:if test="${data.isshow eq 'S'}">
-							<span class="w3-col w3-padding ft12 spoiler" style="float: left; color: red;" id="${data.isshow}">스포일러 댓글입니다. 확인하고 싶으면 본문을 클릭해주세요.</span>
+							<span class="w3-col w3-padding ft10 spoiler" style="float: left; color: red;" id="${data.isshow}">스포일러 댓글입니다. 확인하고 싶으면 본문을 클릭해주세요.</span>
 							<span class="w3-col w3-padding ft12 sbody" style="float: left; text-align: left; display:none;">${data.body}</span>
 </c:if>						
 						</div>

@@ -1,5 +1,15 @@
 package com.githrd.boa.service.p;
-
+/**
+ * 포인트 충전 및 환불 api 관리할 클래스
+ * 
+ * @author 박소연
+ * @since 2022.06.22
+ * @version v.1.0
+ * 
+ * 		작업 이력 ]
+ * 			2022.06.22 - 담당자 : 박소연
+ * 							클래스 제작
+ */
 import java.io.*;
 
 

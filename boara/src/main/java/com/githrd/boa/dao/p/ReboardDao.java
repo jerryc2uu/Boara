@@ -17,7 +17,9 @@ import com.githrd.boa.vo.p.ReboardVO;
  * 
  * 			작업이력 ]
  * 				2022.06.12 - 담당자 : 박소연
- * 									클래스 제작, 리스트 조회
+ * 							클래스 제작, 리스트 보기 요청
+ * 				2022.06.13 - 총 댓글 수, 리스트
+ * 				2022.06.15 - 작성자 정보, 등록, 수정, 삭제, 포인트 적립
  */
 public class ReboardDao {
 	@Autowired

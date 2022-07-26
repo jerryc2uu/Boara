@@ -23,8 +23,9 @@ import com.githrd.boa.vo.p.ReboardVO;
  * 
  * 		작업 이력 ]
  * 			2022.06.12 - 담당자 : 박소연
- * 							클래스 제작,
- *  						리스트 보기 요청 처리
+ * 							클래스 제작, 리스트 보기 요청
+ * 			2022.06.13 - 작성, 수정 폼보기
+ * 			2022.06.15 - 작성, 수정, 삭제 처리
  */
 @Controller
 @RequestMapping("/reboard")

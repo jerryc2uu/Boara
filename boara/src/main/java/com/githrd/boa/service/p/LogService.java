@@ -1,6 +1,16 @@
 package com.githrd.boa.service.p;
 
-
+/**
+ * 로그 처리 관리할 클래스
+ * 
+ * @author 박소연
+ * @since 2022.06.27
+ * @version v.1.0
+ * 
+ * 		작업 이력 ]
+ * 			2022.06.27 - 담당자 : 박소연
+ * 							클래스 제작
+ */
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
