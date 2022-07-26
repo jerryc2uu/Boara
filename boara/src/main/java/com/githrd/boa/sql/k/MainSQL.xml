@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+			
+<!-- 
+
+ 이 클래스는 메인페이지 관련 질의명령을 기억하고 
+ 필요한 순간에 반환해주는 클래스
+ 
+  @author	김소연
+  @since	2022.06.29
+  @version	v.1.0
+  
+  			작업이력 ]
+  				2022.06.29	-	담당자 ] 김소연
+ 								클래스제작, 조회수 top5 게시글 조회
+ 				2022.07.04	-	컬렉션 제목 검색 
+ 				2022.07.06	-	게시글 제목 검색
+ 				2022.07.06	-	hot 게시물 노출
+ 				2022.07.12	- 	발신, 수신 메세지 조회
+ 				2022.07.13 	-	수신자 조회, 쪽지보내기
+ 				2022.07.17	-	쪽지 상세보기
+ 											
+ 
+  -->
+<mapper namespace="maSQL">
+
+	<!-- weekly 조회수 top5 sysdate-7 ==> sysdate-20 -->	    
+	  <select id="topBoard" resultType="fVO">
+	   SELECT
+		    bno, savename, title, click
+		FROM
+		    (
+		    SELECT
+		        ROWNUM rno, bno, savename, title, click
+		    FROM
+		        (
+		            SELECT
+		                f.bno bno, NVL(savename, 'no') savename, title, click
+		            FROM
+		                imgfile f, board b
+		            WHERE
+		                f.whereis = 'B'
+		                AND f.isshow ='C'
+		                AND b.bno = f.bno
+		                AND wdate <![CDATA[>=]]> sysdate-20
+		            ORDER BY 
+		                click DESC
+		        )
+		    )
+		    WHERE
+		        rno <![CDATA[<=]]> 5 
+	</select>
+	
+	<!-- hot 게시물 5 조회 -->
+	<select id="hotBoard" resultType="fVO">
+		SELECT            
+		    h.bno bno, NVL(savename, 'no') savename, title
+		FROM
+		    hot h, imgfile f, board b
+		WHERE
+		     f.bno(+) = b.bno
+		     AND h.bno = b.bno(+)
+		     AND f.isshow(+) = 'C'
+		     AND sysdate BETWEEN hstart AND hend+20
+	</select>
+	 
+	<!-- 검색 컬렉션 개수 조회 -->
+	<select id="getTotal" resultType="int" parameterType="sVO">
+		SELECT
+		    COUNT(*) cnt
+		FROM
+ 			<if test="sel eq 'col'">
+			    collection
+			WHERE
+			    isshow = 'Y'
+				AND cname LIKE '%'|| #{search} || '%'
+ 			</if>
+ 			<if test="sel eq 'bo'">
+			    board
+			WHERE
+			    isshow IN ('Y','A')
+			    AND title LIKE '%'|| #{search} || '%'
+ 			</if>
+	</select>
+	
+	
+	<!-- 컬렉션 검색 조회 목록 -->
+	<select id="getColList" resultType="sVO" parameterType="sVO">
+			SELECT 
+    			cno, cname, id, savename, descr
+			FROM
+			    (
+			     SELECT
+			            ROWNUM rno, cno, cname, id, savename,  descr
+			        FROM
+			        (
+			            SELECT
+			                c.cno cno, cname, id, savename,  NVL(descr, 'no') descr
+			            FROM
+			                collection c, member m, imgfile f
+			            WHERE
+			                c.mno = m.mno
+							AND c.cno = f.cno(+)
+			                AND m.isshow = 'Y'
+			                AND c.isshow = 'Y'
+			                AND f.whereis(+) = 'C'
+			                AND cname LIKE '%'|| #{search} || '%'
+			                ORDER BY c.cno DESC
+			        )
+			    )
+			WHERE
+			    rno BETWEEN #{startCont} AND #{endCont}
+ 	</select>
+ 		
+ 	<!-- 게시물 검색 조회 목록 -->
+	<select id="getBoList" resultType="sVO" parameterType="sVO">
+		SELECT
+		    cno, bno, savename, title, body, isshow, forwho, price, click
+		FROM
+		(
+		    SELECT
+		        ROWNUM rno, cno, bno, savename, title, body, isshow, forwho, price, click
+		    FROM
+		    (
+		        SELECT
+		            c.cno cno, b.bno bno, savename, title, body, b.isshow isshow, forwho, price, click
+		        FROM
+		             board b, collection c, imgfile f
+		        WHERE
+		            b.isshow IN ('Y','A')
+		            AND b.cno = c.cno
+		            AND b.bno = f.bno(+)
+		            AND f.isshow(+) = 'C'
+		            AND f.whereis(+) = 'B'          
+		            AND title like '%'|| #{search} || '%'
+		    )    
+		)
+		WHERE
+		    rno BETWEEN #{startCont} AND #{endCont}
+
+ 	</select>
+ 	
+ 	<!--  장르 디테일 조회 -->
+ 	<select id="gnrList" resultType="sVO">
+ 		SELECT
+		    gno, gname
+		FROM
+		    genre
+ 	</select>
+
+	<!-- 쪽지관련 -->
+	<sql id="list">
+						 #{id}
+		    AND isshow = 'Y'
+		ORDER BY
+		    mdate DESC
+		    ,mgno DESC
+	</sql>
+	 
+	 
+	<select id="receList" resultType="msVO" parameterType="msVO">
+		SELECT
+		    mgno, sendid, title, body, TO_CHAR(mdate, 'YYYY/mm/dd') mdate, NVL(to_char(read), '읽지않음') ck, TO_CHAR(NVL(read, mdate), 'YYYY/mm/dd') read 
+		FROM
+		    message
+		WHERE
+		    recvid = 
+		<include refid="list" />
+	</select>
+	
+	<select id="sendList" resultType="msVO" parameterType="msVO">
+		SELECT
+		    mgno, recvid, title, body, TO_CHAR(mdate, 'YYYY/mm/dd') mdate
+		FROM
+		    message
+		WHERE
+		    sendid = 
+		<include refid="list" />
+	</select>
+	
+	<select id="IdList" resultType="msVO" parameterType="msVO">
+		SELECT
+		    id
+		FROM
+		    member
+		WHERE
+		    id != #{id}
+	</select>
+	
+	<insert id="sendMess" parameterType="msVO">
+		<selectKey keyProperty="mgno" resultType="int" order="BEFORE">
+			SELECT 
+				NVL(MAX(mgno) + 1, 100001)
+			FROM 
+				message
+		</selectKey>
+	
+		INSERT INTO
+		    message(mgno, sendid, recvid, title, body)
+		values(
+		   #{mgno}, #{id}, #{recvid}, #{title} ,#{body}
+		   )
+	</insert>
+	
+	<!-- 상세보기 클릭시 읽음처리 -->
+	<update id="readmess" parameterType="msVO">
+		UPDATE
+		    message
+		SET
+		    read = sysdate 
+		WHERE
+		    read is null
+		    AND mgno = #{mgno}
+		    AND recvid = #{id}
+	</update>
+
+	<select id="messDetail" resultType="msVO" parameterType="msVO">
+		SELECT
+		    mgno, sendid, recvid, title, body, to_char(mdate, 'yyyy/MM/dd HH:mm:ss') mdate, NVL(to_char(read, 'yyyy/MM/dd HH:mm:ss'), '읽지않음') read
+		FROM
+		    message
+		WHERE
+		    mgno = #{mgno}
+	</select>
+	
+	<update id="delMess" parameterType="msVO">
+		UPDATE
+		    message
+		SET
+		    isshow = 'N' 
+		WHERE
+			sendid = #{id}
+		    AND mgno = #{mgno}
+	</update>
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="recoSQL">
+
+	<!-- 최다 조회 게시글 -->
+	<select id="logSerach" resultType="bVO" parameterType="string">
+		SELECT
+			sgenre
+		FROM
+			(
+				SELECT
+					NVL(gnr, 'empty') sgenre
+				FROM
+					board, viewlog
+				WHERE
+					bno = vbno
+					AND vmno = (SELECT mno FROM member WHERE id = #{id})
+					AND gnr IS NOT NULL
+				ORDER BY
+					vdate DESC
+			
+			)
+		WHERE
+			ROWNUM BETWEEN 1 AND 20
+	</select>
+</mapper>

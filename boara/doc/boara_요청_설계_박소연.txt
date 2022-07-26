@@ -1,0 +1,164 @@
+### boara 요청 설계 ###
+
+===========================================
+########### 댓글 관련 요청 설계 ##############
+===========================================
+# 댓글 리스트 폼 보기 요청
+요청내용	:	/boa/reboard/reboardList.boa
+파라미터	:	bno, cno, bnowPage, [nowPage]
+컨트롤러	:	com.githrd.boa.controller.p.Reboard
+처리함수	:	reboardList()
+뷰			:	/WEB-INF/views/p/reboardList.jsp
+--------------------------------------------
+# 새 댓글 작성 폼 보기 요청
+요청내용	:	/boa/reboard/reboardWrite.boa
+파라미터	:	nowPage, id, bno, cno, bnowPage
+컨트롤러	:	com.githrd.boa.controller.p.Reboard
+처리함수	:	reboardWrite()
+뷰			:	/WEB-INF/views/p/reboardWrite.jsp
+--------------------------------------------
+# 새 댓글 작성 처리 요청
+요청내용	:	/boa/reboard/reboardWriteProc.boa
+파라미터	:	nowPage, body, id, bno, cno, bnowPage, isshow
+컨트롤러	:	com.githrd.boa.controller.p.Reboard
+처리함수	:	reboardWriteProc()
+뷰			:	/WEB-INF/views/p/reboardWrite.jsp
+--------------------------------------------
+# 댓글 수정 폼 보기 요청
+요청내용	:	/boa/reboard/reboardEdit.boa
+파라미터	:	nowPage, id, bno, cno, bnowPage
+컨트롤러	:	com.githrd.boa.controller.p.Reboard
+처리함수	:	reboardEdit()
+뷰			:	/WEB-INF/views/p/reboardWrite.jsp
+--------------------------------------------
+# 댓글 수정 처리 요청
+요청내용	:	/boa/reboard/reboardEditProc.boa
+파라미터	:	nowPage, body, id, bno, cno, bnowPage, isshow
+컨트롤러	:	com.githrd.www.controller.p.Reboard
+처리함수	:	reboardEditProc()
+뷰			:	/WEB-INF/views/p/reboardWrite.jsp
+--------------------------------------------
+# 대댓글 작성 폼 보기 요청
+요청내용	:	/boa/reboard/reboardComment.boa
+파라미터	:	nowPage, id, bno, uprno, vw, cno, bnowPage
+컨트롤러	:	com.githrd.boa.controller.p.Reboard
+처리함수	:	reboardComment()
+뷰			:	/WEB-INF/views/p/reboardComment.jsp
+--------------------------------------------
+# 대댓글 작성 처리 요청
+요청내용	:	/boa/reboard/reboardCommentProc.boa
+파라미터	:	nowPage, body, id, bno, uprno, vw, cno, bnowPage
+컨트롤러	:	com.githrd.boa.controller.p.Reboard
+처리함수	:	reboardCommentProc()
+뷰			:	/WEB-INF/views/p/redirect.jsp
+--------------------------------------------
+# 댓글 삭제 처리 요청
+요청내용	:	/boa/reboard/reboardDel.boa
+파라미터	:	nowPage, rno, vw, cno, bnowPage
+컨트롤러	:	com.githrd.boa.controller.p.Reboard
+처리함수	:	reboardDel()
+뷰			:	/WEB-INF/views/p/redirect.jsp
+--------------------------------------------
+===========================================
+########### 마이페이지 관련 요청 설계 ##############
+===========================================
+# 마이페이지 메인 폼 보기 요청
+요청내용	:	/boa/member/myinfo.boa
+파라미터	:	id
+컨트롤러	:	com.githrd.boa.controller.p.MyInfo
+처리함수	:	myInfo()
+뷰			:	/WEB-INF/views/p/myInfo.jsp
+--------------------------------------------
+# 내가 작성한 게시글 폼 보기 요청
+요청내용	:	/boa/member/myboard.boa
+파라미터	:	id, [nowPage]
+컨트롤러	:	com.githrd.boa.controller.p.MyInfo
+처리함수	:	myBoard()
+뷰			:	/WEB-INF/views/p/myboard.jsp
+--------------------------------------------
+# 내가 작성한 댓글 폼 보기 요청
+요청내용	:	/boa/member/myreboard.boa
+파라미터	:	id, [nowPage]
+컨트롤러	:	com.githrd.boa.controller.p.MyInfo
+처리함수	:	myReboard()
+뷰			:	/WEB-INF/views/p/myreboard.jsp
+--------------------------------------------
+# 구매글 리스트 폼 보기 요청
+요청내용	:	/boa/member/mybuy.boa
+파라미터	:	id, [nowPage]
+컨트롤러	:	com.githrd.boa.controller.p.MyInfo
+처리함수	:	myBuyList()
+뷰			:	/WEB-INF/views/p/mybuy.jsp
+--------------------------------------------
+# 좋아요 리스트 폼 보기 요청
+요청내용	:	/boa/member/mylike.boa
+파라미터	:	id, [nowPage]
+컨트롤러	:	com.githrd.boa.controller.p.MyInfo
+처리함수	:	myLike()
+뷰			:	/WEB-INF/views/p/myLike.jsp
+--------------------------------------------
+# 찜 리스트 폼 보기 요청
+요청내용	:	/boa/member/myjjim.boa
+파라미터	:	id, [nowPage]
+컨트롤러	:	com.githrd.boa.controller.p.MyInfo
+처리함수	:	myJJim()
+뷰			:	/WEB-INF/views/p/myJJim.jsp
+--------------------------------------------
+# 포인트 이용 내역 폼 보기 요청
+요청내용	:	/boa/member/mypoint.boa
+파라미터	:	id, [nowPage]
+컨트롤러	:	com.githrd.boa.controller.p.MyInfo
+처리함수	:	myPoint()
+뷰			:	/WEB-INF/views/p/myPoint.jsp
+--------------------------------------------
+# 포인트 충전 폼 보기 요청
+요청내용	:	/boa/member/addPoint.boa
+파라미터	:	id, sumpoint
+컨트롤러	:	com.githrd.boa.controller.p.MyInfo
+처리함수	:	addPoint()
+뷰			:	/WEB-INF/views/p/addPoint.jsp
+--------------------------------------------
+# 포인트 충전 처리 요청
+요청내용	:	/boa/member/addPointProc.boa
+파라미터	:	id, gnp, isAuto
+컨트롤러	:	com.githrd.boa.controller.p.MyInfo
+처리함수	:	addPointProc()
+뷰			:	/WEB-INF/views/p/redirect.jsp
+					성공 : /boa/member/myinfo.boa
+					실패 : /boa/member/addPoint.boa
+--------------------------------------------
+# 포인트 환불 요청
+요청내용	:	/boa/member/canclePay.boa
+파라미터	:	id, gnp, imp_uid
+컨트롤러	:	com.githrd.boa.controller.p.MyInfo
+처리함수	:	canclePay()
+뷰			:	/WEB-INF/views/p/redirect.jsp
+					성공 : /boa/member/myinfo.boa
+					실패 : /boa/member/myinfo.boa
+--------------------------------------------
+# 자동 충전 해지 요청
+요청내용	:	/boa/member/canclePay.boa
+파라미터	:	id
+컨트롤러	:	com.githrd.boa.controller.p.MyInfo
+처리함수	:	cancleAuto()
+뷰			:	/WEB-INF/views/p/redirect.jsp
+					성공 : /boa/member/myinfo.boa
+					실패 : /boa/member/myinfo.boa
+--------------------------------------------
+===========================================
+########### 게시글 관련 요청 설계 ##############
+===========================================
+# 유료 게시글 구매 요청
+요청내용	:	/boa/board/buyBoard.boa
+파라미터	:	id, gnp, nowPage, bno, cno, wid
+컨트롤러	:	com.githrd.boa.controller.p.Boardp
+처리함수	:	buyBoard()
+뷰			:	/WEB-INF/views/p/redirect.jsp
+--------------------------------------------
+# HOT 게시글 등록 요청
+요청내용	:	/boa/board/hotBoardProc.boa
+파라미터	:	id, bno
+컨트롤러	:	com.githrd.boa.controller.p.BoardP
+처리함수	:	hotBoardProc()
+뷰			:	json
+--------------------------------------------

@@ -10,7 +10,23 @@
 						
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<context:annotation-config />
+	<!-- 박소연 -->
+	<bean id="rDao" class="com.githrd.boa.dao.p.ReboardDao" />
+	<bean id="iDao" class="com.githrd.boa.dao.p.MyInfoDao" />
+	<bean id="pDao" class="com.githrd.boa.dao.p.BoardpDao" />
+
+	<!-- 김소연 -->
+	<bean class="com.githrd.boa.dao.k.MemberDao" id="mDao"/>
+	<bean class="com.githrd.boa.dao.k.MainBoardDao" id="mbDao"/>
+	<bean class="com.githrd.boa.service.k.MemberService" id="mSrvc" />
+	<bean class="com.githrd.boa.service.k.MailsendService" id="mailSrvc" />
 	
-	<bean id="mDao" class="com.githrd.boa.dao.p.MainDao" />
+	<!-- 최이지 -->
+	<bean class="com.githrd.boa.dao.c.CollectionDao" id="cDao"/>
+	<bean class="com.githrd.boa.dao.c.BoardDao" id="bDao" />
+	<bean class="com.githrd.boa.service.c.CollectionService" id="cSrvc" />
+	<bean class="com.githrd.boa.service.c.BoardService" id="bSrvc" />
+	<bean class="com.githrd.boa.service.c.Recommend" id="reco" />
+	<bean class="com.githrd.boa.dao.c.RecommendDao" id="recoDao" />
 	
 </beans>

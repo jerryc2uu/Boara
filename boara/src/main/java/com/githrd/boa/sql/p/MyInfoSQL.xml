@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+ * 이 클래스는 마이페이지 관련 요청을 처리할 클래스
+ * 
+ * @author 박소연
+ * @since 2022.06.15
+ * @version v.1.0
+ * 
+ * 		작업 이력 ]
+ * 			2022.06.15 - 담당자 : 박소연
+ * 							클래스 제작
+ * 			2022.06.18 - 마이페이지 메인
+ * 			2022.06.20 - 좋아요, 구매글, 포인트 내역
+ * 			2022.06.21 - 찜, 나의 게시글, 나의 댓글
+ * 			2022.06.22 - 포인트 충전
+ * 			2022.06.24 - 포인트 환불
+ * 			2022.07.22 - 자동 충전, 자동 충전 해지 
+
+ -->
+<mapper namespace="iSQL">
+	<!-- 마이페이지 메인 폼보기 (가입일, 게시글, 댓글, 총 포인트) -->
+	<select id="getMyInfo" resultType="iVO" parameterType="iVO">
+		SELECT
+   			 jdate, savename, sumpoint, rcnt, bcnt, isAuto, tno
+		FROM
+		    (
+		        SELECT
+		            m.jdate jdate, i.savename savename, p.sumpoint sumpoint,
+		            (
+		                SELECT
+		                    COUNT(*)
+		                FROM
+		                    reply
+		                WHERE
+		                    mno = (SELECT
+		                                mno
+		                            FROM
+		                                member
+		                            WHERE
+		                                id = #{id}) 
+		            ) rcnt,
+		            (
+		                SELECT
+		                    COUNT(*)
+		                FROM
+		                    board        
+		                WHERE
+		                    mno = (SELECT
+		                                mno
+		                            FROM
+		                                member
+		                            WHERE
+		                                id = #{id})
+		            ) bcnt, a.isAuto isAuto, a.tno
+		        FROM
+		            member m, imgfile i, point p, autopayment a
+		        WHERE
+		            m.id = #{id}
+		            AND a.mno(+) = p.mno
+		            AND m.mno = i.mno
+		            AND i.isshow = 'C'
+		            AND i.whereis = 'M'
+		            AND m.mno = p.mno
+		            AND pno = (
+		                            SELECT
+		                                MAX(pno)
+		                            FROM
+		                                point
+		                            WHERE
+		                                pdate = (SELECT MAX(pdate)
+		                                        FROM point
+		                                        WHERE mno = (
+		                                            SELECT mno
+		                                            FROM member
+		                                            WHERE id = #{id})
+		                                        )
+		                                AND mno = (SELECT mno FROM member WHERE id = #{id})
+		                            GROUP BY
+		                                pdate
+		                        )
+		        ORDER BY
+		            tno DESC
+		        )
+		WHERE
+		    ROWNUM = 1
+	</select>	
+	
+	<!-- 구매글 수 조회 -->
+	<select id="myBuyCount" resultType="int" parameterType="string">
+		SELECT
+		    COUNT(pno)
+		FROM
+		    point p
+		WHERE
+		    pcode = 201
+		    AND p.mno = (SELECT mno FROM member WHERE id = #{id})
+	</select>
+	<!-- 나의 구매글 리스트 조회 -->
+	<select id="myBuyList" resultType="iVO" parameterType="iVO">
+		SELECT
+		    bno, cname, id, title, sdate, price 
+		FROM
+		    (
+		    SELECT
+		        ROWNUM rno, bno, cname, id, title, sdate, price
+		    FROM
+		        (
+		        SELECT
+		            bno, cname, id, title, TO_CHAR(wdate, 'yyyy/MM/dd') sdate, price
+		        FROM
+		            member m, board b, collection c
+		        WHERE
+		            m.mno = b.mno
+		            AND b.cno = c.cno
+		            AND bno IN (
+		                    SELECT
+		                        bno
+		                    FROM
+		                        point p
+		                    WHERE
+		                        pcode = 201
+		                        AND p.mno = (SELECT mno FROM member WHERE id = #{id})
+		                    )
+		        )
+		    )
+		WHERE
+		    rno BETWEEN #{startCont} AND #{endCont}
+	</select>
+	<!-- 포인트 내역 갯수 -->
+	<select id="myPointCnt" resultType="int" parameterType="iVO">
+		SELECT
+		    COUNT(pno)
+		FROM
+		    point
+		WHERE
+		    mno = (
+		            SELECT
+		                mno
+		            FROM
+		                member
+		            WHERE
+		                id = #{id}
+		            )
+		<if test ="pcode eq 101">
+		    AND pcode = #{pcode}
+		</if>
+	</select>
+	<!-- 포인트 내역 조회-->
+	<select id="myPoint" resultType="iVO" parameterType="iVO">
+		SELECT
+		    pno, gnp, sdate, pcode, detail, NVL(merchant_uid, 0) merchant_uid, NVL(imp_uid, 0) imp_uid, NVL(isRefund, 0) isRefund, NVL(isAuto, 0) isAuto
+		FROM
+		    (
+		    SELECT
+		        ROWNUM rno, pno, gnp, sdate, pcode, detail, merchant_uid, imp_uid, isRefund, isAuto
+		    FROM
+		        (
+		        SELECT
+		            pno, p.gnp gnp, TO_CHAR(p.pdate, 'yyyy/MM/dd') sdate, p.pcode pcode, detail, p.merchant_uid, p.imp_uid, p.isRefund, p.isAuto
+		        FROM
+		            point p, detailcode d
+		        WHERE   
+		            p.pcode = d.pcode
+		            AND mno = (
+		                    SELECT
+		                        mno
+		                    FROM
+		                        member
+		                    WHERE
+		                        id = #{id}
+		                    )
+		    <if test ="pcode eq 101">
+		           AND p.pcode = #{pcode}
+		    </if>
+		        ORDER BY
+		            pno DESC
+		        )
+		    )
+		WHERE
+		    rno BETWEEN #{startCont} AND #{endCont}
+	</select>
+	<!-- 좋아요 갯수 -->
+	<select id="myLikeCnt" resultType="int" parameterType="string">
+		SELECT
+		    COUNT(MKNO)
+		FROM
+		    mark
+		WHERE
+		     mno = (
+		            SELECT
+		                mno
+		            FROM
+		                member
+		            WHERE
+		                id = #{id}
+		            )
+		     AND isshow = 'L'
+	</select>
+	<!-- 좋아요 리스트 조회 -->
+	<select id="myLike" resultType="iVO" parameterType="iVO">
+		SELECT
+		    bno, cname, id, title, sdate, click 
+		FROM
+		    (
+		    SELECT
+		        ROWNUM rno, bno, cname, id, title, sdate, click 
+		    FROM
+		        (
+		        SELECT
+		            bno, cname, id, title, TO_CHAR(wdate, 'yyyy/MM/dd') sdate, click 
+		        FROM
+		            member m, board b, collection c
+		        WHERE
+		            m.mno = b.mno
+		            AND b.cno = c.cno
+		            AND bno IN (
+		                        SELECT
+		                            bno
+		                        FROM
+		                            mark
+		                        WHERE
+		                            mno = (
+		                                    SELECT
+		                                        mno
+		                                    FROM
+		                                        member
+		                                    WHERE
+		                                        id = #{id}
+		                                    )
+		                            AND isshow = 'L'
+		                        )
+		        )
+		    )
+		WHERE
+		    rno BETWEEN #{startCont} AND #{endCont}
+	</select>
+	<!-- 찜 갯수 조회 -->
+	<select id="myJJimCnt" resultType="int" parameterType="string">
+		SELECT
+		    COUNT(MKNO)
+		FROM
+		    mark
+		WHERE
+		     mno = (
+		            SELECT
+		                mno
+		            FROM
+		                member
+		            WHERE
+		                id = #{id}
+		            )
+		    AND isshow = 'J'
+	</select>
+	<!-- 찜 목록 조회 -->
+	<select id="myJJim" resultType="iVO" parameterType="iVO">
+		SELECT
+		    bno, cname, id, title, sdate, click 
+		FROM
+		    (
+		    SELECT
+		        ROWNUM rno, bno, cname, id, title, sdate, click 
+		    FROM
+		        (
+		        SELECT
+		            bno, cname, id, title, TO_CHAR(wdate, 'yyyy/MM/dd') sdate, click 
+		        FROM
+		            member m, board b, collection c
+		        WHERE
+		            m.mno = b.mno
+		            AND b.cno = c.cno
+		            AND bno IN (
+		                        SELECT
+		                            bno
+		                        FROM
+		                            mark
+		                        WHERE
+		                            mno = (
+		                                    SELECT
+		                                        mno
+		                                    FROM
+		                                        member
+		                                    WHERE
+		                                        id = #{id}
+		                                    )
+		                            AND isshow = 'J'
+		                        )
+		        )
+		    )
+		WHERE
+		    rno BETWEEN #{startCont} AND #{endCont}
+	</select>
+	
+	<!-- 내가 작성한 게시글 갯수 -->
+	<select id="myBoardCnt" resultType="int" parameterType="string">
+		SELECT
+		    COUNT(bno)
+		FROM
+		    board
+		WHERE
+		    mno = (
+		            SELECT
+		                mno
+		            FROM
+		                member
+		            WHERE
+		                id = #{id}
+		            )
+	</select>
+	<!-- 내가 작성한 게시글 목록 -->
+	<select id="myBoard" resultType="iVO" parameterType="iVO">
+		SELECT
+		    bno, cname, cno, title, sdate, click, hno           
+		FROM
+		    (
+		    SELECT
+		        ROWNUM rno, bno, cname, cno, title, sdate, click, hno
+		    FROM
+		        (
+		        SELECT
+		            b.bno, cname, b.cno, b.title title, TO_CHAR(wdate, 'yyyy/MM/dd') sdate, click, h.hno hno   
+		        FROM
+		            board b, collection c, hot h
+		        WHERE
+		            b.cno = c.cno
+		            AND h.bno(+) = b.bno
+		            AND h.hend(+) > sysdate
+		            AND b.mno = (
+		                    SELECT
+		                        mno
+		                    FROM
+		                        member
+		                    WHERE
+		                        id = #{id}
+		                    )
+		        ORDER BY
+		            wdate DESC
+		        )
+		    )
+		WHERE
+		    rno BETWEEN #{startCont} AND #{endCont}
+	</select>
+	<!-- 내가 작성한 댓글 갯수 -->
+	<select id="myReboardCnt" resultType="int" parameterType="string">
+		SELECT
+		    COUNT(rno)
+		FROM
+		    reply
+		WHERE
+		    mno = (
+		            SELECT
+		                mno
+		            FROM
+		                member
+		            WHERE
+		                id = 'psoy'
+		            )
+		    AND isshow IN ('Y', 'S')
+	</select>
+	<!-- 내가 작성한 댓글 목록 -->
+	<select id="myReboard" resultType="iVO" parameterType="iVO">
+		SELECT
+		    rno, body, bno, sdate, title
+		FROM
+		    (
+		    SELECT
+		        ROWNUM rowno, rno, body, bno, sdate, title
+		    FROM
+		        (
+		            SELECT
+		                rno, r.body body, r.bno bno, TO_CHAR(rdate, 'yyyy/MM/dd') sdate, b.title title
+		            FROM
+		                reply r, board b
+		            WHERE
+		                r.bno = b.bno
+		                AND r.mno = (
+		                            SELECT
+		                                mno
+		                            FROM
+		                                member
+		                            WHERE
+		                                id = #{id}
+		                            )
+		                AND r.isshow IN ('Y', 'S')
+		            )
+		        )
+		WHERE   
+		    rowno BETWEEN #{startCont} AND #{endCont}
+	</select>
+	
+	<!-- 자동충전 해지 처리 -->
+	<update id="cancleAuto" parameterType="iVO">
+		UPDATE
+		    autopayment
+		SET
+		    isAuto = 'N'
+		WHERE
+		    mno = (
+		            SELECT
+		                mno
+		            FROM
+		                member
+		            WHERE
+		                id = #{id}
+		            )
+		    AND isAuto = 'A'
+	</update>
+	<!-- 포인트 충전 폼보기 -->
+	<select id="addPoint" resultType="iVO" parameterType="iVO">
+		SELECT
+		    sumpoint
+		FROM
+		    point
+		WHERE
+		    (
+		    SELECT
+		        MAX(pno)
+		    FROM
+		        point
+		    WHERE
+		        mno = (
+		            SELECT
+		                mno
+		            FROM
+		                member
+		            WHERE
+		                id = #{id}
+		            )
+		    ) = pno
+	</select>
+	
+	<!-- 포인트 일반 & 자동 충전 처리-->
+	<insert id="addPointProc" parameterType="iVO">
+		INSERT INTO
+		    point(pno, mno, gnp, pcode, sumpoint, merchant_uid, imp_uid, isRefund, isAuto)
+		VALUES(
+		    (SELECT
+		        NVL(MAX(pno) + 1, 1000000001) 
+		     FROM
+		        point),
+		    (
+		    SELECT
+		        mno
+		    FROM
+		        member
+		    WHERE
+		        id = #{id}
+		    ), #{gnp}, 101, 
+		        (SELECT
+		            sumpoint
+		        FROM
+		            point
+		        WHERE
+		            (
+		            SELECT
+		                MAX(pno)
+		            FROM
+		                point
+		            WHERE
+		                mno = (
+		                    SELECT
+		                        mno
+		                    FROM
+		                        member
+		                    WHERE
+		                        id = #{id}
+		                    )
+		            ) = pno) + #{gnp}, #{merchant_uid}, #{imp_uid}, 'N', #{isAuto}
+		)
+	</insert>
+	
+	<!-- 자동 충전 시 AUTOPAYMENT 테이블에 회원 정보 삽입 -->
+	<insert id="addAuto" parameterType="iVO">
+		INSERT INTO
+	    	autopayment(tno, mno, isAuto)
+		VALUES(
+		    (SELECT
+		        NVL(MAX(tno) + 1, 100001) 
+		     FROM
+		        autopayment), (
+		                SELECT
+		                    mno
+		                FROM
+		                    member
+		                WHERE
+		                    id = #{id}
+		                ), 'A'    
+		)
+	</insert>
+	
+	
+	<!-- 포인트 자동 충전 스케줄러 -->
+	
+	<!-- 자동 충전 신청한 회원들 정보 조회 -->
+	<select id="selAuto" resultType="iVO">
+		SELECT
+		    p.mno mno, m.id, p.gnp gnp, a.sumpoint sumpoint
+		FROM
+		    point p,
+		        (SELECT
+		                sumpoint, mno
+		            FROM
+		                point
+		            WHERE
+		                pno IN (
+		                        SELECT
+		                            MAX(pno)
+		                        FROM
+		                            point
+		                        GROUP BY
+		                            mno
+		                        )
+		                AND mno IN (
+		                            SELECT
+		                                mno
+		                            FROM
+		                                autopayment
+		                            WHERE
+		                                isauto = 'A'
+		                            )
+		                    ) a, member m
+		WHERE
+		    p.mno = a.mno
+		    AND p.mno = m.mno
+		    AND isauto = 'A'
+		    AND pno IN (
+		                SELECT
+		                    MAX(pno)
+		                FROM
+		                    point
+		                WHERE
+		                    isauto = 'A'
+		                GROUP BY
+		                    mno
+		                ) 
+	</select>
+	<!-- 자동 충전 회원 포인트 자동 충전 처리 -->
+	<insert id="autoPayment" parameterType="iVO">
+		<selectKey keyProperty="pno" resultType="int" order="BEFORE">
+			SELECT
+		        NVL(MAX(pno) + 1, 1000000001) 
+		     FROM
+		        point
+		</selectKey>
+		INSERT INTO
+		    point(pno, mno, gnp, pcode, sumpoint, isRefund, isAuto)
+		VALUES(
+		    #{pno}, #{mno}, #{gnp}, 101, #{sumpoint} + #{gnp}, 'N', 'A'
+		)	
+	</insert>
+	
+	<!-- 환불 처리 시 기존 포인트 충전 Y로 변경 -->
+	<update id="refund" parameterType="iVO">
+		UPDATE
+		    point
+		SET
+		    isRefund = 'Y'
+		WHERE
+		    imp_uid = #{imp_uid}
+	</update>
+
+	<!-- 환불 처리 시 포인트 차감 -->
+	<insert id="minusPoint" parameterType="iVO">
+		INSERT INTO
+		    point(pno, mno, gnp, pcode, sumpoint)
+		VALUES(
+		    (SELECT
+		        NVL(MAX(pno) + 1, 1000000001) 
+		     FROM
+		        point),
+		    (
+		    SELECT
+		        mno
+		    FROM
+		        member
+		    WHERE
+		        id = #{id}
+		    ), -#{gnp}, 205, 
+		        (SELECT
+		            sumpoint
+		        FROM
+		            point
+		        WHERE
+		            (
+		            SELECT
+		                MAX(pno)
+		            FROM
+		                point
+		            WHERE
+		                mno = (
+		                    SELECT
+		                        mno
+		                    FROM
+		                        member
+		                    WHERE
+		                        id = #{id}
+		                    )
+		            ) = pno) - #{gnp}
+		)
+	</insert>
+</mapper>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+ * 이 클래스는 댓글 게시판 관련 요청을 처리할 클래스
+ * 
+ * @author 박소연
+ * @since 2022.06.12
+ * @version v.1.0
+ * 
+ * 		작업 이력 ]
+ * 			2022.06.12 - 담당자 : 박소연
+ * 							클래스 제작, 리스트 보기 요청
+ * 			2022.06.13 - 작성, 수정 폼보기
+ * 			2022.06.15 - 작성, 수정, 삭제 처리
+ -->
+<mapper namespace="rSQL">
+	<!-- 총 댓글 수 조회 -->
+	<select id="getTotal" resultType="int" parameterType="rVO">
+		SELECT
+		    COUNT(*) cnt
+		FROM
+		    reply
+		WHERE
+		    isshow IN('Y', 'S')
+		    AND bno = #{bno}
+	</select>
+	<!-- 댓글 리스트 조회 -->
+	<select id="getList" resultType="rVO" parameterType="rVO">
+		SELECT
+		    rowno, rno, bno, uprno, cno, mno, id, oid, body, rdate, savename, isshow, step
+		FROM
+		    (
+		    SELECT
+		        ROWNUM rowno, rno, bno, uprno, cno, mno, id, oid, body, rdate, savename, isshow, step
+		    FROM
+		        (
+		        SELECT
+		            r.rno, r.bno, uprno, c.cno cno, r.mno, m.id, 
+		            (
+		            SELECT
+		                id oid
+		            FROM
+		                member
+		            WHERE
+		                mno = (
+		                        SELECT
+		                            DISTINCT b.mno
+		                        FROM
+		                            reply r, board b
+		                        WHERE
+		                            b.bno = #{bno}
+		                            )
+		            ) oid,
+		                r.body, rdate, savename, r.isshow, (level - 1) step         
+		        FROM
+		            reply r, member m, imgfile f, board b, collection c
+		        WHERE
+		            r.isshow IN('Y', 'S')
+		            AND c.mno = b.mno
+		            AND b.bno = r.bno
+		            AND r.mno = m.mno
+		            AND m.mno = f.mno(+)
+		            AND r.bno = #{bno}
+		            AND f.isshow(+) = 'C'
+		            AND f.whereis(+) = 'M'
+		        START WITH
+		            uprno IS NULL
+		        CONNECT BY
+		            PRIOR r.rno = uprno
+		        ORDER SIBLINGS BY
+		            rdate DESC
+		        )
+		    )
+		WHERE
+		    rowno BETWEEN #{startCont} AND #{endCont}
+	</select>
+	
+	<!-- 댓글 작성자 정보 조회 -->
+	<select id="getWriterInfo" resultType="rVO" parameterType="rVO">
+		SELECT
+		    m.mno mno, savename
+		FROM
+		    member m, imgfile f
+		WHERE
+		    m.isshow IN('Y', 'A')
+		    AND m.mno = f.mno(+)
+		    AND f.isshow(+) = 'C'
+		    AND f.whereis(+) = 'M'
+		    AND m.id = #{id}
+	</select>
+	
+	<!-- 새 댓글 및 대댓글 작성 처리 -->
+	<insert id="addReboard" parameterType="rVO">
+		<selectKey keyProperty="rno" resultType="int" order="BEFORE">
+			SELECT 
+				NVL(MAX(rno) + 1, 100001) 
+			FROM 
+				reply
+		</selectKey>
+		INSERT INTO
+		    reply(rno, bno 
+		    <if test="uprno neq 0">
+		    ,uprno
+		    </if>		    
+		    , mno, body
+		    <if test="isshow neq null">
+		    , isshow
+		    </if>
+		    )
+		VALUES(
+		   	#{rno}, #{bno}
+		   	<if test="uprno neq 0">
+		   	, #{uprno}
+		   	</if>		   	
+		   	, #{mno}, #{body}
+		   	<if test="isshow neq null">
+		   	, #{isshow}
+		   	</if>
+		)
+	</insert>
+	
+	<!-- 댓글 수정 폼보기 -->
+	<select id="reboardEdit" resultType="rVO" parameterType="rVO">
+		SELECT
+		    r.rno rno, uprno, r.mno mno, m.id id, body, rdate, savename, r.isshow isshow, f.savename savename
+		FROM
+		    reply r, member m, imgfile f
+		WHERE
+		    r.isshow IN('Y', 'S')
+		    AND r.rno = #{rno}
+		    AND m.mno = f.mno(+)
+		    AND r.mno = m.mno
+		    AND m.id = #{id}
+		    AND f.isshow(+) = 'C'
+		    AND f.whereis(+) = 'M'
+	</select>
+	
+	<!-- 댓글 수정 처리 -->
+	<update id="reboardEditProc" parameterType="rVO">
+		UPDATE
+		    reply
+		SET
+		    body = #{body}
+		    <if test="isshow eq null">
+		    , isshow = 'Y'
+		    </if>
+		    <if test="isshow neq null">
+		    , isshow = 'S'
+		    </if>
+		WHERE
+		    rno = #{rno}   
+	</update>
+	<!-- 댓글 삭제 처리 -->
+	<update id="delReboard" parameterType="rVO">
+		UPDATE
+			reply
+		SET
+			isshow = 'N'
+		WHERE
+			rno = #{rno}	
+	</update>
+	
+	<!-- 댓글, 대댓글 작성 시 포인트 적립 -->
+	<insert id="addPoint" parameterType="rVO">
+		INSERT INTO
+		    point(pno, mno, gnp, pcode, sumpoint)
+		VALUES(
+		    (SELECT
+		        NVL(MAX(pno) + 1, 1000000001) 
+		     FROM
+		        point), #{mno}, #{gnp}, #{pcode}, 
+		        (SELECT
+		            sumpoint
+		        FROM
+		            point
+		        WHERE
+		            (
+		            SELECT
+		                MAX(pno)
+		            FROM
+		                point
+		            WHERE
+		                mno = #{mno}
+		            ) = pno) + #{gnp}
+		)
+	</insert>
+</mapper>

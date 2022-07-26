@@ -3,10 +3,13 @@
 	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 						https://www.springframework.org/schema/beans/spring-beans.xsd
 						http://www.springframework.org/schema/context 
-						https://www.springframework.org/schema/context/spring-context.xsd">
+						https://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/tx 
+						https://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 						
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<context:annotation-config />
@@ -28,5 +31,33 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
+	
+	<tx:annotation-driven />
+	
+	<bean id="transactionManager"
+		  class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>	  
+	</bean>
+	
+   <!-- 메일보내기 -->
+   <bean id="mailSender" class = "org.springframework.mail.javamail.JavaMailSenderImpl">
+      <property name="host" value="smtp.gmail.com" />
+      <property name="port" value="587" />
+      <property name="defaultEncoding" value="utf-8"/>
+      <property name="username" value="soyeoningk@gmail.com" />
+      <property name="password" value="yfwccnkesrqzefbx" />
+      <property name="javaMailProperties">
+         <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <!-- gmail 보안문제로 인한 필수 2단계인증 => SSLSocketFactory를 추가해야 smtp 사용 가능 -->
+                <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+                <prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+            <prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+         </props>
+      </property>
+    </bean>
 	
 </beans>

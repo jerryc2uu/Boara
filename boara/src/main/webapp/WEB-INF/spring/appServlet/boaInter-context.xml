@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
+						https://www.springframework.org/schema/mvc/spring-mvc.xsd
+						http://www.springframework.org/schema/beans 
+						https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<beans:bean id="loginRedirect" class="com.githrd.boa.interceptor.LoginRedirectInterceptor" />
+	<beans:bean id="collRedirect" class="com.githrd.boa.interceptor.CollectionInterceptor" />
+	<beans:bean id="boardRedirect" class="com.githrd.boa.interceptor.BoardInterceptor" />
+	<beans:bean id="adultContent" class="com.githrd.boa.interceptor.AdultInterceptor" />
+	
+	<interceptors>
+		<interceptor>
+			<!-- 박소연 -->
+			<mapping path = "/reboard/reboard*.boa" />
+			<mapping path = "/member/my*.boa" />
+			<mapping path = "/member/add*.boa" />
+			<mapping path = "/member/canclePay.boa" />
+			<mapping path = "/board/buyBoard.boa" />
+			<mapping path = "/board/hotBoardProc.boa" />
+			<!-- 김소연 -->
+			<mapping path = "/member/logout.boa" />
+			<mapping path = "/member/editInfo.boa" />
+			<mapping path = "/member/editInfoProc.boa" />
+			<mapping path = "/member/editImgProc.boa" />
+			<mapping path = "/member/delMember.boa" />
+			<mapping path = "/member/delMemberProc.boa" />
+			<!-- 최이지 -->
+			<mapping path="/collection/*.boa" />
+			<mapping path="/board/*.boa" />
+			
+			<!-- 예외 처리 -->
+			<!-- 최이지 -->
+			<exclude-mapping path="/collection/collecList.boa" />
+			<exclude-mapping path="/board/boardList.boa" />
+			<exclude-mapping path="/board/boardDetail.boa*" />
+			
+			<beans:ref bean="loginRedirect" />
+		</interceptor>
+		
+		<!-- cno 파라미터 없을 때 컬렉션 리스트로 이동 -->
+		<interceptor>
+			<!-- 최이지 -->
+			<mapping path="/board/boardList.boa" />
+			<mapping path="/collection/collecEdit.boa" />
+			
+			<beans:ref bean="collRedirect" />
+		</interceptor>
+		
+		<!-- bno 파라미터 없을 때 컬렉션 리스트로 이동 -->
+		<interceptor>
+			<!-- 최이지 -->
+			<mapping path="/board/boardDetail.boa" />
+			<mapping path="/board/boardEdit.boa" />
+			
+			<beans:ref bean="boardRedirect" />
+		</interceptor>
+		
+		
+		<!-- 성인인증 X -> 마이페이지 -->
+		<interceptor>
+			<!-- 최이지 -->
+			<mapping path="/board/boardDetail.boa" />
+			
+			<beans:ref bean="adultContent" />
+		</interceptor>
+		
+	</interceptors>
+</beans:beans>

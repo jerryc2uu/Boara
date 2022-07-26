@@ -10,10 +10,33 @@
 	</settings>
 	
 	<typeAliases>
-		<typeAlias alias="mVO" type="com.githrd.boa.vo.p.MainVO" />
+		<!-- 박소연 -->
+		<typeAlias alias="rVO" type="com.githrd.boa.vo.p.ReboardVO" />
+		<typeAlias alias="iVO" type="com.githrd.boa.vo.p.MyInfoVO" />
+		<!-- 김소연 -->
+		<typeAlias alias="mVO" type="com.githrd.boa.vo.k.MemberVO" />
+		<typeAlias alias="fVO" type="com.githrd.boa.vo.k.FileVO" />
+		<typeAlias alias="sVO" type="com.githrd.boa.vo.k.SearchVO" />
+		<typeAlias alias="msVO" type="com.githrd.boa.vo.k.MessageVO" />
+		
+		<!-- 최이지 -->
+		<typeAlias alias="cVO" type="com.githrd.boa.vo.c.CollecVO" />
+		<typeAlias alias="gVO" type="com.githrd.boa.vo.c.GenreVO" />
+		<typeAlias alias="bVO" type="com.githrd.boa.vo.c.BoardVO" />
+		<typeAlias alias="cfVO" type="com.githrd.boa.vo.c.FileVO" />
 	</typeAliases>
 	
 	<mappers>
-		<mapper resource="com/githrd/boa/sql/p/MainSQL.xml" />
+		<!-- 박소연 -->
+		<mapper resource="com/githrd/boa/sql/p/ReboardSQL.xml" />
+		<mapper resource="com/githrd/boa/sql/p/MyInfoSQL.xml" />
+		<mapper resource="com/githrd/boa/sql/p/BoardpSQL.xml" />
+		<!-- 김소연 -->
+		<mapper resource="com/githrd/boa/sql/k/MemberSQL.xml"/>
+		<mapper resource="com/githrd/boa/sql/k/MainSQL.xml"/>
+		<!-- 최이지 -->
+		<mapper resource="com/githrd/boa/sql/c/CollectionSQL.xml" />
+      	<mapper resource="com/githrd/boa/sql/c/BoardSQL.xml"/>
+      	<mapper resource="com/githrd/boa/sql/c/RecommendSQL.xml"/>
 	</mappers>
 </configuration>

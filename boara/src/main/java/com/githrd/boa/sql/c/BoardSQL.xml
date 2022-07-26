@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bSQL">
+
+	<!-- 장르 꺼내오기 -->
+	<select id="getGnr" resultType="gVO">
+		SELECT
+		    gname, gno
+		FROM
+		    genre
+	</select>
+	
+	<!-- 갖고 있는 컬렉션 꺼내오기 -->
+	<select id="getCList" resultType="cVO" parameterType="string">
+		SELECT
+			cno, cname
+		FROM
+			collection
+		WHERE
+			mno = (
+				SELECT
+					mno
+				FROM
+					member
+				WHERE
+					id = #{id}
+			)
+			AND isshow = 'Y'
+	</select>
+	
+	<!-- 게시글 새 썸네일 설정 -->
+	<insert id="addThumb" parameterType="cfVO">
+		INSERT INTO
+			imgfile(fno, mno, bno, oriname, savename, len, isshow, whereis)
+		VALUES(
+			(SELECT NVL(MAX(fno+1), 100001) FROM imgfile),
+			(SELECT mno FROM member WHERE id = #{id}),
+			#{bno}, #{oriname}, #{savename}, #{len}, 'C', 'B'
+		)
+	</insert>
+	
+<!-- 게시글 리스트 관련 ####################################################################-->
+
+	<!-- 컬렉션 정보 꺼내오기 -->
+	<select id="getCInfo" resultType="cVO" parameterType="cVO">
+		SELECT
+		    cno, cname, NVL(descr, 'empty') descr, NVL(gnr, 'empty') sgenre, id
+		FROM
+		    collection c, member m
+		WHERE
+		    c.mno = m.mno
+		    AND cno = #{cno}
+	</select>
+	
+	<!-- 컬렉션 소속 게시글 수 꺼내오기 -->
+	<select id="getTotal" resultType="int" parameterType="cVO">
+		SELECT
+		    COUNT(*)
+		FROM
+		    board
+		WHERE
+		    cno = #{cno}
+		    AND isshow IN ('Y', 'A')
+	</select>
+	
+	<!-- 본인 컬렉션 소속 게시글 수 꺼내오기 -->
+	<select id="getSelfTotal" resultType="int" parameterType="cVO">
+		SELECT
+		    COUNT(*)
+		FROM
+		    board
+		WHERE
+		    cno = #{cno}
+		    AND isshow != 'N'
+	</select>
+	
+	<!-- 게시글 리스트 로딩 -->
+	<select id="getBList" resultType="bVO" parameterType="cVO">
+		SELECT
+		    bno, price, savename, title, body, isshow, sgenre, forwho, click
+		FROM
+		    (
+		        SELECT
+		            bno, price, savename, title, body, isshow, sgenre, forwho, click, ROWNUM rno
+		        FROM
+		        (
+		            SELECT
+		                b.bno bno, price, savename, title, body, b.isshow isshow, NVL(b.gnr, 'empty') sgenre, forwho, click
+		            FROM
+		                board b, collection c, imgfile f
+		            WHERE
+		                b.isshow IN ('Y', 'A')
+		                AND b.cno = #{cno}
+		                AND b.cno = c.cno
+		                AND b.bno = f.bno(+)
+		                AND f.isshow(+) = 'C'
+		                AND f.whereis(+) = 'B'
+		            ORDER BY
+		                wdate DESC, bno DESC
+		        )
+		    )
+		WHERE
+		    rno BETWEEN #{startCont} AND #{endCont}
+	</select>
+	
+	<!-- 본인 게시글 불러오기 -->
+	<select id="getSelfBList" resultType="bVO" parameterType="cVO">
+		SELECT
+		    bno, price, savename, title, body, isshow, sgenre, forwho, click
+		FROM
+		    (
+		        SELECT
+		            bno, price, savename, title, body, isshow, sgenre, forwho, click, ROWNUM rno
+		        FROM
+		        (
+		            SELECT
+		                b.bno bno, price, savename, title, body, b.isshow isshow, NVL(b.gnr, 'empty') sgenre, forwho, click
+		            FROM
+		                board b, collection c, imgfile f
+		            WHERE
+		                b.isshow != 'N'
+		                AND b.cno = #{cno}
+		                AND b.cno = c.cno
+		                AND b.bno = f.bno(+)
+		                AND f.isshow(+) = 'C'
+		                AND f.whereis(+) = 'B'
+		            ORDER BY
+		                wdate DESC, bno DESC
+		        )
+		    )
+		WHERE
+		    rno BETWEEN #{startCont} AND #{endCont}
+	
+	</select>
+	
+	<update id="delBoard" parameterType="bVO">
+		UPDATE
+		    board
+		SET
+		    isshow = 'N'
+		WHERE
+		    bno = #{bno}
+	</update>
+<!-- 게시글 작성/수정 관련 #################################################################-->
+
+	<!-- 게시글 작성 (파일X) -->
+	<insert id="addBoard" parameterType="bVO">
+		<selectKey keyProperty="bno" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(bno)+1, 100001) FROM board
+		</selectKey>
+		INSERT INTO
+			board(bno, title, body, price, isshow, forwho, cno, mno
+		<if test="sgenre neq null">
+			, gnr
+		</if>
+			)
+		VALUES(
+			#{bno}, #{title}, #{body}, #{price}, #{isshow}, #{forwho}, #{cno},
+			(SELECT mno FROM member WHERE id = #{id})
+		<if test="sgenre neq null">
+			, #{sgenre}
+		</if>
+		)
+	</insert>
+	
+	<!-- 수정 전 기본 정보 로딩 -->
+	<select id="getBInfo" resultType="bVO" parameterType="int">
+		SELECT
+			b.bno, b.cno, title, b.isshow, forwho, price, NVL(gnr, 'empty') sgenre, body, fno
+		FROM
+			board b, imgfile i
+		WHERE
+			b.bno = i.bno(+)
+			AND b.bno = #{bno}
+			AND i.isshow(+) = 'C'
+	</select>
+	
+	<!-- 썸네일 히스토리 불러오기 -->
+	<select id="getBHis" resultType="cfVO" parameterType="bVO">
+		SELECT
+			savename, fno
+		FROM
+			imgfile
+		WHERE
+			bno = #{bno}
+			AND isshow != 'N'
+	</select>
+	
+	<!-- 게시글 정보 수정 -->
+	<update id="editBoard" parameterType="bVO">
+		UPDATE
+			board
+		<set>
+			<if test="title neq null">
+				title = #{title},
+			</if>
+			<if test="isshow neq null">
+				isshow = #{isshow},
+			</if>
+			<if test="forwho neq null">
+				forwho = #{forwho},
+			</if>
+			<if test="price neq null">
+				price = #{price},
+			</if>
+			<if test="body neq null">
+				body = #{body},
+			</if>
+			<if test="sgenre neq null">
+				gnr = #{sgenre},
+			</if>
+		</set>
+		WHERE
+			bno = #{bno}
+	</update>
+	
+	<!-- 게시글 썸네일 히스토리 isshow 변경 -->
+	<update id="setOldThumb" parameterType="int">
+		UPDATE
+			imgfile
+		SET
+			isshow = 'Y'
+		WHERE
+			bno = #{bno}
+	</update>
+	
+	<!-- 썸네일 히스토리 중 선택시 isshow 변경 -->
+	<update id="setNewThumb" parameterType="int">
+		UPDATE
+			imgfile
+		SET
+			isshow = 'C'
+		WHERE
+			fno = #{fno}
+	</update>
+	
+	<!-- 게시글 작성시 포인트 처리 -->
+	<insert id="addPoint" parameterType="string">
+		INSERT INTO
+		    point(pno, mno, gnp, pcode, sumpoint)
+		VALUES(
+		    (SELECT NVL(MAX(pno)+1, 1000000001) FROM point),
+		    (SELECT mno FROM member WHERE id = #{id}),
+		    10, 104, (
+		        SELECT
+		            sumpoint+10
+		        FROM
+		            point
+		        WHERE
+		            pno = (SELECT NVL(MAX(pno), 0) FROM point WHERE mno = (SELECT mno FROM member WHERE id = #{id}))
+		        )
+		)
+	</insert>
+	
+<!-- 게시글 상세 보기 ######################################################################-->
+	
+	<!-- 기본 상세정보 불러오기 -->
+	<select id="getBDetail" resultType="bVO" parameterType="bVO">
+		SELECT
+			bno, b.isshow, forwho, title, NVL(gnr, 'empty') sgenre,
+			price, click, body, cno, wdate, id
+		FROM
+		    board b, member m
+		WHERE
+			b.mno = m.mno
+			AND bno = #{bno}
+	</select>
+	
+	<!-- 게시글 구매/좋아요/찜 여부 불러오기 -->
+	<select id="didBuy" resultType="int" parameterType="bVO">
+		SELECT
+			COUNT(*) bought
+		FROM
+			point
+		WHERE
+			bno = #{bno}
+			AND mno = (SELECT mno FROM member WHERE id = #{id})
+	</select>
+	
+	<!-- 좋아요/찜 여부 불러오기 -->
+	<select id="getStat" resultType="string" parameterType="bVO">
+		SELECT
+		    isshow nowStat
+		FROM
+		    mark
+		WHERE
+		    mno = (SELECT mno FROM member WHERE id = #{id})
+    		AND bno = #{bno}
+	</select>
+	
+	<!-- 조회수 올리기 -->
+	<update id="upClick" parameterType="int">
+		UPDATE
+			board
+		SET
+			click = (click + 1)
+		WHERE
+			bno = #{bno}
+	</update>
+	
+	<!-- 조회 기록 남기기 -->
+	<insert id="viewCheck" parameterType="bVO">
+		INSERT INTO
+			viewlog(vno, vmno, vbno)
+		VALUES(
+			(SELECT NVL(MAX(vno)+1, 10000001) FROM viewlog),
+			(SELECT mno FROM member WHERE id = #{id}),
+			#{bno}
+		)
+	</insert>
+	
+	<!-- 성인 인증 회원 체크 -->
+	<select id="adultCheck" resultType="string" parameterType="string">
+		SELECT
+			isadult
+		FROM
+			member
+		WHERE
+			id = #{id}
+	</select>
+	
+<!-- 좋아요/찜 처리 관련 ################################################################## -->
+	
+	<!-- 해당 게시글 mark 여부 검사 -->
+	<select id="cntStat" resultType="int" parameterType='bVO'>
+		SELECT
+			COUNT(*)
+		FROM
+			mark
+		WHERE
+			bno = #{bno}
+			AND mno = (SELECT mno FROM member WHERE id = #{id})
+	</select>
+	
+	<!-- NEW : 좋아요 처리 -->
+	<insert id="newLike" parameterType="bVO">
+		INSERT INTO
+			mark(mkno, bno, mno, isshow)
+		VALUES(
+			(SELECT NVL(MAX(mkno+1), 1000000001) FROM mark),
+			#{bno},
+			(SELECT mno FROM member WHERE id = #{id}),
+			'L'
+		)
+	</insert>
+	
+	<!-- RE : 좋아요 처리 -->
+	<update id="reLike" parameterType="bVO">
+		UPDATE
+			mark
+		SET
+			isshow = 'L'
+		WHERE
+			bno = #{bno}
+			AND mno = (SELECT mno FROM member WHERE id = #{id})
+	</update>
+	
+	<!-- NEW : 찜 처리 -->
+	<insert id="newJjim" parameterType="bVO">
+		INSERT INTO
+			mark(mkno, bno, mno, isshow)
+		VALUES(
+			(SELECT NVL(MAX(mkno+1), 1000000001) FROM mark),
+			#{bno},
+			(SELECT mno FROM member WHERE id = #{id}),
+			'J'
+		)
+	</insert>
+	
+	<!-- RE : 찜 처리 -->
+	<update id="reJjim" parameterType="bVO">
+		UPDATE
+			mark
+		SET
+			isshow = 'J'
+		WHERE
+			bno = #{bno}
+			AND mno = (SELECT mno FROM member WHERE id = #{id})
+	</update>
+	
+	
+	<!-- 좋아요, 찜 해제 처리 -->
+	<update id="discard" parameterType="bVO">
+		UPDATE
+			mark
+		SET
+			isshow = 'N'
+		WHERE
+			bno = #{bno}
+			AND mno = (SELECT mno FROM member WHERE id = #{id})
+	</update>
+</mapper>
