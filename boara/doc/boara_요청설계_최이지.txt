@@ -108,7 +108,7 @@
 요청내용 : /boa/board/boardDetail.boa
 파라미터 : bno[, nowPage, id]
 컨트롤러 : www.githrd.boa.controller.c.Board
-담당함수 : boardEdit()
+담당함수 : boardDetail()
       뷰 : /WEB-INF/views/c/board/boardDetail.jsp
 ----------------------------------------------------------
 # 게시글 좋아요 처리
