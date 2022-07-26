@@ -143,6 +143,8 @@ $(document).ready(function(){
 				}else{
 					$('#id01').css('display', 'block');
 					$('#me').html('회원가입시 사용한 비밀번호로 입력해주세요');
+					$('#drepw').val('');
+					$('#dpw').val('');
 				}
 			},
 			error: function(){

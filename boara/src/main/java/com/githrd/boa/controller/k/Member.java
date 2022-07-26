@@ -411,7 +411,7 @@ public class Member {
 	@RequestMapping(value="/certi.boa", method= RequestMethod.GET)
 	@ResponseBody
 	public String certi(String email) {
-	return mailSrvc.joinEmail(email);
+	return mailSrvc.humeonEmail(email);
 
 	}
 }
