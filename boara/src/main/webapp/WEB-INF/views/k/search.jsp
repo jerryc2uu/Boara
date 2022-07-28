@@ -47,25 +47,27 @@
   	  <h1 class="pdt40 w3-xxxlarge dfn"><b>Boara</b></h1>
 	</header>
 	
-	<!-- search bar -->
+	 <!-- search bar -->
 <form method="POST" action="" id="frm" name="frm">
-	<input type="hidden" id="id" name="id" value="${SID}">
-	<input type="hidden" id="nowPage" name="nowPage" value="${PAGE.nowPage}">
-	<input type="hidden" id="bno" name="bno" >
-	<input type="hidden" id="cno" name="cno" >
-
-		<div class="w3-content w3-center mgt20" >
-			<select id="sel" name="sel" class="w3-col w3-quarter w3-select w3-center">
-				<option >** 제목 선택 **</option>
-				<option value="col">컬렉션</option>
-				<option value="bo">게시글</option>
-			</select>
-			<div class="w3-col w3-threequarter ">
-				<input type="text" id="search" name="search" class="w3-input w3-col" style="width: 93%" value="${param.search}">
-				<img id="sertitle" class="w3-rest w3-col" style="width: 40px; height: 40px; "src="/boa/resources/img/k/search.png">
-			</div>
-		</div>
-</form>	
+   <input type="hidden" id="id" name="id" value="${SID}">
+   <input type="hidden" id="nowPage" name="nowPage" value="${PAGE.nowPage}">
+   <input type="hidden" id="bno" name="bno" >
+   <input type="hidden" id="cno" name="cno" >
+<c:if test="${not empty SEL}">   
+   <input type="hidden" id="sel" name="sel" value="${SEL}">
+</c:if>
+      <div class="w3-content w3-center mgt20" >
+         <select id="ssel" name="sel"  class="w3-col w3-quarter w3-select w3-center">
+            <option value="no">*** 제목 검색 ***</option>
+            <option value="col">컬렉션</option>
+            <option value="bo">게시글</option>
+         </select>
+         <div class="w3-col w3-threequarter ">
+            <input type="text" id="search" name="search" class="w3-input w3-col" style="width: 93%" value="${param.search}">
+            <img id="sertitle2" class="w3-rest w3-col" style="width: 40px; height: 40px; "src="/boa/resources/img/k/search.png">
+         </div>
+      </div>
+</form>
 	
 <!-- 컬렉션 검색 목록(이미지, 이름, 제목)  -->
 	<c:if test="${not empty LIST}">
@@ -126,7 +128,7 @@
 		</c:if>
 					</div>
 		<c:if test="${data.price ne 0}">
-					<h4 class="inline nomg">${data.price}</h4>
+					<h4 class="inline nomg">${data.price} p</h4>
 		</c:if>
 				</div>
 				<div class="colldetail w3-margin-left w3-col m7 pbox" id="${data.bno}">

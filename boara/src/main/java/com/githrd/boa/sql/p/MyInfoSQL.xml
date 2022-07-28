@@ -551,7 +551,7 @@
 		)	
 	</insert>
 	
-	<!-- 환불 처리 시 기존 포인트 충전 Y로 변경 -->
+	<!-- 환불 처리 시 기존 포인트 충전 환불 여부 변경 -->
 	<update id="refund" parameterType="iVO">
 		UPDATE
 		    point

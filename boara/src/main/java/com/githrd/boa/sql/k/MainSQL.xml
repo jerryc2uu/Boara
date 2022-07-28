@@ -67,80 +67,81 @@
 	</select>
 	 
 	<!-- 검색 컬렉션 개수 조회 -->
-	<select id="getTotal" resultType="int" parameterType="sVO">
-		SELECT
-		    COUNT(*) cnt
-		FROM
- 			<if test="sel eq 'col'">
-			    collection
-			WHERE
-			    isshow = 'Y'
-				AND cname LIKE '%'|| #{search} || '%'
- 			</if>
- 			<if test="sel eq 'bo'">
-			    board
-			WHERE
-			    isshow IN ('Y','A')
-			    AND title LIKE '%'|| #{search} || '%'
- 			</if>
-	</select>
-	
-	
-	<!-- 컬렉션 검색 조회 목록 -->
-	<select id="getColList" resultType="sVO" parameterType="sVO">
-			SELECT 
-    			cno, cname, id, savename, descr
-			FROM
-			    (
-			     SELECT
-			            ROWNUM rno, cno, cname, id, savename,  descr
-			        FROM
-			        (
-			            SELECT
-			                c.cno cno, cname, id, savename,  NVL(descr, 'no') descr
-			            FROM
-			                collection c, member m, imgfile f
-			            WHERE
-			                c.mno = m.mno
-							AND c.cno = f.cno(+)
-			                AND m.isshow = 'Y'
-			                AND c.isshow = 'Y'
-			                AND f.whereis(+) = 'C'
-			                AND cname LIKE '%'|| #{search} || '%'
-			                ORDER BY c.cno DESC
-			        )
-			    )
-			WHERE
-			    rno BETWEEN #{startCont} AND #{endCont}
- 	</select>
- 		
- 	<!-- 게시물 검색 조회 목록 -->
-	<select id="getBoList" resultType="sVO" parameterType="sVO">
-		SELECT
-		    cno, bno, savename, title, body, isshow, forwho, price, click
-		FROM
-		(
-		    SELECT
-		        ROWNUM rno, cno, bno, savename, title, body, isshow, forwho, price, click
-		    FROM
-		    (
-		        SELECT
-		            c.cno cno, b.bno bno, savename, title, body, b.isshow isshow, forwho, price, click
-		        FROM
-		             board b, collection c, imgfile f
-		        WHERE
-		            b.isshow IN ('Y','A')
-		            AND b.cno = c.cno
-		            AND b.bno = f.bno(+)
-		            AND f.isshow(+) = 'C'
-		            AND f.whereis(+) = 'B'          
-		            AND title like '%'|| #{search} || '%'
-		    )    
-		)
-		WHERE
-		    rno BETWEEN #{startCont} AND #{endCont}
+   <select id="getTotal" resultType="int" parameterType="sVO">
+      SELECT
+          COUNT(*) cnt
+      FROM
+          <if test="sel eq 'col'">
+             collection
+         WHERE
+             isshow = 'Y'
+            AND cname LIKE '%'|| #{search} || '%'
+          </if>
+          <if test="sel eq 'bo'">
+             board
+         WHERE
+             isshow IN ('Y','A')
+             AND title LIKE '%'|| #{search} || '%'
+          </if>
+   </select>
+   
+   
+   <!-- 컬렉션 검색 조회 목록 -->
+   <select id="getColList" resultType="sVO" parameterType="sVO">
+         SELECT 
+             cno, cname, id, savename, descr
+         FROM
+             (
+              SELECT
+                     ROWNUM rno, cno, cname, id, savename,  descr
+                 FROM
+                 (
+                     SELECT
+                         c.cno cno, cname, id, savename,  NVL(descr, 'no') descr
+                     FROM
+                         collection c, member m, imgfile f
+                     WHERE
+                         c.mno = m.mno
+                     AND c.cno = f.cno(+)
+                         AND m.isshow IN ('Y','R')
+                         AND c.isshow = 'Y'
+                         AND f.whereis(+) = 'C'
+                         AND f.isshow(+) = 'C'
+                         AND cname LIKE '%'|| #{search} || '%'
+                         ORDER BY c.cno DESC
+                 )
+             )
+         WHERE
+             rno BETWEEN #{startCont} AND #{endCont}
+    </select>
+       
+    <!-- 게시물 검색 조회 목록 -->
+   <select id="getBoList" resultType="sVO" parameterType="sVO">
+      SELECT
+          cno, bno, savename, title, body, isshow, forwho, price, click
+      FROM
+      (
+          SELECT
+              ROWNUM rno, cno, bno, savename, title, body, isshow, forwho, price, click
+          FROM
+          (
+              SELECT
+                  c.cno cno, b.bno bno, savename, title, body, b.isshow isshow, forwho, price, click
+              FROM
+                   board b, collection c, imgfile f
+              WHERE
+                  b.isshow IN ('Y','A')
+                  AND b.cno = c.cno
+                  AND b.bno = f.bno(+)
+                  AND f.isshow(+) = 'C'
+                  AND f.whereis(+) = 'B'          
+                  AND title like '%'|| #{search} || '%'
+          )    
+      )
+      WHERE
+          rno BETWEEN #{startCont} AND #{endCont}
 
- 	</select>
+    </select>
  	
  	<!--  장르 디테일 조회 -->
  	<select id="gnrList" resultType="sVO">

@@ -3,9 +3,7 @@ $(document).ready(function(){
 
 	$('.cpbtn').click(function(){
 		// bno, vw 파라미터 무효화
-		$('#bno').prop('disabled', true);
-		$('#vw').prop('disabled', true);
-		$('#id').prop('disabled', true);
+		$('#bno, #vw').prop('disabled', true);
 		
 		// 페이지 데이터 읽어오기
 		var page = $(this).attr('id');

@@ -26,57 +26,59 @@
 		    isshow IN('Y', 'S')
 		    AND bno = #{bno}
 	</select>
-	<!-- 댓글 리스트 조회 -->
-	<select id="getList" resultType="rVO" parameterType="rVO">
-		SELECT
-		    rowno, rno, bno, uprno, cno, mno, id, oid, body, rdate, savename, isshow, step
-		FROM
-		    (
-		    SELECT
-		        ROWNUM rowno, rno, bno, uprno, cno, mno, id, oid, body, rdate, savename, isshow, step
-		    FROM
-		        (
-		        SELECT
-		            r.rno, r.bno, uprno, c.cno cno, r.mno, m.id, 
-		            (
-		            SELECT
-		                id oid
-		            FROM
-		                member
-		            WHERE
-		                mno = (
-		                        SELECT
-		                            DISTINCT b.mno
-		                        FROM
-		                            reply r, board b
-		                        WHERE
-		                            b.bno = #{bno}
-		                            )
-		            ) oid,
-		                r.body, rdate, savename, r.isshow, (level - 1) step         
-		        FROM
-		            reply r, member m, imgfile f, board b, collection c
-		        WHERE
-		            r.isshow IN('Y', 'S')
-		            AND c.mno = b.mno
-		            AND b.bno = r.bno
-		            AND r.mno = m.mno
-		            AND m.mno = f.mno(+)
-		            AND r.bno = #{bno}
-		            AND f.isshow(+) = 'C'
-		            AND f.whereis(+) = 'M'
-		        START WITH
-		            uprno IS NULL
-		        CONNECT BY
-		            PRIOR r.rno = uprno
-		        ORDER SIBLINGS BY
-		            rdate DESC
-		        )
-		    )
-		WHERE
-		    rowno BETWEEN #{startCont} AND #{endCont}
-	</select>
 	
+	<!-- 댓글 리스트 조회 -->
+   <select id="getList" resultType="rVO" parameterType="rVO">
+      SELECT
+          rowno, rno, bno, uprno, cno, mno, id, oid, body, rdate, savename, isshow, step
+      FROM
+          (
+          SELECT
+              ROWNUM rowno, rno, bno, uprno, cno, mno, id, oid, body, rdate, savename, isshow, step
+          FROM
+              (
+              SELECT
+                  r.rno, r.bno, uprno, c.cno cno, r.mno, m.id, 
+                  (
+                  SELECT
+                      id oid
+                  FROM
+                      member
+                  WHERE
+                      mno = (
+                              SELECT
+                                  DISTINCT b.mno
+                              FROM
+                                  reply r, board b
+                              WHERE
+                                  b.bno = #{bno}
+                                  )
+                  ) oid,
+                      r.body, rdate, savename, r.isshow, (level - 1) step         
+              FROM
+                  reply r, member m, imgfile f, board b, collection c
+              WHERE
+                  r.isshow IN('Y', 'S')
+                  AND c.mno = b.mno
+                  AND b.bno = r.bno
+                  AND b.cno = c.cno
+                  AND r.mno = m.mno
+                  AND m.mno = f.mno(+)
+                  AND r.bno = #{bno}
+                  AND f.isshow(+) = 'C'
+                  AND f.whereis(+) = 'M'
+              START WITH
+                  uprno IS NULL
+              CONNECT BY
+                  PRIOR r.rno = uprno
+              ORDER SIBLINGS BY
+                  rdate DESC
+              )
+          )
+      WHERE
+          rowno BETWEEN #{startCont} AND #{endCont}
+   </select>
+   
 	<!-- 댓글 작성자 정보 조회 -->
 	<select id="getWriterInfo" resultType="rVO" parameterType="rVO">
 		SELECT

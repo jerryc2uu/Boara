@@ -11,6 +11,9 @@ package com.githrd.boa.service.c;
  * 
  * 			2022.06.26	-	함수 추가(uploadProc, addColl, editColl)
  * 								담당자 : 최이지
+ * 
+ * 			2022.07.27	-	최종 디버깅 함수 수정(editColl)
+ * 								담당자 : 최이지
  *
  */
 
@@ -110,6 +113,7 @@ public class CollectionService {
 	// db 입력 : 컬렉션 수정
 	@Transactional
 	public int editColl(CollecVO cVO) {
+		String id = cVO.getId();
 		cDao.editColl(cVO);
 		
 		// 파일 변경사항 있는지 확인
@@ -128,6 +132,7 @@ public class CollectionService {
 			cDao.setOldThumb(cVO.getCno());
 			cDao.setNewThumb(cVO.getFno());
 		}
+		cVO.setId(id);
 		
 		return 1;
 	}

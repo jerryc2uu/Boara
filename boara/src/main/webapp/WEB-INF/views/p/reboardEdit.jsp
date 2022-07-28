@@ -202,17 +202,13 @@ img {
 							<textarea readonly class="w3-col w3-padding ft12" id="rbody" name="body"
 										style="resize: none; height:120px;">${DATA.body}</textarea>
 						</c:if>
-						<!-- <div class="w3-col w3-margin-top" style="height: 50px;">
-							<input class="w3-col w3-padding ft12"></input>
-						</div> -->
-						
 							<div class="w3-col w3-right" id="${data.bno}" style="height: 15px;">
-<c:if test="${DATA.isshow eq 'S'}">
+							<c:if test="${DATA.isshow eq 'S'}">
 								<label style="float:left;"><input type="checkbox" checked="checked" name="isshow" id="spo" value="S"> 스포일러 포함 시 체크</label>
-</c:if>
-<c:if test="${DATA.isshow eq 'Y'}">
+							</c:if>
+							<c:if test="${DATA.isshow eq 'Y'}">
 								<label style="float:left;"><input type="checkbox" name="isshow" id="spo" value="S"> 스포일러 포함 시 체크</label>
-</c:if>								
+							</c:if>								
 								<div class="w3-col w3-button w3-indigo w70 w3-right" style="padding-top:2px; width: 55px; height:20px; font-size:5pt;" id="editbtn">등록</div>
 							</div>
 						</form>	

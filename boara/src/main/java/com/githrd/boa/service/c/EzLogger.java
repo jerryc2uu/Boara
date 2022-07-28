@@ -37,7 +37,9 @@ public class EzLogger {
 	@After("execution(* com.githrd.boa.controller.c.Collection.collecEditProc(..))")
 	public void collLogEdit(JoinPoint join) {
 		CollecVO cVO = (CollecVO) join.getArgs()[1];
-		if(cVO.getResult().contentEquals("YES")) collecLog.info(cVO.getId() + " 회원 " + cVO.getCno() + "번 컬렉션 수정");
+		if(cVO.getResult().contentEquals("YES")) {
+			collecLog.info(cVO.getId() + " 회원 " + cVO.getCno() + "번 컬렉션 수정");
+		}
 	}
 	
 	// 컬렉션 삭제

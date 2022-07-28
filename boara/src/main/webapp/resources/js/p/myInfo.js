@@ -129,12 +129,9 @@ $(document).ready(function(){
 	        msg += '고유ID : ' + rsp.imp_uid;
 	        msg += '상점 거래ID : ' + rsp.merchant_uid; //결제 번호
 	        msg += '결제 금액 : ' + rsp.paid_amount;
-	        msg += '카드 승인번호 : ' + rsp.apply_num;
+	        msg += '카드 승인번호 : ' + rsp.apply_num;	        
 	        
 	        var marchan = rsp.merchant_uid;
-	        //var payno = marchan.split('_');
-	        //$('#payno').val(payno[1]);
-	        
 	        $('#mer').val(rsp.merchant_uid);
 	        $('#imp').val(rsp.imp_uid);
 	        $('#frm').submit();

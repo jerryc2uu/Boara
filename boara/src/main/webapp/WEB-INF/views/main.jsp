@@ -204,24 +204,24 @@ img{
 	    </div>
    
 	<!-- search bar -->
-   	<form method="POST" action="" id="frm" name="frm">
-		<input type="hidden" id="id" name="id" value="${SID}">	
-		<input type="hidden" id="bno" name="bno" >
-		<input type="hidden" id="cno" name="cno" >
-		
-		<div class="w3-auto w3-center pdt40" >
-			<select id="sel" name="sel" class="w3-col w3-quarter w3-select w3-center">
-				<option disabled selected value="no">*** 제목 검색 ***</option>
-				<option value="col">컬렉션</option>
-				<option value="bo">게시글</option>
-				
-			</select>
-			<div class="w3-col w3-threequarter ">
-				<input type="text" id="search" name="search" class="w3-input w3-col" style="width: 93%">
-				<img id="sertitle" class="w3-rest w3-col" style="width: 40px; height: 40px; "src="/boa/resources/img/k/search.png">
-			</div>
-		</div>
-	</form>
+   <form method="POST" action="" id="frm" name="frm">
+      <input type="hidden" id="id" name="id" value="${SID}">   
+      <input type="hidden" id="bno" name="bno" >
+      <input type="hidden" id="cno" name="cno" >
+      
+      <div class="w3-auto w3-center pdt40" >
+         <select id="sel" name="sel" class="w3-col w3-quarter w3-select w3-center">
+            <option value="no">*** 제목 검색 ***</option>
+            <option value="col">컬렉션</option>
+            <option value="bo">게시글</option>
+            
+         </select>
+         <div class="w3-col w3-threequarter ">
+            <input type="text" id="search" name="search" class="w3-input w3-col" style="width: 93%">
+            <img id="sertitle" class="w3-rest w3-col" style="width: 40px; height: 40px; "src="/boa/resources/img/k/search.png">
+         </div>
+      </div>
+   </form>
 	
 	
    <!-- Bottom  -->
