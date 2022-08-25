@@ -109,7 +109,6 @@ public class IamPort {
 		
 		JsonObject json = new JsonObject();
  
-		//json.addProperty("reason", reason);
 		json.addProperty("imp_uid", imp_uid);
 		json.addProperty("amount", gnp);
 		json.addProperty("checksum", gnp);
