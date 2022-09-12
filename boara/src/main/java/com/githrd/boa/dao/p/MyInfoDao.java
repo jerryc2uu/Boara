@@ -92,29 +92,10 @@ public class MyInfoDao {
 	public MyInfoVO addPoint(MyInfoVO iVO) {
 		return sqlSession.selectOne("iSQL.addPoint", iVO);
 	}
-	//포인트 일반 충전 & 자동충전 즉시 처리 함수 {
+	//포인트 충전 처리 함수 {
 	public int addPointProc(MyInfoVO iVO) {
 		return sqlSession.insert("iSQL.addPointProc", iVO);
 	}
-	
-	//자동 충전 시 AUTOPAYMENT 테이블에 회원 정보 삽입
-	public int addAuto(MyInfoVO iVO) {
-		return sqlSession.insert("iSQL.addAuto", iVO);
-	}
-	
-	//==자동 충전 스케줄러==
-	
-	//자동 충전 신청한 회원 정보 조회
-	public List<MyInfoVO> selAuto() {
-		return sqlSession.selectList("iSQL.selAuto");
-	}
-	
-	//매달 1일 자동 충전 처리
-	public int autoPayment(MyInfoVO iVO) {
-		return sqlSession.insert("iSQL.autoPayment", iVO);
-	}
-	
-	//===============================
 	
 	//환불 시 컬럼 변경
 	public int refund(MyInfoVO iVO) {

@@ -42,27 +42,28 @@ public class Boardp {
 	@RequestMapping("/buyBoard.boa")
 	public ModelAndView buyBoard(ModelAndView mv, MyInfoVO iVO, BoardVO bVO, String nowPage) {
 		
-		mv.addObject("MSG", "게시글 구매에 성공했습니다.");
+		
 		iVO.setResult("NO");
 
 		//현재 총 포인트
 		int sumpoint = pDao.selPoint(iVO);
 		
+		//실패 (포인트 부족)
 		if (sumpoint - iVO.getGnp() < 0) {
 		
-			mv.addObject("MSG", "포인트가 부족합니다. 포인트를 충전해주세요.");
-			iVO.setResult("NO");
+			iVO.setResult("NOPOINT");
 			
 		} else {
 			
+			//성공
 			int bno = iVO.getBno();
 			int cnt = pDao.buyBoard(iVO);
 			int wnt = pDao.selBoard(iVO);
 			
 			iVO.setResult("OK");
 			
+			//실패 (다른 이유)
 			if(cnt != 1 || wnt != 1) {
-				mv.addObject("MSG", "게시글 구매에 실패했습니다.");
 				iVO.setResult("NO");
 			}
 			

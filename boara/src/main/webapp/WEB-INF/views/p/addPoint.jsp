@@ -65,7 +65,6 @@ font-weight: lighter ;
      </div>
    </div>
 
-쪽지 모달 추가!!!
 
    <!-- 쪽지 모달 -->   
    <div id="id01" class="w3-padding w3-modal" >
@@ -256,11 +255,8 @@ font-weight: lighter ;
 				</label>
 	        </div>
 	        <div class="w3-col w3-padding w3-border-top w3-border-bottom" style="margin-top: 20px; margin-bottom: 15px;">
-	        	<div class="w3-col m6 w3-border-right">
+	        	<div class="w3-col">
 					<label><input type="radio" name="isAuto" id="isAuto" value="N" checked="checked">일반충전</label>
-	        	</div>
-	        	<div class="w3-col m6">
-					<label><input type="radio" name="isAuto" id="isAuto" value="A">자동충전</label>	
 	        	</div>
 	        </div>
 	        <div class="w3-content w3-col w3-center">

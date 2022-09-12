@@ -30,31 +30,11 @@
 	</bean>
 	
 	
-	
-	<!-- 박소연 -->
-	<bean id="autoPoint" class="com.githrd.boa.scheduler.p.AutoPoint" />
-	<bean name="autoPointJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean"
-		p:jobClass="com.githrd.boa.scheduler.p.AutoPointJob"
-		p:durability="true">
-		<property name="jobDataAsMap">
-			<map>
-				<entry key="autoPoints" value-ref="autoPoint" />
-			</map>
-		</property>
-	</bean>
-	<bean id="autoTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"
-		p:jobDetail-ref="autoPointJob"
-		p:startDelay="1000"
-		p:cronExpression="0 0 0 1 1/1 ? *"><!-- 매달 1일 실행 -->
-<!-- 		p:cronExpression="0/10 * * * * ?">10초 마다 실행 -->
-	</bean>
-	
 	<!-- 공통 -->
 	<bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>
 				<ref bean="cronTrigger" />
-				<ref bean="autoTrigger" />
 			</list>
 		</property>
 	</bean>

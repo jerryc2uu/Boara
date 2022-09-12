@@ -209,9 +209,6 @@ font-weight: lighter ;
 					<div class="w3-col"> 
 					<h4><span class="w3-col m2">포인트 : </span><span class="w3-col m3 w3-margin-right" style="text-align:right;" id="point"><strong id="spoint">${DATA.sumpoint}</strong></span></h4>
 						<div class="w3-rest w3-button w3-indigo w3-hover-orange" id="plusPoint">충전</div>
-						<c:if test="${DATA.isAuto eq 'A'}">						
-							<div class="w3-rest w3-button w3-green w3-hover-yellow w3-margin-left" id="notAuto">자동 충전 해지</div>
-						</c:if>
 					</div>
 				</div>  
 			</div> 

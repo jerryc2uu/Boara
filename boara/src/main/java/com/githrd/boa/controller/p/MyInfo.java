@@ -34,7 +34,6 @@ import com.githrd.boa.vo.p.MyInfoVO;
  * 			2022.06.21 - 찜, 나의 게시글, 나의 댓글
  * 			2022.06.22 - 포인트 충전
  * 			2022.06.24 - 포인트 환불
- * 			2022.07.22 - 자동 충전, 자동 충전 해지 
  */
 @Controller
 @RequestMapping("/member")
@@ -204,22 +203,6 @@ public class MyInfo {
 		return mv;
 	}
 	
-	//자동 충전 해지 처리
-	@RequestMapping("/cancleAuto.boa")
-	public ModelAndView cancleAuto(ModelAndView mv, MyInfoVO iVO) {
-		
-		int cnt = iDao.cancleAuto(iVO);
-		mv.addObject("MSG", "포인트 자동 충전이 해지되었습니다.");
-
-		if(cnt != 1) {
-			mv.addObject("MSG", "포인트 자동 충전 해지에 실패했습니다. 다시 시도해주세요.");
-			
-		}
-		
-		mv.addObject("VIEW", "/boa/member/myinfo.boa");
-		mv.setViewName("p/redirect");
-		return mv;
-	}
 	
 	//포인트 충전 폼보기
 	@RequestMapping("/addPoint.boa")
@@ -244,16 +227,6 @@ public class MyInfo {
 		}
 		
 		mv.addObject("MSG", gnp + " 포인트 충전에 성공했습니다.");
-		
-		if(iVO.getIsAuto().equals("A")) {
-			
-			int result = iDao.addAuto(iVO);
-
-			if(result == 1) {
-				mv.addObject("MSG", gnp + " 포인트 자동 충전에 성공했습니다. 매달 1일 자동 충전됩니다.");
-				
-			}
-		}
 		
 		iVO.setResult("OK");
 		mv.addObject("VIEW", view);
